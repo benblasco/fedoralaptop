@@ -1,0 +1,318 @@
+#
+# Fedora - Post Install Setup.
+#
+# @22-JUNE-2017
+#
+---
+
+- hosts: localhost
+  connection: local
+  roles:
+    - common
+  tasks:
+
+  # Install Docker Software.
+
+  - name: install docker
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: docker
+      state: present
+
+  # sudo systemctl start docker
+
+  - name: Execute the command for systemctl to start docker.
+    sudo: yes
+    shell: systemctl start docker
+
+  # sudo systemctl enable docker
+
+  - name: Execute the command for systemctl to enable docker.
+    sudo: yes
+    shell: systemctl enable docker
+
+  # Enable RPM Fusion
+
+  - name: Execute the command to Enable RPM Fusion.
+    sudo: yes
+    shell: su -c 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+
+  # Install Development Tools
+
+  - name: Execute the command to install Development Tools.
+    sudo: yes
+    shell: dnf groupinstall 'Development Tools'
+
+  # Install Development Libraries
+
+  - name: Execute the command to install Development Libraries.
+    sudo: yes
+    shell: dnf groupinstall 'C Development Tools and Libraries'
+
+  # Install Archive File Format p7zip
+
+  - name: install p7zip
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: p7zip
+      state: present
+
+  # Install Archive File Format p7zip-plugins
+
+  - name: install p7zip-plugins
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: p7zip-plugins
+      state: present
+
+  # Install Archive File Format unrar
+
+  - name: install unrar
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: unrar
+      state: present
+
+  # Install Java Support java-openjdk
+
+  - name: install java-openjdk
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: java-openjdk
+      state: present
+
+  # Install Java Support icedtea-web
+
+  - name: install icedtea-web
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: icedtea-web
+      state: present
+
+  # Install Flash Support RPM
+
+  - name: Install Flash Support RPM.
+    sudo: yes
+    shell: rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+
+  # Install Flash Support Cert
+
+  - name: Install Flash Support Cert.
+    sudo: yes
+    shell: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+
+  # Install Flash Support - flash-plugin
+
+  - name: install flash-plugin
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: flash-plugin
+      state: present
+
+  # Install Flash Support - alsa-plugins-pulseaudio
+
+  - name: install alsa-plugins-pulseaudio
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: alsa-plugins-pulseaudio
+      state: present
+
+  # Install Flash Support - libcurl
+
+  - name: install libcurl
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: libcurl
+      state: present
+
+  # Install Gnome3 Desktop Tweeks - gnome-tweak-tool
+
+  - name: install gnome-tweak-tool
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gnome-tweak-tool
+      state: present
+
+  # Install Gnome3 Desktop Tweeks - dconf-editor
+
+  - name: install dconf-editor
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: dconf-editor
+      state: present
+
+  # Install Atom Editor
+
+  - name: install atom.x86_64.rpm
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: atom.x86_64.rpm
+      state: present
+
+  # Install Blujeans VC
+
+  - name: install bluejeans-1.22.19.x86_64.rpm
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: bluejeans-1.22.19.x86_64.rpm
+      state: present
+
+  # Install KeePass
+
+  - name: install KeePass
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: KeePass
+      state: present
+
+  # Install OpenVPN ( Red Hat ) NetworkManager-openvpn
+
+  - name: install NetworkManager-openvpn
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: NetworkManager-openvpn
+      state: present
+
+  # Install OpenVPN ( Red Hat ) NetworkManager-openvpn-gnome
+
+  - name: install NetworkManager-openvpn-gnome
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: NetworkManager-openvpn-gnome
+      state: present
+
+  # Install OpenVPN ( Red Hat ) Certs
+
+  - name: Install OpenVPN ( Red Hat ) Certs
+    sudo: yes
+    shell: su -c 'dnf install http://hdn.corp.redhat.com/rhel7-csb-stage/RPMS/noarch/redhat-internal-cert-install-0.1-7.el7.csb.noarch.rpm'
+
+  # Install Network Printer Support -system-config-printer
+
+  - name: install system-config-printer
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: system-config-printer
+      state: present
+
+  # Install Network Printer Support devassistant
+
+  - name: install devassistant
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: devassistant
+      state: present
+
+  # Install Network Printer Support devassistant-gui
+
+  - name: install devassistant-gui
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: devassistant-gui
+      state: present
+
+  # Add Melbourne Network Printer
+
+  - name: Add Melbourne Network Printer
+    sudo: yes
+    shell: lpadmin -p Melbourne-C -v socket://10.64.150.1:9100 -P
+
+  # Install MP3 Support - gstreamer1-plugins-base
+
+  - name: install gstreamer1-plugins-base
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gstreamer1-plugins-base
+      state: present
+
+  # Install MP3 Support - gstreamer1-plugins-good
+
+  - name: install gstreamer1-plugins-good
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gstreamer1-plugins-good
+      state: present
+
+  # Install MP3 Support - gstreamer1-plugins-ugly
+
+  - name: install gstreamer1-plugins-ugly
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gstreamer1-plugins-ugly
+      state: present
+
+  # Install MP3 Support - gstreamer1-plugins-bad-free
+
+  - name: install gstreamer1-plugins-bad-free
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gstreamer1-plugins-bad-free
+      state: present
+
+  # Install MP3 Support - gstreamer1-plugins-bad-freeworld
+
+  - name: install gstreamer1-plugins-bad-freeworld gstreamer1-plugins-bad-free-extras ffmpeg
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gstreamer1-plugins-bad-freeworld
+      state: present
+
+  # Install MP3 Support - gstreamer1-plugins-bad-free-extras
+
+  - name: install gstreamer1-plugins-bad-free-extras
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: gstreamer1-plugins-bad-free-extras
+      state: present
+
+  # Install MP3 Support - ffmpeg
+
+  - name: install ffmpeg
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: ffmpeg
+      state: present
+
+  # Install Tomahawk Music Player
+
+  - name: install tomahawk
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: tomahawk
+      state: present
+
+  # Install Tomahawk Music Player
+
+  - name: install vlc
+    sudo: yes
+    when: ansible_os_family == "RedHat"
+    dnf:
+      name: vlc
+      state: present

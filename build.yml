@@ -1,0 +1,168 @@
+---
+- hosts: localhost
+  connection: local
+  name: PERFORM POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
+  gather_facts: yes
+  become: yes
+
+  vars:
+    # Get the distro major version so we can install
+    fedora_version: "{{ ansible_facts['distribution_major_version'] }}"
+
+    regular_packages:
+    - p7zip
+    - p7zip-plugins
+    - unrar
+    - icedtea-web
+    - java-openjdk
+    - gnome-tweak-tool
+    - dconf-editor
+    - firefox
+    - vlc
+    
+    redhat_mandatory_packages:
+    - SpiderOakGroups
+
+    openvpn_packages:
+    - NetworkManager-openvpn
+    - NetworkManager-openvpn-gnome
+
+    printer_packages:
+    - system-config-printer
+    #- devassistant
+    #- devassistant-gui
+
+    mp3_packages:
+    - gstreamer1-plugins-base
+    - gstreamer1-plugins-good
+    - gstreamer1-plugins-ugly
+    - gstreamer1-plugins-bad-free
+    - gstreamer1-plugins-bad-free
+    - gstreamer1-plugins-bad-freeworld
+    - gstreamer1-plugins-bad-free-extras
+    - ffmpeg
+
+    gnome_shell_extensions_packages:
+    - gnome-shell-extension-alternate-tab.noarch
+    - gnome-shell-extension-apps-menu.noarch
+    - gnome-shell-extension-background-logo.noarch
+    - gnome-shell-extension-common.noarch
+    - gnome-shell-extension-dash-to-dock.noarch
+    - gnome-shell-extension-launch-new-instance.noarch
+    - gnome-shell-extension-places-menu.noarch
+    - gnome-shell-extension-pomodoro.x86_64
+    - gnome-shell-extension-user-theme.noarch
+    - gnome-shell-extension-window-list.noarch
+    
+
+  tasks:
+
+  - debug: var=fedora_version
+
+  - name: ENABLE RPM FUSION REPO
+    #command: 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+    command: 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm'
+
+  - name: INSTALL REGULAR PACKAGES
+    dnf:
+      name: "{{ regular_packages }}"
+      state: present
+
+      # Force dnf to check if cache is out of date and redownload
+      # if needed. Has an effect only if state is present or
+      # latest.
+      update_cache: yes
+ 
+  #- name: INSTALL RED HAT MANDATORY PACKAGES
+    #dnf:
+      #name: "{{ redhat_mandatory_packages }}"
+      #state: present
+
+  - name: INSTALL OPENVPN PACKAGES
+    dnf:
+      name: "{{ openvpn_packages }}"
+      state: present
+
+  - name: INSTALL PRINTER PACKAGES
+    dnf:
+      name: "{{ printer_packages }}"
+      state: present
+
+  - name: CONFIGURE MELBOURNE PRINTER
+    lineinfile:
+      path: /etc/cups/client.conf
+      regexp: '^ServerName'
+      line: 'ServerName cups.mel.redhat.com'
+      state: present
+
+  - name: INSTALL GNOME SHELL EXTENSIONS
+    dnf:
+      name: "{{ gnome_shell_extensions_packages }}"
+      state: present
+
+
+
+#####################################################################
+#
+# PREREQUISITES
+#
+# Install Ansible:
+# sudo dnf install ansible python4-dnf
+#
+# EXECUTION: 
+#
+# ansible-playbook -i hosts build.yml --check --ask-become-pass
+#
+# TASKS TO ADD
+#
+# Enable RPM Fusion
+#  su -c 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+#
+# Install Adobe flash support
+# sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+# sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+# sudo dnf install flash-plugin alsa-plugins-pulseaudio libcurl# 
+#
+# Install Blujeans VC
+# sudo dnf install bluejeans-1.22.19.x86_64.rpm
+#
+# Pull additional openvpn files/packages down and install as per link below
+# https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
+# https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0005424
+#
+# Connect to Wifi
+# https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0001616
+#
+# Configure SpiderOak backups
+# https://redhat.service-now.com/help?id=kb_article&sys_id=c09f0e372b66b8004c71dc0e59da15ff
+# https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
+#
+# Install appimages
+# - NixNote2
+# - Other???
+#
+# Install Gnome extensions
+# dnf list --installed 'gnome-shell-extension*'
+# gnome-shell-extension-alternate-tab.noarch
+# gnome-shell-extension-apps-menu.noarch
+# gnome-shell-extension-background-logo.noarch
+# gnome-shell-extension-common.noarch
+# gnome-shell-extension-dash-to-dock.noarch
+# gnome-shell-extension-launch-new-instance.noarch
+# gnome-shell-extension-places-menu.noarch
+# gnome-shell-extension-pomodoro.x86_64
+# gnome-shell-extension-user-theme.noarch
+# gnome-shell-extension-window-list.noarch
+#
+# QUESTIONS/UPDATES REQUIRED
+#
+# Do I need to install Development tools?
+# sudo dnf groupinstall 'Development Tools'
+# sudo dnf groupinstall 'C Development Tools and Libraries'
+#
+#
+#
+#
+#
+#
+#####################################################################

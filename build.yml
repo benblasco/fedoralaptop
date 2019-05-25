@@ -19,6 +19,7 @@
     - dconf-editor
     - firefox
     - vlc
+    - clipgrab
     
     redhat_mandatory_packages:
     - SpiderOakGroups
@@ -142,6 +143,7 @@
 # - Other???
 #
 # Install Gnome extensions
+# Note that the command below doesn't appear to show all the extensions I have installed.  Why?
 # dnf list --installed 'gnome-shell-extension*'
 # gnome-shell-extension-alternate-tab.noarch
 # gnome-shell-extension-apps-menu.noarch

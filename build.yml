@@ -45,8 +45,10 @@
     - gstreamer1-plugins-bad-free-extras
     - ffmpeg
 
+    # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
     gnome_shell_extensions_packages:
-    - gnome-shell-extension-alternate-tab.noarch
+    # Alternate-tab extension not in Fedora 30
+    # - gnome-shell-extension-alternate-tab.noarch
     - gnome-shell-extension-apps-menu.noarch
     - gnome-shell-extension-background-logo.noarch
     - gnome-shell-extension-common.noarch
@@ -99,11 +101,11 @@
       line: 'ServerName cups.mel.redhat.com'
       state: present
 
-  - name: INSTALL GNOME SHELL EXTENSIONS
-    dnf:
-      name: "{{ gnome_shell_extensions_packages }}"
-      state: present
-
+  # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
+  #- name: INSTALL GNOME SHELL EXTENSIONS
+  #dnf:
+      #name: "{{ gnome_shell_extensions_packages }}"
+      #state: present
 
 
 #####################################################################
@@ -152,6 +154,22 @@
 #
 # Install Gnome extensions
 # Note that the command below doesn't appear to show all the extensions I have installed.  Why?
+# Because not all extensions can be installed as RPMs using DNF
+# It turns out you can sync all your gnome extensions using your google account, as per the instructions here:
+# https://askubuntu.com/questions/1135175/how-do-i-automatically-reinstall-gnome-shell-extensions-after-reinstalling-ubunt
+# 1. Install the Firefox add-on called "GNOME Shell integration"
+# 2. Have it sync your extensions for you...?
+# 3. Pray
+#
+# OR install this extension and follow the instructions:
+# https://github.com/oae/gnome-shell-extensions-sync
+#
+# My gist location is:
+# https://gist.github.com/eraser215/251271b1c756e28e4149c2ab63d5838c
+#
+# My gist token is:
+# fafbb4f71f99a6633ba4bd950573db742b23d885
+#
 # dnf list --installed 'gnome-shell-extension*'
 # gnome-shell-extension-alternate-tab.noarch
 # gnome-shell-extension-apps-menu.noarch

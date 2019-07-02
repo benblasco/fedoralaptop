@@ -59,6 +59,12 @@
     - gnome-shell-extension-user-theme.noarch
     - gnome-shell-extension-window-list.noarch
     
+    flash_packages:
+    - gnome-shell-extension-apps-menu.noarch
+    - gnome-shell-extension-dash-to-dock.noarch
+    - flash-plugin
+    - alsa-plugins-pulseaudio
+    - libcurl 
 
   tasks:
 
@@ -106,6 +112,20 @@
   #dnf:
       #name: "{{ gnome_shell_extensions_packages }}"
       #state: present
+
+  - name: INSTALL ADOBE FLASH PACKAGE
+    dnf:
+      name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+      state: present
+
+  - name: INSTALL ADOBE FLASH GPG KEY
+    rpm_key:
+      key: /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+
+  - name: INSTALL ADDITIONAL FLASH RELATED PACKAGES
+    dnf:
+      name: "{{ flash_packages }}"
+      state: present
 
 
 #####################################################################

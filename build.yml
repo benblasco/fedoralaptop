@@ -22,6 +22,7 @@
     - vlc
     - vim-enhanced
     - clipgrab
+    - tigervnc
     
     redhat_mandatory_packages:
     - SpiderOakGroups
@@ -135,13 +136,17 @@
 # Install Ansible:
 # sudo dnf install ansible python4-dnf
 #
-# EXECUTION: 
+# Add bblasco to sudoers file
+# bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
+#
+# Restore your home directory from the remote source
+#
+# EXECUTION 
 #
 # ansible-playbook -i hosts build.yml --check --ask-become-pass
 #
 # TASKS TO ADD
 #
-# Add bblasco to sudoers file
 #
 # Install Blujeans VC
 # sudo dnf install bluejeans-1.22.19.x86_64.rpm

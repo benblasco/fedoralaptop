@@ -20,6 +20,7 @@
       #- firefox
     - firefox-wayland
     - vlc
+    - vim-enhanced
     - clipgrab
     
     redhat_mandatory_packages:
@@ -62,8 +63,8 @@
   - debug: var=fedora_version
 
   - name: ENABLE RPM FUSION REPO
-    #command: 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
-    command: 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm'
+    #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+    command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm'
 
   - name: INSTALL REGULAR PACKAGES
     dnf:

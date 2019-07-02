@@ -128,9 +128,14 @@
       name: "{{ flash_packages }}"
       state: present
       
+  - name: DOWNLOAD BLUEJEANS VIDEOCONFERENCING
+    get_url:
+      name: https://www.dropbox.com/s/8nt03s5ycy3zh74/bluejeans-1.37.19.x86_64.rpm
+      dest: /tmp/
+
   - name: INSTALL BLUEJEANS VIDEOCONFERENCING
     dnf:
-      name: https://www.dropbox.com/s/8nt03s5ycy3zh74/bluejeans-1.37.19.x86_64.rpm
+      name: /tmp/bluejeans-1.37.19.x86_64.rpm
       state: present
 
 

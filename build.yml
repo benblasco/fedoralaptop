@@ -94,6 +94,7 @@
   - name: CONFIGURE MELBOURNE PRINTER
     lineinfile:
       path: /etc/cups/client.conf
+      create: yes
       regexp: '^ServerName'
       line: 'ServerName cups.mel.redhat.com'
       state: present

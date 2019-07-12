@@ -177,6 +177,9 @@
 # Install Signal Desktop from COPR repo
 # https://copr.fedorainfracloud.org/coprs/luminoso/Signal-Desktop/
 #
+# Install Joplin notes from COPR repo
+# Copr repo for joplin owned by taw
+#
 # Install Gnome extensions
 # Note that the command below doesn't appear to show all the extensions I have installed.  Why?
 # Because not all extensions can be installed as RPMs using DNF

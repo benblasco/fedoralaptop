@@ -172,6 +172,8 @@
 # - NixNote2
 # - Other???
 #
+# Configure the Gnome desktop icons for NixNote2 and anything else i needed to add
+#
 # Install Signal Desktop from COPR repo
 # https://copr.fedorainfracloud.org/coprs/luminoso/Signal-Desktop/
 #

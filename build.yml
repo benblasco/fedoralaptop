@@ -17,7 +17,7 @@
     - java-openjdk
     - gnome-tweak-tool
     - dconf-editor
-      #- firefox
+    - firefox
     - firefox-wayland
     - vlc
     - vim-enhanced
@@ -71,6 +71,11 @@
   tasks:
 
   - debug: var=fedora_version
+
+  - name: SET THE SYSTEM HOSTNAME
+    hostname:
+      name: bblasco_fedora
+
 
   - name: ENABLE RPM FUSION REPO
     #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
@@ -138,6 +143,18 @@
       name: /tmp/bluejeans-1.37.19.x86_64.rpm
       state: present
 
+  - name: INSTALL SIGNAL DESKTOP FROM COPR REPO
+    dnf:
+      name: signal-desktop
+      enablerepo: luminoso/Signal-Desktop
+      state: present
+
+  - name: INSTALL JOPLIN NOTES FROM COPR REPO
+    dnf:
+      name: joplin
+      enablerepo: taw/joplin
+      state: present
+
 
 #####################################################################
 #
@@ -153,7 +170,8 @@
 #
 # EXECUTION 
 #
-# ansible-playbook -i hosts build.yml --check --ask-become-pass
+# ansible-playbook -i hosts build.yml --ask-become-pass --check
+# ansible-playbook -i hosts build.yml --ask-become-pass
 #
 # TASKS TO ADD
 #
@@ -194,10 +212,11 @@
 #
 # My gist location is:
 # https://gist.github.com/eraser215/251271b1c756e28e4149c2ab63d5838c
-#
 # My gist token is:
 # fafbb4f71f99a6633ba4bd950573db742b23d885
+# This appears to be broken somehow
 #
+# Out of date list:
 # dnf list --installed 'gnome-shell-extension*'
 # gnome-shell-extension-alternate-tab.noarch
 # gnome-shell-extension-apps-menu.noarch
@@ -210,11 +229,48 @@
 # gnome-shell-extension-user-theme.noarch
 # gnome-shell-extension-window-list.noarch
 #
+# Install Chrome extensions
+# - Bluejeans Meeting
+# - Bluejeans for Google Calendar
+# - FoxyProxy Standard
+# - Google Calendar
+# - Google Docs Offline
+# - Google Keep Chrome Extension
+# - Open in Firefox
+# - KeePass Tusk
+# - uBlock Origin
+#
+# Install Firefox extensions
+# - Auto Tab Discard
+# - Facebook Containers
+# - Firefox Multi Account Containers
+# - FoxyProxy Standard
+# - Gnome Shell Integration
+# - KeePass Tusk
+# - Open in Chrome
+# - Tab Mover
+# - Tree Style Tabs
+# - uBlock Origin
+#
+# Install cockpit
+# dnf install cockpit
+# systemctl enable cockpit.socket
+# systemctl start cockpit
+# then connect to localhost:9090
+#
+# Check the hostname (print output of command below)
+# hostnamectl
+#
 # QUESTIONS/UPDATES REQUIRED
 #
 # Do I need to install Development tools?
 # sudo dnf groupinstall 'Development Tools'
 # sudo dnf groupinstall 'C Development Tools and Libraries'
+#
+# NOTES ON SOME OF THE TASKS COMPLETED
+#
+# Set the hostname
+# hostnamectl set-hostname bblasco_fedora
 #
 #
 #

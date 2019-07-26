@@ -1,2 +1,4 @@
 #localhost ansible_connection=local
 localhost
+cubox ansible_host=eraser215.ddns.net ansible_user=eblaben ansible_port=49152
+# ansible_ssh_pass=ansible

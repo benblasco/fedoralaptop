@@ -1,4 +1,17 @@
 ---
+- hosts: cubox
+  name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
+  gather_facts: no
+  #become: yes
+
+  tasks:
+  - synchronize:
+      mode: pull
+      src: /home/eblaben/fedora_build/
+      dest: /tmp/fedora_build/
+    tags:
+    - cubox
+
 - hosts: localhost
   connection: local
   name: PERFORM POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP

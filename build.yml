@@ -19,6 +19,10 @@
   become: yes
 
   vars:
+    # Explicitly telling Ansible to use Python3, because of the bug below:
+    # https://github.com/ansible/ansible/issues/54855
+    ansible_python_interpreter: /usr/bin/python3
+
     # Get the distro major version so we can install
     fedora_version: "{{ ansible_facts['distribution_major_version'] }}"
 
@@ -44,6 +48,10 @@
     openvpn_packages:
     - NetworkManager-openvpn
     - NetworkManager-openvpn-gnome
+
+    openvpn_config_packages:
+    - /tmp/fedora_build/redhat-internal-cert-install-0.1-9.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
 
     printer_packages:
     - system-config-printer
@@ -108,6 +116,8 @@
       # if needed. Has an effect only if state is present or
       # latest.
       update_cache: yes
+    tags:
+    - test
  
   #- name: INSTALL RED HAT MANDATORY PACKAGES
     #dnf:
@@ -116,7 +126,6 @@
 
 
    # Pull additional openvpn files/packages down and install as per link below
-   # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0005424
    # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
 
   - name: INSTALL OPENVPN BINARY PACKAGES
@@ -125,8 +134,11 @@
       state: present
 
   # To be completed
-  #- name: INSTALL OPENVPN CONFIGURATION PACKAGES
-   # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
+  # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0005424
+  - name: INSTALL OPENVPN CONFIGURATION PACKAGES
+    dnf:
+      name: "{{ openvpn_config_packages }}"
+      state: present
 
 
 
@@ -165,13 +177,14 @@
       name: "{{ flash_packages }}"
       state: present
       
-  - name: DOWNLOAD BLUEJEANS VIDEOCONFERENCING FROM MY PERSONAL DROPBOX
+  #- name: DOWNLOAD BLUEJEANS VIDEOCONFERENCING FROM MY PERSONAL DROPBOX
     # Bluejeans RPM retrieved from https://redhat.service-now.com/help?id=kb_article&sys_id=d92b36da4f7d470815cf7f75f110c7ef
-    shell: 'cd /tmp && wget https://www.dropbox.com/s/8nt03s5ycy3zh74/bluejeans-1.37.19.x86_64.rpm'
+    #shell: 'cd /tmp && wget https://www.dropbox.com/s/8nt03s5ycy3zh74/bluejeans-1.37.19.x86_64.rpm'
 
   - name: INSTALL BLUEJEANS VIDEOCONFERENCING
     dnf:
-      name: /tmp/bluejeans-1.37.19.x86_64.rpm
+      #name: /tmp/bluejeans-1.37.19.x86_64.rpm
+      name: /tmp/fedora_build/bluejeans-1.37.19.x86_64.rpm
       state: present
 
   - name: INSTALL SIGNAL DESKTOP FROM COPR REPO

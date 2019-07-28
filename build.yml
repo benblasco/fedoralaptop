@@ -124,17 +124,20 @@
       name: "{{ rpmfusion_packages }}"
       state: present
 
+  - name: PERFORM A SYSTEM UPDATE
+    dnf:
+      name: "*"
+      state: latest
+      # Force dnf to check if cache is out of date and redownload
+      # if needed. Has an effect only if state is present or
+      # latest.
+      update_cache: yes
 
   - name: INSTALL REGULAR PACKAGES
     dnf:
       name: "{{ regular_packages }}"
       state: present
 
-      # Force dnf to check if cache is out of date and redownload
-      # if needed. Has an effect only if state is present or
-      # latest.
-      update_cache: yes
- 
   - name: INSTALL RED HAT MANDATORY PACKAGES
     dnf:
       name: "{{ redhat_mandatory_packages }}"

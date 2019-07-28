@@ -367,6 +367,10 @@
 # - Tree Style Tabs
 # - uBlock Origin
 #
+# Install GMail addons
+# - Trello
+# - Others?
+#
 # Install cockpit
 # dnf install cockpit
 # systemctl enable cockpit.socket

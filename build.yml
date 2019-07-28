@@ -286,9 +286,6 @@
     tags:
     - test
 
-
-
-
 #####################################################################
 #
 # PREREQUISITES
@@ -308,37 +305,6 @@
 # ansible-playbook -i hosts build.yml --ask-become-pass
 #
 # TASKS TO ADD
-#
-# Connect to Wifi
-# https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0001616
-# or just grab the files for the SSIDs you want from /etc/sysconfig/network-scripts/
-# [bblasco@bblasco_fedora cloudfedora30]$ nmcli conn show --order type
-# NAME                UUID                                  TYPE      DEVICE
-# virbr1              0123f995-617a-40b7-901e-f1b0f584585f  bridge    virbr1
-# virbr0              5bbcd81f-9b8c-4477-bd31-4c11888621a7  bridge    virbr0
-# enp0s31f6           a892e9f1-390a-3d1d-9029-8cca02a4a981  ethernet  --
-# Wired connection 1  b1ca0584-f3a1-42b7-8563-c1d87f830019  ethernet  enp62s0u1u1
-# enp62s0u1u1         f1f0533b-9973-3496-ad0e-c143336a96ca  ethernet  --
-# vnet0               6a0c1f95-3fbc-4cdb-91ab-c17647883f5f  tun       vnet0
-# São Paulo (GRU2)    26d95e8e-bac5-4308-bc01-ea93656fa112  vpn       --
-# Beijing (PEK2)      38486930-d56a-4088-bbb5-d8a6a1d236c0  vpn       --
-# Singapore (SIN2)    461f8cf8-c8dc-478b-9669-80ca01d04c5b  vpn       --
-# Brno (BRQ)          5777c2b4-defc-46f1-9858-2b850d51587c  vpn       --
-# Amsterdam (AMS2)    7b487c5c-09c9-4c4c-95b0-e562c4a5ad43  vpn       --
-# Brisbane (BNE)      9822534a-1693-4e50-9f61-1560bf0cee17  vpn       --
-# Phoenix (PHX2)      c9509a40-caed-46c2-a3ef-706b5a98265f  vpn       --
-# Tel Aviv (TLV)      e396fe67-4bb0-426a-850c-e8786fae6cea  vpn       --
-# Tokyo (NRT)         ef06e9c8-f787-4419-9790-fd89bcbe70da  vpn       --
-# Raleigh (RDU2)      f281b867-85e1-4979-8adf-ad9fac216a7c  vpn       --
-# Farnborough (FAB)   f3967fc7-a927-47e2-92fd-a53338d4bb92  vpn       --
-# Red Hat Guest       0ccfd13b-5920-4fda-924d-059d0178993c  wifi      --
-# WiFi-6FE7           26e5b1fc-3171-4964-be2a-5fc283c1db28  wifi      --
-# eraser215           27e8eeb8-46b9-4cc6-8acd-a139711e2fa2  wifi      --
-# WiFi-6FE7-5G        3b94cd43-0f68-485b-a220-2d6fb657c54a  wifi      --
-# TelstraC083AB       5d30249a-c8a9-44bf-9763-8f087339cf99  wifi      --
-# Red Hat             916403a9-1bd7-4386-b1d9-7034396dac40  wifi      wlp4s0
-# Yarra               931b30d6-330d-440e-82e0-b7be4c5e731d  wifi      --
-# eraser215op6        a8598908-f3d3-45e0-ad29-df92c6ed2558  wifi      --
 #
 # Install Gnome extensions
 # Note that the command below doesn't appear to show all the extensions I have installed.  Why?
@@ -424,6 +390,37 @@
 # https://redhat.service-now.com/help?id=kb_article&sys_id=c09f0e372b66b8004c71dc0e59da15ff
 # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
 # http://hdn.corp.redhat.com/rhel7-csb-stage/repoview/SpiderOakGroups.html
+#
+# Connect to Wifi
+# https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0001616
+# or just grab the files for the SSIDs you want from /etc/sysconfig/network-scripts/
+# [bblasco@bblasco_fedora cloudfedora30]$ nmcli conn show --order type
+# NAME                UUID                                  TYPE      DEVICE
+# virbr1              0123f995-617a-40b7-901e-f1b0f584585f  bridge    virbr1
+# virbr0              5bbcd81f-9b8c-4477-bd31-4c11888621a7  bridge    virbr0
+# enp0s31f6           a892e9f1-390a-3d1d-9029-8cca02a4a981  ethernet  --
+# Wired connection 1  b1ca0584-f3a1-42b7-8563-c1d87f830019  ethernet  enp62s0u1u1
+# enp62s0u1u1         f1f0533b-9973-3496-ad0e-c143336a96ca  ethernet  --
+# vnet0               6a0c1f95-3fbc-4cdb-91ab-c17647883f5f  tun       vnet0
+# São Paulo (GRU2)    26d95e8e-bac5-4308-bc01-ea93656fa112  vpn       --
+# Beijing (PEK2)      38486930-d56a-4088-bbb5-d8a6a1d236c0  vpn       --
+# Singapore (SIN2)    461f8cf8-c8dc-478b-9669-80ca01d04c5b  vpn       --
+# Brno (BRQ)          5777c2b4-defc-46f1-9858-2b850d51587c  vpn       --
+# Amsterdam (AMS2)    7b487c5c-09c9-4c4c-95b0-e562c4a5ad43  vpn       --
+# Brisbane (BNE)      9822534a-1693-4e50-9f61-1560bf0cee17  vpn       --
+# Phoenix (PHX2)      c9509a40-caed-46c2-a3ef-706b5a98265f  vpn       --
+# Tel Aviv (TLV)      e396fe67-4bb0-426a-850c-e8786fae6cea  vpn       --
+# Tokyo (NRT)         ef06e9c8-f787-4419-9790-fd89bcbe70da  vpn       --
+# Raleigh (RDU2)      f281b867-85e1-4979-8adf-ad9fac216a7c  vpn       --
+# Farnborough (FAB)   f3967fc7-a927-47e2-92fd-a53338d4bb92  vpn       --
+# Red Hat Guest       0ccfd13b-5920-4fda-924d-059d0178993c  wifi      --
+# WiFi-6FE7           26e5b1fc-3171-4964-be2a-5fc283c1db28  wifi      --
+# eraser215           27e8eeb8-46b9-4cc6-8acd-a139711e2fa2  wifi      --
+# WiFi-6FE7-5G        3b94cd43-0f68-485b-a220-2d6fb657c54a  wifi      --
+# TelstraC083AB       5d30249a-c8a9-44bf-9763-8f087339cf99  wifi      --
+# Red Hat             916403a9-1bd7-4386-b1d9-7034396dac40  wifi      wlp4s0
+# Yarra               931b30d6-330d-440e-82e0-b7be4c5e731d  wifi      --
+# eraser215op6        a8598908-f3d3-45e0-ad29-df92c6ed2558  wifi      --
 #
 #
 #

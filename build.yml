@@ -46,6 +46,8 @@
     - clipgrab
     - tigervnc
     - python2-libselinux
+      # libxcrypt-compat required for NixNote2 to launch.  Remove in future?
+    - libxcrypt-compat
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -234,7 +236,7 @@
     get_url:
       url: https://github.com/robert7/nixnote2/releases/download/continuous/NixNote2-x86_64.AppImage
       dest: /usr/local/bin/NixNote2-x86_64.AppImage
-      mode: 755
+      mode: '0755'
       owner: root
       group: root
   
@@ -320,9 +322,8 @@
 #
 # EXECUTION 
 #
-# ansible-playbook -i hosts build.yml --ask-become-pass --check --ask-vault-pass
-# ansible-playbook -i hosts build.yml --ask-become-pass --check
-# ansible-playbook -i hosts build.yml --ask-become-pass
+# ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check 
+# ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
 #
 # TASKS TO ADD TO THIS PLAYBOOK
 #

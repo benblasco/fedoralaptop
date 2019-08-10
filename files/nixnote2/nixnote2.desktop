@@ -2,7 +2,7 @@
 Name=NixNote2
 Comment=Use with Evernote to remember everything
 GenericName=Evernote-clone
-Exec=nixnote2
+Exec=NixNote2-x86_64.AppImage
 Icon=/usr/share/nixnote2/images/windowIcon.png
 StartupNotify=true
 Terminal=false

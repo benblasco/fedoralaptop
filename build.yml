@@ -40,6 +40,7 @@
     - dconf-editor
     - firefox
     - firefox-wayland
+    - chromium
     - vlc
     - vim-enhanced
     - clipgrab
@@ -291,7 +292,23 @@
 
 #####################################################################
 #
-# PREREQUISITES
+# PREREQUISITES OLD MACHINE
+#
+# Complete a backup of the user's entire home directory
+#
+# Get a snapshot of all Firefox and Chrome extensions
+#
+# Get a snapshot of all Gnome extensions
+#
+# Backup your FoxyProxy configuration (Firefox/Chrome)
+#
+# Backup bookmarks and settings using Firefox Sync
+#
+# Update this playbook with all of the above wherever possible
+#
+# Check the updated playbook into Git repo
+#
+# PREREQUISITES NEW BUILD
 #
 # Install Ansible:
 # sudo dnf install ansible python4-dnf
@@ -299,7 +316,7 @@
 # Add bblasco to sudoers file
 # bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
 #
-# Restore your home directory from the remote source
+# Restore your home directory from the remote source via rsync
 #
 # EXECUTION 
 #
@@ -307,7 +324,7 @@
 # ansible-playbook -i hosts build.yml --ask-become-pass --check
 # ansible-playbook -i hosts build.yml --ask-become-pass
 #
-# TASKS TO ADD
+# TASKS TO ADD TO THIS PLAYBOOK
 #
 # Install Gnome extensions
 # Note that the command below doesn't appear to show all the extensions I have installed.  Why?
@@ -375,6 +392,8 @@
 #
 # Check the hostname (print output of command below)
 # hostnamectl
+#
+# Restore bookmarks and settings using Firefox Sync
 #
 # QUESTIONS/UPDATES REQUIRED
 #

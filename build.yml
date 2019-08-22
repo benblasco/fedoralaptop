@@ -100,6 +100,14 @@
     - alsa-plugins-pulseaudio
     - libcurl 
 
+    powermgmt_packages:
+    - tlp
+    - tlp-rdw
+
+    powermgmt_services:
+    - tlp.service
+    - tlp-sleep.service
+
     copr_repos:
     - luminoso/Signal-Desktop
     - taw/joplin
@@ -176,6 +184,12 @@
       regexp: '^ServerName'
       line: 'ServerName cups.mel.redhat.com'
       state: present
+
+  - name: INSTALL POWER MANAGEMENT PACKAGES
+    dnf:
+      name: "{{ powermgmt_packages }}"
+      state: present
+      notify: START POWER MANAGEMENT SERVICES
 
   # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
   #- name: INSTALL GNOME SHELL EXTENSIONS
@@ -291,6 +305,14 @@
       - "files/wifi/keys_encrypted/*"
     tags:
     - test
+
+  handlers:
+  - name: START POWER MANAGEMENT SERVICES
+    dnf:
+      name: "{{ powermgmt_services }}"
+      enabled: yes
+      state: started
+
 
 #####################################################################
 #

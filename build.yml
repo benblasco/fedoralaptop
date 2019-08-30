@@ -105,8 +105,8 @@
     - tlp-rdw
 
     powermgmt_services:
-    - tlp.service
-    - tlp-sleep.service
+    - tlp
+    - tlp-sleep
 
     copr_repos:
     - luminoso/Signal-Desktop
@@ -189,7 +189,9 @@
     dnf:
       name: "{{ powermgmt_packages }}"
       state: present
-      notify: START POWER MANAGEMENT SERVICES
+    notify: START POWER MANAGEMENT SERVICES
+    tags:
+    - power
 
   # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
   #- name: INSTALL GNOME SHELL EXTENSIONS

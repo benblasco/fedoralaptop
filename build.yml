@@ -186,6 +186,7 @@
       state: present
 
   - name: INSTALL POWER MANAGEMENT PACKAGES
+    # https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html
     dnf:
       name: "{{ powermgmt_packages }}"
       state: present

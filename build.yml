@@ -219,7 +219,7 @@
     #shell: 'cd /tmp && wget https://www.dropbox.com/s/8nt03s5ycy3zh74/bluejeans-1.37.19.x86_64.rpm'
 
     # Bluejeans RPM retrieved from https://redhat.service-now.com/help?id=kb_article&sys_id=d92b36da4f7d470815cf7f75f110c7ef
-  - name: INSTALL BLUEJEANS VIDEOCONFERENCING
+  - name: INSTALL BLUEJEANS VIDEOCONFERENCING (BUT CHECK IF THIS RELEASE IS CURRENT FIRST)
     dnf:
       name: /tmp/fedora_build/bluejeans-1.37.19.x86_64.rpm
       state: present
@@ -330,6 +330,8 @@
 # Backup your FoxyProxy configuration (Firefox/Chrome)
 #
 # Backup bookmarks and settings using Firefox Sync
+#
+# Check for new versions of any downloaded packages e.g. bluejeans, vpn clients etc.
 #
 # Update this playbook with all of the above wherever possible
 #

@@ -1,0 +1,30 @@
+Host cx
+    HostName eraser215.ddns.net
+    User eblaben
+    Port 49152
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+    LocalForward 9091 192.168.1.2:9091
+    DynamicForward 127.0.0.1:1337
+
+Host cxhome
+    HostName 192.168.1.2
+    User eblaben
+    Port 22
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+
+Host etgdb
+    HostName registrations.etgredhat.com.au
+    User etg-redhat
+    Port 22
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+    #ProxyCommand ssh etg-redhat@workstation.etgredhat.com.au nc %h %p 2> /dev/null 
+    #ProxyCommand bash -c "ssh southport-rte1 netcat %h %p || ssh southport-rte2 netcat %h %p" 2>/dev/null
+    #ProxyCommand bash -c "ssh etg-redhat@workstation.etgredhat.com.au netcat %h %p" 2> /dev/null 
+    # Working proxy command below
+    # Source:
+    # https://stackoverflow.com/questions/35060642/cant-get-ssh-proxycommand-to-work-ssh-exchange-identification-connection-clos
+    ProxyCommand ssh -W %h:%p etg-redhat@workstation.etgredhat.com.au
+

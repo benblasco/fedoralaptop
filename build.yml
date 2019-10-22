@@ -48,6 +48,7 @@
     - python2-libselinux
       # libxcrypt-compat required for NixNote2 to launch.  Remove in future?
     - libxcrypt-compat
+    - sshfs
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -363,8 +364,11 @@
 #
 # Restore your home directory from the remote source via rsync
 #
-# EXECUTION 
+# USAGE/EXECUTION 
 #
+# git clone https://github.com/eraser215/fedoralaptop.git
+# sudo dnf install ansible
+# cd fedoralaptop
 # ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check 
 # ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
 #

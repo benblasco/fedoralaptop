@@ -154,7 +154,7 @@
       name: "{{ regular_packages }}"
       state: present
 
-  - name: INSTALL RED HAT MANDATORY PACKAGES
+  - name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
     dnf:
       name: "{{ redhat_mandatory_packages }}"
       state: present
@@ -168,7 +168,7 @@
       name: "{{ openvpn_packages }}"
       state: present
 
-  - name: INSTALL OPENVPN CONFIGURATION PACKAGES
+  - name: INSTALL OPENVPN CONFIGURATION PACKAGES FROM LOCAL RPMs
     dnf:
       name: "{{ openvpn_config_packages }}"
       state: present
@@ -254,7 +254,7 @@
   # Installation of NixNote2 Evernote client
   # https://github.com/robert7/nixnote2
   # https://github.com/robert7/nixnote2/releases/tag/continuous
-  - name: INSTALL NIXNOTE2 APPIMAGE
+  - name: INSTALL NIXNOTE2 APPIMAGE FROM GITHUB
     get_url:
       url: https://github.com/robert7/nixnote2/releases/download/continuous/NixNote2-x86_64.AppImage
       dest: /usr/local/bin/NixNote2-x86_64.AppImage

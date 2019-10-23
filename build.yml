@@ -5,12 +5,16 @@
   #become: yes
 
   tasks:
-  - synchronize:
+  - name: PULL LOCAL PACKAGES TO BE INSTALLED
+    synchronize:
       mode: pull
       src: /home/eblaben/fedora_build/
       dest: /tmp/fedora_build/
+    register: synchronize_output
     tags:
     - cubox
+
+  - debug: var=synchronize_output
 
 - hosts: localhost
   connection: local

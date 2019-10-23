@@ -287,18 +287,18 @@
 
   - name: CREATE .SSH DIRECTORY
     file:
-      path: /home/eblaben/.ssh
-      owner: eblaben
-      group: eblaben
+      path: /home/bblasco/.ssh
+      owner: bblasco
+      group: bblasco
       mode: '0700'
       state: directory
 
   - name: COPY SSH CONFIG FILE
     copy:
       src: files/ssh/config
-      dest: /home/eblaben/.ssh
-      owner: eblaben
-      group: eblaben
+      dest: /home/bblasco/.ssh
+      owner: bblasco
+      group: bblasco
       mode: '0600'
 
   - name: COPY WIFI INTERFACE FILES

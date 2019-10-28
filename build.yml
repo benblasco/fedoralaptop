@@ -34,6 +34,8 @@
     - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm
     - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm
 
+# fatal: [localhost]: FAILED! => {"changed": false, "failures": ["No package unrar available.", "No package firefox-wayland available.", "No package vlc available.", "No package clipgrab available.", "No package python2-libselinux available."], "msg": ["Failed to install some of the specified packages"], "rc": 1, "results": []}
+
     regular_packages:
     - p7zip
     - p7zip-plugins
@@ -47,11 +49,12 @@
     - chromium
     - vlc
     - vim-enhanced
-    - clipgrab
+    # Note: Clipgrab is a YouTube video downloader
+    #- clipgrab
     - tigervnc
-    - python2-libselinux
-      # libxcrypt-compat required for NixNote2 to launch.  Remove in future?
-    - libxcrypt-compat
+    #- python2-libselinux
+    # Note: libxcrypt-compat required for NixNote2 to launch.  Remove in future?
+    #- libxcrypt-compat
     - sshfs
     
     # Packages retrieved from:

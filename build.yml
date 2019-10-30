@@ -5,7 +5,7 @@
   #become: yes
 
   tasks:
-  - name: PULL LOCAL PACKAGES TO BE INSTALLED
+  - name: SYNCHRONIZE LOCAL PACKAGES TO BE INSTALLED FROM MY SFTP SERVER
     synchronize:
       mode: pull
       src: /home/eblaben/fedora_build/
@@ -61,9 +61,11 @@
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
     # http://hdn.corp.redhat.com/rhel7-csb-stage/repoview/SpiderOakGroups.html
+    # If you want to stay up to date and use the the yum repo, use the repo file:
+    # wget https://hdn.corp.redhat.com/rhel7-csb-stage/rhel7-csb-stage.repo /etc/yum.repos.d/
     redhat_mandatory_packages:
-      #- SpiderOakGroups
-      - /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
+      - SpiderOakGroups
+      #- /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
 
     openvpn_packages:
     - NetworkManager-openvpn
@@ -131,18 +133,21 @@
     hostname:
       name: bblasco-fedora
 
-  #- name: PULL THE REQUIRED FILES VIA RSYNC/SSH
-    #synchronize:
-      #mode: pull
-      #src: eraser215.ddns.net:49152/home/bblasco/fedora_build
-      #dest: /tmp/fedora_build
-
   - name: ENABLE RPM FUSION REPO
     #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
     #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm'
     dnf:
       name: "{{ rpmfusion_packages }}"
       state: present
+
+  - name: ENABLE RHEL CSB REPO
+    copy:
+      src: /tmp/fedora_build/rhel7-csb-stage.repo
+      dest: /etc/yum.repos.d/rhel7-csb-stage.repo
+      owner: root
+      group: root
+      mode: '0644'
+
 
   - name: PERFORM A SYSTEM UPDATE
     dnf:
@@ -158,15 +163,19 @@
       name: "{{ regular_packages }}"
       state: present
 
-  - name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
+  - name: INSTALL RED HAT MANDATORY PACKAGES FROM CSB REPO
     dnf:
       name: "{{ redhat_mandatory_packages }}"
       state: present
 
+    #- name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
+    #dnf:
+      #name: "{{ redhat_mandatory_packages }}"
+      #state: present
 
-   # Pull additional openvpn files/packages down and install as per link below
-   # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
 
+  # Pull additional openvpn files/packages down and install as per link below
+  # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
   - name: INSTALL OPENVPN BINARY PACKAGES
     dnf:
       name: "{{ openvpn_packages }}"

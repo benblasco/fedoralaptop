@@ -64,8 +64,8 @@
     # If you want to stay up to date and use the the yum repo, use the repo file:
     # wget https://hdn.corp.redhat.com/rhel7-csb-stage/rhel7-csb-stage.repo /etc/yum.repos.d/
     redhat_mandatory_packages:
-      - SpiderOakGroups
-      #- /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
+      #- SpiderOakGroups
+      - /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
 
     openvpn_packages:
     - NetworkManager-openvpn
@@ -140,14 +140,13 @@
       name: "{{ rpmfusion_packages }}"
       state: present
 
-  - name: ENABLE RHEL CSB REPO
-    copy:
-      src: /tmp/fedora_build/rhel7-csb-stage.repo
-      dest: /etc/yum.repos.d/rhel7-csb-stage.repo
-      owner: root
-      group: root
-      mode: '0644'
-
+  #- name: ENABLE RHEL CSB REPO
+     #copy:
+     #src: /tmp/fedora_build/rhel7-csb-stage.repo
+     #dest: /etc/yum.repos.d/rhel7-csb-stage.repo
+     #owner: root
+     #group: root
+     #mode: '0644'
 
   - name: PERFORM A SYSTEM UPDATE
     dnf:
@@ -163,16 +162,15 @@
       name: "{{ regular_packages }}"
       state: present
 
-  - name: INSTALL RED HAT MANDATORY PACKAGES FROM CSB REPO
-    dnf:
-      name: "{{ redhat_mandatory_packages }}"
-      state: present
-
-    #- name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
+  #- name: INSTALL RED HAT MANDATORY PACKAGES FROM CSB REPO
     #dnf:
       #name: "{{ redhat_mandatory_packages }}"
       #state: present
 
+  - name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
+  dnf:
+    name: "{{ redhat_mandatory_packages }}"
+    state: present
 
   # Pull additional openvpn files/packages down and install as per link below
   # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4

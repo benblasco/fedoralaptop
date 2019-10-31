@@ -218,12 +218,17 @@
 
   - name: INSTALL ADOBE FLASH PACKAGE
     dnf:
-      name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+      #name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+      name: https://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
       state: present
+    tags:
+    - adobe
 
   - name: INSTALL ADOBE FLASH GPG KEY
     rpm_key:
       key: /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+    tags:
+    - adobe
 
   - name: INSTALL ADDITIONAL FLASH RELATED PACKAGES
     dnf:
@@ -259,6 +264,8 @@
       name: joplin
       #enablerepo: taw/joplin
       state: present
+    tags:
+    - joplin
 
   # Installation of NixNote2 Evernote client
   # https://github.com/robert7/nixnote2

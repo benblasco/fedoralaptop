@@ -468,9 +468,6 @@
 #
 # QUESTIONS/UPDATES REQUIRED
 #
-# Do I need to install Development tools?
-# sudo dnf groupinstall 'Development Tools'
-# sudo dnf groupinstall 'C Development Tools and Libraries'
 #
 # NOTES ON SOME OF THE TASKS COMPLETED
 #
@@ -515,9 +512,5 @@
 # Red Hat             916403a9-1bd7-4386-b1d9-7034396dac40  wifi      wlp4s0
 # Yarra               931b30d6-330d-440e-82e0-b7be4c5e731d  wifi      --
 # eraser215op6        a8598908-f3d3-45e0-ad29-df92c6ed2558  wifi      --
-#
-#
-#
-#
 #
 #####################################################################

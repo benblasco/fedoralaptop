@@ -49,6 +49,8 @@
     - chromium
     - vlc
     - vim-enhanced
+    # Gvim is vim-X11
+    - vim-X11
     # Note: Clipgrab is a YouTube video downloader
     #- clipgrab
     - tigervnc

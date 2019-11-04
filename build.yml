@@ -418,18 +418,19 @@
 # fafbb4f71f99a6633ba4bd950573db742b23d885
 # This appears to be broken somehow
 #
-# Out of date list:
-# dnf list --installed 'gnome-shell-extension*'
-# gnome-shell-extension-alternate-tab.noarch
-# gnome-shell-extension-apps-menu.noarch
-# gnome-shell-extension-background-logo.noarch
-# gnome-shell-extension-common.noarch
-# gnome-shell-extension-dash-to-dock.noarch
-# gnome-shell-extension-launch-new-instance.noarch
-# gnome-shell-extension-places-menu.noarch
-# gnome-shell-extension-pomodoro.x86_64
-# gnome-shell-extension-user-theme.noarch
-# gnome-shell-extension-window-list.noarch
+# Current list of Gnome Shell Extensions
+# https://extensions.gnome.org/extension/15/alternatetab/
+# https://extensions.gnome.org/extension/6/applications-menu/
+# https://extensions.gnome.org/extension/779/clipboard-indicator/
+# https://extensions.gnome.org/extension/307/dash-to-dock/
+# https://extensions.gnome.org/extension/904/disconnect-wifi/
+# https://extensions.gnome.org/extension/1036/extensions/
+# https://extensions.gnome.org/extension/600/launch-new-instance/
+# https://extensions.gnome.org/extension/921/multi-monitors-add-on/
+# https://extensions.gnome.org/extension/118/no-topleft-hot-corner/
+# https://extensions.gnome.org/extension/8/places-status-indicator/
+# https://extensions.gnome.org/extension/19/user-themes/
+# https://extensions.gnome.org/extension/602/window-list/
 #
 # Install Chrome extensions
 # - Bluejeans Meeting
@@ -442,22 +443,29 @@
 # - KeePass Tusk
 # - uBlock Origin
 #
-# Install Firefox extensions
-# - Firstly, login and sync.  It might download the extensions for you
-# - Auto Tab Discard
-# - Facebook Containers
-# - Firefox Multi Account Containers
-# - FoxyProxy Standard
-# - Gnome Shell Integration
-# - KeePass Tusk
-# - Open in Chrome
-# - Tab Mover
-# - Tree Style Tabs
-# - uBlock Origin
-#
-# Install GMail addons
+# Install GMail addons for Chrome
 # - Trello
 # - Others?
+#
+# Install Firefox extensions
+# - Firstly, login and sync.  It might download the extensions for you
+# - Auto Tab Discard https://add0n.com/tab-discard.html
+# - BitWarden https://bitwarden.com/
+# - Facebook Containers https://github.com/mozilla/contain-facebook
+# - Firefox Multi Account Containers https://github.com/mozilla/multi-account-containers#readme
+# - FoxyProxy Standard https://getfoxyproxy.org/
+# - Gnome Shell Integration https://wiki.gnome.org/Projects/GnomeShellIntegrationForChrome
+# - KeePass Tusk https://subdavis.com/Tusk
+# - Open in Chrome http://add0n.com/open-in.html?from=chrome
+# - Tab Mover https://code.guido-berhoerster.org/addons/firefox-addons/tab-mover/
+# - Tree Style Tabs http://piro.sakura.ne.jp/xul/_treestyletab.html.en
+# - uBlock Origin http://piro.sakura.ne.jp/xul/_treestyletab.html.en
+# - Honey https://www.joinhoney.com/
+# - KeePass Tusk https://subdavis.com/Tusk
+# - Open in Chrome http://add0n.com/open-in.html?from=chrome
+# - Tab Mover https://code.guido-berhoerster.org/addons/firefox-addons/tab-mover/
+# - Tree Style Tabs http://piro.sakura.ne.jp/xul/_treestyletab.html.en
+# - uBlock Origin addons://detail/uBlock0@raymondhill.net
 #
 # Install cockpit
 # dnf install cockpit

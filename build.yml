@@ -443,6 +443,7 @@
 # - uBlock Origin
 #
 # Install Firefox extensions
+# - Firstly, login and sync.  It might download the extensions for you
 # - Auto Tab Discard
 # - Facebook Containers
 # - Firefox Multi Account Containers

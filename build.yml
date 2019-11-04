@@ -441,6 +441,7 @@
 # - uBlock Origin
 #
 # Install Firefox extensions
+# - Firstly, login and sync.  It might download the extensions for you
 # - Auto Tab Discard https://add0n.com/tab-discard.html
 # - Facebook Containers https://github.com/mozilla/contain-facebook
 # - Firefox Multi Account Containers https://github.com/mozilla/multi-account-containers#readme

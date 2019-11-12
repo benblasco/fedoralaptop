@@ -468,6 +468,7 @@
 # - Tab Mover https://code.guido-berhoerster.org/addons/firefox-addons/tab-mover/
 # - Tree Style Tabs http://piro.sakura.ne.jp/xul/_treestyletab.html.en
 # - uBlock Origin addons://detail/uBlock0@raymondhill.net
+# - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
 #
 # Install cockpit
 # dnf install cockpit

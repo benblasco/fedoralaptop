@@ -404,6 +404,22 @@
 #
 # TASKS TO ADD TO THIS PLAYBOOK
 #
+# Mouse
+# Switch mouse to left handed
+# Set mouse speed to maximum
+#
+# Displays
+# Enable night light
+#
+# File Manager
+# Sort folders before files
+# Show action to permanently delete files and folders
+# Switch view to list style
+# Arrange by file type
+#
+# Power management
+# Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
+#
 # Install Gnome extensions
 # Note that the command below doesn't appear to show all the extensions I have installed.  Why?
 # Because not all extensions can be installed as RPMs using DNF
@@ -453,12 +469,13 @@
 # Not in use - FoxyProxy Standard
 # Not in use - Google Calendar
 #
+# Enable Offline mail in your gmail settings
+#
 # Install GMail addons for Chrome
 # - Trello
 # - Others?
 #
-# Enable Offline mail in your gmail settings
-#
+# Restore bookmarks and settings using Firefox Sync
 # Install Firefox extensions
 # - Firstly, login and sync.  It might download the extensions for you
 # - Auto Tab Discard https://add0n.com/tab-discard.html
@@ -480,7 +497,17 @@
 # - uBlock Origin addons://detail/uBlock0@raymondhill.net
 # - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
 #
+# Log in to your Pocket account
 # Configure Multi Account containers to use the appropriate container for each tab
+#
+#
+# Configure Joplin
+# Tell it to use Dropbox and authenticate it to synchronise
+# Change the default date format
+# Switch default editor to vi mode
+#
+# Configure Evernote
+# Tools->Sync, then log in to your account
 #
 # Install cockpit
 # dnf install cockpit
@@ -488,20 +515,6 @@
 # systemctl start cockpit
 # then connect to localhost:9090
 #
-# Restore bookmarks and settings using Firefox Sync
-#
-# Mouse
-# Switch mouse to left handed
-# Set mouse speed to maximum
-#
-# Displays
-# Enable night light
-#
-# File Manager
-# Sort folders before files
-# Show action to permanently delete files and folders
-# Switch view to list style
-# Arrange by file type
 #
 # QUESTIONS/UPDATES REQUIRED
 #

@@ -59,6 +59,8 @@
     #- libxcrypt-compat
     - sshfs
     - terminator
+    - dropbox
+    - pinta
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -421,7 +423,8 @@
 # This appears to be broken somehow
 #
 # Current list of Gnome Shell Extensions
-# https://extensions.gnome.org/extension/15/alternatetab/
+# OBSOLETE https://extensions.gnome.org/extension/15/alternatetab/
+# https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
 # https://extensions.gnome.org/extension/6/applications-menu/
 # https://extensions.gnome.org/extension/779/clipboard-indicator/
 # https://extensions.gnome.org/extension/307/dash-to-dock/
@@ -433,6 +436,10 @@
 # https://extensions.gnome.org/extension/8/places-status-indicator/
 # https://extensions.gnome.org/extension/19/user-themes/
 # https://extensions.gnome.org/extension/602/window-list/
+#
+# How to open Gnome looking glass
+# Alt+F2
+# Then type "lg"
 #
 # Install Chrome extensions
 # - Bluejeans Meeting
@@ -470,6 +477,8 @@
 # - uBlock Origin addons://detail/uBlock0@raymondhill.net
 # - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
 #
+# Configure Multi Account containers to use the appropriate container for each tab
+#
 # Install cockpit
 # dnf install cockpit
 # systemctl enable cockpit.socket
@@ -477,6 +486,19 @@
 # then connect to localhost:9090
 #
 # Restore bookmarks and settings using Firefox Sync
+#
+# Mouse
+# Switch mouse to left handed
+# Set mouse speed to maximum
+#
+# Displays
+# Enable night light
+#
+# File Manager
+# Sort folders before files
+# Show action to permanently delete files and folders
+# Switch view to list style
+# Arrange by file type
 #
 # QUESTIONS/UPDATES REQUIRED
 #

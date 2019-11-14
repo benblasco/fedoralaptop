@@ -441,20 +441,23 @@
 # Alt+F2
 # Then type "lg"
 #
-# Install Chrome extensions
-# - Bluejeans Meeting
-# - Bluejeans for Google Calendar
-# - FoxyProxy Standard
-# - Google Calendar
-# - Google Docs Offline
-# - Google Keep Chrome Extension
+# Enable Chrome Sync, which should take care of all extensions etc
+# Install Chrome extensions:
+# - Bluejeans for Google Calendar: https://chrome.google.com/webstore/detail/bluejeans-for-google-cale/iedelpfmeejalepbpmmfbfnfoeojohpp
+# - Google Docs Offline: https://chrome.google.com/webstore/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi
+# - uBlock Origin: https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
+# - Bitwarden: https://chrome.google.com/webstore/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb
 # - Open in Firefox
-# - KeePass Tusk
-# - uBlock Origin
+# Not in use - KeePass Tusk
+# Not in use - Google Keep Chrome Extension
+# Not in use - FoxyProxy Standard
+# Not in use - Google Calendar
 #
 # Install GMail addons for Chrome
 # - Trello
 # - Others?
+#
+# Enable Offline mail in your gmail settings
 #
 # Install Firefox extensions
 # - Firstly, login and sync.  It might download the extensions for you

@@ -451,7 +451,8 @@
 # https://extensions.gnome.org/extension/118/no-topleft-hot-corner/
 # https://extensions.gnome.org/extension/8/places-status-indicator/
 # https://extensions.gnome.org/extension/19/user-themes/
-# https://extensions.gnome.org/extension/602/window-list/
+# BROKEN https://extensions.gnome.org/extension/602/window-list/
+# https://extensions.gnome.org/extension/1160/dash-to-panel/ This has an import/export settings option which may be helpful
 #
 # How to open Gnome looking glass
 # Alt+F2

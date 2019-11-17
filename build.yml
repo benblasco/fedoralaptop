@@ -408,6 +408,9 @@
 # Switch mouse to left handed
 # Set mouse speed to maximum
 #
+# Time
+# Enable automatic time zone
+#
 # Displays
 # Enable night light
 #
@@ -497,6 +500,7 @@
 # - Tree Style Tabs http://piro.sakura.ne.jp/xul/_treestyletab.html.en
 # - uBlock Origin addons://detail/uBlock0@raymondhill.net
 # - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
+# - Containerise https://addons.mozilla.org/en-US/firefox/addon/containerise/
 #
 # Log in to your Pocket account
 # Configure Multi Account containers to use the appropriate container for each tab

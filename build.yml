@@ -61,6 +61,7 @@
     - terminator
     - dropbox
     - pinta
+    - htop
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -467,7 +468,8 @@
 # - Google Docs Offline: https://chrome.google.com/webstore/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi
 # - uBlock Origin: https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
 # - Bitwarden: https://chrome.google.com/webstore/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb
-# - Open in Firefox
+# - Open in Firefox (WHICH VERSION?)
+# - Privacy Badger https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
 # Not in use - KeePass Tusk
 # Not in use - Google Keep Chrome Extension
 # Not in use - FoxyProxy Standard
@@ -501,6 +503,7 @@
 # - uBlock Origin addons://detail/uBlock0@raymondhill.net
 # - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
 # - Containerise https://addons.mozilla.org/en-US/firefox/addon/containerise/
+# - Privacy Badger https://www.eff.org/privacybadger
 #
 # Log in to your Pocket account
 # Configure Multi Account containers to use the appropriate container for each tab

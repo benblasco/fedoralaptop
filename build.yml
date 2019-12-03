@@ -468,8 +468,8 @@
 # - Google Docs Offline: https://chrome.google.com/webstore/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi
 # - uBlock Origin: https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
 # - Bitwarden: https://chrome.google.com/webstore/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb
-# - Open in Firefox (WHICH VERSION?)
-# - Privacy Badger https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
+# - Open in Firefox: https://chrome.google.com/webstore/detail/open-in-firefox/lmeddoobegbaiopohmpmmobpnpjifpii
+# - Privacy Badger: https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
 # Not in use - KeePass Tusk
 # Not in use - Google Keep Chrome Extension
 # Not in use - FoxyProxy Standard
@@ -483,7 +483,7 @@
 #
 # Restore bookmarks and settings using Firefox Sync
 # Install Firefox extensions
-# - Firstly, login and sync.  It might download the extensions for you
+# - Firstly, login and sync.  It should download the extensions for you
 # - Auto Tab Discard https://add0n.com/tab-discard.html
 # - BitWarden https://bitwarden.com/
 # - Facebook Containers https://github.com/mozilla/contain-facebook

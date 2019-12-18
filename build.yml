@@ -340,6 +340,16 @@
       mode: '0700'
       state: directory
 
+  - name: CREATE MOUNT POINT (CUBOX SSHFS) DIRECTORY
+    file:
+      path: /mnt/cubox
+      owner: bblasco
+      group: bblasco
+      mode: '0700'
+      state: directory
+    tags:
+    - sshfs
+
   - name: COPY SSH CONFIG AND PRIVATE KEY FILES
     copy:
       src: files/ssh/{{ item }}
@@ -424,6 +434,9 @@
 #####################################################################
 #
 # PREREQUISITES OLD MACHINE
+#
+# Backup your Calibre book library following instructions at:
+# http://blog.calibre-ebook.com/2017/01/how-to-backup-move-and-export-your.html
 #
 # Complete a backup of the user's entire home directory
 # Note: refer to files under ~/rsync/ for reference
@@ -569,6 +582,11 @@
 # - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
 # - Containerise https://addons.mozilla.org/en-US/firefox/addon/containerise/
 # - Privacy Badger https://www.eff.org/privacybadger
+#
+# Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
+# about:config
+# browser.sessionstore.warnOnQuit true
+# browser.warnOnQuit true
 #
 # Log in to your Pocket account
 # Configure Multi Account containers to use the appropriate container for each tab

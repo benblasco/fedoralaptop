@@ -340,6 +340,14 @@
       group: bblasco
       mode: '0644'
 
+  - name: COPY RSYNC FILES
+    copy:
+      src: files/rsync
+      dest: /home/bblasco/rsync
+      owner: bblasco
+      group: bblasco
+      mode: '0644'
+
   - name: COPY WIFI INTERFACE FILES
     copy:
       src: "{{ item }}"

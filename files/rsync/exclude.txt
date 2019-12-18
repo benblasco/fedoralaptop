@@ -1,0 +1,3 @@
+Videos/
+vagrant/
+rsync_logs/

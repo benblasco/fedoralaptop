@@ -370,6 +370,17 @@
     tags:
       - rsync
 
+  - name: CREATE RSYNC LOG DIRECTORY
+    file:
+      path: /home/bblasco/rsync_logs
+      owner: bblasco
+      group: bblasco
+      mode: '0755'
+      state: directory
+    tags:
+      - rsync
+
+
   - name: COPY WIFI INTERFACE FILES
     copy:
       src: "{{ item }}"

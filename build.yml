@@ -196,10 +196,6 @@
       name: "{{ openvpn_config_packages }}"
       state: present
 
-
-
-
-
   - name: INSTALL PRINTER PACKAGES
     dnf:
       name: "{{ printer_packages }}"
@@ -324,13 +320,25 @@
       mode: '0700'
       state: directory
 
-  - name: COPY SSH CONFIG FILE
+  - name: COPY SSH CONFIG AND PRIVATE KEY FILES
     copy:
-      src: files/ssh/config
+      src: files/ssh/{{ item }}
       dest: /home/bblasco/.ssh
       owner: bblasco
       group: bblasco
       mode: '0600'
+    loop:
+      - config
+      - id_rsa
+      - id_rsa.pub
+
+  - name: COPY TERMINATOR CONFIG FILE
+    copy:
+      src: files/terminator/config
+      dest: /home/bblasco/.terminator
+      owner: bblasco
+      group: bblasco
+      mode: '0644'
 
   - name: COPY WIFI INTERFACE FILES
     copy:
@@ -508,7 +516,6 @@
 # Log in to your Pocket account
 # Configure Multi Account containers to use the appropriate container for each tab
 #
-#
 # Configure Joplin
 # Tell it to use Dropbox and authenticate it to synchronise
 # Change the default date format
@@ -523,6 +530,8 @@
 # systemctl start cockpit
 # then connect to localhost:9090
 #
+# Configure Terminator to use Putty style paste
+# Note: If you do this, use Shift+F10 to access the menus
 #
 # QUESTIONS/UPDATES REQUIRED
 #

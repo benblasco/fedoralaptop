@@ -343,10 +343,12 @@
   - name: COPY RSYNC FILES
     copy:
       src: files/rsync
-      dest: /home/bblasco/rsync
+      dest: /home/bblasco
       owner: bblasco
       group: bblasco
       mode: '0644'
+    tags:
+      - rsync
 
   - name: COPY WIFI INTERFACE FILES
     copy:

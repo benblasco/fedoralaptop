@@ -388,12 +388,14 @@
 # PREREQUISITES OLD MACHINE
 #
 # Complete a backup of the user's entire home directory
+# Note: refer to files under ~/rsync/ for reference
 #
 # Get a snapshot of all Firefox and Chrome extensions
 #
 # Get a snapshot of all Gnome extensions
 #
 # Backup your FoxyProxy configuration (Firefox/Chrome)
+# Note: This is checked into github under files/foxyproxy
 #
 # Backup bookmarks and settings using Firefox Sync
 #

@@ -127,6 +127,13 @@
     - tlp
     - tlp-sleep
 
+    remove_packages:
+    - cheese
+    - gnome-contacts
+    - gnome-maps
+    - rhythmbox
+    - evince
+
     copr_repos:
     - luminoso/Signal-Desktop
     - taw/joplin
@@ -215,6 +222,19 @@
       name: "{{ powermgmt_packages }}"
       state: present
     notify: START POWER MANAGEMENT SERVICES
+    tags:
+    - power
+
+  - name: CREATE POWER MANAGEMENT TLP DIRECTORY
+    # This is the work around so TLP starts as described here: https://github.com/linrunner/TLP/issues/434
+    # mkdir /var/lib/tlp
+    # restorecon -vR /var/lib/tlp
+    file:
+      path: /var/lib/tlp
+      owner: root
+      group: root
+      mode: '0755'
+      state: directory
     tags:
     - power
 
@@ -374,6 +394,13 @@
       - "files/wifi/keys_encrypted/*"
     tags:
     - test
+
+  - name: REMOVE PACKAGES I DON'T WANT ON THE SYSTEM
+    dnf:
+      name: "{{ remove_packages }}"
+      state: absent
+    tags:
+    - remove
 
   handlers:
   - name: START POWER MANAGEMENT SERVICES

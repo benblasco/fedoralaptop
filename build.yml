@@ -80,7 +80,7 @@
     - NetworkManager-openvpn-gnome
 
     openvpn_config_packages:
-    - /tmp/fedora_build/redhat-internal-cert-install-0.1-9.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-cert-install-0.1-15.el7.csb.noarch.rpm
     - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
 
     printer_packages:
@@ -247,7 +247,7 @@
   - name: INSTALL BLUEJEANS VIDEOCONFERENCING (BUT CHECK IF THIS RELEASE IS CURRENT FIRST)
     dnf:
       #name: /tmp/fedora_build/bluejeans-1.37.19.x86_64.rpm
-      name: /tmp/fedora_build/bluejeans-v2-0.3.0-218.x86_64.rpm
+      name: /tmp/fedora_build/bluejeans-v2-2.0.0-188.x86_64.rpm
       state: present
 
   - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE

@@ -46,7 +46,7 @@
     - dconf-editor
     - firefox
     - firefox-wayland
-    - chromium
+    #- chromium
     - vlc
     - vim-enhanced
     # Gvim is vim-X11

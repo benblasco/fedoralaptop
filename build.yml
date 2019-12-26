@@ -48,6 +48,8 @@
     - firefox-wayland
     #- chromium
     - vlc
+    - gstreamer1-libav
+    - openh264
     - vim-enhanced
     # Gvim is vim-X11
     - vim-X11

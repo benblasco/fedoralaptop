@@ -46,6 +46,7 @@
     - dconf-editor
     - firefox
     - firefox-wayland
+    - filezilla
     #- chromium
     - vlc
     - gstreamer1-libav

@@ -136,6 +136,7 @@
     - gnome-maps
     - rhythmbox
     - evince
+    - virtualbox-guest-additions
 
     copr_repos:
     - luminoso/Signal-Desktop

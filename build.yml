@@ -614,7 +614,10 @@
 #
 # QUESTIONS/UPDATES REQUIRED
 #
-# N/A
+# Install dropbox properly via info at:
+# https://forums.fedoraforum.org/showthread.php?322471-Dropbox-not-working-on
+# dnf reinstall dropbox (possibly unnecessary)
+# dropbox start -i (installs proprietary code needed, and then gives you URL to link your account)
 #
 # NOTES ON SOME OF THE TASKS COMPLETED
 #

@@ -65,6 +65,7 @@
     - dropbox
     - pinta
     - htop
+    - xreader
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -618,6 +619,10 @@
 # https://forums.fedoraforum.org/showthread.php?322471-Dropbox-not-working-on
 # dnf reinstall dropbox (possibly unnecessary)
 # dropbox start -i (installs proprietary code needed, and then gives you URL to link your account)
+#
+# Try IDM integration as per:
+# https://mojo.redhat.com/docs/DOC-1199178
+# (See Engineering Server - non-fresh RHEL 7, non-fresh RHEL 8 or RHEL 5 or 6)
 #
 # NOTES ON SOME OF THE TASKS COMPLETED
 #

@@ -50,6 +50,7 @@
     #- chromium
     - vlc
     - gstreamer1-libav
+    - gstreamer1-plugin-openh264
     - openh264
     - vim-enhanced
     # Gvim is vim-X11

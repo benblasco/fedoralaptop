@@ -10,6 +10,7 @@
       mode: pull
       src: /home/eblaben/fedora_build/
       dest: /tmp/fedora_build/
+      compress: no
     register: synchronize_output
     tags:
     - cubox
@@ -267,14 +268,24 @@
     dnf:
       name: "{{ flash_packages }}"
       state: present
-      
+
+  - name: ADD BLUEJEANS GPG KEY
+    rpm_key:
+      state: present
+      key: https://swdl.bluejeans.com/desktop-app/linux/bluejeans_pubkey.gpg
+    tags:
+    - bluejeans
+
   # Bluejeans v1 RPM retrieved from https://redhat.service-now.com/help?id=kb_article&sys_id=d92b36da4f7d470815cf7f75f110c7ef
   # Bluejeans v2 beta RPM retrieved from file.emea.redhat.com/ohaessle/RPMs/signed/test/2019-07-26
-  - name: INSTALL BLUEJEANS VIDEOCONFERENCING (BUT CHECK IF THIS RELEASE IS CURRENT FIRST)
+  - name: INSTALL BLUEJEANS VIDEOCONFERENCING
     dnf:
-      #name: /tmp/fedora_build/bluejeans-1.37.19.x86_64.rpm
-      name: /tmp/fedora_build/bluejeans-v2-2.0.0-188.x86_64.rpm
+      #name: /tmp/fedora_build/bluejeans-v2-2.0.0-188.x86_64.rpm
+      #name: /tmp/fedora_build/BlueJeans.rpm
+      name: https://swdl.bluejeans.com/desktop-app/linux/2.1.0/BlueJeans.rpm
       state: present
+    tags:
+    - bluejeans
 
   - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
     command: "dnf copr enable -y {{ item }}"

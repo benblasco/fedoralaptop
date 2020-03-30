@@ -289,6 +289,22 @@
     tags:
     - bluejeans
 
+  # Install Zoom conferencing as per instructions at:
+  # https://us04web.zoom.us/download
+  - name: ADD ZOOM GPG KEY
+    rpm_key:
+      state: present
+      key: https://us04web.zoom.us/linux/download/pubkey
+    tags:
+    - zoom
+
+  - name: INSTALL ZOOM VIDEOCONFERENCING
+    dnf:
+      name: https://us04web.zoom.us/client/latest/zoom_x86_64.rpm
+      state: present
+    tags:
+    - zoom
+
   - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
     command: "dnf copr enable -y {{ item }}"
     #command: "dnf copr enable -y luminoso/Signal-Desktop"

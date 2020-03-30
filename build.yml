@@ -69,6 +69,7 @@
     - htop
     - xreader
     - libvirt-client
+    - python3-libvirt
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

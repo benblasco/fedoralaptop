@@ -31,6 +31,9 @@
     # Get the distro major version so we can install
     fedora_version: "{{ ansible_facts['distribution_major_version'] }}"
 
+    # Get the laptop model so we can set the right hostname
+    laptop_model: "{{ ansible_facts['product_version'] }}"
+
     rpmfusion_packages:
     - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm
     - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm
@@ -153,13 +156,25 @@
 
   - debug: var=ansible_interfaces
 
+  #- debug: var="{{ ansible_facts['ansible_product_version'] }}"
+  - name: SHOW THE LAPTOP MODEL NAME
+    debug:
+      #var: "ansible_facts['product_version']"
+      var: laptop_model
+    tags:
+    - model
+
   # Set the hostname
   # hostnamectl set-hostname bblasco_fedora
   # Check the hostname (print output of command below)
   # hostnamectl
   - name: SET THE SYSTEM HOSTNAME
     hostname:
-      name: bblasco-fedora
+      #name: bblasco-fedora
+      #name: { "ThinkPad Yoga 370": "bblasco_yoga370", "ThinkPad T470s": "bblasco_t470s" }[ansible_facts['product_version']] | default("bblasco_fedora")
+      #name: "{{ {"ThinkPad Yoga 370": "bblasco_yoga370", "ThinkPad T470s": "bblasco_t470s" }[ansible_facts['product_version']] | default("bblasco_fedora") }}"
+      name: '{{ {"ThinkPad Yoga 370": "bblasco-yoga370", "ThinkPad T470s": "bblasco-t470s" }[laptop_model] | default("bblasco-fedora") }}'
+    tags: hostname
 
   - name: ENABLE RPM FUSION REPO
     #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
@@ -305,6 +320,31 @@
     tags:
     - zoom
 
+  # Install Microsoft VSCode as per instructions at:
+  # https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
+  - name: ADD MICROSOFT VSCODE GPG KEY
+    rpm_key:
+      state: present
+      key: https://packages.microsoft.com/keys/microsoft.asc
+    tags:
+    - vscode
+ 
+  - name: ADD MICROSOFT VSCODE REPO
+    yum_repository:
+      name: vscode
+      description: Visual Studio Code
+      baseurl: https://packages.microsoft.com/yumrepos/vscode
+      gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    tags:
+    - vscode
+
+  - name: INSTALL MICROSOFT VSCODE
+    dnf:
+      name: code
+      state: latest
+    tags:
+    - vscode
+
   - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
     command: "dnf copr enable -y {{ item }}"
     #command: "dnf copr enable -y luminoso/Signal-Desktop"
@@ -316,7 +356,7 @@
     dnf:
       name: signal-desktop
       #enablerepo: luminoso/Signal-Desktop
-      state: present
+      state: latest
 
   # Install Joplin notes from COPR repo
   # Copr repo for joplin owned by taw
@@ -325,7 +365,7 @@
     dnf:
       name: joplin
       #enablerepo: taw/joplin
-      state: present
+      state: latest
     tags:
     - joplin
 

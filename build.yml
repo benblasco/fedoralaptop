@@ -28,7 +28,7 @@
     # https://github.com/ansible/ansible/issues/54855
     ansible_python_interpreter: /usr/bin/python3
 
-    # Get the distro major version so we can install
+    # Get the distro major version so we can install the relevant RPMFusion repositories
     fedora_version: "{{ ansible_facts['distribution_major_version'] }}"
 
     # Get the laptop model so we can set the right hostname
@@ -73,6 +73,7 @@
     - xreader
     - libvirt-client
     - python3-libvirt
+    - vagrant
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

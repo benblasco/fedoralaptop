@@ -74,6 +74,7 @@
     - libvirt-client
     - python3-libvirt
     - vagrant
+    - python3-psutil
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -498,6 +499,31 @@
       state: absent
     tags:
     - remove
+
+  - name: ADJUST NAUTILUS FILE MANAGER BEHAVIOUR 
+    become_user: bblasco
+    become: yes
+    dconf:
+      key: "/org/gnome/nautilus/preferences/always-use-location-entry"
+      value: "true"
+      state: present
+    tags:
+    - dconf
+
+  # Set Nautilis to show a path that can be copy/pasted
+  # Set mouse to be left handed
+  - name: CHANGE A BUNCH OF DCONF SETTINGS
+    become_user: bblasco
+    become: yes
+    dconf:
+      key: "{{ item.key }}"
+      value: "{{ item.value }}"
+      state: "{{ item.state }}"
+    loop:
+      - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
+      - { key: "/org/gnome/desktop/peripherals/mouse/left-handed", value: "true", state: "present" }
+    tags:
+    - dconf
 
   handlers:
   - name: START POWER MANAGEMENT SERVICES

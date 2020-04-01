@@ -75,6 +75,7 @@
     - python3-libvirt
     - vagrant
     - python3-psutil
+    - openssh-server
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -183,7 +184,7 @@
     #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm'
     dnf:
       name: "{{ rpmfusion_packages }}"
-      state: present
+      state: latest
 
   #- name: ENABLE RHEL CSB REPO
      #copy:
@@ -525,9 +526,18 @@
     tags:
     - dconf
 
+  - name: START OPENSSH SERVER ON THINKPAD T470s ONLY
+    service:
+      name: "sshd"
+      enabled: yes
+      state: started
+    when: laptop_model == "ThinkPad T470s"
+    tags:
+    - sshd
+
   handlers:
   - name: START POWER MANAGEMENT SERVICES
-    dnf:
+    service:
       name: "{{ powermgmt_services }}"
       enabled: yes
       state: started

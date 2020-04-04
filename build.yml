@@ -71,10 +71,6 @@
     - pinta
     - htop
     - xreader
-    - libvirt-client
-    - python3-libvirt
-    - vagrant
-    - python3-psutil
     - openssh-server
     
     # Packages retrieved from:
@@ -153,6 +149,15 @@
     - luminoso/Signal-Desktop
     - taw/joplin
 
+    virt_packages:
+    - libvirt-client
+    - python3-libvirt
+    - vagrant
+    - python3-psutil
+    - virt-install
+    - virt-manager-common
+    - virt-viewer
+    
   tasks:
 
   - debug: var=fedora_version
@@ -288,6 +293,13 @@
     dnf:
       name: "{{ flash_packages }}"
       state: present
+
+  - name: INSTALL VIRTUALISATION RELATED PACKAGES
+    dnf:
+      name: "{{ virt_packages }}"
+      state: present
+    tags:
+    - virt
 
   - name: ADD BLUEJEANS GPG KEY
     rpm_key:

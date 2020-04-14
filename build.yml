@@ -152,6 +152,7 @@
     virt_packages:
     - libvirt-client
     - python3-libvirt
+    - python3-lxml
     - vagrant
     - python3-psutil
     - virt-install
@@ -546,6 +547,15 @@
     when: laptop_model == "ThinkPad T470s"
     tags:
     - sshd
+
+  - name: ENABLE IP ROUTING SO WE CAN USE IT FOR VIRTUALIZATION ON THINKPAD T470S ONLY
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      sysctl_set: yes
+      reload: yes
+    when: laptop_model == "ThinkPad T470s"
+    tags: routing
 
   handlers:
   - name: START POWER MANAGEMENT SERVICES

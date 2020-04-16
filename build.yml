@@ -76,6 +76,7 @@
     - vagrant
     - python3-psutil
     - openssh-server
+    - grubby
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -534,6 +535,11 @@
     when: laptop_model == "ThinkPad T470s"
     tags:
     - sshd
+
+  - name: DISABLE CPU VULNERABILITY MITIGATIONS IN KERNEL
+    command: 'grubby --update-kernel=ALL --args="mitigations=off"'
+    tags:
+    - kernel
 
   handlers:
   - name: START POWER MANAGEMENT SERVICES

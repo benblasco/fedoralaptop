@@ -71,10 +71,6 @@
     - pinta
     - htop
     - xreader
-    - libvirt-client
-    - python3-libvirt
-    - vagrant
-    - python3-psutil
     - openssh-server
     - grubby
     
@@ -154,6 +150,16 @@
     - luminoso/Signal-Desktop
     - taw/joplin
 
+    virt_packages:
+    - libvirt-client
+    - python3-libvirt
+    - python3-lxml
+    - vagrant
+    - python3-psutil
+    - virt-install
+    - virt-manager-common
+    - virt-viewer
+    
   tasks:
 
   - debug: var=fedora_version
@@ -289,6 +295,13 @@
     dnf:
       name: "{{ flash_packages }}"
       state: present
+
+  - name: INSTALL VIRTUALISATION RELATED PACKAGES
+    dnf:
+      name: "{{ virt_packages }}"
+      state: present
+    tags:
+    - virt
 
   - name: ADD BLUEJEANS GPG KEY
     rpm_key:
@@ -541,13 +554,21 @@
     tags:
     - kernel
 
+  - name: ENABLE IP ROUTING SO WE CAN USE IT FOR VIRTUALIZATION ON THINKPAD T470S ONLY
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      sysctl_set: yes
+      reload: yes
+    when: laptop_model == "ThinkPad T470s"
+    tags: routing
+
   handlers:
   - name: START POWER MANAGEMENT SERVICES
     service:
       name: "{{ powermgmt_services }}"
       enabled: yes
       state: started
-
 
 #####################################################################
 #

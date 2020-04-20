@@ -316,7 +316,7 @@
     dnf:
       #name: /tmp/fedora_build/bluejeans-v2-2.0.0-188.x86_64.rpm
       #name: /tmp/fedora_build/BlueJeans.rpm
-      name: https://swdl.bluejeans.com/desktop-app/linux/2.1.0/BlueJeans.rpm
+      name: https://swdl.bluejeans.com/desktop-app/linux/2.1.1/BlueJeans.rpm
       state: present
     tags:
     - bluejeans

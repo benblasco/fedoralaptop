@@ -73,6 +73,8 @@
     - xreader
     - openssh-server
     - grubby
+    # Intel driver for video acceleration via VA-API, may improve videoconference performance
+    - libva-intel-driver
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

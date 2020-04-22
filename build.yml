@@ -75,6 +75,10 @@
     - grubby
     # Intel driver for video acceleration via VA-API, may improve videoconference performance
     - libva-intel-driver
+    # The Intel Media Driver for VA-API is a new VA-API user mode driver
+    # supporting hardware accelerated decoding, encoding etc.
+    - intel-media-driver
+    - gstreamer1-vaapi
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

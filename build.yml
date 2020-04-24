@@ -75,10 +75,12 @@
     - grubby
     # Intel driver for video acceleration via VA-API, may improve videoconference performance
     - libva-intel-driver
+    - libva-intel-hybrid-driver
     # The Intel Media Driver for VA-API is a new VA-API user mode driver
     # supporting hardware accelerated decoding, encoding etc.
     - intel-media-driver
     - gstreamer1-vaapi
+    - libva-utils
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -736,6 +738,7 @@
 # - Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
 # - Containerise https://addons.mozilla.org/en-US/firefox/addon/containerise/
 # - Privacy Badger https://www.eff.org/privacybadger
+# - Intention https://addons.mozilla.org/en-US/firefox/addon/intention/
 #
 # Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
 # about:config

@@ -572,6 +572,15 @@
     when: laptop_model == "ThinkPad T470s"
     tags: routing
 
+  - name: ENABLE IPv6 FORWARDING WITH RA ROUTES ON WIRELESS INTERFACE SO WE CAN USE IT FOR VIRTUALIZATION ON THINKPAD T470S ONLY
+    sysctl:
+      name: net.ipv6.conf.wlp58s0.accept_ra
+      value: '2'
+      sysctl_set: yes
+      reload: yes
+    when: laptop_model == "ThinkPad T470s"
+    tags: routing
+
   handlers:
   - name: START POWER MANAGEMENT SERVICES
     service:

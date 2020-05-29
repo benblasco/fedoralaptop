@@ -619,14 +619,16 @@
   handlers:
   - name: START POWER MANAGEMENT SERVICES
     service:
-      name: "{{ powermgmt_services }}"
+      name: "{{ item }}"
       enabled: yes
       state: started
+    loop: "{{ powermgmt_services }}"
 
   - name: RELOAD POWER MANAGEMENT SERVICES
     service:
-      name: "{{ powermgmt_services }}"
+      name: "{{ item }}"
       state: reloaded
+    loop: "{{ powermgmt_services }}"
 
 #####################################################################
 #

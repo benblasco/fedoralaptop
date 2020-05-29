@@ -1,4 +1,3 @@
----
 - hosts: cubox
   name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
   gather_facts: no
@@ -268,6 +267,21 @@
     tags:
     - power
 
+  - name: GET RPM PACKAGE FACTS
+    package_facts:
+      manager: auto
+    tags:
+    - power
+
+  - name: CHECK POWER MANAGEMENT PACKAGE VERSION
+    debug:
+      msg: "TLP version {{ ansible_facts.packages['tlp'][0].version }} is installed.  Update your config if it's >=1.3"
+      #msg: "TLP version {{ ansible_facts.packages['tlp'] }} is installed.  Update your config if it's >=1.3"
+      #msg: "TLP version {{ ansible_facts.packages['tlp'] | length }} is installed.  Update your config if it's >=1.3"
+    when: "'tlp' in ansible_facts.packages"
+    tags:
+    - power
+
   - name: CREATE POWER MANAGEMENT TLP DIRECTORY
     # This is the work around so TLP starts as described here: https://github.com/linrunner/TLP/issues/434
     # mkdir /var/lib/tlp
@@ -281,11 +295,32 @@
     tags:
     - power
 
+  - name: SET POWER MANAGEMENT CPU PERFORMANCE SETTING ON AC POWER
+    lineinfile:
+      path: /etc/default/tlp
+      regexp: '^CPU_HWP_ON_AC'
+      line: 'CPU_HWP_ON_AC=performance'
+      backup: yes
+    notify: RELOAD POWER MANAGEMENT SERVICES
+    tags:
+    - power
+
+  - name: SET POWER MANAGEMENT CPU TURBO BOOST ON AC POWER
+    lineinfile:
+      path: /etc/default/tlp
+      regexp: 'CPU_BOOST_ON_AC'
+      line: 'CPU_BOOST_ON_AC=1'
+      backup: yes
+    notify: RELOAD POWER MANAGEMENT SERVICES
+    tags:
+    - power
+
   # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
   #- name: INSTALL GNOME SHELL EXTENSIONS
   #dnf:
       #name: "{{ gnome_shell_extensions_packages }}"
       #state: present
+
 
   - name: INSTALL ADOBE FLASH PACKAGE
     dnf:
@@ -587,6 +622,11 @@
       name: "{{ powermgmt_services }}"
       enabled: yes
       state: started
+
+  - name: RELOAD POWER MANAGEMENT SERVICE CONFIGURATION
+    service:
+      name: "{{ powermgmt_services }}"
+      state: reloaded
 
 #####################################################################
 #

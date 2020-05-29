@@ -301,7 +301,7 @@
       regexp: '^CPU_HWP_ON_AC'
       line: 'CPU_HWP_ON_AC=performance'
       backup: yes
-    notify: RELOAD POWER MANAGEMENT SERVICES
+    notify: RESTART POWER MANAGEMENT SERVICES
     tags:
     - power
 
@@ -311,7 +311,7 @@
       regexp: 'CPU_BOOST_ON_AC'
       line: 'CPU_BOOST_ON_AC=1'
       backup: yes
-    notify: RELOAD POWER MANAGEMENT SERVICES
+    notify: RESTART POWER MANAGEMENT SERVICES
     tags:
     - power
 
@@ -624,10 +624,10 @@
       state: started
     loop: "{{ powermgmt_services }}"
 
-  - name: RELOAD POWER MANAGEMENT SERVICES
+  - name: RESTART POWER MANAGEMENT SERVICES
     service:
       name: "{{ item }}"
-      state: reloaded
+      state: restarted
     loop: "{{ powermgmt_services }}"
 
 #####################################################################

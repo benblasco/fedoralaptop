@@ -623,7 +623,7 @@
       enabled: yes
       state: started
 
-  - name: RELOAD POWER MANAGEMENT SERVICE CONFIGURATION
+  - name: RELOAD POWER MANAGEMENT SERVICES
     service:
       name: "{{ powermgmt_services }}"
       state: reloaded

@@ -315,6 +315,16 @@
     tags:
     - power
 
+  - name: SET CPU SCALING GOVERNOR TO FOCUS ON PERFORMANCE ON AC POWER
+    lineinfile:
+      path: /etc/default/tlp
+      regexp: 'CPU_SCALING_GOVERNOR_ON_AC'
+      line: 'CPU_SCALING_GOVERNOR_ON_AC=performance'
+      backup: yes
+    notify: RESTART POWER MANAGEMENT SERVICES
+    tags:
+    - power
+
   # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
   #- name: INSTALL GNOME SHELL EXTENSIONS
   #dnf:

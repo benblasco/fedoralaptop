@@ -77,7 +77,6 @@
     - libva-intel-hybrid-driver
     # The Intel Media Driver for VA-API is a new VA-API user mode driver
     # supporting hardware accelerated decoding, encoding etc.
-    - intel-media-driver
     - gstreamer1-vaapi
     - libva-utils
     - libcgroup-tools
@@ -153,6 +152,7 @@
     - rhythmbox
     - evince
     - virtualbox-guest-additions
+    - intel-media-driver
 
     copr_repos:
     - luminoso/Signal-Desktop
@@ -370,7 +370,7 @@
     dnf:
       #name: /tmp/fedora_build/bluejeans-v2-2.0.0-188.x86_64.rpm
       #name: /tmp/fedora_build/BlueJeans.rpm
-      name: https://swdl.bluejeans.com/desktop-app/linux/2.2.0/BlueJeans.rpm
+      name: https://swdl.bluejeans.com/desktop-app/linux/2.3.0/BlueJeans.rpm
       state: present
     tags:
     - bluejeans

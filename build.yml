@@ -792,6 +792,7 @@
 # - Containerise https://addons.mozilla.org/en-US/firefox/addon/containerise/
 # - Privacy Badger https://www.eff.org/privacybadger
 # - Intention https://addons.mozilla.org/en-US/firefox/addon/intention/
+# - enhanced-h264ify: https://addons.mozilla.org/en-US/firefox/addon/enhanced-h264ify/
 #
 # Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
 # about:config

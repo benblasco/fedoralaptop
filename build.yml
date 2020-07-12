@@ -80,6 +80,8 @@
     - gstreamer1-vaapi
     - libva-utils
     - libcgroup-tools
+    # Intel GPU tools aka intel-gpu-tools, so I can run intel_gpu_top
+    - igt-gpu-tools
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

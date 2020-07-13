@@ -1,2 +1,15 @@
 ---
 # handlers file for roles/common
+#
+  - name: START POWER MANAGEMENT SERVICES
+    service:
+      name: "{{ item }}"
+      enabled: yes
+      state: started
+    loop: "{{ powermgmt_services }}"
+
+  - name: RESTART POWER MANAGEMENT SERVICES
+    service:
+      name: "{{ item }}"
+      state: restarted
+    loop: "{{ powermgmt_services }}"

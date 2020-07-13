@@ -1,2 +1,14 @@
 ---
 # tasks file for roles/prereqs
+
+- name: SYNCHRONIZE LOCAL PACKAGES TO BE INSTALLED FROM MY SFTP SERVER
+  synchronize:
+    mode: pull
+    src: /home/eblaben/fedora_build/
+    dest: /tmp/fedora_build/
+    compress: no
+  register: synchronize_output
+  tags:
+  - cubox
+
+- debug: var=synchronize_output

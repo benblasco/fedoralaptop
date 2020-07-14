@@ -1,2 +1,118 @@
 ---
 # vars file for roles/workstation
+
+    workstation_packages:
+
+    - icedtea-web
+    - java-openjdk
+    - gnome-tweak-tool
+    - dconf-editor
+    - firefox
+    - firefox-wayland
+    - filezilla
+    #- chromium
+    - vlc
+    - gstreamer1-libav
+    - gstreamer1-plugin-openh264
+    - openh264
+    # Gvim is vim-X11
+    - vim-X11
+    # Note: Clipgrab is a YouTube video downloader
+    #- clipgrab
+    - tigervnc
+    #- python2-libselinux
+    # Note: libxcrypt-compat required for NixNote2 to launch.  Remove in future?
+    #- libxcrypt-compat
+    - sshfs
+    - terminator
+    - dropbox
+    - pinta
+    - xreader
+
+    # Intel driver for video acceleration via VA-API, may improve videoconference performance
+    - libva-intel-driver
+    - libva-intel-hybrid-driver
+    # The Intel Media Driver for VA-API is a new VA-API user mode driver
+    # supporting hardware accelerated decoding, encoding etc.
+    - gstreamer1-vaapi
+    - libva-utils
+    - libcgroup-tools
+    # Intel GPU tools aka intel-gpu-tools, so I can run intel_gpu_top
+    - igt-gpu-tools
+    
+    # Packages retrieved from:
+    # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
+    # http://hdn.corp.redhat.com/rhel7-csb-stage/repoview/SpiderOakGroups.html
+    # If you want to stay up to date and use the the yum repo, use the repo file:
+    # wget https://hdn.corp.redhat.com/rhel7-csb-stage/rhel7-csb-stage.repo /etc/yum.repos.d/
+    redhat_mandatory_packages:
+      #- SpiderOakGroups
+      - /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
+
+    # Pull additional openvpn files/packages down and install as per link below
+    # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0005424
+    # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
+    openvpn_packages:
+    - NetworkManager-openvpn
+    - NetworkManager-openvpn-gnome
+
+    openvpn_config_packages:
+    - /tmp/fedora_build/redhat-internal-cert-install-0.1-15.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
+
+    printer_packages:
+    - system-config-printer
+    #- devassistant
+    #- devassistant-gui
+
+    mp3_packages:
+    - gstreamer1-plugins-base
+    - gstreamer1-plugins-good
+    - gstreamer1-plugins-ugly
+    - gstreamer1-plugins-bad-free
+    - gstreamer1-plugins-bad-free
+    - gstreamer1-plugins-bad-freeworld
+    - gstreamer1-plugins-bad-free-extras
+    - ffmpeg
+
+    # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
+    gnome_shell_extensions_packages:
+    # Alternate-tab extension not in Fedora 30
+    # - gnome-shell-extension-alternate-tab.noarch
+    - gnome-shell-extension-apps-menu.noarch
+    - gnome-shell-extension-background-logo.noarch
+    - gnome-shell-extension-common.noarch
+    - gnome-shell-extension-dash-to-dock.noarch
+    - gnome-shell-extension-launch-new-instance.noarch
+    - gnome-shell-extension-places-menu.noarch
+    - gnome-shell-extension-pomodoro.x86_64
+    - gnome-shell-extension-user-theme.noarch
+    - gnome-shell-extension-window-list.noarch
+    
+    flash_packages:
+    - gnome-shell-extension-apps-menu.noarch
+    - gnome-shell-extension-dash-to-dock.noarch
+    - flash-plugin
+    - alsa-plugins-pulseaudio
+    - libcurl 
+
+    powermgmt_packages:
+    - tlp
+    - tlp-rdw
+
+    powermgmt_services:
+    - tlp
+    - tlp-sleep
+
+    remove_packages:
+    - cheese
+    - gnome-contacts
+    - gnome-maps
+    - rhythmbox
+    - evince
+    - virtualbox-guest-additions
+    - intel-media-driver
+
+    copr_repos:
+    - luminoso/Signal-Desktop
+    - taw/joplin

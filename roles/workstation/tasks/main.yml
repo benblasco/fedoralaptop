@@ -153,6 +153,7 @@
     name: "{{ flash_packages }}"
     state: present
 
+- name: INSTALL VIRTUALISATION RELATED PACKAGES
   dnf:
     name: "{{ virt_packages }}"
     state: present

@@ -1,0 +1,19 @@
+- hosts: cubox
+  name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
+  gather_facts: no
+
+  roles:
+  - prereqs
+  tags:
+  - cubox
+
+- hosts: localhost
+  connection: local
+
+  name: PERFORM POST BUILD INSTALL/CONFIG OF INTEL NUC SERVER
+  gather_facts: yes
+  become: yes
+
+  roles:
+  - common
+  - server

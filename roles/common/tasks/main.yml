@@ -34,13 +34,19 @@
     name: "{{ common_packages }}"
     state: present
 
-
 - name: INSTALL VIRTUALISATION RELATED PACKAGES
   dnf:
     name: "{{ virt_packages }}"
     state: present
   tags:
   - virt
+
+- name: INSTALL CONTAINER RELATED PACKAGES
+  dnf:
+    name: "{{ container_packages }}"
+    state: present
+  tags:
+  - container
 
 - name: DISABLE CPU VULNERABILITY MITIGATIONS IN KERNEL
   command: 'grubby --update-kernel=ALL --args="mitigations=off"'

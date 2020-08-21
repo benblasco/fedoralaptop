@@ -35,3 +35,8 @@
     - virt-install
     - virt-manager-common
     - virt-viewer
+
+    container_packages:
+    - podman
+    - buildah
+    - skopeo

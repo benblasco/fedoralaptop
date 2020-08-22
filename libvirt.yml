@@ -1,0 +1,30 @@
+- hosts: localhost
+  connection: local
+
+  name: PERFORM CONFIGURATION OF LIBVIRT BASED VIRTUALISATION
+  gather_facts: no
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  - ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Enable the Libvirt service
+    service:
+      name: libvirtd
+      enabled: yes
+      state: started
+
+  - name: Configure the routed network for VMs
+    virt_net:
+      command: define
+      name: nuc-network
+      #xml: "files/libvirt/nuc-network.xml"
+      # Above command does not work, because the xml parameter is expecting an xml string, not a file name
+      # https://stackoverflow.com/questions/25968490/ansible-virt-module-xml-error
+      xml: '{{ lookup("template", "files/libvirt/nuc-network.xml") }}'
+
+ 

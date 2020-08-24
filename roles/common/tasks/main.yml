@@ -52,3 +52,15 @@
   command: 'grubby --update-kernel=ALL --args="mitigations=off"'
   tags:
   - kernel
+
+
+- name: COPY SCREENRC FILE (SCREEN CONFIGURATION)
+  copy:
+    src: files/screen/screenrc
+    dest: /home/bblasco/.screenrc
+    owner: bblasco
+    group: bblasco
+    mode: '0644'
+  tags:
+  - screen
+

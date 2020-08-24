@@ -21,6 +21,7 @@
     - grubby
     # WPA supplicant is so you can sign in to wifi networks
     - wpa_supplicant
+    - screen
 
     rpmfusion_packages:
     - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

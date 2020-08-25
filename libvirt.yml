@@ -12,6 +12,31 @@
 
   tasks:
 
+  - name: Create the logical volume on disk for VMs
+    lvol:
+      vg: fedora
+      lv: vm
+      size: 100g
+    tags:
+    - lvm
+
+  - name: Create the filesystem for VMs
+    filesystem:
+      fstype: xfs
+      dev: /dev/fedora/vm
+    tags:
+    - lvm
+
+  - name: Mount the filesystem for VMs
+    mount:
+      path: /var/lib/libvirt/images
+      src: /dev/fedora/vm
+      fstype: xfs
+      state: mounted
+      backup: yes
+    tags:
+    - lvm
+
   - name: Enable the Libvirt service
     service:
       name: libvirtd

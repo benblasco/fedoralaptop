@@ -47,9 +47,9 @@
     virt_net:
       command: define
       name: nuc-network
-      #xml: "files/libvirt/nuc-network.xml"
-      # Above command does not work, because the xml parameter is expecting an xml string, not a file name
-      # https://stackoverflow.com/questions/25968490/ansible-virt-module-xml-error
       xml: '{{ lookup("template", "files/libvirt/nuc-network.xml") }}'
 
- 
+  - name: Deploy Fedora 32 VM
+    virt:
+      command: define
+      xml: '{{ lookup("template", "files/libvirt/f32.xml") }}'

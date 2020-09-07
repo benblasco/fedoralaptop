@@ -1,0 +1,31 @@
+- hosts: localhost
+  connection: local
+
+  name: PERFORM CONFIGURATION OF SYSTEM TO RUN MY CONTAINERS
+  gather_facts: no
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  - ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Enable firewall ports for Librespot (Spotify Connect Client) MDNS service (UDP port 5353)
+    firewalld:
+      service: mdns
+      permanent: yes
+      state: enabled
+    tags:
+    - firewall
+    - librespot
+
+  - name: Enable firewall ports for Librespot (Spotify Connect Client) TCP high port 49999
+    firewalld:
+      port: 49999/tcp
+      permanent: yes
+      state: enabled
+    tags:
+    - firewall
+    - librespot

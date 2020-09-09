@@ -24,6 +24,7 @@
     - screen
     # Midnight Commander, for file manipulation etc.
     - mc
+    - tmux
 
     rpmfusion_packages:
     - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

@@ -1,5 +1,5 @@
 # Dockerfile with cache (maybe)
-FROM quay.io/fedora/fedora:32-x86_64
+FROM registry.fedoraproject.org/fedora-minimal:32
 LABEL maintainer Benjamin Blasco
 LABEL description Fedora container for creating Rust applications
 
@@ -10,11 +10,11 @@ LABEL description Fedora container for creating Rust applications
 
 
 #RUN dnf install -y cargo alsa-lib-devel make gcc \
-RUN dnf install -y cargo alsa-lib-devel make gcc net-tools procps-ng iproute \
-        && dnf clean all \
+RUN microdnf install cargo alsa-lib-devel make gcc \
+        && microdnf clean all \
         && rm -rf /var/cache/dnf \
         && cargo install librespot
 #CMD /root/.cargo/bin/librespot -n "F32 VM LibreSpot Speaker" -b 320 --zeroconf-port=49999 --device "hdmi:CARD=PCH,DEV=0"
 #ENTRYPOINT /root/.cargo/bin/librespot -n "NUC LibreSpot Speaker" -b 320 --zeroconf-port=49999 --device "hdmi:CARD=PCH,DEV=0"
-ENTRYPOINT /root/.cargo/bin/librespot --name="NUC LibreSpot Speaker" --bitrate=320 --zeroconf-port=49999 --device="hdmi:CARD=PCH,DEV=0"
-#ENTRYPOINT [/root/.cargo/bin/librespot, -n, "NUC LibreSpot Speaker", -b, 320, "--zeroconf-port=49999", --device, "hdmi:CARD=PCH,DEV=0"]
+ENTRYPOINT /root/.cargo/bin/librespot --name="NUC LibreSpot Speaker" --bitrate=320 --zeroconf-port=49999 --device="hdmi:CARD=PCH,DEV=0" --initial-volume=75
+#ENTRYPOINT [/root/.cargo/bin/librespot, -n, "NUC LibreSpot", -b, 320, "--zeroconf-port=49999", --device, "hdmi:CARD=PCH,DEV=0"]

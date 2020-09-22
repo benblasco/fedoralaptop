@@ -169,7 +169,7 @@
 
 - name: INSTALL BLUEJEANS VIDEOCONFERENCING
   dnf:
-    name: https://swdl.bluejeans.com/desktop-app/linux/2.5.0/BlueJeans_2.5.0.50.rpm
+    name: https://swdl.bluejeans.com/desktop-app/linux/2.17.0/BlueJeans_2.17.0.11.rpm
     state: present
   tags:
   - bluejeans

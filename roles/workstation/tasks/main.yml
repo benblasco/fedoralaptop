@@ -284,6 +284,8 @@
     group: bblasco
     mode: '0700'
     state: directory
+  tags:
+  - ssh
 
 - name: CREATE MOUNT POINT (CUBOX SSHFS) DIRECTORY
   file:
@@ -293,7 +295,7 @@
     mode: '0700'
     state: directory
   tags:
-  - sshfs
+  - ssh
 
 - name: COPY SSH CONFIG AND PRIVATE KEY FILES
   copy:
@@ -306,6 +308,8 @@
     - config
     - id_rsa
     - id_rsa.pub
+  tags:
+  - ssh
 
 - name: COPY TERMINATOR CONFIG FILE
   copy:

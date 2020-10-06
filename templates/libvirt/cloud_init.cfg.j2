@@ -1,6 +1,6 @@
 #cloud-config
-hostname: bblasco78
-fqdn: bblasco78.lan
+hostname: {{ vm_hostname }}
+fqdn: {{ vm_hostname }}.lan
 package_upgrade: false
 #manage_etc_hosts: true
 users:

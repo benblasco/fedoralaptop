@@ -52,4 +52,4 @@
   - name: Deploy Fedora 32 VM
     virt:
       command: define
-      xml: '{{ lookup("template", "files/libvirt/f32.xml") }}'
+      xml: '{{ lookup("template", "files/libvirt/f32/f32.xml") }}'

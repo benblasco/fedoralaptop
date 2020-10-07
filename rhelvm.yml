@@ -1,0 +1,69 @@
+- hosts: localhost
+  connection: local
+
+  name: Build a RHEL VM based on the rhel version number
+  gather_facts: no
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  - ansible_python_interpreter: /usr/bin/python3
+
+    vm_imagepath: "/var/lib/libvirt/images"
+    vm_sourcepath: "/var/lib/libvirt/images/source"
+
+    vm_rhel_version: "8.2"
+    vm_sourceimage: "rhel-8.2-x86_64-kvm.qcow2"
+
+    vm_hostname: "bblasco82"
+
+  tasks:
+
+  - name: Create the directory for the VM
+    file:
+      path: {{ vm_imagepath }}/{{ vm_hostname }}
+      owner: qemu
+      group: qemu
+      mode: '0744'
+      state: directory
+
+  - name: Copy the cloud-init config files
+    copy:
+      src: files/libvirt/{{ vm_hostname}}/{{ item }}
+      dest: {{ vm_imagepath }}/{{ vm_hostname }}/{{ item }}
+      owner: qemu
+      group: qemu
+      mode: '0644'
+    loop:
+      - cloud_init.cfg
+      - network_config_static.cfg
+
+  - name: Create the cloud-init configuration ISO image
+    command: >
+      cloud-localds -v
+      --network-config={{ vm_imagepath }}/{{ vm_hostname }}/network_config_static.cfg
+      {{ vm_imagepath }}/{{ vm_hostname }}/{{ vm_hostname }}-seed.qcow2
+      {{ vm_imagepath }}/{{ vm_hostname }}/cloud_init.cfg
+
+
+
+
+
+# cloud-localds -v --network-config=/home/bblasco/fedoralaptop/files/libvirt/bblasco78/network_config_static.cfg /var/lib/libvirt/images/bblasco78/bblasco78-seed.qcow2 /home/bblasco/fedoralaptop/files/libvirt/bblasco78/cloud_init.cfg
+
+# virt-install \
+  # --print-xml \
+  # --name bblasco78 \
+  # --memory 2048 \
+  # --vcpus 1 \
+  # --network network=nuc-network \
+  # --disk path=/var/lib/libvirt/images/bblasco78/bblasco78-seed.qcow2,device=cdrom \
+  # --disk /var/lib/libvirt/images/bblasco78/bblasco78.qcow2 \
+  # --import \
+  # --os-variant rhel7.8 \
+  # > bblasco78.xml
+
+# virsh define --file bblasco78.xml 
+# virsh start bblasco78
+# virsh list --all

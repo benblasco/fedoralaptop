@@ -245,10 +245,14 @@
 - name: INSTALL NIXNOTE2 APPIMAGE FROM GITHUB
   get_url:
     url: https://github.com/robert7/nixnote2/releases/download/continuous/NixNote2-x86_64.AppImage
+      #url: https://github.com/robert7/nixnote2/releases/download/continuous-develop/NixNote2-x86_64.AppImage
     dest: /usr/local/bin/NixNote2-x86_64.AppImage
+    force: yes
     mode: '0755'
     owner: root
     group: root
+  tags:
+  - nixnote2
 
 - name: COPY NIXNOTE2 SHORTCUT
   copy:
@@ -257,6 +261,8 @@
     owner: bblasco
     group: bblasco
     mode: '0664'
+  tags:
+  - nixnote2
 
 - name: CREATE DIRECTORIES FOR NIXNOTE2 ICON
   file:
@@ -268,6 +274,8 @@
   loop:
   - /usr/share/nixnote2/
   - /usr/share/nixnote2/images
+  tags:
+  - nixnote2
 
 - name: COPY NIXNOTE2 ICON
   copy:
@@ -276,6 +284,8 @@
     owner: root
     group: root
     mode: '0644'
+  tags:
+  - nixnote2
 
 - name: CREATE .SSH DIRECTORY
   file:

@@ -258,8 +258,9 @@
 # https://github.com/robert7/nixnote2/releases/tag/continuous
 - name: INSTALL NIXNOTE2 APPIMAGE FROM GITHUB
   get_url:
-    url: https://github.com/robert7/nixnote2/releases/download/continuous/NixNote2-x86_64.AppImage
-      #url: https://github.com/robert7/nixnote2/releases/download/continuous-develop/NixNote2-x86_64.AppImage
+    #url: https://github.com/robert7/nixnote2/releases/download/continuous/NixNote2-x86_64.AppImage
+    #url: https://github.com/robert7/nixnote2/releases/download/continuous-develop/NixNote2-x86_64.AppImage
+    url:  https://github.com/robert7/nixnote2/releases/download/v2.1.6/NixNote2-qt511-x86_64.AppImage
     dest: /usr/local/bin/NixNote2-x86_64.AppImage
     force: yes
     mode: '0755'

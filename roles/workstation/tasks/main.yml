@@ -190,6 +190,20 @@
   tags:
   - zoom
 
+- name: ADD RINGCENTRAL GPG KEY
+  rpm_key:
+    state: present
+    key: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/LinuxPublicKey.pub
+  tags:
+  - ringcentral
+
+- name: INSTALL RINGCENTRAL VIDEOCONFERENCING
+  dnf:
+    name: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/RCMeetingsClientSetup.rpm
+    state: present
+  tags:
+  - ringcentral
+
 # Install Microsoft VSCode as per instructions at:
 # https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
 - name: ADD MICROSOFT VSCODE GPG KEY

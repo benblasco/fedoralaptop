@@ -421,12 +421,12 @@
   tags:
   - dconf
 
-- name: START OPENSSH SERVER ON THINKPAD T470s ONLY
+- name: START OPENSSH SERVER
   service:
     name: "sshd"
     enabled: yes
     state: started
-  when: system_model == "ThinkPad T470s"
+  #when: system_model == "ThinkPad T470s"
   tags:
   - sshd
 

@@ -1,2 +1,9 @@
 ---
 # tasks file for roles/server
+
+- name: INSTALL STORAGE RELATED PACKAGES
+  dnf:
+    name: "{{ storage_packages }}"
+    state: present
+  tags:
+  - storage

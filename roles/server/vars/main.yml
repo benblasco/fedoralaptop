@@ -3,4 +3,5 @@
 
   storage_packages:
     - hdparm
+    - sdparm
     - lshw

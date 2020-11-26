@@ -28,6 +28,8 @@
     - dropbox
     - pinta
     - xreader
+    - pavucontrol # PulseAudio Volume Control
+    #- pulseeffects # PulseAudio Sound Effects control for tuning
 
     # Intel driver for video acceleration via VA-API, may improve videoconference performance
     - libva-intel-driver

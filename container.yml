@@ -12,6 +12,17 @@
 
   tasks:
 
+  - name: Create directory for persistent storage (exported container volumes)
+    file:
+      path: /var/lib/containers/exported_volumes
+      owner: root
+      group: root
+      mode: '0700'
+      state: directory
+    tags:
+    - storage
+
+
   - name: Enable firewall ports for Librespot (Spotify Connect Client) MDNS service (UDP port 5353)
     firewalld:
       service: mdns

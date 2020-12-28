@@ -7,3 +7,18 @@
     state: present
   tags:
   - storage
+
+- name: INSTALL TUNING RELATED PACKAGES
+  dnf:
+    name: "{{ tuning_packages }}"
+    state: present
+  tags:
+  - tuning
+
+- name: ENABLE THE COCKPIT SERVICE
+  systemd:
+    name: cockpit.socket
+    enabled: yes
+    state: started
+  tags:
+  - cockpit

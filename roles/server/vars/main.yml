@@ -1,7 +1,10 @@
 ---
 # vars file for roles/server
 
-  storage_packages:
-    - hdparm
-    - sdparm
-    - lshw
+storage_packages:
+  - hdparm
+  - sdparm
+  - lshw
+
+tuning_packages:
+  - linux-system-roles

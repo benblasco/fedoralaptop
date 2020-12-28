@@ -1,6 +1,17 @@
 ---
 # tasks file for roles/server
 
+
+- name: CONFIGURE MEDIA USER
+  user:
+    name: media
+    uid: 1001
+    group: media
+    shell: /bin/bash
+    comment: Ben's download user
+  tags:
+  - users
+
 - name: INSTALL STORAGE RELATED PACKAGES
   dnf:
     name: "{{ storage_packages }}"

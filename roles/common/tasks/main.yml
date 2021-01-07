@@ -22,6 +22,7 @@
   #command: 'dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm'
   dnf:
     name: "{{ rpmfusion_packages }}"
+    disable_gpg_check: yes
     state: latest
 
 - name: PERFORM A SYSTEM UPDATE

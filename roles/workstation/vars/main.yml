@@ -44,9 +44,10 @@
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
-    # http://hdn.corp.redhat.com/rhel7-csb-stage/repoview/SpiderOakGroups.html
+    # https://hdn.corp.redhat.com/rhel8-csb/repoview/SpiderOakGroups.html
     # If you want to stay up to date and use the the yum repo, use the repo file:
-    # wget https://hdn.corp.redhat.com/rhel7-csb-stage/rhel7-csb-stage.repo /etc/yum.repos.d/
+    # rpm --import https://hdn.corp.redhat.com/rhel8-csb/RPM-GPG-KEY-helpdesk
+    # yum-config-manager --add-repo https://hdn.corp.redhat.com/rhel8-csb/rhel8-csb.repo
     redhat_mandatory_packages:
       #- SpiderOakGroups
       - /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
@@ -58,9 +59,12 @@
     - NetworkManager-openvpn
     - NetworkManager-openvpn-gnome
 
+    # Packages from
+    # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-cert-install.html
+    # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-NetworkManager-openvpn-profiles.html
     openvpn_config_packages:
-    - /tmp/fedora_build/redhat-internal-cert-install-0.1-15.el7.csb.noarch.rpm
-    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-30.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-cert-install-0.1-23.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-45.el7.csb.noarch.rpm
 
     printer_packages:
     - system-config-printer

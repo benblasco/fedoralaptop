@@ -42,11 +42,13 @@
 - name: INSTALL OPENVPN BINARY PACKAGES
   dnf:
     name: "{{ openvpn_packages }}"
+    disable_gpg_check: yes
     state: present
 
 - name: INSTALL OPENVPN CONFIGURATION PACKAGES FROM LOCAL RPMs
   dnf:
     name: "{{ openvpn_config_packages }}"
+    disable_gpg_check: yes
     state: present
 
 - name: INSTALL PRINTER PACKAGES

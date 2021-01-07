@@ -145,6 +145,7 @@
 - name: INSTALL ADOBE FLASH PACKAGE
   dnf:
     name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+    disable_gpg_check: yes
     state: present
   tags:
   - adobe

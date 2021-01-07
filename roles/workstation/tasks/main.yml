@@ -427,7 +427,7 @@
   loop:
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/mouse/left-handed", value: "true", state: "present" }
-    - { key: "/org/gnome/desktop/session/idle-delay", value: "600", state: "present" }
+    #- { key: "/org/gnome/desktop/session/idle-delay", value: "900", state: "present" }
     - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true", state: "present" }
   tags:
   - dconf

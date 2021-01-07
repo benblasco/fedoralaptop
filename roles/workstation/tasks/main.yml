@@ -34,6 +34,7 @@
 - name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
   dnf:
     name: "{{ redhat_mandatory_packages }}"
+    disable_gpg_check: yes
     state: present
 
 # Pull additional openvpn files/packages down and install as per link below

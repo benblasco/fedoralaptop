@@ -416,6 +416,7 @@
 
 # Set Nautilis to show a path that can be copy/pasted
 # Set mouse to be left handed
+# Change screen idle/lock delay to 10 minutes
 - name: CHANGE A BUNCH OF DCONF SETTINGS
   become_user: bblasco
   become: yes
@@ -426,6 +427,8 @@
   loop:
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/mouse/left-handed", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/session/idle-delay", value: "600", state: "present" }
+    - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true", state: "present" }
   tags:
   - dconf
 

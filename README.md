@@ -1,64 +1,60 @@
 # PREREQUISITES OLD MACHINE
 
-Backup your Calibre book library following instructions at:
+- Backup your Calibre book library following instructions at:
 http://blog.calibre-ebook.com/2017/01/how-to-backup-move-and-export-your.html
-
-Complete a backup of the user's entire home directory
+- Complete a backup of the user's entire home directory
 Note: refer to files under ~/rsync/ for reference
-
-Get a snapshot of all Firefox and Chrome extensions
-
-Get a snapshot of all Gnome extensions
-
-Backup your FoxyProxy configuration (Firefox/Chrome)
+- Get a snapshot of all Firefox and Chrome extensions
+- Get a snapshot of all Gnome extensions
+- Backup your FoxyProxy configuration (Firefox/Chrome)
 Note: This is checked into github under files/foxyproxy
+- Backup bookmarks and settings using Firefox Sync
+- Check for new versions of any downloaded packages e.g. bluejeans, vpn clients etc.
+- Update this playbook with all of the above wherever possible, and check it in
 
-Backup bookmarks and settings using Firefox Sync
+# PREREQUISITES NEW BUILD
 
-Check for new versions of any downloaded packages e.g. bluejeans, vpn clients etc.
-
-Update this playbook with all of the above wherever possible
-
-Check the updated playbook into Git repo
-
-PREREQUISITES NEW BUILD
-
-Install Ansible:
+- Install Ansible:
+```
 sudo dnf install ansible python4-dnf
+```
 
 Optional: Add bblasco to sudoers file
+```
 bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
+```
 
 Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION 
 
 git clone https://github.com/eraser215/fedoralaptop.git
-sudo dnf install ansible
 cd fedoralaptop
 ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check 
 ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
 
-TASKS TO ADD TO THIS PLAYBOOK
+# TASKS TO ADD TO THIS PLAYBOOK
 
 Mouse
-Switch mouse to left handed
-Set mouse speed to maximum
+- Switch mouse to left handed
+- Set mouse speed to maximum
 
 Time
-Enable automatic time zone
+- Enable automatic time zone
 
 Displays
-Enable night light
+- Enable night light
 
 File Manager
-Sort folders before files
-Show action to permanently delete files and folders
-Switch view to list style
-Arrange by file type
+- Sort folders before files
+- Show action to permanently delete files and folders
+- Switch view to list style
+- Arrange by file type
+- Allow you to free type another path into the title bar
 
 Power management
-Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
+- Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
+- Blank screen and lock after 15 minutes, rather than 5
 
 Install Gnome extensions
 Note that the command below doesn't appear to show all the extensions I have installed.  Why?
@@ -95,16 +91,16 @@ Current list of Gnome Shell Extensions:
 - https://extensions.gnome.org/extension/1160/dash-to-panel/ This has an import/export settings option which may be helpful
 - https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 
-In multi monitors add on, disable "show panel on additional monitors
+In multi monitors add on, disable "show panel on additional monitors"
 
 Change the default alt-tab behaviour as per the link below:
-https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
-Go to keyboard shortcuts, seach for "swi win" ie "Switch Windows", and replace it with alt-tab, as there is no shortcut currently assigned.
-Alt-tab is normally used for "Switch Applications"
+- https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
+- Go to keyboard shortcuts, seach for "swi win" ie "Switch Windows", and replace it with alt-tab, as there is no shortcut currently assigned.
+- Alt-tab is normally used for "Switch Applications"
 
 How to open Gnome looking glass
-Alt+F2
-Then type "lg"
+- Alt+F2
+- Then type "lg"
 
 Enable Chrome Sync, which should take care of all extensions etc
 Install Chrome extensions:
@@ -119,9 +115,9 @@ Install Chrome extensions:
 - Not in use - FoxyProxy Standard
 - Not in use - Google Calendar
 
-Enable Offline mail in your gmail settings
+Enable Offline mail in your gmail settings (not possible in Firefox)
 
-Install GMail addons for Chrome
+Install GMail addons for Chrome/Firefox
 - Trello
 - Others?
 
@@ -177,7 +173,7 @@ then connect to localhost:9090
 Configure Terminator to use Putty style paste
 Note: If you do this, use Shift+F10 to access the menus
 
-QUESTIONS/UPDATES REQUIRED
+# QUESTIONS/UPDATES REQUIRED
 
 Install dropbox properly via info at:
 https://forums.fedoraforum.org/showthread.php?322471-Dropbox-not-working-on
@@ -191,8 +187,6 @@ https://mojo.redhat.com/docs/DOC-1199178
 NOTES ON SOME OF THE TASKS COMPLETED
 
 MANUAL TASKS THAT MAY NOT BE POSSIBLE TO AUTOMATE
-
-Configure mouse sensitivity and left handed use
 
 Configure SpiderOak backups
 https://redhat.service-now.com/help?id=kb_article&sys_id=c09f0e372b66b8004c71dc0e59da15ff

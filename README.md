@@ -172,7 +172,7 @@ systemctl enable cockpit.socket
 systemctl start cockpit
 then connect to localhost:9090
 
-Configure Terminator to use Putty style paste
+DONE: Configure Terminator to use Putty style paste
 Note: If you do this, use Shift+F10 to access the menus
 
 # QUESTIONS/UPDATES REQUIRED

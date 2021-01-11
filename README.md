@@ -188,6 +188,8 @@ NOTES ON SOME OF THE TASKS COMPLETED
 
 MANUAL TASKS THAT MAY NOT BE POSSIBLE TO AUTOMATE
 
+- Change display position of second screen relative to laptop screen
+
 Configure SpiderOak backups
 https://redhat.service-now.com/help?id=kb_article&sys_id=c09f0e372b66b8004c71dc0e59da15ff
 https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

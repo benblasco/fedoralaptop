@@ -310,6 +310,18 @@
   tags:
   - nixnote2
 
+- name: COPY TERMINATOR CONFIG
+  #become_user: bblasco
+  become: no
+  copy:
+    src: files/terminator/config
+    dest: /home/bblasco/.config/terminator/config
+    owner: bblasco
+    group: bblasco
+    mode: '0644'
+  tags:
+  - terminator
+
 - name: CREATE .SSH DIRECTORY
   file:
     path: /home/bblasco/.ssh
@@ -426,9 +438,14 @@
     state: "{{ item.state }}"
   loop:
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
+    - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/mouse/left-handed", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/peripherals/mouse/speed", value: "1", state: "present" }
     #- { key: "/org/gnome/desktop/session/idle-delay", value: "900", state: "present" }
     - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/datetime/automatic-timezone", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/sound/allow-volume-above-100-percent", value: "true", state: "present" }
   tags:
   - dconf
 

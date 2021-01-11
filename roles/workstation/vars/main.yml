@@ -26,6 +26,7 @@
     - sshfs
     - terminator
     - dropbox
+    - nautilus-dropbox
     - pinta
     - xreader
     - pavucontrol # PulseAudio Volume Control

@@ -310,6 +310,16 @@
   tags:
   - nixnote2
 
+- name: CREATE TERMINATOR CONFIG DIRECTORY
+  file:
+    path: /home/bblasco/.config/terminator
+    owner: bblasco
+    group: bblasco
+    mode: '0755'
+    state: directory
+  tags:
+  - terminator
+
 - name: COPY TERMINATOR CONFIG
   #become_user: bblasco
   become: no

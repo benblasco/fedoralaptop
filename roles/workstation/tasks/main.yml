@@ -198,6 +198,17 @@
   tags:
   - zoom
 
+# https://www.reddit.com/r/MicrosoftTeams/comments/j6rob9/teams_download_link_for_linux_gone/
+# https://teams.microsoft.com/uswe-01/downloads
+# RPMS actually at https://packages.microsoft.com/yumrepos/ms-teams/
+# Check the URL above to get an update
+- name: INSTALL MICROSOFT TEAMS VIDEOCONFERENCING
+  dnf:
+    name: https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=rpm
+    state: present
+  tags:
+  - msteams
+
 - name: ADD RINGCENTRAL GPG KEY
   rpm_key:
     state: present

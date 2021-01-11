@@ -28,10 +28,12 @@ Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION 
 
+```
 git clone https://github.com/eraser215/fedoralaptop.git
 cd fedoralaptop
 ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check 
 ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
+```
 
 # TASKS TO ADD TO THIS PLAYBOOK
 

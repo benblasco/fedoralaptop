@@ -93,9 +93,9 @@ Current list of Gnome Shell Extensions:
 - https://extensions.gnome.org/extension/1160/dash-to-panel/ This has an import/export settings option which may be helpful
 - https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 
-In multi monitors add on, disable "show panel on additional monitors"
+DONE: In multi monitors add on, disable "show panel on additional monitors"
 
-Change the default alt-tab behaviour as per the link below:
+DONE: Change the default alt-tab behaviour as per the link below:
 - https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
 - Go to keyboard shortcuts, seach for "swi win" ie "Switch Windows", and replace it with alt-tab, as there is no shortcut currently assigned.
 - Alt-tab is normally used for "Switch Applications"

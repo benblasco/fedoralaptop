@@ -448,9 +448,9 @@
   tags:
   - dconf
 
-# Set Nautilis to show a path that can be copy/pasted
-# Set mouse to be left handed
-# Change screen idle/lock delay to 10 minutes
+# Good explanation of how this works here:
+# https://eklitzke.org/lobotomizing-gnome
+# Requires detailed reading and more work
 - name: CHANGE A BUNCH OF DCONF SETTINGS
   become_user: bblasco
   become: yes

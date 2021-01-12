@@ -5,6 +5,7 @@ http://blog.calibre-ebook.com/2017/01/how-to-backup-move-and-export-your.html
 - Complete a backup of the user's entire home directory
 Note: refer to files under ~/rsync/ for reference
 - Get a snapshot of all Firefox and Chrome extensions
+- Backup the configuration of "auto tab discard" firefox extension
 - Get a snapshot of all Gnome extensions
 - Backup your FoxyProxy configuration (Firefox/Chrome)
 Note: This is checked into github under files/foxyproxy
@@ -126,6 +127,10 @@ Install GMail addons for Chrome/Firefox
 Restore bookmarks and settings using Firefox Sync
 Install Firefox extensions
 - Firstly, login and sync.  It should download the extensions for you
+- Open the Container tabs extension and allow it to sync
+- Restore the list of auto tab discard exceptions
+
+Reference list of Firefox extensions/add ons
 - Auto Tab Discard https://add0n.com/tab-discard.html
 - BitWarden https://bitwarden.com/
 - Facebook Containers https://github.com/mozilla/contain-facebook

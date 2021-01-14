@@ -128,7 +128,8 @@ Restore bookmarks and settings using Firefox Sync
 Install Firefox extensions
 - Firstly, login and sync.  It should download the extensions for you
 - Open the Container tabs extension and allow it to sync
-- Restore the list of auto tab discard exceptions
+- Restore the list of auto tab discard exceptions (auto-tab-discard-preferences.json)
+- Restore the Tree Style Tabs config (configs-treestyletab@piro.sakura.ne.jp.json)
 
 Reference list of Firefox extensions/add ons
 - Auto Tab Discard https://add0n.com/tab-discard.html

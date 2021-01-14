@@ -476,6 +476,8 @@
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
     - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled-", value: "true", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature-", value: "2710", state: "present" }
   tags:
   - dconf
 

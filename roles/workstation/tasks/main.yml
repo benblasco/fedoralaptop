@@ -469,17 +469,17 @@
     - { key: "/org/gnome/desktop/datetime/automatic-timezone", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/sound/allow-volume-above-100-percent", value: "true", state: "present" }
-    - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "''", state: "present" }
-    - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "''", state: "present" }
-    - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "['<Alt>Tab']", state: "present" }
-    - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "['<Shift><Alt>Tab']", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "@as []", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "@as []", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "@as ['<Alt>Tab']", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "@as ['<Shift><Alt>Tab']", state: "present" }
     - { key: "/org/gnome/desktop/wm/keybindings/switch-group", value: "@as []", state: "present" }
     - { key: "/org/gnome/desktop/wm/keybindings/switch-group-backward", value: "@as []", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
     - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled-", value: "true", state: "present" }
-    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature-", value: "2710", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature-", value: "2700", state: "present" }
   tags:
   - dconf
 

@@ -27,9 +27,10 @@ bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
 
 Restore your home directory from the remote source via rsync
 
-# USAGE/EXECUTION 
+# USAGE/EXECUTION AND UPDATES
 
-Then add they SSH key for this machine in Github
+Add they SSH key for this machine in Github
+
 https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 https://github.com/settings/keys
 
@@ -42,10 +43,10 @@ ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
 
 Change the remote URL so you can use your SSH key
 https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
+
 ```
 git remote set-url origin git@github.com:eraser215/fedoralaptop.git
 ```
-
 
 # TASKS TO ADD TO THIS PLAYBOOK
 
@@ -55,7 +56,7 @@ Mouse
 - [ ] Keep track pad right handed
 
 Time
-- Enable automatic time zone
+- [ ] Enable automatic time zone
 
 Displays
 - [ ] Enable night light

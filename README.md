@@ -29,6 +29,10 @@ Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION 
 
+Then add they SSH key for this machine in Github
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+https://github.com/settings/keys
+
 ```
 git clone https://github.com/eraser215/fedoralaptop.git
 cd fedoralaptop
@@ -36,28 +40,36 @@ ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check
 ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
 ```
 
+Change the remote URL so you can use your SSH key
+https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
+```
+git remote set-url origin git@github.com:eraser215/fedoralaptop.git
+```
+
+
 # TASKS TO ADD TO THIS PLAYBOOK
 
 Mouse
-- Switch mouse to left handed
-- Set mouse speed to maximum
+- [x] Switch mouse to left handed
+- [ ] Set mouse speed to maximum
+- [ ] Keep track pad right handed
 
 Time
 - Enable automatic time zone
 
 Displays
-- Enable night light
+- [ ] Enable night light
 
 File Manager
-- Sort folders before files
-- Show action to permanently delete files and folders
-- Switch view to list style
-- Arrange by file type
-- Allow you to free type another path into the title bar
+- [ ] Sort folders before files
+- [ ] Show action to permanently delete files and folders
+- [ ] Switch view to list style
+- [ ] Arrange by file type
+- [ ] Allow you to free type another path into the title bar
 
 Power management
-- Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
-- Blank screen and lock after 15 minutes, rather than 5
+- [ ] Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
+- [ ] Blank screen and lock after 15 minutes, rather than 5
 
 Install Gnome extensions
 Note that the command below doesn't appear to show all the extensions I have installed.  Why?

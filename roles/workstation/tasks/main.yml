@@ -461,6 +461,8 @@
   loop:
     - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/interface/cursor-size", value: '48', state: "present" }
+    - { key: "/org/gnome/desktop/interface/clock-format", value: "'24h'", state: "present" }
+    - { key: "/org/gnome/desktop/datetime/automatic-timezone", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/mouse/left-handed", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/mouse/speed", value: '1.0', state: "present" }
     - { key: "/org/gnome/desktop/peripherals/touchpad/left-handed", value: "'right'", state: "present" }
@@ -478,8 +480,8 @@
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
     - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
-    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled-", value: "true", state: "present" }
-    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature-", value: "2700", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled", value: "true", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature", value: "2700", state: "present" }
   tags:
   - dconf
 

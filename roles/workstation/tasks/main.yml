@@ -205,6 +205,7 @@
 - name: INSTALL MICROSOFT TEAMS VIDEOCONFERENCING
   dnf:
     name: https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=rpm
+    disable_gpg_check: yes
     state: present
   tags:
   - msteams

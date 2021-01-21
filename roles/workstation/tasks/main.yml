@@ -249,6 +249,8 @@
   tags:
   - vscode
 
+# Note we may be able to make it idempotent with the solution here:
+# https://stackoverflow.com/questions/42651026/ansible-dnf-module-enable-fedora-copr-repository
 - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
   command: "dnf copr enable -y {{ item }}"
   #command: "dnf copr enable -y luminoso/Signal-Desktop"

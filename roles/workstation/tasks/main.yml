@@ -482,9 +482,12 @@
     - { key: "/org/gnome/desktop/wm/keybindings/switch-group-backward", value: "@as []", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
+    - { key: "/org/gnome/shell/favorite-apps", value: "@as []", state: "present" }
     - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled", value: "true", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature", value: "2700", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled", value: "true", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/color/night-light-last-coordinates", value: "'-37.837469239884811, 145.05206509999999'", state: "present" }
   tags:
   - dconf
 

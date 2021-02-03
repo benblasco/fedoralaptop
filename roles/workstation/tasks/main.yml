@@ -70,6 +70,7 @@
     name: "{{ powermgmt_packages }}"
     state: present
   notify: START POWER MANAGEMENT SERVICES
+  when: fedora_version | int <= 32
   tags:
   - power
 
@@ -441,16 +442,6 @@
   tags:
   - remove
 
-- name: ADJUST NAUTILUS FILE MANAGER BEHAVIOUR 
-  become_user: bblasco
-  become: yes
-  dconf:
-    key: "/org/gnome/nautilus/preferences/always-use-location-entry"
-    value: "true"
-    state: present
-  tags:
-  - dconf
-
 # Good explanation of how this works here:
 # https://eklitzke.org/lobotomizing-gnome
 # Requires detailed reading and more work
@@ -482,6 +473,8 @@
     - { key: "/org/gnome/desktop/wm/keybindings/switch-group-backward", value: "@as []", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
+    - { key: "/org/gnome/software/allow-updates", value: "false", state: "present" }
+    - { key: "/org/gnome/software/download-updates", value: "false", state: "present" }
     - { key: "/org/gnome/shell/favorite-apps", value: "@as []", state: "present" }
     - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled", value: "true", state: "present" }

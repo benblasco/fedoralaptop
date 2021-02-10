@@ -34,6 +34,7 @@
 - name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
   dnf:
     name: "{{ redhat_mandatory_packages }}"
+    disable_gpg_check: yes
     state: present
 
 # Pull additional openvpn files/packages down and install as per link below
@@ -41,11 +42,13 @@
 - name: INSTALL OPENVPN BINARY PACKAGES
   dnf:
     name: "{{ openvpn_packages }}"
+    disable_gpg_check: yes
     state: present
 
 - name: INSTALL OPENVPN CONFIGURATION PACKAGES FROM LOCAL RPMs
   dnf:
     name: "{{ openvpn_config_packages }}"
+    disable_gpg_check: yes
     state: present
 
 - name: INSTALL PRINTER PACKAGES
@@ -67,6 +70,7 @@
     name: "{{ powermgmt_packages }}"
     state: present
   notify: START POWER MANAGEMENT SERVICES
+  when: fedora_version | int <= 32
   tags:
   - power
 
@@ -95,6 +99,7 @@
     group: root
     mode: '0755'
     state: directory
+  when: fedora_version | int <= 32
   tags:
   - power
 
@@ -105,6 +110,7 @@
     line: 'CPU_HWP_ON_AC=performance'
     backup: yes
   notify: RESTART POWER MANAGEMENT SERVICES
+  when: fedora_version | int <= 32
   tags:
   - power
 
@@ -115,6 +121,7 @@
     line: 'CPU_BOOST_ON_AC=1'
     backup: yes
   notify: RESTART POWER MANAGEMENT SERVICES
+  when: fedora_version | int <= 32
   tags:
   - power
 
@@ -125,6 +132,7 @@
     line: 'CPU_SCALING_GOVERNOR_ON_AC=performance'
     backup: yes
   notify: RESTART POWER MANAGEMENT SERVICES
+  when: fedora_version | int <= 32
   tags:
   - power
 
@@ -138,6 +146,7 @@
 - name: INSTALL ADOBE FLASH PACKAGE
   dnf:
     name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+    disable_gpg_check: yes
     state: present
   tags:
   - adobe
@@ -190,6 +199,18 @@
   tags:
   - zoom
 
+# https://www.reddit.com/r/MicrosoftTeams/comments/j6rob9/teams_download_link_for_linux_gone/
+# https://teams.microsoft.com/uswe-01/downloads
+# RPMS actually at https://packages.microsoft.com/yumrepos/ms-teams/
+# Check the URL above to get an update
+- name: INSTALL MICROSOFT TEAMS VIDEOCONFERENCING
+  dnf:
+    name: https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=rpm
+    disable_gpg_check: yes
+    state: present
+  tags:
+  - msteams
+
 - name: ADD RINGCENTRAL GPG KEY
   rpm_key:
     state: present
@@ -229,6 +250,8 @@
   tags:
   - vscode
 
+# Note we may be able to make it idempotent with the solution here:
+# https://stackoverflow.com/questions/42651026/ansible-dnf-module-enable-fedora-copr-repository
 - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
   command: "dnf copr enable -y {{ item }}"
   #command: "dnf copr enable -y luminoso/Signal-Desktop"
@@ -301,6 +324,29 @@
     mode: '0644'
   tags:
   - nixnote2
+
+- name: CREATE TERMINATOR CONFIG DIRECTORY
+  file:
+    path: /home/bblasco/.config/terminator
+    owner: bblasco
+    group: bblasco
+    mode: '0755'
+    state: directory
+  tags:
+  - terminator
+
+- name: COPY TERMINATOR CONFIG
+  #become_user: bblasco
+  become: no
+  copy:
+    src: files/terminator/config
+    dest: /home/bblasco/.config/terminator/config
+    owner: bblasco
+    group: bblasco
+    mode: '0644'
+    backup: yes
+  tags:
+  - terminator
 
 - name: CREATE .SSH DIRECTORY
   file:
@@ -396,18 +442,9 @@
   tags:
   - remove
 
-- name: ADJUST NAUTILUS FILE MANAGER BEHAVIOUR 
-  become_user: bblasco
-  become: yes
-  dconf:
-    key: "/org/gnome/nautilus/preferences/always-use-location-entry"
-    value: "true"
-    state: present
-  tags:
-  - dconf
-
-# Set Nautilis to show a path that can be copy/pasted
-# Set mouse to be left handed
+# Good explanation of how this works here:
+# https://eklitzke.org/lobotomizing-gnome
+# Requires detailed reading and more work
 - name: CHANGE A BUNCH OF DCONF SETTINGS
   become_user: bblasco
   become: yes
@@ -416,8 +453,34 @@
     value: "{{ item.value }}"
     state: "{{ item.state }}"
   loop:
-    - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/interface/cursor-size", value: '48', state: "present" }
+    - { key: "/org/gnome/desktop/interface/clock-format", value: "'24h'", state: "present" }
+    - { key: "/org/gnome/desktop/datetime/automatic-timezone", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/mouse/left-handed", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/peripherals/mouse/speed", value: '1.0', state: "present" }
+    - { key: "/org/gnome/desktop/peripherals/touchpad/left-handed", value: "'right'", state: "present" }
+    - { key: "/org/gnome/desktop/peripherals/touchpad/speed", value: '1.0', state: "present" }
+    - { key: "/org/gnome/desktop/session/idle-delay", value: '900', state: "present" }
+    - { key: "/org/gnome/desktop/datetime/automatic-timezone", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/sound/allow-volume-above-100-percent", value: "true", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "@as []", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "@as []", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "@as ['<Alt>Tab']", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "@as ['<Shift><Alt>Tab']", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-group", value: "@as []", state: "present" }
+    - { key: "/org/gnome/desktop/wm/keybindings/switch-group-backward", value: "@as []", state: "present" }
+    - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
+    - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
+    - { key: "/org/gnome/software/allow-updates", value: "false", state: "present" }
+    - { key: "/org/gnome/software/download-updates", value: "false", state: "present" }
+    - { key: "/org/gnome/shell/favorite-apps", value: "@as []", state: "present" }
+    - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled", value: "true", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature", value: "2700", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled", value: "true", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/color/night-light-last-coordinates", value: "'-37.837469239884811, 145.05206509999999'", state: "present" }
   tags:
   - dconf
 

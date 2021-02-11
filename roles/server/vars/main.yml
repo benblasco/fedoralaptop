@@ -8,3 +8,11 @@ storage_packages:
 
 tuning_packages:
   - linux-system-roles
+
+cockpit_packages:
+  - cockpit
+  - cockpit-dashboard
+  - cockpit-podman
+  - cockpit-machines
+  - cockpit-networkmanager
+  - cockpit-storaged

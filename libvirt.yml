@@ -54,6 +54,16 @@
     - lvm
     - crc
 
+  - name: Create the mount point for CodeReady Containers
+    file:
+      path: /home/bblasco/.crc
+      state: directory
+      owner: bblasco
+      group: bblasco
+    tags:
+    - lvm
+    - crc
+
   - name: Mount the filesystem for CodeReady Containers
     mount:
       path: /home/bblasco/.crc

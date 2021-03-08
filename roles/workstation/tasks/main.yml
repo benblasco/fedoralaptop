@@ -473,6 +473,8 @@
     - { key: "/org/gnome/desktop/wm/keybindings/switch-group-backward", value: "@as []", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/always-use-location-entry", value: "true", state: "present" }
     - { key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "'list-view'", state: "present" }
+    - { key: "/org/gnome/nautilus/preferences/list-view/default-visible-columns", value: "@as ['name', 'size', 'type', 'date_modified', 'starred']", state: "present" }
+    - { key: "/org/gnome/nautilus/preferences/list-view/default-column-order", value: "@as ['name', 'size', 'type', 'owner', 'group', 'permissions', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed', 'recency', 'starred', 'detailed_type']", state: "present" }
     - { key: "/org/gnome/software/allow-updates", value: "false", state: "present" }
     - { key: "/org/gnome/software/download-updates", value: "false", state: "present" }
     - { key: "/org/gnome/shell/favorite-apps", value: "@as []", state: "present" }

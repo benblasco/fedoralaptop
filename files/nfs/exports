@@ -1,1 +1,2 @@
-/mnt/sg3 192.168.1.0/24(rw,async)
+/srv/nfs4/sg3 192.168.1.0/24(rw,async) 192.168.3.0/24(rw,async)
+/srv/nfs4/wd_xfs1 192.168.1.0/24(rw,async) 192.168.3.0/24(rw,async)

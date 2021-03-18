@@ -21,6 +21,8 @@
     loop:
       - /mnt/sg3/
       - /mnt/wd_xfs1/
+      - /srv/nfs4/sg3/
+      - /srv/nfs4/wd_xfs1/
     tags:
     - nfs
 
@@ -44,6 +46,58 @@
     tags:
     - nfs
 
+  - name: Create the bind mounts
+    mount:
+      path: /srv/nfs4/sg3
+      src: /mnt/sg3
+      opts: bind
+      fstype: none
+      state: mounted
+      backup: yes
+    tags:
+    - nfs
+
+  - name: Create the bind mounts
+    mount:
+      path: /srv/nfs4/wd_xfs1
+      src: /mnt/wd_xfs1
+      opts: bind
+      fstype: none
+      state: mounted
+      backup: yes
+    tags:
+    - nfs
+
+  - name: Create the LIBNFSIDMAP configuration
+    lineinfile:
+      path: /etc/idmapd.conf
+      regexp: '^#Domain'
+      line: Domain = nuc.lan
+      backup: yes
+    tags:
+    - nfs
+
+  - name: Export the filesystems (/etc/exports)
+    copy:
+      src: nfs/exports
+      dest: /etc/exports
+      owner: root
+      group: root
+      mode: 0644
+    tags:
+    - nfs
+
+  - name: ENABLE THE NFS SYSTEM SERVICES
+    systemd:
+      name: "{{ item }}"
+      enabled: yes
+      state: started
+    loop:
+      - rpcbind
+      - nfs-server
+    tags:
+    - nfs
+
   - name: Open the appropriate firewall ports
     firewalld:
       zone: FedoraServer
@@ -54,8 +108,7 @@
     loop:
       - nfs
       - nfs3
+      - mountd
+      - rpc-bind
     tags:
     - nfs
-
-
-

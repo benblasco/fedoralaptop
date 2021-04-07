@@ -123,3 +123,5 @@
     copr_repos:
     - luminoso/Signal-Desktop
     - taw/joplin
+
+    bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.21.3/BlueJeans_2.21.3.2.rpm

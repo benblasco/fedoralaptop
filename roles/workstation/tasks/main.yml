@@ -178,7 +178,8 @@
 
 - name: INSTALL BLUEJEANS VIDEOCONFERENCING
   dnf:
-    name: https://swdl.bluejeans.com/desktop-app/linux/2.21.2/BlueJeans_2.21.2.1.rpm
+    #name: https://swdl.bluejeans.com/desktop-app/linux/2.21.2/BlueJeans_2.21.2.1.rpm
+    name: "{{ bluejeans_rpm }}"
     state: present
   tags:
   - bluejeans
@@ -207,7 +208,7 @@
   dnf:
     name: https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=rpm
     disable_gpg_check: yes
-    state: present
+    state: latest
   tags:
   - msteams
 

@@ -112,3 +112,15 @@
       - rpc-bind
     tags:
     - nfs
+
+  - name: Open the appropriate firewall services for local VMs
+    firewalld:
+      zone: libvirt
+      service: '{{ item }}'
+      permanent: yes
+      immediate: yes
+      state: enabled
+    loop:
+      - nfs
+    tags:
+    - nfs

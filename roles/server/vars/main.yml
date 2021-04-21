@@ -16,3 +16,4 @@ cockpit_packages:
   - cockpit-machines
   - cockpit-networkmanager
   - cockpit-storaged
+  - cockpit-pcp

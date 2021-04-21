@@ -1,0 +1,28 @@
+- hosts: pi4.lan
+  #connection: local
+
+  name: PERFORM INSTALL/CONFIG TASKS ON RASPBERRY PI OS
+  gather_facts: no
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  - ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Run an APT update
+    apt:
+      #name: "*"
+      #state: latest
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Install Wireguard VPN package
+    apt:
+      name: wireguard
+      state: latest
+    tags:
+    - wireguard

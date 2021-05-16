@@ -251,6 +251,14 @@
   tags:
   - vscode
 
+- name: INSTALL FLATPAK APPS
+  flatpak:
+    name: spotify
+    state: present
+    method: user
+  tags:
+  - flatpak
+
 # Note we may be able to make it idempotent with the solution here:
 # https://stackoverflow.com/questions/42651026/ansible-dnf-module-enable-fedora-copr-repository
 - name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE

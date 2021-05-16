@@ -113,6 +113,9 @@
     - tlp
     - tlp-sleep
 
+    flatpak_apps:
+    - spotify
+
     remove_packages:
     - cheese
     - gnome-contacts

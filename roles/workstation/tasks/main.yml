@@ -251,11 +251,32 @@
   tags:
   - vscode
 
+- name: INSTALL FLATPAK REMOTE REPOS
+  flatpak_remote:
+    name: "{{ item.name }}"
+    #name: flathub
+    state: present
+    flatpakrepo_url: "{{ item.remote }}"
+    #flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    #method: user
+  loop:
+  # Looping over a variable that is a hash doesn't appear to be working.  Need to troubleshoot
+  #- "{{ flatpak_remotes }}"
+  #- { name: 'flathub', remote: 'https://dl.flathub.org/repo/flathub.flatpakrepo' }
+  - { name: 'flathub', remote: 'https://flathub.org/repo/flathub.flatpakrepo' }
+  tags:
+  - flatpak
+
 - name: INSTALL FLATPAK APPS
+# Note this doesn't appear to be working with variables, as it seems to add brackets or something to the app name
   flatpak:
+    #name: "{{ item }}"
     name: spotify
+    #remote: flathub
     state: present
     method: user
+  #loop:
+  #- "{{ flatpak_apps }}"
   tags:
   - flatpak
 

@@ -113,8 +113,13 @@
     - tlp
     - tlp-sleep
 
+    flatpak_remotes:
+    - { name: 'flathub', remote: 'https://dl.flathub.org/repo/flathub.flatpakrepo' }
+
     flatpak_apps:
     - spotify
+    #- Spotify
+    #- com.spotify.Client
 
     remove_packages:
     - cheese

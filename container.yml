@@ -49,5 +49,11 @@
         rm: yes
       state: build
       tag: librespot_via_ansible
+    register: build_results
     tags:
+    - librespot
+
+  - name: Check how my container build went
+    debug:
+      var: build_results
     - librespot

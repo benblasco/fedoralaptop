@@ -56,4 +56,5 @@
   - name: Check how my container build went
     debug:
       var: build_results
+    tags:
     - librespot

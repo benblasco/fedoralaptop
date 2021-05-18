@@ -40,3 +40,14 @@
     tags:
     - firewall
     - librespot
+
+  - name: Build the Librespot podman container image
+    podman_image:
+      name: registry.fedoraproject.org/fedora-minimal:32
+      path: files/containers/librespot
+      build:
+        rm: yes
+      state: build
+      tag: librespot_via_ansible
+    tags:
+    - librespot

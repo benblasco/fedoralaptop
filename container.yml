@@ -43,12 +43,12 @@
 
   - name: Build the Librespot podman container image
     podman_image:
-      name: registry.fedoraproject.org/fedora-minimal:32
+      name: librespot_via_ansible
       path: files/containers/librespot
       build:
         rm: yes
-      state: build
-      tag: librespot_via_ansible
+      state: present
+      tag: "32"
     register: build_results
     tags:
     - librespot

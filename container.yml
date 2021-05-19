@@ -12,6 +12,16 @@
 
   tasks:
 
+  - name: Ensure that containers run with the local time zone set
+    lineinfile:
+      path: /usr/share/containers/containers.conf
+      regexp: '^tz'
+      insertafter: '^# tz = ""'
+      line: tz = "local"
+      backup: yes
+    tags:
+    - podman
+
   - name: Create directory for persistent storage (exported container volumes)
     file:
       path: /var/lib/containers/exported_volumes
@@ -47,7 +57,7 @@
       path: files/containers/librespot
       build:
         rm: yes
-      state: present
+      state: build
       tag: "32"
     register: build_results
     tags:
@@ -56,5 +66,17 @@
   - name: Check how my container build went
     debug:
       var: build_results
+    tags:
+    - librespot
+
+  - name: Start the Librespot container
+    containers.podman.podman_container:
+      name: librespot
+      image: localhost/librespot_via_ansible:32
+      state: started
+      restart_policy: always
+      #rm: yes
+      network: host
+      device: "/dev/snd"
     tags:
     - librespot

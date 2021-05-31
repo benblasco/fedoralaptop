@@ -10,7 +10,7 @@ RUN microdnf install cargo alsa-lib-devel make gcc \
         && cargo install librespot
 
 ENTRYPOINT [ "/root/.cargo/bin/librespot" ]
-CMD        [ "--name=\"NUC LibreSpot Speaker\"", \
+CMD        [ "--name=NUC LibreSpot Speaker", \
              "--bitrate=320", \
              "--zeroconf-port=49999", \
              "--device=hdmi:CARD=PCH,DEV=0", \

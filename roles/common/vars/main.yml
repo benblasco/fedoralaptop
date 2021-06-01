@@ -26,6 +26,8 @@
     - mc
     - tmux
     - smartmontools
+    - ansible
+    - ansible-lint
 
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

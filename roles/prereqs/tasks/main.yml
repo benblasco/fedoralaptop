@@ -11,4 +11,5 @@
   tags:
   - cubox
 
-- debug: var=synchronize_output
+- name: SHOW SYNCHRONIZATION OUTPUT
+  debug: var=synchronize_output

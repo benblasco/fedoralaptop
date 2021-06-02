@@ -1,9 +1,11 @@
 ---
 # tasks file for roles/common
 
-- debug: var=fedora_version
+- name: SHOW THE FEDORA LINUX VERSION
+  debug: var=fedora_version
 
-- debug: var=ansible_interfaces
+- name: SHOW THE NETWORK INTERFACES
+  debug: var=ansible_interfaces
 
 #- debug: var="{{ ansible_facts['ansible_product_version'] }}"
 - name: SHOW THE SYSTEM MODEL NAME

@@ -4,7 +4,7 @@ LABEL maintainer Benjamin Blasco
 LABEL description Fedora container for creating Rust applications
 
 # Note: We run all commands together in order to prevent multiple layers being added to the container image.  Could also look at squashing this further.
-RUN microdnf install cargo alsa-lib-devel make gcc \
+RUN microdnf install -y cargo alsa-lib-devel make gcc \
         && microdnf clean all \
         && rm -rf /var/cache/dnf \
         && cargo install librespot

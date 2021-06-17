@@ -13,8 +13,17 @@
     vm_imagepath: "/var/lib/libvirt/images"
     vm_sourcepath: "/var/lib/libvirt/images/source"
 
-    vm_rhel_version: "8.2"
+    vm_rhelversion: "8.2"
     vm_sourceimage: "rhel-8.2-x86_64-kvm.qcow2"
+
+    sourceimage:
+      rhel76: "rhel-server-7.6-x86_64-kvm.qcow2"
+      rhel78: "rhel-server-7.8-x86_64-kvm.qcow2"
+      rhel79: "rhel-server-7.9-x86_64-kvm.qcow2"
+      rhel81: "rhel-8.1-x86_64-kvm.qcow2"
+      rhel82: "rhel-8.2-x86_64-kvm.qcow2"
+      rhel83: "rhel-8.3-x86_64-kvm.qcow2"
+      rhel84: "rhel-8.4-x86_64-kvm.qcow2"
 
     vm_hostname: "bblasco82"
 
@@ -30,7 +39,7 @@
 
   - name: Copy the cloud-init config files
     copy:
-      src: files/libvirt/{{ vm_hostname}}/{{ item }}
+      src: files/libvirt/{{ vm_hostname }}/{{ item }}
       dest: {{ vm_imagepath }}/{{ vm_hostname }}/{{ item }}
       owner: qemu
       group: qemu

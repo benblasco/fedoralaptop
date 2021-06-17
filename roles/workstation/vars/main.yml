@@ -118,6 +118,7 @@
 
     flatpak_apps:
     - spotify
+    #- com.obsproject.Studio
     #- Spotify
     #- com.spotify.Client
 
@@ -133,5 +134,6 @@
     copr_repos:
     - luminoso/Signal-Desktop
     - taw/joplin
+    - sentry/v4l2loopback
 
     bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.22.0/BlueJeans_2.22.0.87.rpm

@@ -270,13 +270,12 @@
 - name: INSTALL FLATPAK APPS
 # Note this doesn't appear to be working with variables, as it seems to add brackets or something to the app name
   flatpak:
-    #name: "{{ item }}"
-    name: spotify
+    name: "{{ item }}"
+    #name: spotify
     #remote: flathub
     state: present
     method: user
-  #loop:
-  #- "{{ flatpak_apps }}"
+  loop: "{{ flatpak_apps }}"
   tags:
   - flatpak
 
@@ -286,6 +285,8 @@
   command: "dnf copr enable -y {{ item }}"
   #command: "dnf copr enable -y luminoso/Signal-Desktop"
   loop: "{{ copr_repos }}"
+  tags:
+  - copr
 
 # Install Signal Desktop from COPR repo
 # https://copr.fedorainfracloud.org/coprs/luminoso/Signal-Desktop/
@@ -294,6 +295,9 @@
     name: signal-desktop
     #enablerepo: luminoso/Signal-Desktop
     state: latest
+  tags:
+  - copr
+  - signal
 
 # Install Joplin notes from COPR repo
 # Copr repo for joplin owned by taw
@@ -304,7 +308,16 @@
     #enablerepo: taw/joplin
     state: latest
   tags:
+  - copr
   - joplin
+
+- name: INSTALL VIDEO 4 LINUX LOOPBACK REQUIRED FOR OBS
+  dnf:
+    name: v4l2loopback
+    state: latest
+  tags:
+  - copr
+  - obs
 
 # Installation of NixNote2 Evernote client
 # https://github.com/robert7/nixnote2

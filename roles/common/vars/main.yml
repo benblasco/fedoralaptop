@@ -28,6 +28,8 @@
     - smartmontools
     - ansible
     - ansible-lint
+    - lm_sensors
+    - lm_sensors-sensord
 
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

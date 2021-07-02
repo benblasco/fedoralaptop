@@ -15,8 +15,8 @@
     vm_imagepath: "/var/lib/libvirt/images"
     vm_sourcepath: "/var/lib/libvirt/images/source"
 
-    os_variant: "rhel8.4"
-    vm_sourceimage: "rhel-8.4-x86_64-kvm.qcow2"
+    os_variant: "rhel8.2"
+    vm_sourceimage: "rhel-8.2-x86_64-kvm.qcow2"
 
     sourceimage:
       rhel7.6: "rhel-server-7.6-x86_64-kvm.qcow2"
@@ -27,8 +27,8 @@
       rhel8.3: "rhel-8.3-x86_64-kvm.qcow2"
       rhel8.4: "rhel-8.4-x86_64-kvm.qcow2"
 
-    vm_hostname: "bblasco84b"
-    vm_ipaddress: "192.168.1.99/24"
+    vm_hostname: "bblasco82to84"
+    vm_ipaddress: "192.168.3.182/24"
 
   tasks:
 
@@ -60,7 +60,7 @@
 
   - name: Copy the machine image
     copy:
-      src: "{{ vm_imagepath }}/source/{{ sourceimage['rhel8.4'] }}"
+      src: "{{ vm_imagepath }}/source/{{ sourceimage['rhel8.2'] }}"
       dest: "{{ vm_imagepath }}/{{ vm_hostname }}/{{ vm_hostname }}.qcow2"
       owner: qemu
       group: qemu
@@ -84,10 +84,16 @@
         --os-variant {{ os_variant }} \
         > {{ vm_imagepath }}/{{ vm_hostname }}/{{ vm_hostname }}.xml
 
-  - name: Define VM
-    community.libvirt.virt:
-      command: define
-      xml: "{{ vm_imagepath }}/{{ vm_hostname }}/{{ vm_hostname }}.xml"
+  - name: Define the VM non-idempotently
+    command: >
+      virsh define "{{ vm_imagepath }}/{{ vm_hostname }}/{{ vm_hostname }}.xml"
+
+#  - name: Define VM
+#    community.libvirt.virt:
+#      command: define
+#        #xml: "{{ vm_imagepath }}/{{ vm_hostname }}/{{ vm_hostname }}.xml"
+#        #xml: "{{ lookup('template', 'vm_template.xml.j2') }}"
+#      xml: "{{ lookup('file', vm_imagepath+'/'+vm_hostname+'/'+vm_hostname+'.xml') }}"
   
   - name: Start VM
     community.libvirt.virt:

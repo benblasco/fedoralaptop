@@ -88,6 +88,12 @@
       memory: 256m
     tags:
     - librespot
+  
+  # If I wanted to create a systemd service for my container, I would run:
+  # cd /etc/systemd/system
+  # podman generate systemd librespot > librespot-container-pod-root.service
+  # This would ensure it starts at boot time
+  # Source: https://www.redhat.com/sysadmin/podman-shareable-systemd-services
 
   - name: Enable firewall ports for Jenkins
     firewalld:

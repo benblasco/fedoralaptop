@@ -1,0 +1,46 @@
+- hosts: localhost
+  connection: local
+
+  name: PERFORM CONFIGURATION OF SAMSUNG 860 EVO 1TB SSD
+  gather_facts: no
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  - ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Create the physical volume (PV)
+    lvg:
+      vg: vg-samsung1tb
+      pvs: /dev/sda
+    tags:
+    - lvm
+
+  - name: Create the logical volume on disk for general use
+    lvol:
+      vg: vg-samsung1tb
+      lv: lv-general
+      size: 300g
+    tags:
+    - lvm
+
+  - name: Create the filesystem for general use
+    filesystem:
+      fstype: xfs
+      dev: /dev/vg-samsung1tb/lv-general
+      resizefs: yes
+    tags:
+    - lvm
+
+  - name: Mount the filesystem for general use
+    mount:
+      path: /mnt/general
+      src: /dev/vg-samsung1tb/lv-general
+      fstype: xfs
+      state: mounted
+      backup: yes
+    tags:
+    - lvm

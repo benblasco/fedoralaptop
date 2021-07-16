@@ -31,6 +31,7 @@
     - xreader
     - pavucontrol # PulseAudio Volume Control
     #- pulseeffects # PulseAudio Sound Effects control for tuning
+    - krb5-workstation # for kinit, see https://source.redhat.com/groups/public/groups_blog/configure_idm_and_automate_kerberos_tickets
 
     # Intel driver for video acceleration via VA-API, may improve videoconference performance
     - libva-intel-driver

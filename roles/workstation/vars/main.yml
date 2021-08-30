@@ -45,6 +45,8 @@
     - igt-gpu-tools
     # Logitech mouse tools
     - piper
+    # vip is a pre-requisite for Signal Desktop as at 20210831
+    - vip
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

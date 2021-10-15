@@ -172,7 +172,7 @@
 - name: ADD BLUEJEANS GPG KEY
   rpm_key:
     state: present
-    key: https://swdl.bluejeans.com/desktop-app/linux/bluejeans_pubkey.gpg
+    key: "{{ bluejeans_gpg_key }}"
   tags:
   - bluejeans
 

@@ -35,17 +35,18 @@ https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/
 https://github.com/settings/keys
 
 ```
-git clone https://github.com/eraser215/fedoralaptop.git
+git clone https://github.com/benblasco/fedoralaptop.git
 cd fedoralaptop
-ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check 
-ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=ssh
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check 
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass
 ```
 
 Change the remote URL so you can use your SSH key
 https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
 
 ```
-git remote set-url origin git@github.com:eraser215/fedoralaptop.git
+git remote set-url origin git@github.com:benblasco/fedoralaptop.git
 ```
 
 # TASKS TO ADD TO THIS PLAYBOOK
@@ -85,7 +86,7 @@ OR install this extension and follow the instructions:
 https://github.com/oae/gnome-shell-extensions-sync
 
 My gist location is:
-https://gist.github.com/eraser215/251271b1c756e28e4149c2ab63d5838c
+https://gist.github.com/benblasco/251271b1c756e28e4149c2ab63d5838c
 My gist token is:
 fafbb4f71f99a6633ba4bd950573db742b23d885
 This appears to be broken somehow

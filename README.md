@@ -41,6 +41,11 @@ ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass --check
 ansible-playbook -i hosts build.yml --ask-become-pass --ask-vault-pass
 ```
 
+Another test command prepping F35 deployment
+```
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check --skip-tags=vscode,signal,joplin,copr,wifi
+```
+
 Change the remote URL so you can use your SSH key
 https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
 
@@ -92,7 +97,7 @@ This appears to be broken somehow
 
 Current list of Gnome Shell Extensions:
 - OBSOLETE https://extensions.gnome.org/extension/15/alternatetab/
-- https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
+  See https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
 - https://extensions.gnome.org/extension/6/applications-menu/
 - https://extensions.gnome.org/extension/779/clipboard-indicator/
 - https://extensions.gnome.org/extension/307/dash-to-dock/

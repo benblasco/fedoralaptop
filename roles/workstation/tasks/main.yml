@@ -45,12 +45,14 @@
     name: "{{ openvpn_packages }}"
     disable_gpg_check: yes
     state: present
+  tags: openvpn
 
 - name: INSTALL OPENVPN CONFIGURATION PACKAGES FROM LOCAL RPMs
   dnf:
     name: "{{ openvpn_config_packages }}"
     disable_gpg_check: yes
     state: present
+  tags: openvpn
 
 - name: INSTALL PRINTER PACKAGES
   dnf:

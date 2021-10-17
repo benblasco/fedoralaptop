@@ -25,17 +25,18 @@
   dnf:
     name: "{{ workstation_packages }}"
     state: present
+  tags: workstation_packages
 
 #- name: INSTALL RED HAT MANDATORY PACKAGES FROM CSB REPO
   #dnf:
     #name: "{{ redhat_mandatory_packages }}"
     #state: present
 
-- name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
-  dnf:
-    name: "{{ redhat_mandatory_packages }}"
-    disable_gpg_check: yes
-    state: present
+#- name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
+  #dnf:
+    #name: "{{ redhat_mandatory_packages }}"
+    #disable_gpg_check: yes
+    #state: present
 
 # Pull additional openvpn files/packages down and install as per link below
 # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
@@ -151,16 +152,17 @@
   tags:
   - adobe
 
-- name: INSTALL ADOBE FLASH GPG KEY
-  rpm_key:
-    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
-  tags:
-  - adobe
+#- name: INSTALL ADOBE FLASH GPG KEY
+  #rpm_key:
+    #key: /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+  #tags:
+  #- adobe
 
-- name: INSTALL ADDITIONAL FLASH RELATED PACKAGES
-  dnf:
-    name: "{{ flash_packages }}"
-    state: present
+#- name: INSTALL ADDITIONAL FLASH RELATED PACKAGES
+  #dnf:
+    #name: "{{ flash_packages }}"
+    #state: present
+  #- adobe
 
 - name: INSTALL VIRTUALISATION RELATED PACKAGES
   dnf:
@@ -180,6 +182,7 @@
   dnf:
     #name: https://swdl.bluejeans.com/desktop-app/linux/2.21.2/BlueJeans_2.21.2.1.rpm
     name: "{{ bluejeans_rpm }}"
+    disable_gpg_check: yes
     state: present
   tags:
   - bluejeans
@@ -252,13 +255,14 @@
   - vscode
 
 - name: INSTALL FLATPAK REMOTE REPOS
+  become: no
   flatpak_remote:
     name: "{{ item.name }}"
     #name: flathub
     state: present
     flatpakrepo_url: "{{ item.remote }}"
     #flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    #method: user
+    method: user
   loop:
   # Looping over a variable that is a hash doesn't appear to be working.  Need to troubleshoot
   #- "{{ flatpak_remotes }}"
@@ -269,6 +273,7 @@
 
 - name: INSTALL FLATPAK APPS
 # Note this doesn't appear to be working with variables, as it seems to add brackets or something to the app name
+  become: no
   flatpak:
     name: "{{ item }}"
     #name: spotify
@@ -463,7 +468,7 @@
   with_fileglob:
     - "files/wifi/ifcfg*"
   tags:
-  - test
+  - wifi
 
 - name: COPY ENCRYPTED WIFI KEY FILES
   copy:
@@ -476,7 +481,7 @@
   with_fileglob:
     - "files/wifi/keys_encrypted/*"
   tags:
-  - test
+  - wifi
 
 - name: REMOVE PACKAGES I DON'T WANT ON THE SYSTEM
   dnf:

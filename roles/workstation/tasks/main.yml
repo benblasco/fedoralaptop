@@ -503,6 +503,7 @@
     value: "{{ item.value }}"
     state: "{{ item.state }}"
   loop:
+    - { key: "/org/gnome/desktop/notifications/show-in-lock-screen", value: "false", state: "present" }
     - { key: "/org/gnome/desktop/interface/show-battery-percentage", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/interface/cursor-size", value: '48', state: "present" }
     - { key: "/org/gnome/desktop/interface/clock-format", value: "'24h'", state: "present" }

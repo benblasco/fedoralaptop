@@ -37,7 +37,8 @@ https://github.com/settings/keys
 ```
 git clone https://github.com/benblasco/fedoralaptop.git
 cd fedoralaptop
-ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=cubox,ssh
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=ssh
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=cubox
 ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check 
 ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass
 ```

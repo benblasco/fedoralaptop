@@ -17,19 +17,18 @@ Note: This is checked into github under files/foxyproxy
 
 - Install Ansible:
 ```
-sudo dnf install ansible python4-dnf
+sudo dnf install ansible
 ```
 
-Optional: Add bblasco to sudoers file
+Optional: Add bblasco to sudoers file for Vagrant commands
 ```
 bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
 ```
-
 Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION AND UPDATES
 
-Add they SSH key for this machine in Github
+Add the SSH key for this machine in Github (probably not needed if reusing SSH key)
 
 https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 https://github.com/settings/keys
@@ -43,11 +42,6 @@ ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check
 ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass
 ```
 
-Another test command prepping F35 deployment
-```
-ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check --skip-tags=vscode,signal,joplin,copr,wifi
-```
-
 Change the remote URL so you can use your SSH key
 https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
 
@@ -59,7 +53,7 @@ git remote set-url origin git@github.com:benblasco/fedoralaptop.git
 
 Mouse
 - [x] Switch mouse to left handed
-- [ ] Set mouse speed to maximum
+- [x] Set mouse speed to maximum
 - [ ] Keep track pad right handed
 
 Time

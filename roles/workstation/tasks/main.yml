@@ -227,7 +227,8 @@
 - name: INSTALL RINGCENTRAL VIDEOCONFERENCING
   dnf:
     name: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/RCMeetingsClientSetup.rpm
-    state: present
+    #state: present
+    state: absent
   tags:
   - ringcentral
 

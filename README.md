@@ -57,21 +57,21 @@ Mouse
 - [ ] Keep track pad right handed
 
 Time
-- [ ] Enable automatic time zone
+- [x] Enable automatic time zone
 
 Displays
-- [ ] Enable night light
+- [x] Enable night light
 
-File Manager
-- [ ] Sort folders before files
-- [ ] Show action to permanently delete files and folders
-- [ ] Switch view to list style
-- [ ] Arrange by file type
-- [ ] Allow you to free type another path into the title bar
+Nautilus File Manager
+- [x] Sort folders before files
+- [x] Show action to permanently delete files and folders
+- [x] Switch view to list style
+- [x] Arrange by file type
+- [x] Allow you to free type another path into the title bar
 
 Power management
 - [ ] Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
-- [ ] Blank screen and lock after 15 minutes, rather than 5
+- [x] Blank screen and lock after 15 minutes, rather than 5 (idle delay?)
 
 Install Gnome extensions
 Note that the command below doesn't appear to show all the extensions I have installed.  Why?
@@ -84,12 +84,6 @@ https://askubuntu.com/questions/1135175/how-do-i-automatically-reinstall-gnome-s
 
 OR install this extension and follow the instructions:
 https://github.com/oae/gnome-shell-extensions-sync
-
-My gist location is:
-https://gist.github.com/benblasco/251271b1c756e28e4149c2ab63d5838c
-My gist token is:
-fafbb4f71f99a6633ba4bd950573db742b23d885
-This appears to be broken somehow
 
 Current list of Gnome Shell Extensions:
 - OBSOLETE https://extensions.gnome.org/extension/15/alternatetab/
@@ -118,21 +112,6 @@ DONE: Change the default alt-tab behaviour as per the link below:
 How to open Gnome looking glass
 - Alt+F2
 - Then type "lg"
-
-Enable Chrome Sync, which should take care of all extensions etc
-Install Chrome extensions:
-- Bluejeans for Google Calendar: https://chrome.google.com/webstore/detail/bluejeans-for-google-cale/iedelpfmeejalepbpmmfbfnfoeojohpp
-- Google Docs Offline: https://chrome.google.com/webstore/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi
-- uBlock Origin: https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
-- Bitwarden: https://chrome.google.com/webstore/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb
-- Open in Firefox: https://chrome.google.com/webstore/detail/open-in-firefox/lmeddoobegbaiopohmpmmobpnpjifpii
-- Privacy Badger: https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
-- Not in use - KeePass Tusk
-- Not in use - Google Keep Chrome Extension
-- Not in use - FoxyProxy Standard
-- Not in use - Google Calendar
-
-Enable Offline mail in your gmail settings (not possible in Firefox)
 
 Install GMail addons for Chrome/Firefox
 - Trello

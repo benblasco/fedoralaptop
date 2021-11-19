@@ -1,0 +1,48 @@
+# Pre-requisite: ansible-galaxy collection install community.libvirt
+#
+- hosts: rhelvm
+
+  name: Register RHEL VMs and install Insights/related
+  gather_facts: no
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  #- ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Register the systems with subscription-manager
+    redhat_subscription:
+      state: present
+      username: "{{ rhn_username }}"
+      password: "{{ rhn_password }}"
+      #auto_attach: true
+
+  - name: Install some useful packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - bash-completion
+      - vim
+
+  - name: Install Insights-related packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - insights-client
+      - scap-security-guide
+      - openscap-scanner
+
+  - name: Register the Insights Client
+    command: insights-client --register
+    tags:
+      - register
+
+  - name: Run the Insights Client
+    command: insights-client
+    tags:
+      - run

@@ -180,6 +180,7 @@
   dnf:
     #name: https://swdl.bluejeans.com/desktop-app/linux/2.21.2/BlueJeans_2.21.2.1.rpm
     name: "{{ bluejeans_rpm }}"
+    disable_gpg_check: yes
     state: present
   tags:
   - bluejeans

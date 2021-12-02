@@ -319,13 +319,14 @@
   - copr
   - joplin
 
-- name: INSTALL VIDEO 4 LINUX LOOPBACK REQUIRED FOR OBS
-  dnf:
-    name: v4l2loopback
-    state: latest
-  tags:
-  - copr
-  - obs
+# Deprecated as this COPR repo no longer exists.  What to do?
+#- name: INSTALL VIDEO 4 LINUX LOOPBACK REQUIRED FOR OBS
+#  dnf:
+#    name: v4l2loopback
+#    state: latest
+#  tags:
+#  - copr
+#  - obs
 
 # Installation of NixNote2 Evernote client
 # https://github.com/robert7/nixnote2

@@ -119,6 +119,10 @@
     - tlp
     - tlp-sleep
 
+    obs_packages:
+    - obs-studio
+    - v4l2loopback
+
     flatpak_remotes:
     - { name: 'flathub', remote: 'https://flathub.org/repo/flathub.flatpakrepo' }
 

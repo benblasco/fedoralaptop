@@ -173,6 +173,13 @@
   tags:
   - virt
 
+- name: INSTALL OBS (Open Broadcast Studio) AND RELATED PACKAGES
+  dnf:
+    name: "{{ obs_packages }}"
+    state: present
+  tags:
+  - obs
+
 - name: ADD BLUEJEANS GPG KEY
   rpm_key:
     state: present

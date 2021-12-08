@@ -19,6 +19,8 @@
       username: "{{ rhn_username }}"
       password: "{{ rhn_password }}"
       #auto_attach: true
+    tags:
+      - subscription-manager
 
   - name: Install some useful packages
     yum:
@@ -36,13 +38,15 @@
       - insights-client
       - scap-security-guide
       - openscap-scanner
+    tags:
+      - insights
 
   - name: Register the Insights Client
     command: insights-client --register
     tags:
-      - register
+      - insights
 
   - name: Run the Insights Client
     command: insights-client
     tags:
-      - run
+      - insights

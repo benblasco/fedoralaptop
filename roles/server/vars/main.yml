@@ -8,6 +8,7 @@ storage_packages:
 
 tuning_packages:
   - linux-system-roles
+  - tuned
 
 cockpit_packages:
   - cockpit

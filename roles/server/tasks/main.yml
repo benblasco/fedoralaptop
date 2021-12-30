@@ -40,6 +40,14 @@
   tags:
   - cockpit
 
+- name: ENABLE THE TUNED SERVICE
+  systemd:
+    name: tuned
+    enabled: yes
+    state: started
+  tags:
+  - tuning
+
 - name: ENABLE THE COCKPIT SERVICE
   systemd:
     name: cockpit.socket

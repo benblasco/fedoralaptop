@@ -12,7 +12,7 @@ tuning_packages:
 
 cockpit_packages:
   - cockpit
-  - cockpit-dashboard
+    #- cockpit-dashboard
   - cockpit-podman
   - cockpit-machines
   - cockpit-networkmanager

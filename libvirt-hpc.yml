@@ -1,0 +1,16 @@
+- hosts: localhost
+  connection: local
+
+  name: Ensure that Libvirt is configured
+
+  roles:
+    - role: stackhpc.libvirt-host
+      libvirt_host_networks:
+        - name: vm-network-routed
+          mode: route
+          bridge: virbr1
+          domain: micro.local
+          ip: 192.168.66.254
+          netmask: 255.255.255.0
+          dhcp_start: 192.168.66.100
+          dhcp_end: 192.168.66.200

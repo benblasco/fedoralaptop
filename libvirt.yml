@@ -16,7 +16,7 @@
     lvol:
       vg: fedora
       lv: vm
-      size: 300g
+      size: 200g
     tags:
     - lvm
 
@@ -37,44 +37,44 @@
     tags:
     - lvm
 
-  - name: Create the logical volume on disk for CodeReady Containers
-    lvol:
-      vg: fedora
-      lv: crc
-      size: 50g
-    tags:
-    - lvm
-    - crc
-
-  - name: Create the filesystem for CodeReady Containers
-    filesystem:
-      fstype: xfs
-      dev: /dev/fedora/crc
-    tags:
-    - lvm
-    - crc
-
-  - name: Create the mount point for CodeReady Containers
-    file:
-      path: /home/bblasco/.crc
-      state: directory
-      owner: bblasco
-      group: bblasco
-    tags:
-    - lvm
-    - crc
-
-  - name: Mount the filesystem for CodeReady Containers
-    mount:
-      path: /home/bblasco/.crc
-      src: /dev/fedora/crc
-      fstype: xfs
-      state: mounted
-      backup: yes
-    tags:
-    - lvm
-    - crc
-
+#  - name: Create the logical volume on disk for CodeReady Containers
+#    lvol:
+#      vg: fedora
+#      lv: crc
+#      size: 50g
+#    tags:
+#    - lvm
+#    - crc
+#
+#  - name: Create the filesystem for CodeReady Containers
+#    filesystem:
+#      fstype: xfs
+#      dev: /dev/fedora/crc
+#    tags:
+#    - lvm
+#    - crc
+#
+#  - name: Create the mount point for CodeReady Containers
+#    file:
+#      path: /home/bblasco/.crc
+#      state: directory
+#      owner: bblasco
+#      group: bblasco
+#    tags:
+#    - lvm
+#    - crc
+#
+#  - name: Mount the filesystem for CodeReady Containers
+#    mount:
+#      path: /home/bblasco/.crc
+#      src: /dev/fedora/crc
+#      fstype: xfs
+#      state: mounted
+#      backup: yes
+#    tags:
+#    - lvm
+#    - crc
+#
   - name: Enable the Libvirt service
     service:
       name: libvirtd
@@ -86,8 +86,3 @@
       command: define
       name: nuc-network
       xml: '{{ lookup("template", "files/libvirt/nuc-network.xml") }}'
-
-#  - name: Deploy Fedora 32 VM
-      #virt:
-      #command: define
-      #xml: '{{ lookup("template", "files/libvirt/f32/f32.xml") }}'

@@ -15,21 +15,16 @@ Note: This is checked into github under files/foxyproxy
 
 # PREREQUISITES NEW BUILD
 
-- Install Ansible:
+- Install Ansible and git:
 ```
-sudo dnf install ansible python4-dnf
-```
-
-Optional: Add bblasco to sudoers file
-```
-bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
+sudo dnf install ansible git
 ```
 
 Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION AND UPDATES
 
-Add they SSH key for this machine in Github
+Add they SSH key for this machine in Github if needed
 
 https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 https://github.com/settings/keys
@@ -37,7 +32,8 @@ https://github.com/settings/keys
 ```
 git clone https://github.com/benblasco/fedoralaptop.git
 cd fedoralaptop
-ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=cubox,ssh
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=ssh
+ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --tags=cubox
 ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check 
 ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass
 ```
@@ -53,7 +49,7 @@ git remote set-url origin git@github.com:benblasco/fedoralaptop.git
 
 Mouse
 - [x] Switch mouse to left handed
-- [ ] Set mouse speed to maximum
+- [x] Set mouse speed to maximum
 - [ ] Keep track pad right handed
 
 Time
@@ -73,23 +69,8 @@ Power management
 - [ ] Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
 - [ ] Blank screen and lock after 15 minutes, rather than 5
 
-Install Gnome extensions
-Note that the command below doesn't appear to show all the extensions I have installed.  Why?
-Because not all extensions can be installed as RPMs using DNF
-It turns out you can sync all your gnome extensions using your google account, as per the instructions here:
-https://askubuntu.com/questions/1135175/how-do-i-automatically-reinstall-gnome-shell-extensions-after-reinstalling-ubunt
-1. Install the Firefox add-on called "GNOME Shell integration"
-2. Have it sync your extensions for you...?
-3. Pray
-
-OR install this extension and follow the instructions:
+Install Gnome extensions Sync:
 https://github.com/oae/gnome-shell-extensions-sync
-
-My gist location is:
-https://gist.github.com/benblasco/251271b1c756e28e4149c2ab63d5838c
-My gist token is:
-fafbb4f71f99a6633ba4bd950573db742b23d885
-This appears to be broken somehow
 
 Current list of Gnome Shell Extensions:
 - OBSOLETE https://extensions.gnome.org/extension/15/alternatetab/
@@ -108,31 +89,9 @@ Current list of Gnome Shell Extensions:
 - https://extensions.gnome.org/extension/1160/dash-to-panel/ This has an import/export settings option which may be helpful
 - https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 
-DONE: In multi monitors add on, disable "show panel on additional monitors"
-
-DONE: Change the default alt-tab behaviour as per the link below:
-- https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
-- Go to keyboard shortcuts, seach for "swi win" ie "Switch Windows", and replace it with alt-tab, as there is no shortcut currently assigned.
-- Alt-tab is normally used for "Switch Applications"
-
 How to open Gnome looking glass
 - Alt+F2
 - Then type "lg"
-
-Enable Chrome Sync, which should take care of all extensions etc
-Install Chrome extensions:
-- Bluejeans for Google Calendar: https://chrome.google.com/webstore/detail/bluejeans-for-google-cale/iedelpfmeejalepbpmmfbfnfoeojohpp
-- Google Docs Offline: https://chrome.google.com/webstore/detail/google-docs-offline/ghbmnnjooekpmoecnnnilnnbdlolhkhi
-- uBlock Origin: https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
-- Bitwarden: https://chrome.google.com/webstore/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb
-- Open in Firefox: https://chrome.google.com/webstore/detail/open-in-firefox/lmeddoobegbaiopohmpmmobpnpjifpii
-- Privacy Badger: https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
-- Not in use - KeePass Tusk
-- Not in use - Google Keep Chrome Extension
-- Not in use - FoxyProxy Standard
-- Not in use - Google Calendar
-
-Enable Offline mail in your gmail settings (not possible in Firefox)
 
 Install GMail addons for Chrome/Firefox
 - Trello
@@ -183,14 +142,8 @@ Tell it to use Dropbox and authenticate it to synchronise
 Change the default date format
 Switch default editor to vi mode
 
-Configure Evernote
+Configure Evernote (NixNote2)
 Tools->Sync, then log in to your account
-
-Install cockpit
-dnf install cockpit
-systemctl enable cockpit.socket
-systemctl start cockpit
-then connect to localhost:9090
 
 DONE: Configure Terminator to use Putty style paste
 Note: If you do this, use Shift+F10 to access the menus

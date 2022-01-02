@@ -1,0 +1,51 @@
+# ansible-galaxy install stackhpc.libvirt-vm
+# Read: https://galaxy.ansible.com/stackhpc/libvirt-vm
+# Read: https://github.com/stackhpc/ansible-role-libvirt-vm
+- hosts: localhost
+  connection: local
+
+  name: Install a VM using a role
+
+  roles:
+    - role: stackhpc.libvirt-vm
+      libvirt_vms:
+        - state: present
+          name: 'vm1'
+          memory_mb: 2048
+          vcpus: 1
+          volumes:
+            - name: 'vm1'
+              device: 'disk'
+              #type: 'file'
+              format: 'qcow2'
+              capacity: '20GB'
+              pool: 'vm-pool'
+              image: 'https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2'
+            - name: 'generic-seed.qcow2'
+              type: 'file'
+              device: 'cdrom'
+              format: 'raw'
+          interfaces:
+            - network: 'vm-network-routed'
+
+        - state: present
+          name: 'vm2'
+          memory_mb: 2048
+          vcpus: 1
+          volumes:
+            - name: 'vm2'
+              device: 'disk'
+              #type: 'file'
+              format: 'qcow2'
+              capacity: '20GB'
+              pool: 'vm-pool'
+              image: 'https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2'
+            - name: 'generic-seed.qcow2'
+              type: 'file'
+              device: 'cdrom'
+              format: 'raw'
+          interfaces:
+            - network: 'vm-network-routed'
+#       - state: absent
+#         name: 'vm2'
+

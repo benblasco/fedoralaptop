@@ -1,3 +1,6 @@
+# ansible-galaxy install stackhpc.libvirt-host
+# Read: https://galaxy.ansible.com/stackhpc/libvirt-host
+# Read: https://github.com/stackhpc/ansible-role-libvirt-host
 - hosts: localhost
   connection: local
 
@@ -10,7 +13,21 @@
           mode: route
           bridge: virbr1
           domain: micro.local
-          ip: 192.168.66.254
+          ip: 192.168.6.254
           netmask: 255.255.255.0
-          dhcp_start: 192.168.66.100
-          dhcp_end: 192.168.66.200
+          dhcp_start: 192.168.6.100
+          dhcp_end: 192.168.6.200
+      libvirt_host_pools:
+        - name: vm-pool
+          type: dir
+          #capacity: 1024
+          path: /var/lib/libvirt/vm-pool
+          mode: 755
+          owner: qemu
+          group: qemu
+#       - name: lvm_pool
+#         type: logical
+#         source: vg1
+#         target: /dev/vg1
+#         pvs:
+#           - /dev/sda3

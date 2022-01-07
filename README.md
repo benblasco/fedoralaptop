@@ -15,20 +15,28 @@ Note: This is checked into github under files/foxyproxy
 
 # PREREQUISITES NEW BUILD
 
-- Install Ansible:
+- Install Ansible and git:
 ```
+<<<<<<< HEAD
 sudo dnf install ansible
 ```
 
 Optional: Add bblasco to sudoers file for Vagrant commands
 ```
 bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
+=======
+sudo dnf install ansible git
+>>>>>>> master
 ```
 Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION AND UPDATES
 
+<<<<<<< HEAD
 Add the SSH key for this machine in Github (probably not needed if reusing SSH key)
+=======
+Add they SSH key for this machine in Github if needed
+>>>>>>> master
 
 https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 https://github.com/settings/keys
@@ -73,16 +81,7 @@ Power management
 - [ ] Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
 - [x] Blank screen and lock after 15 minutes, rather than 5 (idle delay?)
 
-Install Gnome extensions
-Note that the command below doesn't appear to show all the extensions I have installed.  Why?
-Because not all extensions can be installed as RPMs using DNF
-It turns out you can sync all your gnome extensions using your google account, as per the instructions here:
-https://askubuntu.com/questions/1135175/how-do-i-automatically-reinstall-gnome-shell-extensions-after-reinstalling-ubunt
-1. Install the Firefox add-on called "GNOME Shell integration"
-2. Have it sync your extensions for you...?
-3. Pray
-
-OR install this extension and follow the instructions:
+Install Gnome extensions Sync:
 https://github.com/oae/gnome-shell-extensions-sync
 
 Current list of Gnome Shell Extensions:
@@ -101,13 +100,6 @@ Current list of Gnome Shell Extensions:
 - BROKEN, and obsolete https://extensions.gnome.org/extension/602/window-list/
 - https://extensions.gnome.org/extension/1160/dash-to-panel/ This has an import/export settings option which may be helpful
 - https://extensions.gnome.org/extension/906/sound-output-device-chooser/
-
-DONE: In multi monitors add on, disable "show panel on additional monitors"
-
-DONE: Change the default alt-tab behaviour as per the link below:
-- https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
-- Go to keyboard shortcuts, seach for "swi win" ie "Switch Windows", and replace it with alt-tab, as there is no shortcut currently assigned.
-- Alt-tab is normally used for "Switch Applications"
 
 How to open Gnome looking glass
 - Alt+F2
@@ -162,14 +154,8 @@ Tell it to use Dropbox and authenticate it to synchronise
 Change the default date format
 Switch default editor to vi mode
 
-Configure Evernote
+Configure Evernote (NixNote2)
 Tools->Sync, then log in to your account
-
-Install cockpit
-dnf install cockpit
-systemctl enable cockpit.socket
-systemctl start cockpit
-then connect to localhost:9090
 
 DONE: Configure Terminator to use Putty style paste
 Note: If you do this, use Shift+F10 to access the menus

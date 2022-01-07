@@ -13,3 +13,8 @@
       name: "{{ item }}"
       state: restarted
     loop: "{{ powermgmt_services }}"
+
+  - name: RESTART JOURNALD
+    service:
+      name: "systemd-journald"
+      state: restarted

@@ -83,24 +83,10 @@ Power management
 - [x] Blank screen and lock after 15 minutes, rather than 5 (idle delay?)
 
 Install Gnome extensions Sync:
-https://github.com/oae/gnome-shell-extensions-sync
-
-Current list of Gnome Shell Extensions:
-- OBSOLETE https://extensions.gnome.org/extension/15/alternatetab/
-  See https://blogs.gnome.org/fmuellner/2018/10/11/the-future-of-alternatetab-and-why-you-need-not-worry/
-- https://extensions.gnome.org/extension/6/applications-menu/
-- https://extensions.gnome.org/extension/779/clipboard-indicator/
-- https://extensions.gnome.org/extension/307/dash-to-dock/
-- https://extensions.gnome.org/extension/904/disconnect-wifi/
-- https://extensions.gnome.org/extension/1036/extensions/
-- https://extensions.gnome.org/extension/600/launch-new-instance/
-- https://extensions.gnome.org/extension/921/multi-monitors-add-on/
-- https://extensions.gnome.org/extension/118/no-topleft-hot-corner/
-- https://extensions.gnome.org/extension/8/places-status-indicator/
-- https://extensions.gnome.org/extension/19/user-themes/
-- BROKEN, and obsolete https://extensions.gnome.org/extension/602/window-list/
-- https://extensions.gnome.org/extension/1160/dash-to-panel/ This has an import/export settings option which may be helpful
-- https://extensions.gnome.org/extension/906/sound-output-device-chooser/
+- https://github.com/oae/gnome-shell-extensions-sync
+- Configure the correct Github gist/token (check Joplin Notes)
+- Click to download the extensions
+- Reboot or log off to restart Gnome
 
 How to open Gnome looking glass
 - Alt+F2
@@ -113,53 +99,23 @@ Install GMail addons for Chrome/Firefox
 Restore bookmarks and settings using Firefox Sync
 Install Firefox extensions
 - Firstly, login and sync.  It should download the extensions for you
-- Open the Container tabs extension and allow it to sync
+- Open the Multi Account Containers extension and allow it to sync
 - Restore the list of auto tab discard exceptions (auto-tab-discard-preferences.json)
-- Restore the Tree Style Tabs config (configs-treestyletab@piro.sakura.ne.jp.json)
-
-Reference list of Firefox extensions/add ons
-- Auto Tab Discard https://add0n.com/tab-discard.html
-- BitWarden https://bitwarden.com/
-- Facebook Containers https://github.com/mozilla/contain-facebook
-- Firefox Multi Account Containers https://github.com/mozilla/multi-account-containers#readme
-- FoxyProxy Standard https://getfoxyproxy.org/
-- Gnome Shell Integration https://wiki.gnome.org/Projects/GnomeShellIntegrationForChrome
-- KeePass Tusk https://subdavis.com/Tusk
-- Open in Chrome http://add0n.com/open-in.html?from=chrome
-- Tab Mover https://code.guido-berhoerster.org/addons/firefox-addons/tab-mover/
-- Tree Style Tabs http://piro.sakura.ne.jp/xul/_treestyletab.html.en
-- uBlock Origin http://piro.sakura.ne.jp/xul/_treestyletab.html.en
-- Honey https://www.joinhoney.com/
-- KeePass Tusk https://subdavis.com/Tusk
-- Open in Chrome http://add0n.com/open-in.html?from=chrome
-- Tab Mover https://code.guido-berhoerster.org/addons/firefox-addons/tab-mover/
-- Tree Style Tabs http://piro.sakura.ne.jp/xul/_treestyletab.html.en
-- uBlock Origin addons://detail/uBlock0@raymondhill.net
-- Joplin Web Clipper https://addons.mozilla.org/en-US/firefox/addon/joplin-web-clipper/
-- Containerise https://addons.mozilla.org/en-US/firefox/addon/containerise/
-- Privacy Badger https://www.eff.org/privacybadger
-- Intention https://addons.mozilla.org/en-US/firefox/addon/intention/
-- enhanced-h264ify: https://addons.mozilla.org/en-US/firefox/addon/enhanced-h264ify/
-- Bypass Paywalls: https://github.com/iamadamdev/bypass-paywalls-chrome
+- Restore the FoxyProxy configuration
+- Log in to your Pocket account
 
 Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
 about:config
 browser.sessionstore.warnOnQuit true
 browser.warnOnQuit true
 
-Log in to your Pocket account
-Configure Multi Account containers to use the appropriate container for each tab
-
-Configure Joplin
-Tell it to use Dropbox and authenticate it to synchronise
-Change the default date format
-Switch default editor to vi mode
+Configure Joplin Notes
+- File -> Synchronise: Tell it to use Dropbox and authenticate it
+- Change the default date format (Tools -> Options)
+- Switch default editor to vi mode (Tools -> Options -> General -> Show Advanced Settings -> Keyboard Mode: Vim)
 
 Configure Evernote (NixNote2)
-Tools->Sync, then log in to your account
-
-DONE: Configure Terminator to use Putty style paste
-Note: If you do this, use Shift+F10 to access the menus
+- Tools -> Sync, then log in to your account
 
 # QUESTIONS/UPDATES REQUIRED
 

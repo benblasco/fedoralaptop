@@ -104,6 +104,10 @@ Install Firefox extensions
 - Restore the FoxyProxy configuration
 - Log in to your Pocket account
 
+Configure Firefox Hardware Acceleration:
+- https://www.reddit.com/r/firefox/comments/r5wilh/the_road_to_vaapi_on_linux_by_default_looks/
+- https://mastransky.wordpress.com/2020/06/03/firefox-on-fedora-finally-gets-va-api-on-wayland/
+
 Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
 about:config
 browser.sessionstore.warnOnQuit true

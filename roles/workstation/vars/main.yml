@@ -1,6 +1,9 @@
 ---
 # vars file for roles/workstation
 
+# fatal: [localhost]: FAILED! => {"changed": false, "failures": ["No package vlc available.", "No package gstreamer1-libav available.", "No package gstreamer1-plugin-openh264 available.", "No package openh264 available.", "No package dropbox available.", "No package nautilus-dropbox available.", "No package libva-intel-driver available.", "No package vip available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+
+
     workstation_packages:
 
     - icedtea-web
@@ -45,8 +48,8 @@
     - igt-gpu-tools
     # Logitech mouse tools
     - piper
-    # vip is a pre-requisite for Signal Desktop as at 20210831
-    - vip
+    # vips is a pre-requisite for Signal Desktop as at 20210831
+    - vips
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
@@ -54,9 +57,9 @@
     # If you want to stay up to date and use the the yum repo, use the repo file:
     # rpm --import https://hdn.corp.redhat.com/rhel8-csb/RPM-GPG-KEY-helpdesk
     # yum-config-manager --add-repo https://hdn.corp.redhat.com/rhel8-csb/rhel8-csb.repo
-    redhat_mandatory_packages:
-      #- SpiderOakGroups
-      - /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
+    #redhat_mandatory_packages:
+      ##- SpiderOakGroups
+      #- /tmp/fedora_build/SpiderOakGroups-7.5.0-1.el7.x86_64.rpm
 
     # Pull additional openvpn files/packages down and install as per link below
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0005424
@@ -70,7 +73,7 @@
     # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-NetworkManager-openvpn-profiles.html
     openvpn_config_packages:
     - /tmp/fedora_build/redhat-internal-cert-install-0.1-23.el7.csb.noarch.rpm
-    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-45.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-46.el7.csb.noarch.rpm
 
     printer_packages:
     - system-config-printer
@@ -116,28 +119,32 @@
     - tlp
     - tlp-sleep
 
+    obs_packages:
+    - obs-studio
+    - v4l2loopback
+
     flatpak_remotes:
-    - { name: 'flathub', remote: 'https://dl.flathub.org/repo/flathub.flatpakrepo' }
+    - { name: 'flathub', remote: 'https://flathub.org/repo/flathub.flatpakrepo' }
 
     flatpak_apps:
-    - spotify
+    - com.spotify.Client
     #- com.obsproject.Studio
-    #- Spotify
-    #- com.spotify.Client
 
     remove_packages:
     - cheese
     - gnome-contacts
     - gnome-maps
     - rhythmbox
-    - evince
+    # Not removing evince due to bug in Ansible with packages that have a number in the name
+    # https://github.com/ansible/ansible/issues/64294
+    #- evince
     - virtualbox-guest-additions
     - intel-media-driver
 
     copr_repos:
     - luminoso/Signal-Desktop
     - taw/joplin
-    - sentry/v4l2loopback
+    #- sentry/v4l2loopback
 
     bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.25.0/BlueJeans_2.25.0.78.rpm
     bluejeans_gpg_key: https://swdl.bluejeans.com/desktop-app/linux/bluejeans_pubkey.gpg

@@ -25,17 +25,18 @@
   dnf:
     name: "{{ workstation_packages }}"
     state: present
+  tags: workstation_packages
 
 #- name: INSTALL RED HAT MANDATORY PACKAGES FROM CSB REPO
   #dnf:
     #name: "{{ redhat_mandatory_packages }}"
     #state: present
 
-- name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
-  dnf:
-    name: "{{ redhat_mandatory_packages }}"
-    disable_gpg_check: yes
-    state: present
+#- name: INSTALL RED HAT MANDATORY PACKAGES FROM LOCAL RPMs
+  #dnf:
+    #name: "{{ redhat_mandatory_packages }}"
+    #disable_gpg_check: yes
+    #state: present
 
 # Pull additional openvpn files/packages down and install as per link below
 # https://redhat.service-now.com/help?id=kb_article&sys_id=5e7dc60713972640daa77b304244b0c4
@@ -44,12 +45,14 @@
     name: "{{ openvpn_packages }}"
     disable_gpg_check: yes
     state: present
+  tags: openvpn
 
 - name: INSTALL OPENVPN CONFIGURATION PACKAGES FROM LOCAL RPMs
   dnf:
     name: "{{ openvpn_config_packages }}"
     disable_gpg_check: yes
     state: present
+  tags: openvpn
 
 - name: INSTALL PRINTER PACKAGES
   dnf:
@@ -151,16 +154,17 @@
   tags:
   - adobe
 
-- name: INSTALL ADOBE FLASH GPG KEY
-  rpm_key:
-    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
-  tags:
-  - adobe
+#- name: INSTALL ADOBE FLASH GPG KEY
+  #rpm_key:
+    #key: /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+  #tags:
+  #- adobe
 
-- name: INSTALL ADDITIONAL FLASH RELATED PACKAGES
-  dnf:
-    name: "{{ flash_packages }}"
-    state: present
+#- name: INSTALL ADDITIONAL FLASH RELATED PACKAGES
+  #dnf:
+    #name: "{{ flash_packages }}"
+    #state: present
+  #- adobe
 
 - name: INSTALL VIRTUALISATION RELATED PACKAGES
   dnf:
@@ -168,6 +172,13 @@
     state: present
   tags:
   - virt
+
+- name: INSTALL OBS (Open Broadcast Studio) AND RELATED PACKAGES
+  dnf:
+    name: "{{ obs_packages }}"
+    state: present
+  tags:
+  - obs
 
 - name: ADD BLUEJEANS GPG KEY
   rpm_key:
@@ -213,19 +224,20 @@
   tags:
   - msteams
 
-- name: ADD RINGCENTRAL GPG KEY
-  rpm_key:
-    state: present
-    key: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/LinuxPublicKey.pub
-  tags:
-  - ringcentral
-
-- name: INSTALL RINGCENTRAL VIDEOCONFERENCING
-  dnf:
-    name: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/RCMeetingsClientSetup.rpm
-    state: present
-  tags:
-  - ringcentral
+#- name: ADD RINGCENTRAL GPG KEY
+#  rpm_key:
+#    state: present
+#    key: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/LinuxPublicKey.pub
+#  tags:
+#  - ringcentral
+#
+#- name: INSTALL RINGCENTRAL VIDEOCONFERENCING
+#  dnf:
+#    name: http://dn.ringcentral.com/data/web/download/RCMeetings/1210/RCMeetingsClientSetup.rpm
+#    #state: present
+#    state: absent
+#  tags:
+# - ringcentral
 
 # Install Microsoft VSCode as per instructions at:
 # https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
@@ -253,13 +265,14 @@
   - vscode
 
 - name: INSTALL FLATPAK REMOTE REPOS
+  become: no
   flatpak_remote:
     name: "{{ item.name }}"
     #name: flathub
     state: present
     flatpakrepo_url: "{{ item.remote }}"
     #flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    #method: user
+    method: user
   loop:
   # Looping over a variable that is a hash doesn't appear to be working.  Need to troubleshoot
   #- "{{ flatpak_remotes }}"
@@ -270,6 +283,7 @@
 
 - name: INSTALL FLATPAK APPS
 # Note this doesn't appear to be working with variables, as it seems to add brackets or something to the app name
+  become: no
   flatpak:
     name: "{{ item }}"
     #name: spotify
@@ -312,13 +326,14 @@
   - copr
   - joplin
 
-- name: INSTALL VIDEO 4 LINUX LOOPBACK REQUIRED FOR OBS
-  dnf:
-    name: v4l2loopback
-    state: latest
-  tags:
-  - copr
-  - obs
+# Deprecated as this COPR repo no longer exists.  What to do?
+#- name: INSTALL VIDEO 4 LINUX LOOPBACK REQUIRED FOR OBS
+#  dnf:
+#    name: v4l2loopback
+#    state: latest
+#  tags:
+#  - copr
+#  - obs
 
 # Installation of NixNote2 Evernote client
 # https://github.com/robert7/nixnote2
@@ -464,7 +479,7 @@
   with_fileglob:
     - "files/wifi/ifcfg*"
   tags:
-  - test
+  - wifi
 
 - name: COPY ENCRYPTED WIFI KEY FILES
   copy:
@@ -477,7 +492,7 @@
   with_fileglob:
     - "files/wifi/keys_encrypted/*"
   tags:
-  - test
+  - wifi
 
 - name: REMOVE PACKAGES I DON'T WANT ON THE SYSTEM
   dnf:
@@ -507,7 +522,6 @@
     - { key: "/org/gnome/desktop/peripherals/touchpad/left-handed", value: "'right'", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/touchpad/speed", value: '1.0', state: "present" }
     - { key: "/org/gnome/desktop/session/idle-delay", value: '900', state: "present" }
-    - { key: "/org/gnome/desktop/datetime/automatic-timezone", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/sound/allow-volume-above-100-percent", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "@as []", state: "present" }

@@ -514,6 +514,16 @@
   tags:
   - autofs
 
+- name: CREATE AUTOFS MOUNT POINT
+  file:
+    path: /mnt/backup
+    owner: bblasco
+    group: bblasco
+    mode: '0755'
+    state: directory
+  tags:
+  - autofs
+
 - name: ENABLE AUTOFS SERVICE AND RELOAD CONFIG
   # Note: This is lazy and changes could use a handler
   service:

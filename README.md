@@ -1,9 +1,9 @@
 # PREREQUISITES OLD MACHINE
 
 - Backup your Calibre book library following instructions at:
-http://blog.calibre-ebook.com/2017/01/how-to-backup-move-and-export-your.html
+    https://blog.calibre-ebook.com/how-to-backup-move-and-export-your-library-in-calibre/
 - Complete a backup of the user's entire home directory
-Note: refer to files under ~/rsync/ for reference
+    Note: refer to files under ~/rsync/ for reference
 - Firefox
     - Backup the configuration of "auto tab discard" firefox extension
     - Backup the configuration of "FoxyProxy" firefox extension
@@ -18,29 +18,16 @@ Note: refer to files under ~/rsync/ for reference
 
 - Install Ansible and git:
 ```
-<<<<<<< HEAD
-sudo dnf install ansible
+sudo dnf install ansible git
 ```
 
-Optional: Add bblasco to sudoers file for Vagrant commands
-```
-bblasco	localhost=(root)	NOPASSWD: /usr/bin/vagrant
-=======
-sudo dnf install ansible git
->>>>>>> master
-```
 Restore your home directory from the remote source via rsync
 
 # USAGE/EXECUTION AND UPDATES
 
-<<<<<<< HEAD
-Add the SSH key for this machine in Github (probably not needed if reusing SSH key)
-=======
-Add they SSH key for this machine in Github if needed
->>>>>>> master
-
-https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
-https://github.com/settings/keys
+- Add the SSH key for this machine in Github (probably not needed if reusing SSH key)
+    https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+    https://github.com/settings/keys
 
 ```
 git clone https://github.com/benblasco/fedoralaptop.git
@@ -51,8 +38,8 @@ ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass --check
 ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass
 ```
 
-Change the remote URL so you can use your SSH key
-https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
+- Change the remote URL so you can use your SSH key
+    https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
 
 ```
 git remote set-url origin git@github.com:benblasco/fedoralaptop.git

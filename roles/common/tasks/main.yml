@@ -36,6 +36,32 @@
     # latest.
     update_cache: yes
 
+- name: CONFIGURE THE MEDIA GROUP
+  ansible.builtin.group:
+    name: media
+    gid: 1001
+    state: present
+  tags:
+  - users
+
+- name: CONFIGURE THE MEDIA USER
+  ansible.builtin.user:
+    name: media
+    uid: 1001
+    group: media
+    comment: User-created for media files
+    state: present
+  tags:
+  - users
+
+- name: ADD MEDIA GROUP AS SECONDARY GROUP FOR BBLASCO
+  ansible.builtin.user:
+    name: bblasco
+    append: yes
+    groups: media
+  tags:
+  - users
+
 - name: INSTALL COMMON PACKAGES
   dnf:
     name: "{{ common_packages }}"

@@ -494,6 +494,35 @@
   tags:
   - wifi
 
+- name: COPY AUTOFS MASTER MAPPING FILE
+  copy:
+    src: "files/autofs/bblasco_backup.autofs"
+    dest: "/etc/auto.master.d/"
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+  - autofs
+
+- name: COPY AUTOFS MAPPING FILE
+  copy:
+    src: "files/autofs/auto.bblasco_backup"
+    dest: "/etc/autofs/"
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+  - autofs
+
+- name: ENABLE AUTOFS SERVICE AND RELOAD CONFIG
+  # Note: This is lazy and changes could use a handler
+  service:
+    name: "autofs"
+    enabled: yes
+    state: reloaded
+  tags:
+  - autofs
+
 - name: REMOVE PACKAGES I DON'T WANT ON THE SYSTEM
   dnf:
     name: "{{ remove_packages }}"

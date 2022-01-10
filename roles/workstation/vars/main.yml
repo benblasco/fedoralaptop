@@ -27,6 +27,7 @@
     # Note: libxcrypt-compat required for NixNote2 to launch.  Remove in future?
     #- libxcrypt-compat
     - sshfs
+    - autofs
     - terminator
     - dropbox
     - nautilus-dropbox

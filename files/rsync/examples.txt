@@ -1,7 +1,7 @@
 BACKUP
-/usr/bin/rsync -avt --progress --delete-before -e '/usr/bin/ssh -p 22' /home/bblasco/ eblaben@192.168.1.2:/mnt/sg1/eblaben_backup/rh_backup/ --exclude-from="exclude.txt" >> /home/bblasco/rsync_logs/20191218.txt
-/usr/bin/rsync -avt --progress --delete-before -e '/usr/bin/ssh -p 49152' /home/bblasco/ eblaben@eraser215.ddns.net:/mnt/sg1/eblaben_backup/rh_backup/ --exclude-from="exclude.txt" >> /home/bblasco/rsync_logs/20191218.txt
+/usr/bin/rsync -avh --progress --delete-before -e '/usr/bin/ssh -p 22' /home/bblasco/ eblaben@cubox.lan:/mnt/sg1/eblaben_backup/rh_backup/ --exclude-from="exclude.txt" >> /home/bblasco/rsync_logs/20220110.txt
+/usr/bin/rsync -avh --progress --delete-before -e '/usr/bin/ssh -p 49152' /home/bblasco/ eblaben@eraser215.ddns.net:/mnt/sg1/eblaben_backup/rh_backup/ --exclude-from="exclude.txt" >> /home/bblasco/rsync_logs/20210110.txt
 
 RESTORE
 mkdir /home/bblasco/restore
-/usr/bin/rsync -avt --progress --delete-before -e '/usr/bin/ssh -p 22' eblaben@192.168.1.2:/mnt/sg1/eblaben_backup/rh_backup/ /home/bblasco/restore/ >> /home/bblasco/rsync_logs/20191218restore.txt
+/usr/bin/rsync -avt --progress --delete-before -e '/usr/bin/ssh -p 22' eblaben@192.168.1.2:/mnt/sg1/eblaben_backup/rh_backup/ /home/bblasco/restore/ >> /home/bblasco/rsync_logs/20210110restore.txt

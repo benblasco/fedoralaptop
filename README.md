@@ -45,7 +45,7 @@ ansible-playbook -i hosts laptop.yml --ask-become-pass --ask-vault-pass
 git remote set-url origin git@github.com:benblasco/fedoralaptop.git
 ```
 
-# TASKS TO ADD TO THIS PLAYBOOK
+# POST INSTALL TASKS
 
 Mouse
 - [x] Switch mouse to left handed
@@ -113,6 +113,13 @@ Configure Joplin Notes
 
 Configure Evernote (NixNote2)
 - Tools -> Sync, then log in to your account
+
+Configure Dropbox
+- Run Dropbox and follow the prompts
+
+Install and restore Calibre E-Book library
+- https://calibre-ebook.com/download_linux
+- https://manual.calibre-ebook.com/faq.html#how-do-i-move-my-calibre-data-from-one-computer-to-another
 
 # QUESTIONS/UPDATES REQUIRED
 

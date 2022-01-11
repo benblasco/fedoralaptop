@@ -1,4 +1,5 @@
 Videos/
 Music/
+Dropbox/
 vagrant/
 rsync_logs/

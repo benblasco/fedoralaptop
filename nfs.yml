@@ -22,10 +22,13 @@
     loop:
       - /mnt/sg3/
       - /mnt/wd_xfs1/
+      - /mnt/martinbackup/
+      - /mnt/sg1/
       - /srv/nfs4/sg3/
       - /srv/nfs4/wd_xfs1/
     tags:
     - nfs
+    - martin
 
   - name: Mount the filesystem for media/backups
     mount:
@@ -46,6 +49,17 @@
       backup: yes
     tags:
     - nfs
+
+  - name: Mount the filesystem for Martin's drive backups
+    mount:
+      path: /mnt/martinbackup
+      src: LABEL=WD_MARTIN
+      fstype: ext4
+      state: mounted
+      backup: yes
+    tags:
+    - nfs
+    - martin
 
   - name: Create the bind mounts
     mount:
@@ -114,7 +128,7 @@
     tags:
     - nfs
 
-  - name: Open the appropriate firewall services for local VMs
+  - name: Open the appropriate firewall services for local VMs to access mounts
     firewalld:
       zone: libvirt
       service: '{{ item }}'

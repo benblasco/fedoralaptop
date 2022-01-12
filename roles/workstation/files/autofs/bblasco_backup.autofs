@@ -1,1 +1,1 @@
-/mnt/backup /etc/autofs/auto.bblasco_backup --timeout=60
+/- /etc/autofs/auto.bblasco_backup --timeout=600

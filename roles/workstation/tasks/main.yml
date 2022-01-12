@@ -516,7 +516,7 @@
 
 - name: CREATE AUTOFS MOUNT POINT
   file:
-    path: /mnt/backup
+    path: /mnt/sg1
     owner: bblasco
     group: bblasco
     mode: '0755'

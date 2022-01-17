@@ -39,7 +39,7 @@
               format: 'qcow2'
               capacity: '20GB'
               pool: 'vm-pool'
-              image: 'https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2'
+              image: 'https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220112.1.x86_64.qcow2'
             - name: 'generic-seed.qcow2'
               type: 'file'
               device: 'cdrom'
@@ -48,4 +48,3 @@
             - network: 'vm-network-routed'
 #       - state: absent
 #         name: 'vm2'
-

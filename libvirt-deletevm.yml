@@ -1,0 +1,17 @@
+# ansible-galaxy install stackhpc.libvirt-vm
+# Read: https://galaxy.ansible.com/stackhpc/libvirt-vm
+# Read: https://github.com/stackhpc/ansible-role-libvirt-vm
+- hosts: localhost
+  connection: local
+
+  name: Install a VM using a role
+
+  roles:
+    - role: stackhpc.libvirt-vm
+      libvirt_vms:
+      - state: absent
+        name: 'vm1'
+      - state: absent
+        name: 'vm2'
+      - state: absent
+        name: 'bblasco-centos9'

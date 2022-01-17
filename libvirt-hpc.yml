@@ -5,9 +5,38 @@
   connection: local
 
   name: Ensure that Libvirt is configured
+  
+
+  pre_tasks:
+  
+  - name: Create the logical volume on disk for VMs
+    lvol:
+      vg: fedora_fedora
+      lv: vm-pool
+      size: 100G
+    tags:
+    - lvm
+
+  - name: Create the filesystem for VMs
+    filesystem:
+      fstype: xfs
+      dev: /dev/fedora_fedora/vm-pool
+    tags:
+    - lvm
+
+  - name: Mount the filesystem for VMs
+    mount:
+      path: /var/lib/libvirt/vm-pool
+      src: /dev/fedora_fedora/vm-pool
+      fstype: xfs
+      state: mounted
+      backup: yes
+    tags:
+    - lvm
 
   roles:
     - role: stackhpc.libvirt-host
+      become: no
       libvirt_host_networks:
         - name: vm-network-routed
           mode: route
@@ -25,9 +54,9 @@
           mode: 755
           owner: qemu
           group: qemu
-#       - name: lvm_pool
-#         type: logical
-#         source: vg1
-#         target: /dev/vg1
-#         pvs:
-#           - /dev/sda3
+            #- name: vm-pool-lvm
+            #type: logical
+            #source: fedora_fedora
+            #target: /dev/fedora_fedora
+            #pvs:
+            #- /dev/sdb3

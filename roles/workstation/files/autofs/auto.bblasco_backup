@@ -1,1 +1,1 @@
-bblasco -rw,soft,rsize=8192,wsize=8192 cubox.lan:/srv/nfs4/sg1/eblaben_backup
+/mnt/sg1 -rw,soft,rsize=8192,wsize=8192 cubox.lan:/srv/nfs4/sg1

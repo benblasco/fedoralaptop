@@ -2,10 +2,10 @@
   name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF HPE MICROSERVER
   gather_facts: no
 
-  roles:
-  - prereqs
-  tags:
-  - cubox
+    #roles:
+    #- prereqs
+    #tags:
+    #- cubox
 
 - hosts: localhost
   connection: local

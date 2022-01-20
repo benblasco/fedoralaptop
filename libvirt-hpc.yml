@@ -6,12 +6,13 @@
 
   name: Ensure that Libvirt is configured
   
+  become: yes
 
   pre_tasks:
   
   - name: Create the logical volume on disk for VMs
     lvol:
-      vg: fedora_fedora
+      vg: fedora_micro
       lv: vm-pool
       size: 100G
     tags:
@@ -20,14 +21,14 @@
   - name: Create the filesystem for VMs
     filesystem:
       fstype: xfs
-      dev: /dev/fedora_fedora/vm-pool
+      dev: /dev/fedora_micro/vm-pool
     tags:
     - lvm
 
   - name: Mount the filesystem for VMs
     mount:
       path: /var/lib/libvirt/vm-pool
-      src: /dev/fedora_fedora/vm-pool
+      src: /dev/fedora_micro/vm-pool
       fstype: xfs
       state: mounted
       backup: yes
@@ -56,7 +57,7 @@
           group: qemu
             #- name: vm-pool-lvm
             #type: logical
-            #source: fedora_fedora
-            #target: /dev/fedora_fedora
+            #source: fedora_micro
+            #target: /dev/fedora_micro
             #pvs:
             #- /dev/sdb3

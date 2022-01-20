@@ -39,7 +39,7 @@
     - libvirt-client
     - python3-libvirt
     - python3-lxml
-    - vagrant
+      #- vagrant
     - python3-psutil
     - virt-install
     - virt-manager-common

@@ -61,3 +61,28 @@
             #target: /dev/fedora_micro
             #pvs:
             #- /dev/sdb3
+
+  post_tasks:
+
+  # Note: Ansible firewalld module does not natively support this, so using shell commands instead
+  # https://github.com/ansible-collections/ansible.posix/issues/284
+  # More reading about policies:
+  # https://firewalld.org/2020/09/policy-objects-introduction
+  # https://firewalld.org/2020/09/policy-objects-filtering-container-and-vm-traffic
+
+  - name: Add Firewalld policy objects to route between zones
+    shell: $i
+    loop:
+    - firewall-cmd --permanent --new-policy hostToLibvirt
+    #- firewall-cmd --permanent --policy hostToLibvirt --set-target ACCEPT
+    - firewall-cmd --permanent --policy hostToLibvirt --set-target CONTINUE
+    - firewall-cmd --permanent --policy hostToLibvirt --add-ingress-zone FedoraServer
+    - firewall-cmd --permanent --policy hostToLibvirt --add-egress-zone libvirt
+    - firewall-cmd --permanent --new-policy libvirtToHost
+    #- firewall-cmd --permanent --policy libvirtToHost --set-target ACCEPT
+    - firewall-cmd --permanent --policy libvirtToHost --set-target CONTINUE
+    - firewall-cmd --permanent --policy libvirtToHost --add-ingress-zone libvirt
+    - firewall-cmd --permanent --policy libvirtToHost --add-egress-zone FedoraServer
+    - firewall-cmd --reload
+    tags:
+    - firewall

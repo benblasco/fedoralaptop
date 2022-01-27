@@ -1,6 +1,15 @@
+---
 # Use:
+# $ ansible-galaxy collection install -r requirements.yml 
+# then
 # $ ansible-galaxy install -r requirements.yml 
-#
+# Is needing to run it twice a bug?  Not sure.
+
+collections:
+# For automating podman containers
+- containers.podman
+
+roles:
 # Ansible Galaxy role for configuring host as a hypervisor
 # https://galaxy.ansible.com/stackhpc/libvirt-host
 - src: stackhpc.libvirt-host
@@ -8,3 +17,7 @@
 # Ansible Galaxy role to quickly deploy new VMs
 # https://galaxy.ansible.com/stackhpc/libvirt-vm
 - src: stackhpc.libvirt-vm
+
+# Upstream podman-container-systemd role
+# Note: Also available at Ansible Galaxy
+- src: https://github.com/ikke-t/podman-container-systemd.git

@@ -8,11 +8,19 @@
   
   become: yes
 
+  vars:
+    vg_name: fedora_micro
+    libvirt_domain: micro.local
+    libvirt_ip: 192.168.6.254
+    libvirt_netmask: 255.255.255.0
+    libvirt_dhcp_start: 192.168.6.100
+    libvirt_dhcp_end: 192.168.6.200
+
   pre_tasks:
   
   - name: Create the logical volume on disk for VMs
     lvol:
-      vg: fedora_micro
+      vg: "{{ vg_name }}"
       lv: vm-pool
       size: 100G
     tags:
@@ -42,11 +50,11 @@
         - name: vm-network-routed
           mode: route
           bridge: virbr1
-          domain: micro.local
-          ip: 192.168.6.254
-          netmask: 255.255.255.0
-          dhcp_start: 192.168.6.100
-          dhcp_end: 192.168.6.200
+          domain: "{{ libvirt_domain }}"
+          ip: "{{ libvirt_ip }}"
+          netmask: "{{ libvirt_netmask }}"
+          dhcp_start: "{{ libvirt_dhcp_start }}"
+          dhcp_end: "{{ libvirt_dhcp_end }}"
       libvirt_host_pools:
         - name: vm-pool
           type: dir

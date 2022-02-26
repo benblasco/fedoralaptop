@@ -25,6 +25,7 @@
               type: 'file'
               device: 'cdrom'
               format: 'raw'
+              image: '/var/lib/libvirt/images/generic-seed.qcow2'
           interfaces:
             - network: 'vm-network-routed'
 
@@ -44,6 +45,7 @@
               type: 'file'
               device: 'cdrom'
               format: 'raw'
+              image: '/var/lib/libvirt/images/generic-seed.qcow2'
           interfaces:
             - network: 'vm-network-routed'
 #       - state: absent

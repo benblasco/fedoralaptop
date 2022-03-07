@@ -51,6 +51,8 @@
     - piper
     # vips is a pre-requisite for Signal Desktop as at 20210831
     - vips
+    #  AptX Bluetooth support
+    - pipewire-codec-aptx
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

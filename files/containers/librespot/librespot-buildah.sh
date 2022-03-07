@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Changes to be made: 
-# - Add labels for maintainer and description
-
 CONTAINER=$(buildah from registry.fedoraproject.org/fedora-minimal:35)
 
 buildah run ${CONTAINER} microdnf install -y cargo alsa-lib-devel make gcc

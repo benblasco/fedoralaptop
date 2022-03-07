@@ -147,5 +147,5 @@
     - taw/joplin
     #- sentry/v4l2loopback
 
-    bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.25.0/BlueJeans_2.25.0.78.rpm
+    bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.26.0/BlueJeans_2.26.0.136.rpm
     bluejeans_gpg_key: https://swdl.bluejeans.com/desktop-app/linux/bluejeans_pubkey.gpg

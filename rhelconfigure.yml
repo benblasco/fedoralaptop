@@ -29,6 +29,7 @@
     loop:
       - bash-completion
       - vim
+      - tmux
 
   - name: Install Insights-related packages
     yum:

@@ -27,6 +27,7 @@
       rhel8.2: "rhel-8.2-x86_64-kvm.qcow2"
       rhel8.3: "rhel-8.3-x86_64-kvm.qcow2"
       rhel8.4: "rhel-8.4-x86_64-kvm.qcow2"
+      rhel8.5: "rhel-8.5-x86_64-kvm.qcow2"
 
     vm_hostname: "bblasco84"
     vm_ipaddress: "192.168.3.184/24"

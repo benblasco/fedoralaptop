@@ -21,12 +21,12 @@
   # RHEL 8.4 scap-security-guide-0.1.54-5.el8 and scap-security-guide-0.1.57-3.el8_4
   # RHEL 8.5 scap-security-guide-0.1.57-5.el8
   - scap_security_guide_package:
-      8.0: "scap-security-guide-0.1.42-11.el8"
-      8.1: "scap-security-guide-0.1.47-8.el8_1"
-      8.2: "scap-security-guide-0.1.48-7.el8"
-      8.3: "scap-security-guide-0.1.50-14.el8"
-      8.4: "scap-security-guide-0.1.57-3.el8_4"
-      8.5: "scap-security-guide-0.1.57-5.el8"
+      8.0: "scap-security-guide-0.1.42-11.el8.noarch"
+      8.1: "scap-security-guide-0.1.47-8.el8_1.noarch"
+      8.2: "scap-security-guide-0.1.48-7.el8.noarch"
+      8.3: "scap-security-guide-0.1.50-14.el8.noarch"
+      8.4: "scap-security-guide-0.1.57-3.el8_4.noarch"
+      8.5: "scap-security-guide-0.1.57-5.el8.noarch"
 
     rhel_version: "{{ ansible_facts['distribution_version'] }}"
       #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"

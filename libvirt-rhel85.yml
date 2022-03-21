@@ -11,7 +11,7 @@
       libvirt_vms:
         - state: present
           name: 'bblasco-rhel85'
-          memory_mb: 2048
+          memory_mb: 4096
           vcpus: 1
           volumes:
             - name: 'bblasco-rhel85'

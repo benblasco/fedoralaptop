@@ -20,7 +20,7 @@
               format: 'qcow2'
               capacity: '20GB'
               pool: 'vm-pool'
-              image: '/var/lib/libvirt/images/rhel-8.5-x86_64-kvm.qcow2'
+              image: '/var/lib/libvirt/images/rhel-8.2-x86_64-kvm.qcow2'
             - name: 'generic-seed.qcow2'
               type: 'file'
               device: 'cdrom'

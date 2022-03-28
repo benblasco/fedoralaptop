@@ -1,0 +1,45 @@
+#
+# Instructions based on the following doc:
+# https://access.redhat.com/documentation/en-us/red_hat_insights/2021/html-single/red_hat_connector_configuration_guide/index#proc_rhc-setting-up-rhcassembly_rhc-configuring
+#
+- hosts: rhelvm
+
+  name: Install and configure the RHC tool
+  gather_facts: yes
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  #- ansible_python_interpreter: /usr/bin/python3
+
+  - rhel_version: "{{ ansible_facts['distribution_version'] }}"
+      #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"
+
+  tasks:
+
+  - name: Enable the Ansible repository
+    rhsm_repository:
+      name: ansible-2.9-for-rhel-8-x86_64-rpms
+      state: enabled
+
+  - name: Install rhc required packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - ansible
+      - rhc-worker-playbook
+
+  - name: Enable Red Hat Connector
+    command: rhc connect
+    register: rhc_result
+
+  - name: Show RHC result
+    debug:
+      var: rhc_result
+    tags:
+    - debug
+
+
+

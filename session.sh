@@ -1,4 +1,7 @@
-# Check which version we are running of
+# Script this demo with "doitlive"
+# https://doitlive.readthedocs.io/en/stable/
+
+# Check which version of RHEL we are running
 # State release date of OS
 cat /etc/os-release
 

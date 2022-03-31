@@ -28,6 +28,8 @@
     - smartmontools
     - ansible
     - ansible-lint
+    # Package for Ansible when working with Azure
+    - python3-requests-oauthlib
     - lm_sensors
     - lm_sensors-sensord
 

@@ -49,6 +49,8 @@
     - igt-gpu-tools
     # Logitech mouse tools
     - piper
+    # Logitech webcam tools
+    - guvcview
     # vips is a pre-requisite for Signal Desktop as at 20210831
     - vips
     #  AptX Bluetooth support

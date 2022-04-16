@@ -1,6 +1,9 @@
 # Librespot Rust Package
 
+Github repo
 https://github.com/librespot-org/librespot
+
+Rust Crates source
 https://crates.io/crates/librespot
 
 Parameters:
@@ -8,6 +11,9 @@ https://github.com/librespot-org/librespot/wiki/Options
 
 Changing the audio backend
 https://github.com/librespot-org/librespot/wiki/Audio-Backends
+
+Compiling
+https://github.com/librespot-org/librespot/blob/master/COMPILING.md
 
 # Firewall ports required
 

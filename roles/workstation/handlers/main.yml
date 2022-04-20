@@ -1,7 +1,21 @@
 ---
 # handlers file for roles/workstation
 #
+  - name: START POWER MANAGEMENT SERVICES
+    service:
+      name: "{{ item }}"
+      enabled: yes
+      state: started
+    loop: "{{ powermgmt_services }}"
+
+  - name: RESTART POWER MANAGEMENT SERVICES
+    service:
+      name: "{{ item }}"
+      state: restarted
+    loop: "{{ powermgmt_services }}"
+
   - name: RESTART USER BLUETOOTH SERVICE
     service:
       name: "bluetooth"
       state: restarted
+

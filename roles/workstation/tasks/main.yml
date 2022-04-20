@@ -139,6 +139,21 @@
   tags:
   - power
 
+- name: ENABLE BLUETOOTH EXPERIMENTAL FEATURES (TO SHOW BATTERY %)
+# https://www.reddit.com/r/Fedora/comments/p863ya/displaying_bluetooth_headphone_battery_level_in/
+# https://www.redpill-linpro.com/techblog/2021/05/31/better-bluetooth-headset-audio-with-msbc.html
+# https://extensions.gnome.org/extension/3991/bluetooth-battery/
+  lineinfile:
+    path: /etc/bluetooth/main.conf
+    insertafter: '^#Experimental = false'
+    line: 'Experimental = true'
+    firstmatch: yes
+    state: present
+    backup: yes
+  notify: RESTART USER BLUETOOTH SERVICE
+  tags:
+  - bluetooth
+
 # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
 #- name: INSTALL GNOME SHELL EXTENSIONS
 #dnf:

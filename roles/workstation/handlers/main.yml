@@ -1,2 +1,7 @@
 ---
 # handlers file for roles/workstation
+#
+  - name: RESTART USER BLUETOOTH SERVICE
+    service:
+      name: "bluetooth"
+      state: restarted

@@ -27,6 +27,7 @@
       "8.3": "scap-security-guide-0.1.50-14.el8.noarch"
       "8.4": "scap-security-guide-0.1.57-3.el8_4.noarch"
       "8.5": "scap-security-guide-0.1.57-5.el8.noarch"
+      "7.9": "scap-security-guide-0.1.57-6.el7_9.noarch"
 
     rhel_version: "{{ ansible_facts['distribution_version'] }}"
       #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"
@@ -73,6 +74,7 @@
       - bash-completion
       - vim
       - tmux
+      - git
 
   - name: Install Insights-related packages
     yum:

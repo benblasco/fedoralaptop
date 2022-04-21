@@ -19,6 +19,7 @@
     - htop
     - openssh-server
     - grubby
+    - git
     # WPA supplicant is so you can sign in to wifi networks
     - wpa_supplicant
     - screen
@@ -32,6 +33,8 @@
     - python3-requests-oauthlib
     - lm_sensors
     - lm_sensors-sensord
+    # Packages required to be a Jenkins node
+    - java-11-openjdk
 
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

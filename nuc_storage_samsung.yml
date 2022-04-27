@@ -1,0 +1,22 @@
+# ansible-galaxy install linux-system-roles.storage
+# then
+# cd ~/.ansible/roles/linux-system-roles.storage
+# ansible-galaxy collection install -vv -r meta/requirements.yml
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    #ansible_python_interpreter: /usr/bin/python3
+
+    storage_pools:
+      - name: vg-samsung1tb
+        disks:
+          - sda
+        volumes:
+          - name: lv-general
+            size: "300g"
+            fs_type: xfs
+            mount_point: /mnt/general
+            state: present
+  roles:
+    - linux-system-roles.storage

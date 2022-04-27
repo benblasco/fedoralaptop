@@ -1,0 +1,27 @@
+# ansible-galaxy install linux-system-roles.storage
+# then
+# cd ~/.ansible/roles/linux-system-roles.storage
+# ansible-galaxy collection install -vv -r meta/requirements.yml
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    #ansible_python_interpreter: /usr/bin/python3
+
+    storage_pools:
+      - name: fedora_micro
+        disks:
+          - sdb3
+        volumes:
+          - name: vm_pool
+            size: "100 GiB"
+            fs_type: xfs
+            mount_point: /var/lib/libvirt/vm-pool
+            state: present
+          - name: user_containers
+            size: "20 GiB"
+            fs_type: xfs
+            mount_point: /mnt/containers
+            state: present
+  roles:
+    - linux-system-roles.storage

@@ -1,0 +1,36 @@
+---
+- name: Register RHEL VMs and install Insights/related
+  gather_facts: no
+  become: yes
+
+  hosts: azure
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  #- ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Install some useful packages
+    dnf:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - bash-completion
+      - vim
+      - tmux
+      - rhui-azure-rhel8-ansible
+      - ansible
+      - rhc-worker-playbook
+
+  - name: Install Insights-related packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - insights-client
+      - scap-security-guide
+      - openscap-scanner
+    tags:
+      - insights

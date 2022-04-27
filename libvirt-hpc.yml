@@ -21,7 +21,7 @@
   - name: Create the logical volume on disk for VMs
     lvol:
       vg: "{{ vg_name }}"
-      lv: vm-pool
+      lv: vm_pool
       size: 100G
     tags:
     - lvm
@@ -29,14 +29,14 @@
   - name: Create the filesystem for VMs
     filesystem:
       fstype: xfs
-      dev: /dev/fedora_micro/vm-pool
+      dev: /dev/fedora_micro/vm_pool
     tags:
     - lvm
 
   - name: Mount the filesystem for VMs
     mount:
       path: /var/lib/libvirt/vm-pool
-      src: /dev/fedora_micro/vm-pool
+      src: /dev/fedora_micro/vm_pool
       fstype: xfs
       state: mounted
       backup: yes

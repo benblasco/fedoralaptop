@@ -6,7 +6,7 @@
   connection: local
   become: yes
   vars:
-    ansible_python_interpreter: /usr/bin/python3
+    #ansible_python_interpreter: /usr/bin/python3
 
     storage_pools:
       - name: fedora_micro
@@ -18,7 +18,6 @@
             fs_type: xfs
             mount_point: /var/lib/libvirt/vm-pool
             state: present
-  roles:
           - name: user_containers
             size: "20 GiB"
             fs_type: xfs

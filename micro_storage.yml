@@ -25,3 +25,37 @@
             state: present
   roles:
     - linux-system-roles.storage
+
+  tasks:
+
+# Fix the SELinux permissions for user container storage as per:
+# https://github.com/containers/podman/issues/12812
+# https://github.com/containers/podman/issues/3234
+# $ sudo semanage fcontext -a -e $HOME/.local/share/containers /mnt/containers
+# $ restorecon -R -v /mnt
+    - name: Allow users to modify files in their local container storage directories
+      community.general.sefcontext:
+        target: '/mnt/containers(/.*)?'
+        seuser: unconfined_u
+        setype: data_home_t
+        state: present
+      tags:
+      - selinux
+
+    - name: Apply new SELinux file context to filesystem
+      ansible.builtin.command: restorecon -irv /mnt/containers
+      tags:
+      - selinux
+
+# Edit /etc/containers.conf to ensure rootless containers are stored in correct location
+# OLD: # rootless_storage_path = "$HOME/.local/share/containers/storage"
+# NEW: rootless_storage_path = "/mnt/containers/$USER/storage"
+    - name: Ensure that rootless container storage is in the correct directory
+      lineinfile:
+        path: /etc/containers/storage.conf
+        regexp: '^rootless_storage_path'
+        insertafter: '^# rootless_storage_path'
+        line: rootless_storage_path = "/mnt/containers/$USER/storage"
+        backup: yes
+      tags:
+      - podman

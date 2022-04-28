@@ -1,0 +1,13 @@
+# ansible-galaxy install linux-system-roles.timesync
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+    timesync_ntp_servers:
+      - hostname: au.pool.ntp.org
+        pool: yes
+        iburst: yes
+  roles:
+    - linux-system-roles.timesync

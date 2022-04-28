@@ -1,3 +1,5 @@
+# Documentation
+# https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/administration_and_configuration_tasks_using_system_roles_in_rhel/configuring-time-synchronization-using-system-roles_administration-and-configuration-tasks-using-system-roles-in-rhel
 # ansible-galaxy install linux-system-roles.timesync
 - hosts: localhost
   connection: local

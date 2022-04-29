@@ -12,7 +12,7 @@
         - state: present
           name: 'bblasco-rhel82'
           memory_mb: 4096
-          vcpus: 1
+          vcpus: 2
           volumes:
             - name: 'bblasco-rhel82'
               device: 'disk'

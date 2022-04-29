@@ -1,0 +1,18 @@
+# ansible-galaxy install linux-system-roles.selinux
+# then
+# cd ~/.ansible/roles/linux-system-roles.selinux
+# ansible-galaxy collection install -vv -r meta/requirements.yml
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    selinux_fcontexts:
+      - { target: '/mnt/containers(/.*)?', setype: 'data_home_t', state: 'present' }
+      # Line below for testing potential improvement to role according to:
+      # https://github.com/linux-system-roles/selinux/issues/106
+      #- { target: '/mnt/containers(/.*)?', setype: 'data_home_t', seuser: 'unconfined_u', state: 'present' }
+    selinux_restore_dirs:
+      - /mnt/containers
+
+  roles:
+    - linux-system-roles.selinux

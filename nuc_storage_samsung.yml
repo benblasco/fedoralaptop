@@ -6,7 +6,7 @@
   connection: local
   become: yes
   vars:
-    #ansible_python_interpreter: /usr/bin/python3
+    ansible_python_interpreter: /usr/bin/python3
 
     storage_pools:
       - name: vg-samsung1tb
@@ -14,7 +14,7 @@
           - sda
         volumes:
           - name: lv-general
-            size: "300g"
+            size: "300 GiB"
             fs_type: xfs
             mount_point: /mnt/general
             state: present

@@ -35,7 +35,9 @@
 # $ restorecon -R -v /mnt
     - name: Allow users to modify files in their local container storage directories
       community.general.sefcontext:
-        target: '/mnt/containers(/.*)?'
+        #target: '/mnt/containers(/.*)?'
+        target: '/mnt/containers'
+        # Trying to set seuser is redundant when using SELinux targeted policy
         seuser: unconfined_u
         setype: data_home_t
         state: present
@@ -43,7 +45,8 @@
       - selinux
 
     - name: Apply new SELinux file context to filesystem
-      ansible.builtin.command: restorecon -irv /mnt/containers
+      #ansible.builtin.command: restorecon -irv /mnt/containers
+      ansible.builtin.command: restorecon -iv /mnt/containers
       tags:
       - selinux
 

@@ -11,5 +11,13 @@
       - hostname: au.pool.ntp.org
         pool: yes
         iburst: yes
+
+    timezone: "Australia/Melbourne"
+
   roles:
     - linux-system-roles.timesync
+
+  tasks:
+    - name: Set timezone to Asia/Tokyo
+      timezone:
+        name: "{{ timezone }}"

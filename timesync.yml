@@ -18,6 +18,6 @@
     - linux-system-roles.timesync
 
   tasks:
-    - name: Set timezone to Asia/Tokyo
+    - name: Set timezone
       timezone:
         name: "{{ timezone }}"

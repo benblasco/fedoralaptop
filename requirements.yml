@@ -24,3 +24,12 @@ roles:
 # Upstream podman-container-systemd role
 # Note: Also available at Ansible Galaxy
 - src: https://github.com/ikke-t/podman-container-systemd.git
+
+# Linux/RHEL system roles
+linux-system-roles.timesync
+
+linux-system-roles.storage
+# then
+# cd ~/.ansible/roles/linux-system-roles.storage
+# ansible-galaxy collection install -vv -r meta/requirements.yml
+#

@@ -82,7 +82,8 @@
       state: present
     loop:
       - insights-client
-        #- scap-security-guide
+      # Note that this exact format is needed to dereference rhel_version variable
+      # Cannot use scap_security_guide_package.rhel_version notation
       - "{{ scap_security_guide_package[ rhel_version ] }}"
       - openscap-scanner
     tags:

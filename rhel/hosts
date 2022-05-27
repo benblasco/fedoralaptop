@@ -1,0 +1,4 @@
+[rhelvm]
+bblasco82 ansible_host=192.168.3.82
+bblasco84 ansible_host=192.168.3.184
+bblasco85b ansible_host=192.168.3.85

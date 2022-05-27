@@ -6,7 +6,7 @@
 
     workstation_packages:
 
-    - icedtea-web
+      #- icedtea-web
     - java-openjdk
     - gnome-tweak-tool
     - dconf-editor

@@ -6,7 +6,7 @@
 
     workstation_packages:
 
-    - icedtea-web
+      #- icedtea-web
     - java-openjdk
     - gnome-tweak-tool
     - dconf-editor
@@ -77,8 +77,8 @@
     # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-cert-install.html
     # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-NetworkManager-openvpn-profiles.html
     openvpn_config_packages:
-    - /tmp/fedora_build/redhat-internal-cert-install-0.1-23.el7.csb.noarch.rpm
-    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-46.el7.csb.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-cert-install-0.1-25.el7.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-55.el7.noarch.rpm
 
     printer_packages:
     - system-config-printer
@@ -151,6 +151,5 @@
     - taw/joplin
     #- sentry/v4l2loopback
 
-    #bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.26.0/BlueJeans_2.26.0.136.rpm
-    bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.27.0/BlueJeans_2.27.0.130.rpm
+    bluejeans_rpm: https://swdl.bluejeans.com/desktop-app/linux/2.28.0/BlueJeans_2.28.0.69.rpm
     bluejeans_gpg_key: https://swdl.bluejeans.com/desktop-app/linux/bluejeans_pubkey.gpg

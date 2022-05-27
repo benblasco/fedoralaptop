@@ -2,3 +2,14 @@
 bblasco82 ansible_host=192.168.3.82
 bblasco84 ansible_host=192.168.3.184
 bblasco85b ansible_host=192.168.3.85
+
+[azure]
+bblasco-azure-cis1 ansible_host=52.150.9.76
+bblasco-azure-cis2 ansible_host=20.119.71.50
+
+[azure:vars]
+ansible_user=azureuser
+ansible_ssh_private_key_file=/home/bblasco/Downloads/bblasco-composer-azure_key.pem
+
+[rhelvm:children]
+azure

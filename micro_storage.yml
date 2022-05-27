@@ -23,6 +23,11 @@
             fs_type: xfs
             mount_point: /mnt/containers
             state: present
+          - name: root_containers
+            size: "20 GiB"
+            fs_type: xfs
+            mount_point: /var/lib/containers
+            state: present
   roles:
     - linux-system-roles.storage
 

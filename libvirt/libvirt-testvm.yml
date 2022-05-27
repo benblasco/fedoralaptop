@@ -10,11 +10,11 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
         - state: present
-          name: 'vm1'
+          name: 'f35vm'
           memory_mb: 2048
           vcpus: 1
           volumes:
-            - name: 'vm1'
+            - name: 'f35vm'
               device: 'disk'
               #type: 'file'
               format: 'qcow2'
@@ -29,7 +29,7 @@
           interfaces:
             - network: 'vm-network-routed'
 
-        - state: present
+        - state: absent
           name: 'vm2'
           memory_mb: 2048
           vcpus: 1

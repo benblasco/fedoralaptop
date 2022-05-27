@@ -26,9 +26,9 @@ roles:
 - src: https://github.com/ikke-t/podman-container-systemd.git
 
 # Linux/RHEL system roles
-linux-system-roles.timesync
+- src: linux-system-roles.timesync
 
-linux-system-roles.storage
+- src: linux-system-roles.storage
 # then
 # cd ~/.ansible/roles/linux-system-roles.storage
 # ansible-galaxy collection install -vv -r meta/requirements.yml

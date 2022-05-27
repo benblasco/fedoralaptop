@@ -1,0 +1,79 @@
+# ansible-galaxy install linux-system-roles.storage
+# then
+# cd ~/.ansible/roles/linux-system-roles.storage
+# ansible-galaxy collection install -vv -r meta/requirements.yml
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    #ansible_python_interpreter: /usr/bin/python3
+
+    storage_pools:
+      - name: fedora_nuc
+        disks:
+          - nvme0n1p3
+        volumes:
+          - name: vm_pool
+            size: "100 GiB"
+            fs_type: xfs
+            mount_point: /var/lib/libvirt/vm-pool
+            state: present
+          - name: user_containers
+            size: "20 GiB"
+            fs_type: xfs
+            mount_point: /mnt/containers
+            state: present
+          - name: root_containers
+            size: "20 GiB"
+            fs_type: xfs
+            mount_point: /var/lib/containers
+            state: present
+      - name: vg_samsung1tb
+        disks:
+          - sda
+        volumes:
+          - name: lv_general
+            size: "300 GiB"
+            fs_type: xfs
+            mount_point: /mnt/general
+            state: present
+
+  roles:
+    - linux-system-roles.storage
+
+  tasks:
+
+# Fix the SELinux permissions for user container storage as per:
+# https://github.com/containers/podman/issues/12812
+# https://github.com/containers/podman/issues/3234
+# $ sudo semanage fcontext -a -e $HOME/.local/share/containers /mnt/containers
+# $ restorecon -R -v /mnt
+    - name: Allow users to modify files in their local container storage directories
+      community.general.sefcontext:
+        #target: '/mnt/containers(/.*)?'
+        target: '/mnt/containers'
+        # Trying to set seuser is redundant when using SELinux targeted policy
+        seuser: unconfined_u
+        setype: data_home_t
+        state: present
+      tags:
+      - selinux
+
+    - name: Apply new SELinux file context to filesystem
+      #ansible.builtin.command: restorecon -irv /mnt/containers
+      ansible.builtin.command: restorecon -iv /mnt/containers
+      tags:
+      - selinux
+
+# Edit /etc/containers.conf to ensure rootless containers are stored in correct location
+# OLD: # rootless_storage_path = "$HOME/.local/share/containers/storage"
+# NEW: rootless_storage_path = "/mnt/containers/$USER/storage"
+    - name: Ensure that rootless container storage is in the correct directory
+      lineinfile:
+        path: /etc/containers/storage.conf
+        regexp: '^rootless_storage_path'
+        insertafter: '^# rootless_storage_path'
+        line: rootless_storage_path = "/mnt/containers/$USER/storage"
+        backup: yes
+      tags:
+      - podman

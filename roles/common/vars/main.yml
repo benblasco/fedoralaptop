@@ -25,7 +25,6 @@
     - screen
     # Midnight Commander, for file manipulation etc.
     - mc
-    - tmux
     - smartmontools
     - ansible
     - ansible-lint

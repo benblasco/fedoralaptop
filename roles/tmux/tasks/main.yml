@@ -1,6 +1,14 @@
 ---
 # tasks file for roles/tmux
 
+- name: INSTALL TMUX PACKAGE
+  become: yes
+  dnf:
+    name: tmux
+    state: latest
+  tags:
+  - tmux
+
 - name: CLONE THE TMUX PROFILE GIT REPO
   become: no
   ansible.builtin.git:

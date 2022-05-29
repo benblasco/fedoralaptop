@@ -1,12 +1,4 @@
-- hosts: cubox
-  name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
-  gather_facts: no
-
-  #roles:
-  #- prereqs
-  #tags:
-  #- cubox
-
+---
 - hosts: localhost
   connection: local
 
@@ -18,3 +10,4 @@
   - common
   - server
   - container_host
+  - tmux

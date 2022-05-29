@@ -1,0 +1,9 @@
+---
+# tasks file for container_host
+
+- name: INSTALL CONTAINER RELATED PACKAGES
+  dnf:
+    name: "{{ container_packages }}"
+    state: present
+  tags:
+  - container

@@ -39,19 +39,3 @@
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm
     - http://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm
-
-    virt_packages:
-    - libvirt-client
-    - python3-libvirt
-    - python3-lxml
-      #- vagrant
-    - python3-psutil
-    - virt-install
-    - virt-manager-common
-    - virt-viewer
-    - cloud-utils
-
-    container_packages:
-    - podman
-    - buildah
-    - skopeo

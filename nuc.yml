@@ -2,10 +2,10 @@
   name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
   gather_facts: no
 
-  roles:
-  - prereqs
-  tags:
-  - cubox
+  #roles:
+  #- prereqs
+  #tags:
+  #- cubox
 
 - hosts: localhost
   connection: local
@@ -17,3 +17,4 @@
   roles:
   - common
   - server
+  - container_host

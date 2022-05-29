@@ -7,3 +7,5 @@
     state: present
   tags:
   - container
+  notify:
+  - enable_container_services

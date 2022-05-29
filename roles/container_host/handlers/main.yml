@@ -1,2 +1,16 @@
 ---
 # handlers file for container_host
+
+- name: Enable the podman service
+  systemd:
+    name: podman
+    enabled: yes
+    state: started
+  listen: enable_container_services
+
+- name: enable the podman socket service
+  systemd:
+    name: podman.socket
+    enabled: yes
+    state: started
+  listen: enable_container_services

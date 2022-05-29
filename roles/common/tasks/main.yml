@@ -72,7 +72,6 @@
   tags:
   - kernel
 
-
 - name: COPY SCREENRC FILE (SCREEN CONFIGURATION)
   copy:
     src: files/screen/screenrc

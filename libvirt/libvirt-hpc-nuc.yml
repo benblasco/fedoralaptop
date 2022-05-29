@@ -1,0 +1,96 @@
+# ansible-galaxy install stackhpc.libvirt-host
+# Read: https://galaxy.ansible.com/stackhpc/libvirt-host
+# Read: https://github.com/stackhpc/ansible-role-libvirt-host
+- hosts: localhost
+  connection: local
+
+  name: Ensure that Libvirt is configured
+  
+  become: yes
+
+  vars:
+    vg_name: fedora_nuc
+    libvirt_domain: nuc.local
+    libvirt_ip: 192.168.3.254
+    libvirt_netmask: 255.255.255.0
+    libvirt_dhcp_start: 192.168.3.100
+    libvirt_dhcp_end: 192.168.3.200
+
+  pre_tasks:
+  
+  - name: Create the logical volume on disk for VMs
+    lvol:
+      vg: "{{ vg_name }}"
+      lv: vm_pool
+      size: 100G
+    tags:
+    - lvm
+
+  - name: Create the filesystem for VMs
+    filesystem:
+      fstype: xfs
+      dev: /dev/fedora_nuc/vm_pool
+    tags:
+    - lvm
+
+  - name: Mount the filesystem for VMs
+    mount:
+      path: /var/lib/libvirt/vm-pool
+      src: /dev/fedora_nuc/vm_pool
+      fstype: xfs
+      state: mounted
+      backup: yes
+    tags:
+    - lvm
+
+  roles:
+    - role: stackhpc.libvirt-host
+      become: no
+      libvirt_host_networks:
+        - name: vm-network-routed
+          mode: route
+          bridge: virbr1
+          domain: "{{ libvirt_domain }}"
+          ip: "{{ libvirt_ip }}"
+          netmask: "{{ libvirt_netmask }}"
+          dhcp_start: "{{ libvirt_dhcp_start }}"
+          dhcp_end: "{{ libvirt_dhcp_end }}"
+      libvirt_host_pools:
+        - name: vm-pool
+          type: dir
+          #capacity: 1024
+          path: /var/lib/libvirt/vm-pool
+          mode: 755
+          owner: qemu
+          group: qemu
+            #- name: vm-pool-lvm
+            #type: logical
+            #source: fedora_nuc
+            #target: /dev/fedora_nuc
+            #pvs:
+            #- /dev/sdb3
+
+  post_tasks:
+
+  # Note: Ansible firewalld module does not natively support this, so using shell commands instead
+  # https://github.com/ansible-collections/ansible.posix/issues/284
+  # More reading about policies:
+  # https://firewalld.org/2020/09/policy-objects-introduction
+  # https://firewalld.org/2020/09/policy-objects-filtering-container-and-vm-traffic
+
+  - name: Add Firewalld policy objects to route between zones
+    shell: $i
+    loop:
+    - firewall-cmd --permanent --new-policy hostToLibvirt
+    #- firewall-cmd --permanent --policy hostToLibvirt --set-target ACCEPT
+    - firewall-cmd --permanent --policy hostToLibvirt --set-target CONTINUE
+    - firewall-cmd --permanent --policy hostToLibvirt --add-ingress-zone FedoraServer
+    - firewall-cmd --permanent --policy hostToLibvirt --add-egress-zone libvirt
+    - firewall-cmd --permanent --new-policy libvirtToHost
+    #- firewall-cmd --permanent --policy libvirtToHost --set-target ACCEPT
+    - firewall-cmd --permanent --policy libvirtToHost --set-target CONTINUE
+    - firewall-cmd --permanent --policy libvirtToHost --add-ingress-zone libvirt
+    - firewall-cmd --permanent --policy libvirtToHost --add-egress-zone FedoraServer
+    - firewall-cmd --reload
+    tags:
+    - firewall

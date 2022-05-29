@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/tmux
 
-- name: INSTALL TMUX PACKAGE
+- name: Install tmux package
   become: yes
   dnf:
     name: tmux
@@ -9,13 +9,12 @@
   tags:
   - tmux
 
-- name: CLONE THE TMUX PROFILE GIT REPO
+- name: Clone the tmux profile Git repo
   become: no
   ansible.builtin.git:
     repo: https://github.com/gpakosz/.tmux.git
     dest: /home/bblasco/.tmux
   notify:
-  - link_tmux_profile
-  - copy_tmux_profile_local
+  - update_tmux_profiles
   tags:
   - tmux

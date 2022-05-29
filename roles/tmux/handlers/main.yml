@@ -1,7 +1,7 @@
 ---
 # handlers file for roles/tmux
 
-- name: link_tmux_profile
+- name: Link static tmux profile
   become: no
   ansible.builtin.file:
     src: ~bblasco/.tmux/.tmux.conf
@@ -10,8 +10,9 @@
     group: bblasco
     mode: '0644'
     state: link
+  listen: update_tmux_profiles
 
-- name: copy_tmux_profile_local
+- name: Copy local tmux profile
   become: no
   ansible.builtin.copy:
     remote_src: yes
@@ -20,3 +21,4 @@
     owner: bblasco
     group: bblasco
     mode: '0644'
+  listen: update_tmux_profiles

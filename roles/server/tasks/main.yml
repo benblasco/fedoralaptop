@@ -55,19 +55,3 @@
     state: started
   tags:
   - cockpit
-
-- name: ENABLE THE PODMAN SERVICE
-  systemd:
-    name: podman
-    enabled: yes
-    state: started
-  tags:
-  - podman
-
-- name: ENABLE THE PODMAN SOCKET SERVICE
-  systemd:
-    name: podman.socket
-    enabled: yes
-    state: started
-  tags:
-  - podman

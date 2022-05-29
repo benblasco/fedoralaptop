@@ -1,0 +1,9 @@
+---
+# tasks file for virt_host
+
+- name: INSTALL VIRTUALISATION RELATED PACKAGES
+  dnf:
+    name: "{{ virt_packages }}"
+    state: present
+  tags:
+  - virt

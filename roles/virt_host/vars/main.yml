@@ -1,0 +1,13 @@
+---
+# vars file for virt_host
+
+    virt_packages:
+    - libvirt-client
+    - python3-libvirt
+    - python3-lxml
+      #- vagrant
+    - python3-psutil
+    - virt-install
+    - virt-manager-common
+    - virt-viewer
+    - cloud-utils

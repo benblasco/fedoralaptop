@@ -9,7 +9,7 @@
   become: yes
 
   vars:
-    vg_name: fedora_nuc
+
     libvirt_domain: nuc.local
     libvirt_ip: 192.168.3.254
     libvirt_netmask: 255.255.255.0
@@ -18,30 +18,31 @@
 
   pre_tasks:
   
-  - name: Create the logical volume on disk for VMs
-    lvol:
-      vg: "{{ vg_name }}"
-      lv: vm_pool
-      size: 100G
-    tags:
-    - lvm
+   - name: Override the OS version so the role works
+     set_fact:
+       ansible_facts:
+         os_family: RedHat
+         distribution: RedHat
+         distribution_major_version: 8
+         distribution_version: 8
+         python:
+           version:
+             major: 3
+     tags:
+     - os
 
-  - name: Create the filesystem for VMs
-    filesystem:
-      fstype: xfs
-      dev: /dev/fedora_nuc/vm_pool
-    tags:
-    - lvm
+   - name: Check the OS version was overridden correctly
+     debug:
+       msg: Family "{{ ansible_facts.os_family }}", distro "{{ ansible_facts.distribution }}", major ver "{{ ansible_facts.distribution_major_version }}"
+       #msg: major ver "{{ ansible_facts.distribution_major_version }}"
+       #msg: distro "{{ ansible_facts.distribution }}", major ver "{{ ansible_facts.distribution_major_version }}"
+     tags:
+     - os
 
-  - name: Mount the filesystem for VMs
-    mount:
-      path: /var/lib/libvirt/vm-pool
-      src: /dev/fedora_nuc/vm_pool
-      fstype: xfs
-      state: mounted
-      backup: yes
-    tags:
-    - lvm
+   - name: Install genisoimage package so we can create new qcow seed images
+     dnf:
+       name: genisoimage
+       state: latest
 
   roles:
     - role: stackhpc.libvirt-host
@@ -63,12 +64,6 @@
           mode: 755
           owner: qemu
           group: qemu
-            #- name: vm-pool-lvm
-            #type: logical
-            #source: fedora_nuc
-            #target: /dev/fedora_nuc
-            #pvs:
-            #- /dev/sdb3
 
   post_tasks:
 

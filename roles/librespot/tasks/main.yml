@@ -1,0 +1,51 @@
+---
+# tasks file for roles/librespot
+
+- name: Install audio utility packages
+  dnf:
+    name: "{{ audio_packages }}"
+    state: latest
+  tags:
+  - audio
+
+- name: Permit traffic in FedoraServer Zone for MDNS
+  ansible.posix.firewalld:
+    zone: FedoraServer
+    service: mdns
+    permanent: yes
+    state: enabled
+
+- name: Permit traffic in FedoraServer Zone for ZeroConf
+  ansible.posix.firewalld:
+    zone: FedoraServer
+    port: 49999/tcp
+    permanent: yes
+    state: enabled
+
+- name: Copy the LibreSpot binary
+  copy:
+    remote_src: yes
+    src: /home/bblasco/jenkins/workspace/librespot-fedora-buildah_main/librespot
+    dest: /usr/local/bin/librespot
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Copy the templated systemd service unit file
+  template:
+    src: librespot.service.j2
+    dest: /etc/systemd/system/librespot.service
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Enable the service
+  systemd:
+    name: librespot
+    enabled: yes
+    state: started
+
+# X Open firewall ports
+# X Grab the binary and put it in /usr/local/bin
+# X Put the systemd service file in the right location /etc/systemd/system root:root 755
+# X Install and enable systemd service

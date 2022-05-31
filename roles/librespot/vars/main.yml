@@ -1,0 +1,5 @@
+---
+# vars file for roles/librespot
+
+    audio_packages:
+    - alsa-utils

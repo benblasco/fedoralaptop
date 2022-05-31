@@ -33,6 +33,13 @@
   tags:
   - tuning
 
+- name: INSTALL JENKINS NODE REQUIRED PACKAGES
+  dnf:
+    name: "{{ jenkins_node_packages }}"
+    state: present
+  tags:
+  - jenkins
+
 - name: INSTALL COCKPIT AND PLUGIN PACKAGES
   dnf:
     name: "{{ cockpit_packages }}"

@@ -19,6 +19,8 @@ cockpit_packages:
   - cockpit-storaged
   - cockpit-pcp
   - cockpit-composer
+  - cockpit-kdump
+  - cockpit-selinux
 
 jenkins_node_packages:
   - java-11-openjdk

@@ -28,6 +28,7 @@
       "8.4": "scap-security-guide-0.1.57-3.el8_4.noarch"
       "8.5": "scap-security-guide-0.1.57-5.el8.noarch"
       "7.9": "scap-security-guide-0.1.57-6.el7_9.noarch"
+      "9.0": "scap-security-guide-0.1.60-5.el9.noarch"
 
     rhel_version: "{{ ansible_facts['distribution_version'] }}"
       #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"
@@ -63,6 +64,10 @@
       username: "{{ rhn_username }}"
       password: "{{ rhn_password }}"
       #auto_attach: true
+      syspurpose:
+        usage: "Development/Test"
+        role: "Red Hat Enterprise Server"
+        service_level_agreement: "Premium"
     tags:
       - subscription-manager
 
@@ -108,12 +113,12 @@
 
   # You want to use subscription-manager syspurpose service-level --set Premium and similar for RHEL 8.6 and 9.x. The syspurpose commands are unified as a subcommand of subscription-manager going forward.
   # existing syntax is preserved though for RHEL 8 though deprecated.
-  - name: Set the system purpose
-    command: "{{ item }}"
-    ignore_errors: yes
-    loop:
-      - syspurpose set-sla "Premium"
-      - syspurpose set-usage "Development/Test"
-      - syspurpose set-role "Red Hat Enterprise Linux Server"
-    tags:
-      - syspurpose
+# - name: Set the system purpose
+#   command: "{{ item }}"
+#   ignore_errors: yes
+#   loop:
+#     - syspurpose set-sla "Premium"
+#     - syspurpose set-usage "Development/Test"
+#     - syspurpose set-role "Red Hat Enterprise Linux Server"
+#   tags:
+#     - syspurpose

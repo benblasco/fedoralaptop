@@ -11,6 +11,7 @@
 
     mount_point_user_containers: /mnt/containers
     mount_point_root_containers: /var/lib/containers
+    mount_point_crc: /home/bblasco/.crc
 
     storage_pools:
       - name: fedora_nuc
@@ -31,6 +32,11 @@
             size: "20 GiB"
             fs_type: xfs
             mount_point: "{{ mount_point_root_containers }}"
+            state: present
+          - name: crc
+            size: "50 GiB"
+            fs_type: xfs
+            mount_point: "{{ mount_point_crc }}"
             state: present
       - name: vg_samsung1tb
         disks:
@@ -89,3 +95,32 @@
       when: mount_point_user_containers is defined
       tags:
       - podman
+
+    - name: Configure storage directory for rootless containers
+      block:
+        - name: Set correct directory ownership/permissions for CRC mount point
+          file:
+            path: "{{ mount_point_crc }}"
+            state: directory
+            owner: bblasco
+            group: bblasco
+            mode: '0755'
+
+        - name: Set correct SELinux permissions for CRC mount point
+          community.general.sefcontext:
+            target: "{{ mount_point_crc }}"
+            # Trying to set seuser is redundant when using SELinux targeted policy
+            # unconfined_u:object_r:user_home_t:s0
+            seuser: unconfined_u
+            setype: user_home_t
+            state: present
+          tags:
+          - selinux
+
+        - name: Apply new SELinux file context to filesystem
+          #ansible.builtin.command: restorecon -irv /mnt/containers
+          ansible.builtin.command: restorecon -iv {{ mount_point_crc }}
+          tags:
+          - selinux
+      tags:
+      - crc

@@ -72,6 +72,8 @@
   # More reading about policies:
   # https://firewalld.org/2020/09/policy-objects-introduction
   # https://firewalld.org/2020/09/policy-objects-filtering-container-and-vm-traffic
+  # 20220602 I expect the whole of this to be redundant at some point soon. Read:
+  # https://github.com/firewalld/firewalld.github.io/pull/14#issuecomment-1142540613
 
   - name: Add Firewalld policy objects to route between zones
     shell: $i
@@ -82,10 +84,14 @@
     - firewall-cmd --permanent --policy hostToLibvirt --add-ingress-zone FedoraServer
     - firewall-cmd --permanent --policy hostToLibvirt --add-egress-zone libvirt
     - firewall-cmd --permanent --new-policy libvirtToHost
+    # WE POSSIBLY DO NOT NEED THE LIBVIRT TO HOST POLICY. CURRENTLY REMOVED ON SYSTEM
     #- firewall-cmd --permanent --policy libvirtToHost --set-target ACCEPT
     - firewall-cmd --permanent --policy libvirtToHost --set-target CONTINUE
     - firewall-cmd --permanent --policy libvirtToHost --add-ingress-zone libvirt
     - firewall-cmd --permanent --policy libvirtToHost --add-egress-zone FedoraServer
     - firewall-cmd --reload
+    # FYI other helpful commands
+    # firewall-cmd --list-all-policies
+    # firewall-cmd --info-policy libvirtToHost
     tags:
     - firewall

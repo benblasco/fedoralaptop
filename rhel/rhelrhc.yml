@@ -18,17 +18,39 @@
 
   tasks:
 
+  # Only relevant for RHEL 8.0-8.5
   - name: Enable the Ansible repository
     rhsm_repository:
       name: ansible-2.9-for-rhel-8-x86_64-rpms
       state: enabled
+    when:
+      #- ansible_facts['distribution_major_version'] | int <= "8.5"
+      - ansible_facts['distribution_major_version'] is version('8.5', '<=')
+
+  - name: Install ansible
+    yum:
+      name: ansible
+      state: present
+    when:
+      #- ansible_facts['distribution_major_version'] != "9"
+      #- ansible_facts['distribution_major_version'] | int <= "8.5"
+      - ansible_facts['distribution_major_version'] is version('8.5', '<=')
+
+  # Placeholder for install of ansible-core on RHEL 8.6+ and 9.0+
+  - name: Install ansible-core
+    yum:
+      name: ansible-core
+      state: present
+    when:
+      #- ansible_facts['distribution_major_version'] == "9"
+      #- ansible_facts['distribution_major_version'] | int >= "8.6"
+      - ansible_facts['distribution_major_version'] is version('8.6', '>=')
 
   - name: Install rhc required packages
     yum:
       name: "{{ item }}"
       state: present
     loop:
-      - ansible
       - rhc-worker-playbook
 
   - name: Enable Red Hat Connector
@@ -40,6 +62,3 @@
       var: rhc_result
     tags:
     - debug
-
-
-

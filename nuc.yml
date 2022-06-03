@@ -6,9 +6,13 @@
   gather_facts: yes
   become: yes
 
+  vars:
+    kdump_path: /mnt/general/crash
+
   roles:
   - common
   - server
   - container_host
   - tmux
   - librespot
+  - linux-system-roles.kdump

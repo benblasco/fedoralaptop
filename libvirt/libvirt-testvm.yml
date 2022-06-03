@@ -10,17 +10,17 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
         - state: present
-          name: 'f35vm'
+          name: 'f36vm'
           memory_mb: 2048
           vcpus: 1
           volumes:
-            - name: 'f35vm'
+            - name: 'f36vm'
               device: 'disk'
               #type: 'file'
               format: 'qcow2'
               capacity: '20GB'
               pool: 'vm-pool'
-              image: 'https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2'
+              image: 'https://fedora.mirror.digitalpacific.com.au/linux/releases/36/Cloud/x86_64/images/Fedora-Cloud-Base-36-1.5.x86_64.qcow2'
             - name: 'generic-seed.qcow2'
               type: 'file'
               device: 'cdrom'

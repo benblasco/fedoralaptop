@@ -27,7 +27,7 @@ roles:
 
 # Linux/RHEL system roles
 - src: linux-system-roles.timesync
-
+- src: linux-system-roles.kdump
 - src: linux-system-roles.storage
 # then
 # cd ~/.ansible/roles/linux-system-roles.storage

@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  connection: local
+
+  name: PERFORM POST BUILD INSTALL/CONFIG OF INTEL NUC SERVER
+  gather_facts: yes
+  become: yes
+
+  roles:
+  - librespot

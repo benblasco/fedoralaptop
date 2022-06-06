@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+
+  name: PERFORM POST BUILD INSTALL/CONFIG OF INTEL NUC SERVER
+  gather_facts: yes
+  become: yes
+
+  vars:
+    kdump_path: /mnt/general/crash
+
+  roles:
+  - linux-system-roles.kdump

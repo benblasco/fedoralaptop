@@ -19,15 +19,16 @@
   pre_tasks:
   
    - name: Override the OS version so the role works
-     set_fact:
-       ansible_facts:
-         os_family: RedHat
-         distribution: RedHat
-         distribution_major_version: 8
-         distribution_version: 8
-         python:
-           version:
-             major: 3
+     ansible.utils.update_fact:
+       updates:
+         - path: ansible_facts.os_family
+           value: RedHat
+         - path: ansible_facts.distribution
+           value: RedHat
+         - path: ansible_facts.distribution_major_version
+           value: 8
+         - path: ansible_facts.distribution_version
+           value: 8
      tags:
      - os
 

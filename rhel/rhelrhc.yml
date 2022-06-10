@@ -52,6 +52,7 @@
       state: present
     loop:
       - rhc-worker-playbook
+      - rhc
 
   - name: Enable Red Hat Connector
     command: rhc connect

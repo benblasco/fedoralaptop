@@ -14,5 +14,5 @@
   - server
   - container_host
   - tmux
-  - librespot
-  - linux-system-roles.kdump
+    #- linux-system-roles.kdump
+    #- librespot

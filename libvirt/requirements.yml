@@ -1,0 +1,22 @@
+---
+# Use:
+# $ ansible-galaxy collection install -r requirements.yml 
+# then
+# $ ansible-galaxy install -r requirements.yml 
+# https://docs.ansible.com/ansible/2.9/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file
+# "While both roles and collections can be specified in one requirements file, they need to be installed separately.
+# The ansible-galaxy role install -r requirements.yml will only install roles and
+# ansible-galaxy collection install -r requirements.yml -p ./ will only install collections."
+
+collections:
+  # Utils collection to get update_fact module
+- ansible.utils
+
+roles:
+# Ansible Galaxy role for configuring host as a hypervisor
+# https://galaxy.ansible.com/stackhpc/libvirt-host
+- src: stackhpc.libvirt-host
+
+# Ansible Galaxy role to quickly deploy new VMs
+# https://galaxy.ansible.com/stackhpc/libvirt-vm
+- src: stackhpc.libvirt-vm

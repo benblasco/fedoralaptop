@@ -181,13 +181,6 @@
     #state: present
   #- adobe
 
-- name: INSTALL VIRTUALISATION RELATED PACKAGES
-  dnf:
-    name: "{{ virt_packages }}"
-    state: present
-  tags:
-  - virt
-
 - name: INSTALL OBS (Open Broadcast Studio) AND RELATED PACKAGES
   dnf:
     name: "{{ obs_packages }}"

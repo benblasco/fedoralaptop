@@ -94,3 +94,17 @@
   tags:
   - journald
 
+- name: ENSURE JOURNAL LOG DATA DIRECTORY EXISTS
+  file:
+    path: /var/log/journal
+    state: directory
+    owner: root
+    group: systemd-journal
+    # drwxr-sr-x+ 3 root systemd-journal 46 Jun 10 08:50 /var/log/journal/
+    mode: u=rwx,g=rxs,o=rx
+
+  notify:
+  - RESTART JOURNALD
+  tags:
+  - journald
+

@@ -80,15 +80,15 @@
     shell: $i
     loop:
     - firewall-cmd --permanent --new-policy hostToLibvirt
-    #- firewall-cmd --permanent --policy hostToLibvirt --set-target ACCEPT
-    - firewall-cmd --permanent --policy hostToLibvirt --set-target CONTINUE
+    - firewall-cmd --permanent --policy hostToLibvirt --set-target ACCEPT
+    #- firewall-cmd --permanent --policy hostToLibvirt --set-target CONTINUE
     - firewall-cmd --permanent --policy hostToLibvirt --add-ingress-zone FedoraServer
     - firewall-cmd --permanent --policy hostToLibvirt --add-egress-zone libvirt
 
     # WE POSSIBLY DO NOT NEED THE LIBVIRT TO HOST POLICY. CURRENTLY REMOVED ON SYSTEM
     - firewall-cmd --permanent --new-policy libvirtToHost
-    #- firewall-cmd --permanent --policy libvirtToHost --set-target ACCEPT
-    - firewall-cmd --permanent --policy libvirtToHost --set-target CONTINUE
+    - firewall-cmd --permanent --policy libvirtToHost --set-target ACCEPT
+    #- firewall-cmd --permanent --policy libvirtToHost --set-target CONTINUE
     - firewall-cmd --permanent --policy libvirtToHost --add-ingress-zone libvirt
     - firewall-cmd --permanent --policy libvirtToHost --add-egress-zone FedoraServer
     - firewall-cmd --reload

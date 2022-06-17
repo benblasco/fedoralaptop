@@ -9,9 +9,6 @@
   become: yes
 
   vars:
-  # Explicitly telling Ansible to use Python3, because of the bug below:
-  #     # https://github.com/ansible/ansible/issues/54855
-  #- ansible_python_interpreter: /usr/bin/python3
 
   - rhel_version: "{{ ansible_facts['distribution_version'] }}"
       #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"
@@ -19,7 +16,7 @@
   tasks:
 
   # Only relevant for RHEL 8.0-8.5
-  - name: Enable the Ansible repository
+  - name: Enable the Ansible repository (RHEL <= 8.5)
     rhsm_repository:
       name: ansible-2.9-for-rhel-8-x86_64-rpms
       state: enabled
@@ -27,23 +24,18 @@
       #- ansible_facts['distribution_major_version'] | int <= "8.5"
       - ansible_facts['distribution_major_version'] is version('8.5', '<=')
 
-  - name: Install ansible
+  - name: Install Ansible (RHEL <= 8.5)
     yum:
       name: ansible
       state: present
     when:
-      #- ansible_facts['distribution_major_version'] != "9"
-      #- ansible_facts['distribution_major_version'] | int <= "8.5"
       - ansible_facts['distribution_major_version'] is version('8.5', '<=')
 
-  # Placeholder for install of ansible-core on RHEL 8.6+ and 9.0+
-  - name: Install ansible-core
+  - name: Install ansible-core (RHEL >= 8.6)
     yum:
       name: ansible-core
       state: present
     when:
-      #- ansible_facts['distribution_major_version'] == "9"
-      #- ansible_facts['distribution_major_version'] | int >= "8.6"
       - ansible_facts['distribution_major_version'] is version('8.6', '>=')
 
   - name: Install rhc required packages

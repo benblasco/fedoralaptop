@@ -14,6 +14,7 @@
     service: mdns
     permanent: yes
     state: enabled
+    immediate: yes
 
 - name: Permit traffic in FedoraServer Zone for ZeroConf
   ansible.posix.firewalld:
@@ -21,6 +22,7 @@
     port: 49999/tcp
     permanent: yes
     state: enabled
+    immediate: yes
 
 - name: Copy the LibreSpot binary
   copy:

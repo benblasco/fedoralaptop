@@ -68,6 +68,11 @@
 
   post_tasks:
 
+  - name: Install cloud utilities
+    dnf:
+      name: cloud-utils
+      state: present
+
   # Note: Ansible firewalld module does not natively support this, so using shell commands instead
   # https://github.com/ansible-collections/ansible.posix/issues/284
   # More reading about policies:

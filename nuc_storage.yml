@@ -1,7 +1,7 @@
 # ansible-galaxy install linux-system-roles.storage
 # then
 # cd ~/.ansible/roles/linux-system-roles.storage
-# ansible-galaxy collection install -vv -r meta/requirements.yml
+# ansible-galaxy collection install -vv -r meta/collection-requirements.yml
 ---
 - hosts: localhost
   connection: local

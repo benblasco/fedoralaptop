@@ -8,7 +8,7 @@ After=network.target sound.target
 [Service]
 Restart=always
 RestartSec=10
-ExecStart=/usr/local/bin/librespot --name=LibreSpot@{{ ansible_hostname }} --bitrate=320 --zeroconf-port=49999 --backend=alsa --device=hdmi:CARD=PCH,DEV=0 --initial-volume=75 -v
+ExecStart=/usr/local/bin/librespot --name=LibreSpot@{{ ansible_hostname }} --bitrate=320 --zeroconf-port=49999 --backend=alsa --device=hdmi:CARD=PCH,DEV=0 --initial-volume=100 -v
 
 [Install]
 WantedBy=default.target

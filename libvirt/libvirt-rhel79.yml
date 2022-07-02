@@ -9,7 +9,7 @@
   roles:
     - role: stackhpc.libvirt-vm
       libvirt_vms:
-        - state: absent
+        - state: present
           name: 'bblasco-rhel79'
           memory_mb: 4096
           vcpus: 2

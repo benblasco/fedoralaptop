@@ -1,4 +1,3 @@
-#
 # Instructions based on the following doc:
 # https://access.redhat.com/documentation/en-us/red_hat_insights/2021/html-single/red_hat_connector_configuration_guide/index#proc_rhc-setting-up-rhcassembly_rhc-configuring
 #
@@ -32,27 +31,22 @@
 #            state: present
 #      when:
 #        - ansible_facts['distribution_version'] is version('8.5', '<=')
-  
-    - name: Install ansible-core (RHEL >= 8.6)
-      dnf:
-        name: ansible-core
-        state: present
+
+    - name: Install ansible-core and RHC, then connect (RHEL >= 8.6)
+      block:
+        - name: Install rhc required packages
+          dnf:
+            name:
+              - ansible-core
+              - rhc-worker-playbook
+              - rhc
+            state: present
+
+        - name: Enable Red Hat Connector
+          command: rhc connect
+          #register: rhc_result
       when:
         - ansible_facts['distribution_version'] is version('8.6', '>=')
-  
-    - name: Install rhc required packages
-      dnf:
-        name:
-          - rhc-worker-playbook
-          - rhc
-        state: present
-      #loop:
-        #- rhc-worker-playbook
-        #- rhc
-  
-    - name: Enable Red Hat Connector
-      command: rhc connect
-      register: rhc_result
   
 #    - name: Show RHC result
 #      debug:

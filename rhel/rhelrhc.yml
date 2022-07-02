@@ -1,4 +1,7 @@
 # Instructions based on the following doc:
+# NEW:
+# https://access.redhat.com/documentation/en-us/red_hat_insights/2022/html-single/red_hat_connector_configuration_guide/index
+# OLD:
 # https://access.redhat.com/documentation/en-us/red_hat_insights/2021/html-single/red_hat_connector_configuration_guide/index#proc_rhc-setting-up-rhcassembly_rhc-configuring
 #
 - hosts: all

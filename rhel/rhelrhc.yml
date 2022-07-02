@@ -2,56 +2,53 @@
 # Instructions based on the following doc:
 # https://access.redhat.com/documentation/en-us/red_hat_insights/2021/html-single/red_hat_connector_configuration_guide/index#proc_rhc-setting-up-rhcassembly_rhc-configuring
 #
-- hosts: rhelvm
+- hosts: all
 
   name: Install and configure the RHC tool
   gather_facts: yes
   become: yes
 
-  vars:
-
-  - rhel_version: "{{ ansible_facts['distribution_version'] }}"
-      #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"
-
   tasks:
+    - name: Print the RHEL version
+      debug:
+        var: ansible_facts['distribution_version']
 
-  # Only relevant for RHEL 8.0-8.5
-  - name: Enable the Ansible repository (RHEL <= 8.5)
-    rhsm_repository:
-      name: ansible-2.9-for-rhel-8-x86_64-rpms
-      state: enabled
-    when:
-      #- ansible_facts['distribution_major_version'] | int <= "8.5"
-      - ansible_facts['distribution_major_version'] is version('8.5', '<=')
-
-  - name: Install Ansible (RHEL <= 8.5)
-    yum:
-      name: ansible
-      state: present
-    when:
-      - ansible_facts['distribution_major_version'] is version('8.5', '<=')
-
-  - name: Install ansible-core (RHEL >= 8.6)
-    yum:
-      name: ansible-core
-      state: present
-    when:
-      - ansible_facts['distribution_major_version'] is version('8.6', '>=')
-
-  - name: Install rhc required packages
-    yum:
-      name: "{{ item }}"
-      state: present
-    loop:
-      - rhc-worker-playbook
-      - rhc
-
-  - name: Enable Red Hat Connector
-    command: rhc connect
-    register: rhc_result
-
-  - name: Show RHC result
-    debug:
-      var: rhc_result
-    tags:
-    - debug
+    # Only relevant for RHEL 8.0-8.5
+    - name: Enable repo and install Ansible (RHEL <=8.5)
+      block:
+        - name: Enable the Ansible repository (RHEL <= 8.5)
+          rhsm_repository:
+            name: ansible-2.9-for-rhel-8-x86_64-rpms
+            state: enabled
+  
+        - name: Install Ansible (RHEL <= 8.5)
+          yum:
+            name: ansible
+            state: present
+      when:
+        - ansible_facts['distribution_version'] is version('8.5', '<=')
+  
+    - name: Install ansible-core (RHEL >= 8.6)
+      yum:
+        name: ansible-core
+        state: present
+      when:
+        - ansible_facts['distribution_version'] is version('8.6', '>=')
+  
+    - name: Install rhc required packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - rhc-worker-playbook
+        - rhc
+  
+    - name: Enable Red Hat Connector
+      command: rhc connect
+      register: rhc_result
+  
+    - name: Show RHC result
+      debug:
+        var: rhc_result
+      tags:
+      - debug

@@ -19,19 +19,19 @@
         - ansible_facts['distribution_version'] is version('8.5', '<=')
 
     # Only relevant for RHEL 8.0-8.5
-    - name: Enable repo and install Ansible (RHEL <=8.5)
-      block:
-        - name: Enable the Ansible repository (RHEL <= 8.5)
-          rhsm_repository:
-            name: ansible-2.9-for-rhel-8-x86_64-rpms
-            state: enabled
-  
-        - name: Install Ansible (RHEL <= 8.5)
-          dnf:
-            name: ansible
-            state: present
-      when:
-        - ansible_facts['distribution_version'] is version('8.5', '<=')
+#    - name: Enable repo and install Ansible (RHEL <=8.5)
+#      block:
+#        - name: Enable the Ansible repository (RHEL <= 8.5)
+#          rhsm_repository:
+#            name: ansible-2.9-for-rhel-8-x86_64-rpms
+#            state: enabled
+#  
+#        - name: Install Ansible (RHEL <= 8.5)
+#          dnf:
+#            name: ansible
+#            state: present
+#      when:
+#        - ansible_facts['distribution_version'] is version('8.5', '<=')
   
     - name: Install ansible-core (RHEL >= 8.6)
       dnf:
@@ -54,8 +54,8 @@
       command: rhc connect
       register: rhc_result
   
-    - name: Show RHC result
-      debug:
-        var: rhc_result
-      tags:
-      - debug
+#    - name: Show RHC result
+#      debug:
+#        var: rhc_result
+#      tags:
+#      - debug

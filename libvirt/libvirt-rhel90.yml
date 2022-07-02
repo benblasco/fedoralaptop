@@ -10,11 +10,11 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
         - state: present
-          name: 'bblasco-rhel90'
+          name: 'rhel90'
           memory_mb: 2048
           vcpus: 1
           volumes:
-            - name: 'bblasco-rhel90'
+            - name: 'rhel90'
               device: 'disk'
               #type: 'file'
               format: 'qcow2'
@@ -28,3 +28,4 @@
               image: '/var/lib/libvirt/images/generic-seed.qcow2'
           interfaces:
             - network: 'vm-network-routed'
+          autostart: no

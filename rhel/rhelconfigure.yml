@@ -1,6 +1,6 @@
 # Pre-requisite: ansible-galaxy collection install community.libvirt
 #
-- hosts: rhelvm
+- hosts: all
 
   name: Register RHEL VMs and install Insights/related
   gather_facts: yes
@@ -27,6 +27,7 @@
       "8.3": "scap-security-guide-0.1.50-14.el8.noarch"
       "8.4": "scap-security-guide-0.1.57-3.el8_4.noarch"
       "8.5": "scap-security-guide-0.1.57-5.el8.noarch"
+      "8.6": "scap-security-guide-0.1.60-9.el8_6.noarch"
       "7.9": "scap-security-guide-0.1.57-6.el7_9.noarch"
       "9.0": "scap-security-guide-0.1.60-6.el9_0.noarch"
 

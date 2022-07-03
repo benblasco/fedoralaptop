@@ -1,0 +1,65 @@
+---
+- hosts: all
+
+  name: Create some storage and handle errors
+  gather_facts: yes
+  become: yes
+
+  vars:
+
+
+  tasks:
+    - name: Show all the hostvars
+      debug:
+        var: hostvars[ansible_hostname]['ansible_default_ipv4']['address']
+
+#    - name: Install LVM tools
+#      dnf:
+#        name: lvm2
+#        state: present
+#  
+    - name: Create a volume group
+      lvg:
+        #state: absent
+        vg: vg_test
+        pvs: /dev/vdb
+
+    - name: Create a logical volume and rescue if we fail
+      block:
+        - name: Create a logical volume of 1.5G
+          lvol:
+            vg: vg_test
+            lv: lv_test
+            size: 0.5G
+          register: lvol_results
+        - name: Create a ext4 filesystem
+          filesystem:
+            fstype: ext4
+            dev: /dev/mapper/vg_test-lv_test
+        - name: Create the mount point
+          file:
+            path: /mnt/lv_test
+            state: directory
+            owner: root
+            group: root
+            mode: '0755'
+            recurse: yes
+        - name: Mount the filesystem
+          mount: 
+            path: /mnt/lv_test
+            src: /dev/mapper/vg_test-lv_test
+            fstype: ext4
+            state: mounted
+      
+      rescue:
+        - name: Print when errors
+          ansible.builtin.debug:
+            msg: 'I caught an error, can do stuff here to fix it'
+        - name: Print error message
+          ansible.builtin.debug:
+            msg: 'Not enough disk space available to create partition'
+            #var: lvol_results.err
+          when: "'insufficient' in lvol_results.err"
+
+
+        

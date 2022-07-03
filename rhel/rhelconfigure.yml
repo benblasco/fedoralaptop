@@ -74,24 +74,22 @@
 
   - name: Install some useful packages
     yum:
-      name: "{{ item }}"
+      name:
+        - bash-completion
+        - vim
+        - tmux
+        - git
       state: present
-    loop:
-      - bash-completion
-      - vim
-      - tmux
-      - git
 
   - name: Install Insights-related packages
     yum:
       name: "{{ item }}"
+        - insights-client
+        # Note that this exact format is needed to dereference rhel_version variable
+        # Cannot use scap_security_guide_package.rhel_version notation
+        - "{{ scap_security_guide_package[ rhel_version ] }}"
+        - openscap-scanner
       state: present
-    loop:
-      - insights-client
-      # Note that this exact format is needed to dereference rhel_version variable
-      # Cannot use scap_security_guide_package.rhel_version notation
-      - "{{ scap_security_guide_package[ rhel_version ] }}"
-      - openscap-scanner
     tags:
       - insights
 

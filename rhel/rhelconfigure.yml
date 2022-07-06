@@ -83,7 +83,7 @@
 
   - name: Install Insights-related packages
     yum:
-      name: "{{ item }}"
+      name:
         - insights-client
         # Note that this exact format is needed to dereference rhel_version variable
         # Cannot use scap_security_guide_package.rhel_version notation

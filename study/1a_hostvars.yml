@@ -1,0 +1,22 @@
+---
+- name: Doing some stuff selectively with host_vars
+  hosts: all
+
+  gather_facts: yes
+
+  vars:
+
+  tasks:
+    - name: Print the IP address for the load balancer only
+      debug:
+        var: hostvars[ansible_hostname]['ansible_default_ipv4']['address']
+        #var: groups
+      when: "'balancer' in group_names"
+
+    - name: Do multiple things and use other host's variables for it
+      block:
+        - name: Print something about web servers for the loadbalancer
+          debug:
+            msg: "The MAC for {{ hostvars[item]['ansible_hostname'] }} is {{ hostvars[item]['ansible_eth0']['macaddress'] }}"
+          loop: "{{ groups['webserver'] }}"
+      when: "'balancer' in group_names"

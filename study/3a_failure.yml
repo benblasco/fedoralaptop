@@ -1,0 +1,38 @@
+---
+- name: Learn to deal with failure
+  hosts: all
+
+  become: yes
+
+  gather_facts: yes
+
+  vars:
+
+  tasks:
+#    - name: Print the IP address for the load balancer only
+#      debug:
+#        var: hostvars[ansible_hostname]['ansible_default_ipv4']['address']
+#        #var: groups
+#      when: "'balancer' in group_names"
+#
+    - name: Try to install a package that doesn't exist and handle the error
+      block:
+        - name: Install a package called maggie
+          dnf:
+            name: maggie
+            state: latest
+          register: dnf_result
+      rescue:
+        - name: Print the whole reason for failure
+          debug:
+            var: dnf_result
+        - name: Print the list of failures if "No package"
+          debug:
+            var: dnf_result['failures']
+          when: "'No package' in dnf_result['failures'][0]"
+        - name: Print the failure message if "Failed to install"
+          debug:
+            var: dnf_result['msg']
+          when: "'Failed to install' in dnf_result['msg']"
+          #when: dnf_result['failures'] is search("No package")
+      when: "'balancer' in group_names"

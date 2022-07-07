@@ -10,7 +10,7 @@
 
   vars:
 
-    libvirt_domain: nuc.local
+    libvirt_domain: nuc.blasco.id.au
     libvirt_ip: 192.168.3.254
     libvirt_netmask: 255.255.255.0
     libvirt_dhcp_start: 192.168.3.100

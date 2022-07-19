@@ -1,8 +1,4 @@
 {
-  "logging": {
-    "active": true,
-    "maxSize": 500
-  },
   "k20d21508277536715": {
     "active": true,
     "title": "Default",
@@ -28,7 +24,7 @@
     "address": "localhost",
     "port": 1337,
     "proxyDNS": true,
-    "active": false,
+    "active": true,
     "whitePatterns": [
       {
         "title": "all URLs",
@@ -39,13 +35,13 @@
       }
     ],
     "blackPatterns": [],
-    "index": 0
+    "index": 2
   },
   "j73j0p1654153908542": {
     "type": 3,
     "color": "#66cc66",
     "title": "nuc@home for openshift local",
-    "active": false,
+    "active": true,
     "address": "localhost",
     "port": 1338,
     "proxyDNS": true,
@@ -53,19 +49,23 @@
     "password": "",
     "whitePatterns": [
       {
-        "title": "all URLs",
-        "active": true,
-        "pattern": "*",
+        "title": "all URLsOpenShift Local",
+        "pattern": "*apps-crc.testing*",
         "type": 1,
-        "protocols": 1
+        "protocols": 1,
+        "active": true
       }
     ],
     "blackPatterns": [],
     "pacURL": "",
-    "index": -1
+    "index": 0
   },
-  "mode": "j73j0p1654153908542",
-  "browserVersion": "100.0.2",
+  "logging": {
+    "active": true,
+    "maxSize": 500
+  },
+  "mode": "patterns",
+  "browserVersion": "102.0",
   "foxyProxyVersion": "7.5.1",
   "foxyProxyEdition": "standard",
   "sync": true

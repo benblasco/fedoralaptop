@@ -1,6 +1,6 @@
 # Pre-requisite: ansible-galaxy collection install community.libvirt
 #
-- hosts: rhelvm
+- hosts: all
 
   name: Disconnect Insights and Unegister RHEL VMs
   gather_facts: yes

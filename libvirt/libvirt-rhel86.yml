@@ -10,17 +10,17 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
         - state: present
-          name: 'bblasco-rhel79'
+          name: 'rhel86'
           memory_mb: 4096
-          vcpus: 2
+          vcpus: 1
           volumes:
-            - name: 'bblasco-rhel79'
+            - name: 'rhel86'
               device: 'disk'
               #type: 'file'
               format: 'qcow2'
               capacity: '20GB'
               pool: 'vm-pool'
-              image: '/var/lib/libvirt/images/rhel-server-7.9-x86_64-kvm.qcow2'
+              image: '/var/lib/libvirt/images/rhel-8.6-x86_64-kvm.qcow2'
             - name: 'generic-seed.qcow2'
               type: 'file'
               device: 'cdrom'
@@ -28,3 +28,4 @@
               image: '/var/lib/libvirt/images/generic-seed.qcow2'
           interfaces:
             - network: 'vm-network-routed'
+          autostart: no

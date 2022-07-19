@@ -34,6 +34,8 @@
     - lm_sensors-sensord
     # Packages required to be a Jenkins node
     - java-11-openjdk
+    # Provides "needs-restarting" utility.  "needs-restarting -r" is a handy command
+    - dnf-utils
 
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

@@ -1,11 +1,16 @@
 [rhelvm]
-bblasco82 ansible_host=192.168.3.82
-bblasco84 ansible_host=192.168.3.184
-bblasco85b ansible_host=192.168.3.85
+
+[rhelrhc]
+rhel85.blasco.id.au ansible_host=192.168.6.115
+rhel86.blasco.id.au ansible_host=192.168.6.181
+rhel90.blasco.id.au ansible_host=192.168.6.145
 
 [azure]
-bblasco-azure-cis1 ansible_host=52.150.9.76
-bblasco-azure-cis2 ansible_host=20.119.71.50
+#bblasco-azure-cis1 ansible_host=52.150.9.76
+#bblasco-azure-cis2 ansible_host=20.119.71.50
+
+[all:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 [azure:vars]
 ansible_user=azureuser

@@ -10,7 +10,7 @@
 
   vars:
     vg_name: fedora_micro
-    libvirt_domain: micro.local
+    libvirt_domain: micro.blasco.id.au
     libvirt_ip: 192.168.6.254
     libvirt_netmask: 255.255.255.0
     libvirt_dhcp_start: 192.168.6.100

@@ -1,0 +1,32 @@
+# Pre-requisite: ansible-galaxy collection install community.libvirt
+#
+- hosts: all
+
+  name: Play around with hostvars
+  gather_facts: yes
+  #become: yes
+
+  vars:
+
+  tasks:
+  
+    - name: Show all the hostvars
+      debug:
+        var: hostvars[ansible_hostname]['ansible_default_ipv4']['address']
+
+    - name: Show the IP address
+      debug:
+        #var: hostvars[ansible_hostname]['ansible_default_ipv4']['gateway']
+        var: hostvars[ansible_hostname]['ansible_distribution_version']
+
+    - name: Build hosts file for balancers using data from webservers
+      become: yes
+      lineinfile:
+        dest: /etc/hosts
+        regexp: '.*{{ item }}$'
+        #line: '{{ hostvars[item].ip_address }} {{item}}'
+        line: '{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}'
+        state: present
+        backup: yes
+      loop: '{{ groups["webserver"] }}'
+      when: "'balancer' in group_names"

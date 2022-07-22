@@ -9,7 +9,6 @@
   become: yes
 
   vars:
-    vg_name: fedora_micro
     libvirt_domain: micro.blasco.id.au
     libvirt_ip: 192.168.6.254
     libvirt_netmask: 255.255.255.0
@@ -18,30 +17,8 @@
 
   pre_tasks:
   
-  - name: Create the logical volume on disk for VMs
-    lvol:
-      vg: "{{ vg_name }}"
-      lv: vm_pool
-      size: 100G
-    tags:
-    - lvm
 
-  - name: Create the filesystem for VMs
-    filesystem:
-      fstype: xfs
-      dev: /dev/fedora_micro/vm_pool
-    tags:
-    - lvm
 
-  - name: Mount the filesystem for VMs
-    mount:
-      path: /var/lib/libvirt/vm-pool
-      src: /dev/fedora_micro/vm_pool
-      fstype: xfs
-      state: mounted
-      backup: yes
-    tags:
-    - lvm
 
   roles:
     - role: stackhpc.libvirt-host
@@ -63,12 +40,6 @@
           mode: 755
           owner: qemu
           group: qemu
-            #- name: vm-pool-lvm
-            #type: logical
-            #source: fedora_micro
-            #target: /dev/fedora_micro
-            #pvs:
-            #- /dev/sdb3
 
   post_tasks:
 

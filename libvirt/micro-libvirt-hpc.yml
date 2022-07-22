@@ -1,0 +1,104 @@
+# ansible-galaxy install stackhpc.libvirt-host
+# Read: https://galaxy.ansible.com/stackhpc/libvirt-host
+# Read: https://github.com/stackhpc/ansible-role-libvirt-host
+- hosts: localhost
+  connection: local
+
+  name: Ensure that Libvirt is configured
+  
+  become: yes
+
+  vars:
+
+    libvirt_domain: micro.blasco.id.au
+    libvirt_ip: 192.168.6.254
+    libvirt_netmask: 255.255.255.0
+    libvirt_dhcp_start: 192.168.6.100
+    libvirt_dhcp_end: 192.168.6.200
+
+  pre_tasks:
+  
+   - name: Override the OS version so the role works
+     ansible.utils.update_fact:
+       updates:
+         - path: ansible_facts.os_family
+           value: RedHat
+         - path: ansible_facts.distribution
+           value: RedHat
+         - path: ansible_facts.distribution_major_version
+           value: 8
+         - path: ansible_facts.distribution_version
+           value: 8
+     tags:
+     - os
+
+   - name: Check the OS version was overridden correctly
+     debug:
+       msg: Family "{{ ansible_facts.os_family }}", distro "{{ ansible_facts.distribution }}", major ver "{{ ansible_facts.distribution_major_version }}"
+       #msg: major ver "{{ ansible_facts.distribution_major_version }}"
+       #msg: distro "{{ ansible_facts.distribution }}", major ver "{{ ansible_facts.distribution_major_version }}"
+     tags:
+     - os
+
+   - name: Install genisoimage package so we can create new qcow seed images
+     dnf:
+       name: genisoimage
+       state: latest
+
+  roles:
+    - role: stackhpc.libvirt-host
+      become: no
+      libvirt_host_networks:
+        - name: vm-network-routed
+          mode: route
+          bridge: virbr1
+          domain: "{{ libvirt_domain }}"
+          ip: "{{ libvirt_ip }}"
+          netmask: "{{ libvirt_netmask }}"
+          dhcp_start: "{{ libvirt_dhcp_start }}"
+          dhcp_end: "{{ libvirt_dhcp_end }}"
+      libvirt_host_pools:
+        - name: vm-pool
+          type: dir
+          #capacity: 1024
+          path: /var/lib/libvirt/vm-pool
+          mode: 755
+          owner: qemu
+          group: qemu
+
+  post_tasks:
+
+  - name: Install cloud utilities
+    dnf:
+      name: cloud-utils
+      state: present
+
+  # Note: Ansible firewalld module does not natively support this, so using shell commands instead
+  # https://github.com/ansible-collections/ansible.posix/issues/284
+  # More reading about policies:
+  # https://firewalld.org/2020/09/policy-objects-introduction
+  # https://firewalld.org/2020/09/policy-objects-filtering-container-and-vm-traffic
+  # 20220602 I expect the whole of this to be redundant at some point soon. Read:
+  # https://github.com/firewalld/firewalld.github.io/pull/14#issuecomment-1142540613
+
+  - name: Add Firewalld policy objects to route between zones
+    shell: $i
+    loop:
+    - firewall-cmd --permanent --new-policy hostToLibvirt
+    - firewall-cmd --permanent --policy hostToLibvirt --set-target ACCEPT
+    #- firewall-cmd --permanent --policy hostToLibvirt --set-target CONTINUE
+    - firewall-cmd --permanent --policy hostToLibvirt --add-ingress-zone FedoraServer
+    - firewall-cmd --permanent --policy hostToLibvirt --add-egress-zone libvirt
+
+    # WE POSSIBLY DO NOT NEED THE LIBVIRT TO HOST POLICY. CURRENTLY REMOVED ON SYSTEM
+    - firewall-cmd --permanent --new-policy libvirtToHost
+    - firewall-cmd --permanent --policy libvirtToHost --set-target ACCEPT
+    #- firewall-cmd --permanent --policy libvirtToHost --set-target CONTINUE
+    - firewall-cmd --permanent --policy libvirtToHost --add-ingress-zone libvirt
+    - firewall-cmd --permanent --policy libvirtToHost --add-egress-zone FedoraServer
+    - firewall-cmd --reload
+    # FYI other helpful commands
+    # firewall-cmd --list-all-policies
+    # firewall-cmd --info-policy libvirtToHost
+    tags:
+    - firewall

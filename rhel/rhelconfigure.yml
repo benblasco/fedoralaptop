@@ -1,10 +1,14 @@
 # Pre-requisite: ansible-galaxy collection install community.libvirt
+# ansible-playbook rhelconfigure.yml --vault-password-file secret.txt 
 #
 - hosts: all
 
   name: Register RHEL VMs and install Insights/related
   gather_facts: yes
   become: yes
+
+  vars_files:
+    - vars/rhn_credential.yml
 
   vars:
   # Explicitly telling Ansible to use Python3, because of the bug below:

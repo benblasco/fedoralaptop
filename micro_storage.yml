@@ -32,6 +32,25 @@
     - linux-system-roles.storage
 
   tasks:
+    - name: Create mount point for sg1 filesystem
+      file:
+        path: /mnt/sg1
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+      tags:
+        - nfs
+
+    - name: Mount sg1 filesystem from Cubox
+      mount:
+        src: cubox.lan:/srv/nfs4/sg1
+        path: /mnt/sg1
+        opts: x-systemd.after=network-online.target
+        state: mounted
+        fstype: nfs
+      tags:
+        - nfs
 
 # Fix the SELinux permissions for user container storage as per:
 # https://github.com/containers/podman/issues/12812

@@ -594,6 +594,26 @@
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature", value: "2700", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled", value: "true", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/color/night-light-last-coordinates", value: "'-37.837469239884811, 145.05206509999999'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/mic-mute", value: "@as [ 'Launch8' ]", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings", value: "@as [ '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/' ]", state: "present" }
+
+    # Note that custom keybindings below require double wrapped "'values'" even though other entries above do not
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'Launch Terminator'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'/usr/bin/terminator'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'Launch5'", state: "present" }
+
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name", value: "'Open Downloads Folder'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command", value: "'/usr/bin/nautilus --new-window /home/bblasco/Downloads'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding", value: "'Launch6'", state: "present" }
+
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name", value: "'Launch Spotify'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command", value: "'/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=spotify --file-forwarding com.spotify.Client @@u %U @@'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding", value: "'Launch7'", state: "present" }
+
+
+
+
+
   tags:
   - dconf
 

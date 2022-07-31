@@ -10,7 +10,8 @@
     #name: bblasco-fedora
     #name: { "ThinkPad Yoga 370": "bblasco_yoga370", "ThinkPad T470s": "bblasco_t470s" }[ansible_facts['product_version']] | default("bblasco_fedora")
     #name: "{{ {"ThinkPad Yoga 370": "bblasco_yoga370", "ThinkPad T470s": "bblasco_t470s" }[ansible_facts['product_version']] | default("bblasco_fedora") }}"
-    name: '{{ {"ThinkPad Yoga 370": "bblasco-yoga370", "ThinkPad T470s": "bblasco-t470s", "ThinkPad T490s": "bblasco-t490s" }[system_model] | default("bblasco-fedora") }}'
+    #name: '{{ {"ThinkPad Yoga 370": "bblasco-yoga370", "ThinkPad T470s": "bblasco-t470s", "ThinkPad T490s": "bblasco-t490s" }[system_model] | default("bblasco-fedora") }}'
+    name: '{{ {"ThinkPad Yoga 370": "bblasco-yoga370", "ThinkPad T470s": "bblasco-t470s", "ThinkPad T490s": "bblasco-t490s", "ThinkPad X1 Carbon Gen 9": "bblasco-x1" }[system_model] | default("bblasco-fedora") }}'
   tags: hostname
 
 #- name: ENABLE RHEL CSB REPO

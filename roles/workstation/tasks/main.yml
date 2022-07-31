@@ -481,30 +481,30 @@
   tags:
     - rsync
 
-- name: COPY WIFI INTERFACE FILES
-  copy:
-    src: "{{ item }}"
-    dest: "/etc/sysconfig/network-scripts/"
-    owner: root
-    group: root
-    mode: '0644'
-  with_fileglob:
-    - "files/wifi/ifcfg*"
-  tags:
-  - wifi
-
-- name: COPY ENCRYPTED WIFI KEY FILES
-  copy:
-    decrypt: yes
-    src: "{{ item }}"
-    dest: "/etc/sysconfig/network-scripts/"
-    owner: root
-    group: root
-    mode: '0600'
-  with_fileglob:
-    - "files/wifi/keys_encrypted/*"
-  tags:
-  - wifi
+#- name: COPY WIFI INTERFACE FILES
+#  copy:
+#    src: "{{ item }}"
+#    dest: "/etc/sysconfig/network-scripts/"
+#    owner: root
+#    group: root
+#    mode: '0644'
+#  with_fileglob:
+#    - "files/wifi/ifcfg*"
+#  tags:
+#  - wifi
+#
+#- name: COPY ENCRYPTED WIFI KEY FILES
+#  copy:
+#    decrypt: yes
+#    src: "{{ item }}"
+#    dest: "/etc/sysconfig/network-scripts/"
+#    owner: root
+#    group: root
+#    mode: '0600'
+#  with_fileglob:
+#    - "files/wifi/keys_encrypted/*"
+#  tags:
+#  - wifi
 
 - name: COPY AUTOFS MASTER MAPPING FILE
   copy:

@@ -15,13 +15,25 @@
 
   tasks:
 
-  - name: unregister the Insights Client
-    command: insights-client --unregister
-    tags:
-      - insights
+  - name: Unregister systems running RHEL <=8.5
+    block: 
+      - name: unregister the Insights Client
+        command: insights-client --unregister
+        tags:
+          - insights
+    
+      - name: Unregister the systems with subscription-manager
+        redhat_subscription:
+          state: absent
+        tags:
+          - subscription-manager
+    when:
+      - ansible_facts['distribution_version'] is version('8.5', '<=')
 
-  - name: Unregister the systems with subscription-manager
-    redhat_subscription:
-      state: absent
-    tags:
-      - subscription-manager
+  - name: Unregister systems running RHEL >8.5
+    block: 
+      - name: Disable Red Hat Connector
+        command: rhc disconnect
+        #register: rhc_result
+    when:
+      - ansible_facts['distribution_version'] is version('8.5', '>')

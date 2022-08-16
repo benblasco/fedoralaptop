@@ -34,7 +34,7 @@
             mount_point: "{{ mount_point_root_containers }}"
             state: present
           - name: crc
-            size: "50 GiB"
+            size: "100 GiB"
             fs_type: xfs
             mount_point: "{{ mount_point_crc }}"
             state: present

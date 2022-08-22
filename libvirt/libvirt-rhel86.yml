@@ -9,7 +9,7 @@
   roles:
     - role: stackhpc.libvirt-vm
       libvirt_vms:
-        - state: present
+        - state: absent
           name: 'rhel86'
           memory_mb: 4096
           vcpus: 1

@@ -1,9 +1,9 @@
 [webserver]
-bblasco-senna ansible_host=192.168.6.185
-bblasco-prost ansible_host=192.168.6.133
+bblasco-senna ansible_host=192.168.6.159
+bblasco-prost ansible_host=192.168.6.190
 
 [balancer]
-bblasco-alonso ansible_host=192.168.6.172
+bblasco-alonso ansible_host=192.168.6.141
 
 [all:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'

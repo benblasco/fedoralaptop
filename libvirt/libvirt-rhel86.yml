@@ -11,7 +11,7 @@
       libvirt_vms:
         - state: absent
           name: 'rhel86'
-          memory_mb: 4096
+          memory_mb: 2048
           vcpus: 1
           volumes:
             - name: 'rhel86'

@@ -111,6 +111,9 @@ Configure Joplin Notes
 - Change the default date format (Tools -> Options)
 - Switch default editor to vi mode (Tools -> Options -> General -> Show Advanced Settings -> Keyboard Mode: Vim)
 
+Install Todoist AppImage
+- https://todoist.com/help/articles/how-to-install-todoist-on-linux
+
 Configure Evernote (NixNote2)
 - Tools -> Sync, then log in to your account
 
@@ -133,10 +136,11 @@ MANUAL TASKS THAT MAY NOT BE POSSIBLE TO AUTOMATE
 
 - Change display position of second screen relative to laptop screen
 
-Configure SpiderOak backups
+OBSOLETE: Configure SpiderOak backups
 https://redhat.service-now.com/help?id=kb_article&sys_id=c09f0e372b66b8004c71dc0e59da15ff
 https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
 http://hdn.corp.redhat.com/rhel7-csb-stage/repoview/SpiderOakGroups.html
+Note: SpiderOak has been superseded by another tool whose name I have forgotten
 
 Connect to Wifi
 https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0001616

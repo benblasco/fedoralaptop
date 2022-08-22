@@ -18,6 +18,8 @@
 
   pre_tasks:
   
+   # Required for rudimentary Fedora 36 support as per:
+   # https://github.com/stackhpc/ansible-role-libvirt-host/issues/57
    - name: Override the OS version so the role works
      ansible.utils.update_fact:
        updates:

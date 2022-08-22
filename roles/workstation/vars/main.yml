@@ -55,6 +55,9 @@
     - vips
     #  AptX Bluetooth support
     - pipewire-codec-aptx
+    # Audio playback and recording
+    - audacity
+    - audacious
     
     # Packages retrieved from:
     # https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771

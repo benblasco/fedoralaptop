@@ -6,7 +6,7 @@ This repo shows you how to spin up Hashicorp vault in a container using podman i
 
 ## Reference instructions used to create this solution
 
-[](https://hub.docker.com/_/vault)
+[Vault at Docker Hub](https://hub.docker.com/_/vault)
 
 ## Assumed Knowledge
 
@@ -73,7 +73,8 @@ firewall-cmd --zone=FedoraServer --add-port=8200/tcp
 ```
 
 ## Access the Vault UI via your browser at:
-[](http://<IP of container host>:8200/)
+
+http://<IP of container host>:8200/
 Use the Root Token to log in
 
 ## Alternative method: Running the container in SERVER MODE aka the hard way

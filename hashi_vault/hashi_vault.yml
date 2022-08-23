@@ -1,0 +1,31 @@
+---
+# Test pulling a secret from Hashicorp vault
+# Pre-requisites:
+# - sudo dnf install -y python3-hvac (now covered by playbook)
+# - ansible-galaxy collection install community.hashi_vault
+#
+- hosts: localhost
+  connection: local
+
+  name: Learning all about hashicorp vault
+  gather_facts: no
+  #become: yes
+
+  vars:
+    vault_ip: "192.168.1.6"
+    vault_port: "8200"
+    # This is the root token
+    vault_token: "hvs.VqkfOJJxq81T733Vqh2Gw2Vl"
+
+  pre_tasks:
+    - name: Ensure the HashiCorp Vault API client for Python 3 is installed
+      become: yes
+      dnf:
+        name: python3-hvac
+        state: installed
+
+  tasks:
+    - name: Grab a secret from the vault
+      ansible.builtin.debug:
+        #msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=secret/data/bensecret token=hvs.VqkfOJJxq81T733Vqh2Gw2Vl url=http://192.168.1.6:8200') }}"
+        msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=secret/data/bensecret token=' + vault_token +' url=http://' + vault_ip + ':' + vault_port) }}"

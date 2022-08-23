@@ -67,15 +67,25 @@ Root Token: hvs.6uLmQoIEdRa54DqXEGXYcEGn
 Development mode should NOT be used in production installations!
 ```
 
-## You then need to allow port 8200 in the firewall of your host, e.g.
+## Open the firewall ports on the container host
+
+You then need to allow port 8200 in the firewall of your host, e.g.
 ```
 firewall-cmd --zone=FedoraServer --add-port=8200/tcp
 ```
 
-## Access the Vault UI via your browser at:
+## Open the Vault UI
+
+Access the Vault UI via your browser at:
 
 http://<IP of container host>:8200/
 Use the Root Token to log in
+
+## Add some keys
+
+Follow the instructions at: 
+
+[Tutorial: Your First Secret](https://learn.hashicorp.com/tutorials/vault/getting-started-first-secret)
 
 ## Alternative method: Running the container in SERVER MODE aka the hard way
 

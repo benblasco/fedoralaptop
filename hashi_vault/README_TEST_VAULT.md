@@ -10,7 +10,7 @@ The instructions below show you how to test pulling a secret from Hashicorp vaul
 
 ## Adding your secret to Vault via the GUI
 
-1. Navigate to the Vault URL: e.g. http://192.168.1.3:8200
+1. Navigate to the Vault URL: e.g. http://192.168.1.6:8200
 2. Sign in using your root token
 3. Navigate to the "secret" Secrets Engine (key/value secret storage)
 4. Create a new secret, e.g. Path = mynewsecret, Key = mynewsecret, Value = 5up3R53cr3t! 

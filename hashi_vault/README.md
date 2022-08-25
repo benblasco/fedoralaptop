@@ -2,7 +2,13 @@
 
 ## Introduction
 
-This repo shows you how to spin up Hashicorp vault in a container using podman in rootless mode
+This repo shows you how to spin up Hashicorp vault in a container using podman in rootless mode.
+
+## Assumed Knowledge
+
+- Linux (particularly Fedora, RHEL, and derivatives)
+- Containers
+- Podman (or Docker)
 
 ## How to deploy Hashicorp Vault in a container with Podman
 

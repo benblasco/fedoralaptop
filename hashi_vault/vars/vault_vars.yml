@@ -1,0 +1,6 @@
+---
+vault_ip: "192.168.1.6"
+vault_port: "8200"
+# This is the root token
+vault_token: "hvs.VqkfOJJxq81T733Vqh2Gw2Vl"
+secret_path: "secret/data/mynewsecret"

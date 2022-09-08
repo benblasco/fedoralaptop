@@ -114,6 +114,28 @@
       - insights
       - compliance
 
+  - name: Install ansible-core and RHC, then connect (RHEL >= 8.6)
+    block:
+      - name: Install rhc required packages
+        dnf:
+          name:
+            - ansible-core
+            - rhc-worker-playbook
+            - rhc
+          state: present
+
+      - name: Enable Red Hat Connector
+        command: rhc connect
+        register: rhc_result
+      - name: Show rhc result
+        debug:
+          var: rhc_result
+        tags:
+          - debug
+    when:
+      - ansible_facts['distribution_version'] is version('8.6', '>=')
+
+
   # You want to use subscription-manager syspurpose service-level --set Premium and similar for RHEL 8.6 and 9.x. The syspurpose commands are unified as a subcommand of subscription-manager going forward.
   # existing syntax is preserved though for RHEL 8 though deprecated.
 # - name: Set the system purpose

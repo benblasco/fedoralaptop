@@ -9,31 +9,12 @@
 
   vars_files:
     - vars/rhn_credential.yml
+    - vars/ssg_versions.yml
 
   vars:
   # Explicitly telling Ansible to use Python3, because of the bug below:
   #     # https://github.com/ansible/ansible/issues/54855
   #- ansible_python_interpreter: /usr/bin/python3
-
-  # Insights Compliance - Supported Configurations
-  # https://access.redhat.com/articles/6644131
-  #
-  # RHEL 8.0 SAP  scap-security-guide-0.1.42-11.el8
-  # RHEL 8.1 EUS  scap-security-guide-0.1.46-1.el8 and scap-security-guide-0.1.47-8.el8_1
-  # RHEL 8.2 (batch update) scap-security-guide-0.1.48-7.el8
-  # RHEL 8.3 scap-security-guide-0.1.50-14.el8
-  # RHEL 8.4 scap-security-guide-0.1.54-5.el8 and scap-security-guide-0.1.57-3.el8_4
-  # RHEL 8.5 scap-security-guide-0.1.57-5.el8
-  - scap_security_guide_package:
-      "8.0": "scap-security-guide-0.1.42-11.el8.noarch"
-      "8.1": "scap-security-guide-0.1.47-8.el8_1.noarch"
-      "8.2": "scap-security-guide-0.1.48-7.el8.noarch"
-      "8.3": "scap-security-guide-0.1.50-14.el8.noarch"
-      "8.4": "scap-security-guide-0.1.57-3.el8_4.noarch"
-      "8.5": "scap-security-guide-0.1.57-5.el8.noarch"
-      "8.6": "scap-security-guide-0.1.63-1.el8_6.noarch"
-      "7.9": "scap-security-guide-0.1.57-8.el7_9.noarch"
-      "9.0": "scap-security-guide-0.1.60-6.el9_0.noarch"
 
     rhel_version: "{{ ansible_facts['distribution_version'] }}"
       #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"

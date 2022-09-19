@@ -1,0 +1,1 @@
+/- /etc/autofs/auto.bblasco_backup uid=1000,gid=1000,--timeout=300,--ghost

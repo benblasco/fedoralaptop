@@ -1,0 +1,3 @@
+#/mnt/sg1 -rw,hard,soft,retries=3,rsize=8192,wsize=8192 cubox.lan:/srv/nfs4/sg1
+/mnt/sg1 -fstype=fuse,rw,allow_other,port=49152,IdentityFile=/home/bblasco/.ssh/id_rsa :sshfs\#eblaben@eraser215.ddns.net\:/mnt/sg1
+#/mnt/sg1 rw,port=49152,IdentityFile=/home/bblasco/.ssh/id_rsa :sshfs\#eblaben@eraser215.ddns.net\:/mnt/sg1

@@ -39,7 +39,7 @@
       - hostname
 
   - name: Set the system timezone correctly
-    timezone:
+    community.general.timezone:
       name: Australia/Melbourne
     tags:
       - timezone

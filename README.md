@@ -121,6 +121,7 @@ Configure Dropbox
 - Run Dropbox and follow the prompts
 - Disable annoying notifications via the following commands as regular user:
 https://discourse.joplinapp.org/t/joplin-i-love-you-but-this-is-driving-me-nuts-dropbox/10842/13
+https://help.dropbox.com/sync/ignored-files
 ```
 $ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/apps/Joplin/.sync/
 $ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/apps/Joplin/locks/

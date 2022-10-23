@@ -39,11 +39,11 @@
     tags:
       - hostname
 
-  - name: Set the system timezone correctly
-    community.general.timezone:
-      name: Australia/Melbourne
-    tags:
-      - timezone
+  #- name: Set the system timezone correctly
+    #community.general.timezone:
+      #name: Australia/Melbourne
+    #tags:
+      #- timezone
 
   - name: Register the systems with subscription-manager
     redhat_subscription:

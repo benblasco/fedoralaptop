@@ -2,7 +2,9 @@
 # Pre-requisite: ansible-galaxy collection install community.libvirt
 # ansible-playbook rhelconfigure.yml --vault-password-file secret.txt 
 #
-- name: Register RHEL VMs and install Insights/related
+- hosts: all
+
+  name: Register RHEL VMs and install Insights/related
   gather_facts: yes
   become: yes
 

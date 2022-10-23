@@ -8,9 +8,9 @@
   gather_facts: yes
   become: yes
 
-  #vars_files:
+  vars_files:
     #- vars/rhn_credential.yml
-    #- vars/ssg_versions.yml
+    - vars/ssg_versions.yml
 
   vars:
   # Explicitly telling Ansible to use Python3, because of the bug below:

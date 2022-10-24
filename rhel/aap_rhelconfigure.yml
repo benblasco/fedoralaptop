@@ -9,7 +9,7 @@
   become: yes
 
   vars_files:
-    #- vars/rhn_credential.yml
+    - vars/rhn_credential.yml
     - vars/ssg_versions.yml
 
   vars:
@@ -39,7 +39,7 @@
     tags:
       - hostname
 
-  #- name: Set the system timezone correctly
+  #- Name: Set the system timezone correctly
     #community.general.timezone:
       #name: Australia/Melbourne
     #tags:

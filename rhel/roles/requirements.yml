@@ -1,5 +1,4 @@
 ---
-roles:
-  # Shane's role to install and configure fapolicyd 
-  # with appropriate application allowlist
-  - src: shaneboulden.fapolicyd
+# Shane's role to install and configure fapolicyd 
+# with appropriate application allowlist
+- src: shaneboulden.fapolicyd

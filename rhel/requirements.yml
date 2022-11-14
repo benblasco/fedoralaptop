@@ -9,4 +9,8 @@
 # ansible-galaxy collection install -r requirements.yml -p ./ will only install collections."
 
 collections:
-- community.general
+  - community.general
+
+roles:
+  - src: shaneboulden.fapolicyd
+

@@ -136,6 +136,7 @@
 
     flatpak_apps:
     - com.spotify.Client
+    - org.signal.Signal
     #- com.obsproject.Studio
 
     remove_packages:

@@ -10,6 +10,7 @@
 
 collections:
   - community.general
+  - redhatinsights.insights
 
 roles:
   - src: shaneboulden.fapolicyd

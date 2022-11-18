@@ -306,27 +306,29 @@
   tags:
   - flatpak
 
+# DEPRECATED 2022-11-18
 # Note we may be able to make it idempotent with the solution here:
 # https://stackoverflow.com/questions/42651026/ansible-dnf-module-enable-fedora-copr-repository
-- name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
-  command: "dnf copr enable -y {{ item }}"
-  #command: "dnf copr enable -y luminoso/Signal-Desktop"
-  loop: "{{ copr_repos }}"
-  tags:
-  - copr
+#- name: ENABLE COPR REPOS DUE TO LIMITATION OF DNF MODULE
+#  command: "dnf copr enable -y {{ item }}"
+#  #command: "dnf copr enable -y luminoso/Signal-Desktop"
+#  loop: "{{ copr_repos }}"
+#  tags:
+#  - copr
 
+# DEPRECATED 2022-11-18
 # Install Signal Desktop from COPR repo
 # https://copr.fedorainfracloud.org/coprs/luminoso/Signal-Desktop/
-- name: INSTALL SIGNAL DESKTOP FROM COPR REPO
-  dnf:
-    name: signal-desktop
-    #enablerepo: luminoso/Signal-Desktop
-    state: latest
-  tags:
-  - copr
-  - signal
+#- name: INSTALL SIGNAL DESKTOP FROM COPR REPO
+#  dnf:
+#    name: signal-desktop
+#    #enablerepo: luminoso/Signal-Desktop
+#    state: latest
+#  tags:
+#  - copr
+#  - signal
 
-# Install Joplin notes from COPR repo
+## Install Joplin notes from COPR repo
 # Copr repo for joplin owned by taw
 # https://copr.fedorainfracloud.org/coprs/taw/joplin/
 - name: INSTALL JOPLIN NOTES FROM COPR REPO

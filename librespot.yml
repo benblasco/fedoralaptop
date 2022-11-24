@@ -1,8 +1,10 @@
 ---
+# Note: This role is dependent upon the build of librepot as per:
+# https://github.com/benblasco/librespot-fedora-buildah
 - hosts: localhost
   connection: local
 
-  name: PERFORM POST BUILD INSTALL/CONFIG OF INTEL NUC SERVER
+  name: Install Librespot after jenkins build
   gather_facts: yes
   become: yes
 

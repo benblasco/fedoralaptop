@@ -27,7 +27,7 @@
 - name: Copy the LibreSpot binary
   copy:
     remote_src: yes
-    src: /home/bblasco/jenkins/workspace/librespot-fedora-buildah_main/librespot
+    src: /home/bblasco/jenkins-agent/workspace/librespot-fedora-buildah_main/librespot
     dest: /usr/local/bin/librespot
     owner: root
     group: root

@@ -210,7 +210,8 @@
 - name: ADD ZOOM GPG KEY
   rpm_key:
     state: present
-    key: https://us04web.zoom.us/linux/download/pubkey
+    #key: https://us04web.zoom.us/linux/download/pubkey
+    key: https://us04web.zoom.us/linux/download/pubkey?version=5-12-6
   tags:
   - zoom
 

@@ -1,0 +1,89 @@
+# ansible-galaxy install linux-system-roles.storage
+# then
+# cd ~/.ansible/roles/linux-system-roles.storage
+# ansible-galaxy collection install -vv -r meta/collection-requirements.yml
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    #ansible_python_interpreter: /usr/bin/python3
+
+    mount_point_user_containers: /mnt/containers
+    mount_point_root_containers: /var/lib/containers
+    mount_point_crc: /home/bblasco/.crc
+
+    storage_pools:
+      - name: fedora_opti
+        disks:
+          - sda3
+        volumes:
+          - name: vm_pool
+            size: "30 GiB"
+            fs_type: xfs
+            mount_point: /var/lib/libvirt/vm-pool
+            state: present
+          - name: user_containers
+            size: "20 GiB"
+            fs_type: xfs
+            mount_point: "{{ mount_point_user_containers }}"
+            state: present
+          - name: root_containers
+            size: "20 GiB"
+            fs_type: xfs
+            mount_point: "{{ mount_point_root_containers }}"
+            state: present
+
+  roles:
+    - linux-system-roles.storage
+
+  tasks:
+    - name: What's the user containers directory?
+      debug:
+        var: mount_point_user_containers
+
+    - name: Configure storage directory for rootless containers
+      block:
+        - name: Set correct directory ownership/permissions for rootless container mount point
+          file:
+            path: "{{ mount_point_user_containers }}"
+            state: directory
+            owner: root
+            group: root
+            mode: '0777'
+
+        # Fix the SELinux permissions for user container storage as per:
+        # https://github.com/containers/podman/issues/12812
+        # https://github.com/containers/podman/issues/3234
+        # $ sudo semanage fcontext -a -e $HOME/.local/share/containers /mnt/containers
+        # $ restorecon -R -v /mnt
+        - name: Allow users to modify files in their local container storage directories
+          community.general.sefcontext:
+            #target: '/mnt/containers(/.*)?'
+            #target: '/mnt/containers'
+            target: "{{ mount_point_user_containers }}"
+            # Trying to set seuser is redundant when using SELinux targeted policy
+            seuser: unconfined_u
+            setype: data_home_t
+            state: present
+
+        - name: Apply new SELinux file context to filesystem
+          #ansible.builtin.command: restorecon -irv /mnt/containers
+          ansible.builtin.command: restorecon -iv {{ mount_point_user_containers }}
+
+        # Edit /etc/containers.conf to ensure rootless containers are stored in correct location
+        # OLD: # rootless_storage_path = "$HOME/.local/share/containers/storage"
+        # NEW: rootless_storage_path = "/mnt/containers/$USER/storage"
+        - name: Ensure that rootless container storage is in the correct directory
+          lineinfile:
+            path: /usr/share/containers/storage.conf
+            regexp: '^rootless_storage_path'
+            insertafter: '^# rootless_storage_path'
+            line: rootless_storage_path = "{{ mount_point_user_containers }}/$USER/storage"
+            #owner: root
+            #group: root
+            #mode: '0644'
+            backup: yes
+      when: mount_point_user_containers is defined
+      tags:
+      - podman

@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  connection: local
+
+  name: PERFORM POST BUILD INSTALL/CONFIG OF OPTIPLEX MICRO SERVER
+  gather_facts: yes
+  become: yes
+
+  vars:
+    kdump_path: /mnt/general/crash
+
+  roles:
+  - common
+  - server
+  - container_host
+  - tmux
+  #- linux-system-roles.kdump
+  #- librespot

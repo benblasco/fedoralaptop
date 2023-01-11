@@ -317,6 +317,15 @@
 #  tags:
 #  - copr
 
+- name: ENABLE COPR REPOS
+  community.general.copr:
+    host: copr.fedorainfracloud.org
+    name: "{{ item }}"
+    state: enabled
+  loop: "{{ copr_repos }}"
+  tags:
+  - copr
+
 # DEPRECATED 2022-11-18
 # Install Signal Desktop from COPR repo
 # https://copr.fedorainfracloud.org/coprs/luminoso/Signal-Desktop/

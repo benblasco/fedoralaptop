@@ -151,7 +151,7 @@
     - intel-media-driver
 
     copr_repos:
-    - luminoso/Signal-Desktop
+    #- luminoso/Signal-Desktop
     - taw/joplin
     #- sentry/v4l2loopback
 

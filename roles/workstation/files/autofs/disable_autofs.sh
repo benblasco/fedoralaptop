@@ -1,8 +1,12 @@
 #!/bin/bash
-# Put this script in /etc/NetworkManager/dispatcher.d/pre-down.d
-# Ensure the script is owned by root and executable
-if [ "$2" = "up" ]; then
-  if ["$CONNECTION_UUID" = "e40fc7a7-0055-475c-85d7-9f630c1a5cfe" ]; then
+echo "*** Running script $0"
+echo "*** The interface is $1 in state $2"
+echo "*** The CONNECTION ID is $CONNECTION_ID, and the CONNECTION UUID is $CONNECTION_UUID"
+if [ "$2" == "pre-down" ]; then
+  echo "*** We have determined that the connection is in state $2"
+  #if [ "$CONNECTION_UUID" = "2911db45-3eff-3b74-9c87-4c36e0290693" ]; then
+  if [ "$CONNECTION_ID" == "eraser215" ]; then
+    echo "*** Disabling autofs"
     systemctl disable --now autofs.service
   fi
 fi

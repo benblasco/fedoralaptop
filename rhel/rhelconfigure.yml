@@ -107,10 +107,12 @@
     tags:
       - insights
 
-  - name: Run the Insights Compliance Role (in run only mode)
+  - name: Run the Insights Compliance Role (in install only mode)
     include_role:
       name: redhatinsights.insights.compliance
-      tasks_from: run
+      tasks_from: install
+    tags:
+      - compliance
 
 #  - name: Register the Insights Client
 #    command: insights-client --register

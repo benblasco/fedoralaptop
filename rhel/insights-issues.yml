@@ -16,7 +16,7 @@
     - name: Put SELinux in permissive mode, logging actions that would be blocked.
       ansible.posix.selinux:
         policy: targeted
-        state: disabled
+        state: permissive
           
     # PostgreSQL-related rules, courtesy Paul Wayper
     # Here are the configuration settings that cause that rule to trigger:

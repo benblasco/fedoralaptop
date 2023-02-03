@@ -1,0 +1,66 @@
+# Pre-requisite: ansible-galaxy collection install community.libvirt
+# ansible-playbook rhelconfigure.yml --vault-password-file secret.txt 
+#
+- hosts: all
+
+  name: Register RHEL VMs and install Insights/related
+  gather_facts: yes
+  become: yes
+
+  vars:
+  # Explicitly telling Ansible to use Python3, because of the bug below:
+  #     # https://github.com/ansible/ansible/issues/54855
+  #- ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Put SELinux in permissive mode, logging actions that would be blocked.
+      ansible.posix.selinux:
+        policy: targeted
+        state: disabled
+          
+    # PostgreSQL-related rules, courtesy Paul Wayper
+    # Here are the configuration settings that cause that rule to trigger:
+    # 1. RHEL 8 or later
+    # 2. There is no mssql-server, oracle, satellite or satellite-capsule, sap netweaver, sap hana
+    # 3. postgresql service is running
+    # 4. The postgresql profile is not active.
+    # 5. The following settings exist:
+    #     a. The value of force_latency is over 1000 (please refer to https://www.golinuxhub.com/2018/06/what-cpu-c-states-check-cpu-core-linux/)
+    #     b. The "transparent_hugepages" is not never (check cmdline parser and relevant rule as reference)
+    #     c. vm.dirty_background_ratio is over 3 (sysctl parser)
+    #     d. vm.dirty_ratio is over 3 (sysctl)
+    #     e. vm.dirty_background_bytes is over 134217728 (sysctl parser)
+    #     f. vm.dirty_bytes is over 1073741824 (sysctl parser)
+    #     g. vm.swappiness is over 6 (sysctl parser)
+    #     h. kernel.sched_autogroup_enabled is 1 (sysctl parser)
+    #     i. sched_migration_cost_ns is less than 40000000 (sysctl parser)
+
+    # Inspiration for code below from:
+    # https://www.redhat.com/sysadmin/postgresql-setup-use-cases
+    # https://stribny.name/blog/ansible-postgresql/
+
+    - name: Install PostgreSQL 13
+      dnf:
+        name: '@postgresql:13'
+        state: present
+
+    - name: Find out if PostgreSQL is initialized
+      ansible.builtin.stat:
+        path: /var/lib/pgsql/data/pg_hba.conf
+      register: postgres_data
+
+    - name: Initialize PostgreSQL
+      shell: "postgresql-setup --initdb"
+      when: not postgres_data.stat.exists
+
+    - name: Ensure PostgreSQL service is enabled and started
+      ansible.builtin.systemd:
+        state: started
+        name: postgresql
+        enabled: true
+
+    - name: Set the vm.swappiness too high
+      ansible.posix.sysctl:
+        name: vm.swappiness
+        value: '10'
+        state: present

@@ -231,7 +231,7 @@
     # Generic URL below doesn't seem to work with Ansible on Fedora 36. Needs troubleshooting
     # Tying to specific Teams version for now
     #name: https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=rpm
-    name: https://packages.microsoft.com/yumrepos/ms-teams/teams-1.5.00.10453-1.x86_64.rpm
+    name: https://packages.microsoft.com/yumrepos/ms-teams/Packages/t/teams-1.5.00.23861-1.x86_64.rpm
     disable_gpg_check: yes
     state: latest
   tags:
@@ -535,6 +535,26 @@
     owner: root
     group: root
     mode: '0644'
+  tags:
+  - autofs
+
+- name: COPY AUTOFS NetworkManager-dispatcher PRE-UP SCRIPT
+  copy:
+    src: "files/autofs/enable-autofs.sh"
+    dest: "/etc/NetworkManager/dispatcher.d/pre-up.d"
+    owner: root
+    group: root
+    mode: '0744'
+  tags:
+  - autofs
+
+- name: COPY AUTOFS NetworkManager-dispatcher PRE-DOWN SCRIPT
+  copy:
+    src: "files/autofs/disable-autofs.sh"
+    dest: "/etc/NetworkManager/dispatcher.d/pre-down.d"
+    owner: root
+    group: root
+    mode: '0744'
   tags:
   - autofs
 

@@ -78,28 +78,6 @@
       tags:
         - postgresql
 
-    # Decreased security: SpamAssassin using untrusted channels
-    # The changes below will generate a critical issue relating 
-    # to SpamAssasin.  The code is directly copied from:
-    # https://gitlab.cee.redhat.com/insights-rules/insights-playbooks/-/blob/master/playbooks/security/hardening_spamassassin/SPAMASSASSIN_UNTRUSTED_SOURCES/rhel_host/breakit.yml
-    - name: Install spamassassin
-      yum:
-        name: spamassassin
-        state: present
-      tags:
-        - spamassassin
-
-    - name: Configure untrusted source
-      blockinfile:
-        path: /etc/mail/spamassassin/channel.d/prodsec-insights.conf
-        create: true
-        marker: "# {mark} hardening_spamassassin"
-        block: |
-          CHANNELURL=malicious.prodsec.insights
-          KEYID=8366B0D9
-      tags:
-        - spamassassin
-
     # Decreased security: System log permissions 
     - name: Open up /var/log directory permissions
       ansible.builtin.file:

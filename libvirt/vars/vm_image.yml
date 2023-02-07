@@ -1,0 +1,21 @@
+---
+# Insights Compliance - Supported Configurations
+# https://access.redhat.com/articles/6644131
+
+vm_image_path: "/var/lib/libvirt/images/"
+
+vm_image:
+  "rhel76": "rhel-server-7.6-x86_64-kvm.qcow2"
+  "rhel78": "rhel-server-7.8-x86_64-kvm.qcow2"
+  "rhel79": "rhel-server-7.9-x86_64-kvm.qcow2"
+  "rhel81": "rhel-8.1-x86_64-kvm.qcow2"
+  "rhel82": "rhel-8.2-x86_64-kvm.qcow2"
+  "rhel83": "rhel-8.3-x86_64-kvm.qcow2"
+  "rhel84": "rhel-8.4-x86_64-kvm.qcow2"
+  "rhel85": "rhel-8.5-x86_64-kvm.qcow2"
+  "rhel86": "rhel-8.6-x86_64-kvm.qcow2"
+  "rhel87": "rhel-8.7-x86_64-kvm.qcow2"
+  "rhel90": "rhel-baseos-9.0-x86_64-kvm.qcow2"
+  "rhel91": "rhel-baseos-9.1-x86_64-kvm.qcow2"
+  "fedora36": "https://fedora.mirror.digitalpacific.com.au/linux/releases/36/Cloud/x86_64/images/Fedora-Cloud-Base-36-1.5.x86_64.qcow2"
+  "fedora37": "https://fedora.mirror.digitalpacific.com.au/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"

@@ -1,0 +1,45 @@
+# ansible-galaxy install stackhpc.libvirt-vm
+# Read: https://galaxy.ansible.com/stackhpc/libvirt-vm
+# Read: https://github.com/stackhpc/ansible-role-libvirt-vm
+- hosts: localhost
+  connection: local
+
+  name: Install a VM using a role
+
+  vars_files:
+    - vars/vm_image.yml
+
+  vars:
+    # Define a default version unless overridden when calling the playbook
+    rhel_version: "rhel91"
+    name: "{{ vm_hostname | default(rhel_version) }}"
+    #name: "{{ vm_hostname | default(vm_image [rhel_version]) }}"
+
+  pre_tasks:
+     - name: Print the variables
+       debug:
+         msg: RHEL version is "{{ rhel_version }}" and hostname is "{{ name }}"
+
+  roles:
+    - role: stackhpc.libvirt-vm
+      libvirt_vms:
+        - state: "{{ vm_state | default('present') }}"
+          name: "{{ name }}"
+          memory_mb: 4096
+          vcpus: 1
+          volumes:
+            - name: "{{ name }}"
+              device: 'disk'
+              #type: 'file'
+              format: 'qcow2'
+              capacity: '20GB'
+              pool: 'vm-pool'
+              image: "{{ vm_image_path + vm_image [ rhel_version ] }}"
+            - name: 'generic-seed.qcow2'
+              type: 'file'
+              device: 'cdrom'
+              format: 'raw'
+              image: '/var/lib/libvirt/images/generic-seed.qcow2'
+          interfaces:
+            - network: 'vm-network-routed'
+          autostart: no

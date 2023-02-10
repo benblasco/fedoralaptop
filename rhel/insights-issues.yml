@@ -42,9 +42,14 @@
     # https://www.redhat.com/sysadmin/postgresql-setup-use-cases
     # https://stribny.name/blog/ansible-postgresql/
 
-    - name: Install PostgreSQL 13
+    - name: Install PostgreSQL
       dnf:
-        name: '@postgresql:13'
+        #name: '@postgresql:13'
+        #name: postgresql
+        name:
+          - postgresql
+          - postgresql-server
+          - tuned-profiles-postgresql
         state: present
       tags:
         - postgresql

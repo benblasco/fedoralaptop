@@ -1,0 +1,16 @@
+- name: Fix hardening_spamassassin
+  hosts: all
+  become: true
+  vars:
+    pydata: "{{ insights_report.details['hardening_spamassassin|SPAMASSASSIN_UNTRUSTED_SOURCES'] | default('') }}"
+  tasks:
+    - debug:
+        msg: "{{ item['path'] }} {{item['line']}}"
+      loop: "{{ pydata['unsafe_channels'] |dict2items(key_name='path', value_name='line') }}"
+
+#    - name: Disable untrusted channels
+#      replace:
+#        path: "{{ item[0] }}"
+#        regexp: "{{ item[1] }}"
+#        replace: "# \1"
+#      loop: "{{ pydata['unsafe_channels'] |dict2items(key_name='path', value_name='line' }}"

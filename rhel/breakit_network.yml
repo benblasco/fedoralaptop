@@ -1,0 +1,18 @@
+- name: add quotes to device name
+  hosts: all
+  become: true
+
+  tasks:
+    # Collect all of the network scripts into a variable
+    - name: get files in the path
+      shell: ls /etc/sysconfig/network-scripts/ifcfg-*
+      register: path_files
+
+    - name: Add quotes around device names
+      lineinfile:
+        dest: "{{item}}"
+        regexp: '(^\s*DEVICE=)(.*)'
+        line: '\1"\2"'
+        backup: yes
+        backrefs: yes
+      with_items: "{{path_files.stdout_lines}}"

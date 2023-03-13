@@ -1,0 +1,17 @@
+- name: Break hardening_spamassassin
+  hosts: all
+  become: true
+  tasks:
+    - name: Install spamassassin
+      yum:
+        name: spamassassin
+        state: present
+
+    - name: Configure untrusted source
+      blockinfile:
+        path: /etc/mail/spamassassin/channel.d/prodsec-insights.conf
+        create: true
+        marker: "# {mark} hardening_spamassassin"
+        block: |
+          CHANNELURL=malicious.prodsec.insights
+          KEYID=8366B0D9

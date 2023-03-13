@@ -1,6 +1,11 @@
 # ansible-galaxy install stackhpc.libvirt-vm
 # Read: https://galaxy.ansible.com/stackhpc/libvirt-vm
 # Read: https://github.com/stackhpc/ansible-role-libvirt-vm
+#
+# Example playbook execution:
+# ansible-playbook libvirt-newvm.yml --ask-become-pass -e "rhel_version='rhel86'"
+# Note: Default state is present, and default RHEL version is defined by "rhel_version"
+#
 - hosts: localhost
   connection: local
 

@@ -10,6 +10,26 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
         - state: present
+          name: 'f37vm'
+          memory_mb: 2048
+          vcpus: 1
+          volumes:
+            - name: 'f37vm'
+              device: 'disk'
+              #type: 'file'
+              format: 'qcow2'
+              capacity: '20GB'
+              pool: 'vm-pool'
+              image: 'https://fedora.mirror.digitalpacific.com.au/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2'
+            - name: 'generic-seed.qcow2'
+              type: 'file'
+              device: 'cdrom'
+              format: 'raw'
+              image: '/var/lib/libvirt/images/generic-seed.qcow2'
+          interfaces:
+            - network: 'vm-network-routed'
+
+        - state: present
           name: 'f36vm'
           memory_mb: 2048
           vcpus: 1

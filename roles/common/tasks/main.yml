@@ -67,6 +67,9 @@
     name: "{{ common_packages }}"
     state: present
 
+# You can check out more about vulnerabilities
+# and mitigations via the following command:
+# grep . /sys/devices/system/cpu/vulnerabilities/*
 - name: DISABLE CPU VULNERABILITY MITIGATIONS IN KERNEL
   command: 'grubby --update-kernel=ALL --args="mitigations=off"'
   tags:

@@ -18,6 +18,11 @@
         disks:
           - sda3
         volumes:
+          - name: root
+            size: "30 GiB"
+            fs_type: xfs
+            mount_point: /
+            state: present
           - name: vm_pool
             size: "30 GiB"
             fs_type: xfs

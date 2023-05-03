@@ -81,15 +81,13 @@
         # NEW: rootless_storage_path = "/mnt/containers/$USER/storage"
         - name: Ensure that rootless container storage is in the correct directory
           lineinfile:
-            #path: /usr/share/containers/storage.conf
-            path: /etc/containers/storage.conf
+            path: /usr/share/containers/storage.conf
             regexp: '^rootless_storage_path'
             insertafter: '^# rootless_storage_path'
             line: rootless_storage_path = "{{ mount_point_user_containers }}/$USER/storage"
-            owner: root
-            group: root
-            mode: '0644'
-            create: true
+            #owner: root
+            #group: root
+            #mode: '0644'
             backup: yes
       when: mount_point_user_containers is defined
       tags:

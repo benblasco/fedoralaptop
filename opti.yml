@@ -1,6 +1,6 @@
 ---
-- hosts: localhost
-  connection: local
+- hosts: opti.lan
+  #connection: local
 
   name: PERFORM POST BUILD INSTALL/CONFIG OF OPTIPLEX MICRO SERVER
   gather_facts: yes

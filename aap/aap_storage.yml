@@ -1,0 +1,37 @@
+# ansible-galaxy install linux-system-roles.storage
+# then
+# cd ~/.ansible/roles/linux-system-roles.storage
+# ansible-galaxy collection install -vv -r meta/collection-requirements.yml
+---
+- hosts: aap.opti.blasco.id.au
+  #connection: local
+  become: yes
+  vars:
+    #ansible_python_interpreter: /usr/bin/python3
+
+    mount_point_aap: /var/lib/awx
+
+    storage_pools:
+      - name: aap
+        disks:
+          - vdb
+        volumes:
+          - name: awx
+            size: "80 GB"
+            fs_type: xfs
+            mount_point: "{{ mount_point_aap }}"
+            state: present
+
+  roles:
+    - linux-system-roles.storage
+
+  tasks:
+    - name: Configure mount point for AAP
+      block:
+        - name: Set correct directory ownership/permissions for rootless container mount point
+          file:
+            path: "{{ mount_point_aap }}"
+            state: directory
+            owner: root
+            group: root
+            mode: '0777'

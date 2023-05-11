@@ -3,8 +3,8 @@
 # cd ~/.ansible/roles/linux-system-roles.storage
 # ansible-galaxy collection install -vv -r meta/collection-requirements.yml
 ---
-- hosts: localhost
-  connection: local
+- hosts: opti.lan
+  #connection: local
   become: yes
   vars:
     #ansible_python_interpreter: /usr/bin/python3
@@ -24,7 +24,7 @@
             mount_point: /
             state: present
           - name: vm_pool
-            size: "30 GiB"
+            size: "120 GiB"
             fs_type: xfs
             mount_point: /var/lib/libvirt/vm-pool
             state: present

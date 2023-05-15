@@ -1,0 +1,66 @@
+---
+aap_setup_down_offline_token: "Paste token here between quotes"
+aap_setup_down_version: "2.3"
+aap_setup_down_type: "setup-bundle"
+aap_setup_rhel_version: "9"
+
+# TASK [redhat_cop.aap_utilities.aap_setup_install : Run the Ansible Automation Platform setup program] *********************************
+                                                                                                                  
+aap_setup_prep_inv_nodes:
+  automationcontroller:
+    - aap.opti.blasco.id.au
+  #automationhub:
+    #- aap.opti.blasco.id.au
+  #database:
+    #- aap.opti.blasco.id.au # if using an already existing DB, remove this and ensure that the following variables are filled with the valid details for your Controller and PAH
+                       # databases: pg_host, pg_port, pg_database, ph_username, pg_password, automationhub_pg_host, automationhub_pg_port, automationhub_pg_database,
+                       # automationhub_pg_username, automationhub_pg_password, automationhub_pg_sslmode
+  #execution_nodes:
+    #- aap.opti.blasco.id.au
+
+  #servicescatalog_workers:
+  #sso:
+
+aap_setup_prep_inv_vars:
+  automationcontroller: # denotes the automation controller nodes as hybrid nodes (controller and execution)
+    peers: execution_nodes
+    node_type: hybrid
+
+  execution_nodes:
+    node_type: execution
+
+  all:
+    ansible_user: ansible
+    ansible_become: true
+    admin_password: changeme # admin password for Automation Controller UI
+    pg_host: ''
+    pg_port: '5432'
+
+    pg_database: 'awx'
+    pg_username: 'awx'
+    pg_password: changeme
+    pg_sslmode: 'prefer'  # set to 'verify-full' for client-side enforced SSL
+
+    registry_url: 'registry.redhat.io'
+    receptor_listener_port: 27199
+
+    #automationhub_admin_password: changeme # admin password for PAH UI
+    #automationhub_pg_host: 'database.example'
+    #automationhub_pg_port: '5432'
+
+    #automationhub_pg_database: 'automationhub'
+    #automationhub_pg_username: 'automationhub'
+    #automationhub_pg_password: changeme
+    #automationhub_pg_sslmode: 'prefer'
+    #automationhub_main_url: hub.example
+    #automationhub_require_content_approval: False
+    #automationhub_enable_unauthenticated_collection_access: True
+
+    #automationhub_ssl_validate_certs: False
+
+    sso_console_admin_password: ''
+
+aap_setup_prep_inv_secrets:
+  all:
+    registry_username: rhn_username # Your access.redhat.com username
+    registry_password: rhn_password # Your access.redhat.com password

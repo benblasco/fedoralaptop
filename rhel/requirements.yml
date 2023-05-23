@@ -14,4 +14,9 @@ collections:
 
 roles:
   - src: shaneboulden.fapolicyd
+  - src: linux-system-roles.rhc
+# then
+# cd ~/.ansible/roles/linux-system-roles.rhc
+# ansible-galaxy collection install -vv -r meta/requirements.yml
+
 

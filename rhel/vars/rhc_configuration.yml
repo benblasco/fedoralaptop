@@ -1,0 +1,18 @@
+rhc_auth:
+  activation_keys:
+    keys:
+      - "{{ activation_key }}"
+
+rhc_organization: "{{ organization_id }}"
+
+rhc_insights:
+  state: present
+  autoupdate: true
+  remediation: present
+  tags:
+    environment: dev
+    location: #"au/vic/melbourne"
+      country: au
+      state: vic
+      city: melbourne
+

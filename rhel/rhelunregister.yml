@@ -1,10 +1,9 @@
 # Pre-requisite: ansible-galaxy collection install community.libvirt
 #
 - hosts: all
+  become: true
 
-  name: Disconnect Insights and Unegister RHEL VMs
-  gather_facts: yes
-  become: yes
+  name: Disconnect Insights and Unregister RHEL VMs
 
   vars:
   # Explicitly telling Ansible to use Python3, because of the bug below:
@@ -13,27 +12,7 @@
 
   - rhel_version: "{{ ansible_facts['distribution_version'] }}"
 
-  tasks:
+    rhc_state: absent
 
-  - name: Unregister systems running RHEL <=8.5
-    block: 
-      - name: unregister the Insights Client
-        command: insights-client --unregister
-        tags:
-          - insights
-    
-      - name: Unregister the systems with subscription-manager
-        redhat_subscription:
-          state: absent
-        tags:
-          - subscription-manager
-    when:
-      - ansible_facts['distribution_version'] is version('8.5', '<=')
-
-  - name: Unregister systems running RHEL >8.5
-    block: 
-      - name: Disable Red Hat Connector
-        command: rhc disconnect
-        #register: rhc_result
-    when:
-      - ansible_facts['distribution_version'] is version('8.5', '>')
+  roles:
+    - role: linux-system-roles.rhc

@@ -38,6 +38,7 @@
     - dnf-utils
     - setools-console
     - strace
+    - ncdu
 
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

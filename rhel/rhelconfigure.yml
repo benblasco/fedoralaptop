@@ -21,12 +21,6 @@
       #rhel_version: "{{ ansible_facts['distribution_major_version'] }}"
 
   pre_tasks:
-    - name: Show the RHEL version and scap-security-guide-version
-      debug:
-        msg: RHEL version {{ rhel_version }} requires {{ scap_security_guide_package[ rhel_version ] }}
-      tags:
-      - insights
-      - debug
 
     - name: Set the system hostname correctly
       hostname:
@@ -60,19 +54,32 @@
 
   post_tasks:
 
+    - name: Show the RHEL version and scap-security-guide-version
+      debug:
+        msg: RHEL version {{ rhel_version }} requires {{ scap_security_guide_package[ rhel_version ] }}
+      tags:
+      - insights
+      - debug
+
     - name: Install specific scap-security-guide package
       yum:
         name:
           # Note that this exact format is needed to dereference rhel_version variable
           # Cannot use scap_security_guide_package.rhel_version notation
           - "{{ scap_security_guide_package[ rhel_version ] }}"
+          - openscap
+          - openscap-scanner
         state: present
       tags:
         - compliance
 
-    - name: Run the Insights Compliance Role (in install only mode)
-      include_role:
-        name: redhatinsights.insights.compliance
-        tasks_from: install
-      tags:
-        - compliance
+    # Commented the role out because it will update to the wrong
+    # version of scap-security-guide
+    # See https://github.com/RedHatInsights/ansible-collections-insights/issues/41
+    #
+    #- name: Run the Insights Compliance Role (in install only mode)
+      #include_role:
+        #name: redhatinsights.insights.compliance
+        #tasks_from: install
+      #tags:
+        #- compliance

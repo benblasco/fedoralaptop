@@ -37,6 +37,7 @@
     # Provides "needs-restarting" utility.  "needs-restarting -r" is a handy command
     - dnf-utils
     - setools-console
+    - setroubleshoot-server
     - strace
     - ncdu
     # Required for ansible-navigator and ansible builder

@@ -39,6 +39,8 @@
     - setools-console
     - strace
     - ncdu
+    # Required for ansible-navigator and ansible builder
+    - python3-pip
 
     rpmfusion_packages:
     - http://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm

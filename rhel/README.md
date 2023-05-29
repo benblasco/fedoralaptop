@@ -21,5 +21,6 @@ ansible-navigator run -m stdout --eei ee_test:v1 <playbook name>.yml -e ansible_
 ```
 
 A more complex example for running the same playbook
-ansible-navigator run -m stdout --eei ee_test:v1 <playbook name>.yml --vault-password-file secret.txt 
---limit="rhel86*"
+```
+ansible-navigator run -m stdout --eei ee_test:v1 <playbook name>.yml --vault-password-file secret.txt --limit="rhel86*"
+```

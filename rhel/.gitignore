@@ -1,3 +1,9 @@
+# Secrets file for passwords etc.
 secret.txt
+
+# Ansible Builder Artifacts
 context/
+
+# Ansible Navigator artifacts
 ansible-navigator.log
+*artifact*.json

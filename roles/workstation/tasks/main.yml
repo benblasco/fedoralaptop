@@ -189,21 +189,21 @@
   tags:
   - obs
 
-- name: ADD BLUEJEANS GPG KEY
-  rpm_key:
-    state: present
-    key: "{{ bluejeans_gpg_key }}"
-  tags:
-  - bluejeans
-
-- name: INSTALL BLUEJEANS VIDEOCONFERENCING
-  dnf:
-    #name: https://swdl.bluejeans.com/desktop-app/linux/2.21.2/BlueJeans_2.21.2.1.rpm
-    name: "{{ bluejeans_rpm }}"
-    disable_gpg_check: yes
-    state: present
-  tags:
-  - bluejeans
+#- name: ADD BLUEJEANS GPG KEY
+#  rpm_key:
+#    state: present
+#    key: "{{ bluejeans_gpg_key }}"
+#  tags:
+#  - bluejeans
+#
+#- name: INSTALL BLUEJEANS VIDEOCONFERENCING
+#  dnf:
+#    #name: https://swdl.bluejeans.com/desktop-app/linux/2.21.2/BlueJeans_2.21.2.1.rpm
+#    name: "{{ bluejeans_rpm }}"
+#    disable_gpg_check: yes
+#    state: present
+#  tags:
+#  - bluejeans
 
 # Install Zoom conferencing as per instructions at:
 # https://us04web.zoom.us/download

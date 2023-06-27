@@ -39,7 +39,7 @@
 
     - name: Run the RHC role
       include_role:
-        name: linux-system-roles.rhc
+        name: fedora.linux_system_roles.rhc
       tags:
         - rhc
 

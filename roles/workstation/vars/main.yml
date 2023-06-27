@@ -80,8 +80,8 @@
     # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-cert-install.html
     # https://hdn.corp.redhat.com/rhel8-csb/repoview/redhat-internal-NetworkManager-openvpn-profiles.html
     openvpn_config_packages:
-    - /tmp/fedora_build/redhat-internal-cert-install-0.1-25.el7.noarch.rpm
-    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-55.el7.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-cert-install-0.1-31.el7.noarch.rpm
+    - /tmp/fedora_build/redhat-internal-NetworkManager-openvpn-profiles-0.1-58.el7.noarch.rpm
 
     printer_packages:
     - system-config-printer

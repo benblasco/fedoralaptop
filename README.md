@@ -71,7 +71,7 @@ Power management
 
 Install Gnome extensions Sync:
 - https://github.com/oae/gnome-shell-extensions-sync
-- Configure the correct Github gist/token (check Joplin Notes)
+- Configure the correct Github gist/token (see Joplin Notes or encrypted roles/workstation/vars/gnome_extensions_sync_gist.yml)
 - Click to download the extensions
 - Reboot or log off to restart Gnome
 

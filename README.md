@@ -35,7 +35,7 @@ cd fedoralaptop
 ansible-playbook -i hosts laptop.yml --ask-become-pass --vault-id @prompt --tags=ssh
 ansible-playbook -i hosts laptop.yml --ask-become-pass --vault-id @prompt --tags=cubox
 ansible-playbook -i hosts laptop.yml --ask-become-pass --vault-id @prompt --check 
-ansible-playbook -i hosts laptop.yml --ask-become-pass --vault-id @prompt --skip-tags=wifi
+# ansible-playbook -i hosts laptop.yml --ask-become-pass --vault-id @prompt --skip-tags=wifi
 ```
 
 - Change the remote URL so you can use your SSH key

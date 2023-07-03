@@ -606,6 +606,9 @@
     - { key: "/org/gnome/software/download-updates", value: "false", state: "present" }
     - { key: "/org/gnome/shell/favorite-apps", value: "@as []", state: "present" }
     - { key: "/org/gnome/shell/extensions/multi-monitors-add-on/show-panel", value: "false", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type", value: "'nothing'", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout", value: "3600", state: "present" }
+    - { key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type", value: "'suspend'", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-enabled", value: "true", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/power/night-light-temperature", value: "2700", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled", value: "true", state: "present" }

@@ -56,6 +56,7 @@ Time
 - [x] Enable automatic time zone
 
 Displays
+- Orient the screens correctly
 - [x] Enable night light
 
 Nautilus File Manager

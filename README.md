@@ -70,20 +70,6 @@ Power management
 - [ ] Via Gnome Tweaks, ensure closing lid does not put laptop to sleep
 - [x] Blank screen and lock after 15 minutes, rather than 5 (idle delay?)
 
-Install Gnome extensions Sync:
-- https://github.com/oae/gnome-shell-extensions-sync
-- Configure the correct Github gist/token (see Joplin Notes or encrypted roles/workstation/vars/gnome_extensions_sync_gist.yml)
-- Click to download the extensions
-- Reboot or log off to restart Gnome
-
-How to open Gnome looking glass
-- Alt+F2
-- Then type "lg"
-
-Install GMail addons for Chrome/Firefox
-- Trello
-- Others?
-
 Restore bookmarks and settings using Firefox Sync
 Install Firefox extensions
 - Firstly, login and sync.  It should download the extensions for you
@@ -97,8 +83,19 @@ Configure Firefox Hardware Acceleration:
 
 Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
 1. Go to about:config
-2. Set `browser.sessionstore.warnOnQuit true`
-3. Set `browser.warnOnQuit true`
+2. Set `browser.warnOnQuit true`
+3. Set `browser.warnOnQuitShortcut true`
+Note: These appear to be enabled by default now probably due to Firefox sync
+
+Install Gnome extensions Sync:
+- https://github.com/oae/gnome-shell-extensions-sync
+- Configure the correct Github gist/token (see Joplin Notes or encrypted roles/workstation/vars/gnome_extensions_sync_gist.yml)
+- Click to download the extensions
+- Reboot or log off to restart Gnome
+
+How to open Gnome looking glass
+- Alt+F2
+- Then type "lg"
 
 Configure Joplin Notes
 - File -> Synchronise: Tell it to use Dropbox and authenticate it

@@ -488,6 +488,19 @@
 #  tags:
 #  - wifi
 
+- name: COPY ENCRYPTED WIFI KEY FILES
+  copy:
+    decrypt: yes
+    src: "{{ item }}"
+    dest: "/etc/NetworkManager/system-connections"
+    owner: root
+    group: root
+    mode: '0600'
+  with_fileglob:
+    - "files/wifi/nmconnection/*nmconnection"
+  tags:
+  - wifi
+
 - name: COPY AUTOFS MASTER MAPPING FILE
   copy:
     src: "files/autofs/bblasco_backup.autofs"

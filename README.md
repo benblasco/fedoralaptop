@@ -92,19 +92,12 @@ Install Firefox extensions
 - Log in to your Pocket account
 
 Configure Firefox Hardware Acceleration:
-- https://www.reddit.com/r/firefox/comments/r5wilh/the_road_to_vaapi_on_linux_by_default_looks/
-- https://mastransky.wordpress.com/2020/09/29/firefox-81-on-fedora-with-va-api-webrtc-and-x11/
-```
-set media.ffmpeg.vaapi.enabled to true
-set gfx.webrender.enabled to true
-set gfx.webrendest.enabled to true
-set media.navigator.mediadatadecoder_vpx_enabled to true
-```
+- https://fedoraproject.org/wiki/Firefox_Hardware_acceleration
 
 Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
-about:config
-browser.sessionstore.warnOnQuit true
-browser.warnOnQuit true
+1. Go to about:config
+2. Set `browser.sessionstore.warnOnQuit true`
+3. Set `browser.warnOnQuit true`
 
 Configure Joplin Notes
 - File -> Synchronise: Tell it to use Dropbox and authenticate it
@@ -120,8 +113,8 @@ Configure Evernote (NixNote2)
 Configure Dropbox
 - Run Dropbox and follow the prompts
 - Disable annoying notifications via the following commands as regular user:
-https://discourse.joplinapp.org/t/joplin-i-love-you-but-this-is-driving-me-nuts-dropbox/10842/13
-https://help.dropbox.com/sync/ignored-files
+    - https://discourse.joplinapp.org/t/joplin-i-love-you-but-this-is-driving-me-nuts-dropbox/10842/13
+    - https://help.dropbox.com/sync/ignored-files
 ```
 $ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/apps/Joplin/.sync/
 $ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/apps/Joplin/locks/

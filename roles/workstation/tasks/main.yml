@@ -587,7 +587,7 @@
     - { key: "/org/gnome/desktop/peripherals/mouse/speed", value: '1.0', state: "present" }
     - { key: "/org/gnome/desktop/peripherals/touchpad/left-handed", value: "'right'", state: "present" }
     - { key: "/org/gnome/desktop/peripherals/touchpad/speed", value: '1.0', state: "present" }
-    - { key: "/org/gnome/desktop/session/idle-delay", value: '900', state: "present" }
+    - { key: "/org/gnome/desktop/session/idle-delay", value: 'uint32 900', state: "present" }
     - { key: "/org/gnome/desktop/calendar/show-weekdate", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/sound/allow-volume-above-100-percent", value: "true", state: "present" }
     - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "@as []", state: "present" }

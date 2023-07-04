@@ -77,6 +77,7 @@ Install Firefox extensions
 - Restore the list of auto tab discard exceptions (auto-tab-discard-preferences.json)
 - Restore the FoxyProxy configuration
 - Log in to your Pocket account
+- Click on the extensions icon to show the list of extensions, and then right click on an extension to select "pin to toolbar"
 
 Configure Firefox Hardware Acceleration:
 - https://fedoraproject.org/wiki/Firefox_Hardware_acceleration

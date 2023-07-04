@@ -128,32 +128,3 @@ Install and restore Calibre E-Book library
 Try IDM integration as per:
 https://mojo.redhat.com/docs/DOC-1199178
 (See Engineering Server - non-fresh RHEL 7, non-fresh RHEL 8 or RHEL 5 or 6)
-
-NOTES ON SOME OF THE TASKS COMPLETED
-
-MANUAL TASKS THAT MAY NOT BE POSSIBLE TO AUTOMATE
-
-- Change display position of second screen relative to laptop screen
-
-OBSOLETE: Configure SpiderOak backups
-https://redhat.service-now.com/help?id=kb_article&sys_id=c09f0e372b66b8004c71dc0e59da15ff
-https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0000771
-http://hdn.corp.redhat.com/rhel7-csb-stage/repoview/SpiderOakGroups.html
-Note: SpiderOak has been superseded by another tool whose name I have forgotten
-
-Connect to Wifi
-https://redhat.service-now.com/help?id=kb_article&sysparm_article=KB0001616
-or just grab the files for the SSIDs you want from /etc/sysconfig/network-scripts/
-```
-[bblasco@bblasco_fedora cloudfedora30]$ nmcli conn show --order type
-NAME                UUID                                  TYPE      DEVICE
-...
-Red Hat Guest       0ccfd13b-5920-4fda-924d-059d0178993c  wifi      --
-WiFi-6FE7           26e5b1fc-3171-4964-be2a-5fc283c1db28  wifi      --
-eraser215           27e8eeb8-46b9-4cc6-8acd-a139711e2fa2  wifi      --
-WiFi-6FE7-5G        3b94cd43-0f68-485b-a220-2d6fb657c54a  wifi      --
-TelstraC083AB       5d30249a-c8a9-44bf-9763-8f087339cf99  wifi      --
-Red Hat             916403a9-1bd7-4386-b1d9-7034396dac40  wifi      wlp4s0
-Yarra               931b30d6-330d-440e-82e0-b7be4c5e731d  wifi      --
-eraser215op6        a8598908-f3d3-45e0-ad29-df92c6ed2558  wifi      --
-```

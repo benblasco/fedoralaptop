@@ -113,10 +113,12 @@ Configure Dropbox
 - Disable annoying notifications via the following commands as regular user:
     - https://discourse.joplinapp.org/t/joplin-i-love-you-but-this-is-driving-me-nuts-dropbox/10842/13
     - https://help.dropbox.com/sync/ignored-files
-```
-$ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/apps/Joplin/.sync/
-$ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/apps/Joplin/locks/
-```
+    ```
+    $ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/Apps/Joplin/.sync/
+    $ attr -s com.dropbox.ignore -V 1 /home/bblasco/Dropbox/Apps/Joplin/locks/
+    ```
+    - Also note that accessing the dropbox GUI depends on legacy tray icon support in Gnome:
+    https://extensions.gnome.org/extension/615/appindicator-support/
 
 
 Install and restore Calibre E-Book library

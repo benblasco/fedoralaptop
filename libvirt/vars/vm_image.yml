@@ -20,3 +20,5 @@ vm_image:
   "rhel92": "rhel-9.2-x86_64-kvm.qcow2"
   "fedora36": "https://fedora.mirror.digitalpacific.com.au/linux/releases/36/Cloud/x86_64/images/Fedora-Cloud-Base-36-1.5.x86_64.qcow2"
   "fedora37": "https://fedora.mirror.digitalpacific.com.au/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
+  "fedora38": "Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
+  "stream9": "CentOS-Stream-GenericCloud-9-20221219.0.x86_64.qcow2"

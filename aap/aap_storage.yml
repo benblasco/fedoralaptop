@@ -3,7 +3,7 @@
 # cd ~/.ansible/roles/linux-system-roles.storage
 # ansible-galaxy collection install -vv -r meta/collection-requirements.yml
 ---
-- hosts: aap.opti.blasco.id.au
+- hosts: all
   #connection: local
   become: yes
   vars:
@@ -28,7 +28,7 @@
   tasks:
     - name: Configure mount point for AAP
       block:
-        - name: Set correct directory ownership/permissions for rootless container mount point
+        - name: Set correct directory ownership/permissions for AAP mount point
           file:
             path: "{{ mount_point_aap }}"
             state: directory

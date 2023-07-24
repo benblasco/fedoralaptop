@@ -11,6 +11,7 @@
 collections:
   # Utils collection to get update_fact module
 - ansible.utils
+- community.libvirt
 
 roles:
 # Ansible Galaxy role for configuring host as a hypervisor

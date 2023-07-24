@@ -19,7 +19,6 @@
     rhel_version: "rhel92"
     name: "{{ vm_hostname | default(rhel_version) }}"
     #name: "{{ vm_hostname | default(vm_image [rhel_version]) }}"
-    name: aap
 
   pre_tasks:
      - name: Print the variables

@@ -7,3 +7,6 @@ context/
 # Ansible Navigator artifacts
 ansible-navigator.log
 *artifact*.json
+
+# VScode junk
+.vscode/

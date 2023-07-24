@@ -16,6 +16,13 @@
     libvirt_dhcp_start: 192.168.7.100
     libvirt_dhcp_end: 192.168.7.200
 
+    # Configuration for when you need logging
+    #
+    # libvirt_host_libvirtd_conf_enabled: true
+    # libvirt_host_libvirtd_conf:
+      # log_filters: "3:remote 4:event 3:util.json 3:rpc 1:*"
+      # log_outputs: "1:file:/var/log/libvirt/libvirtd.log"
+
   pre_tasks:
   
    # Required for rudimentary Fedora 36 support as per:

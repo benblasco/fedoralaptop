@@ -78,6 +78,7 @@ Install Firefox extensions
 - Restore the FoxyProxy configuration
 - Log in to your Pocket account
 - Click on the extensions icon to show the list of extensions, and then right click on an extension to select "pin to toolbar"
+    - https://www.reddit.com/r/firefox/comments/10f8ohq/how_to_bring_back_addon_icons_to_toolbar_after/
 
 Configure Firefox Hardware Acceleration:
 - https://fedoraproject.org/wiki/Firefox_Hardware_acceleration

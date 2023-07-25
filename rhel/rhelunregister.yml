@@ -15,4 +15,4 @@
     rhc_state: absent
 
   roles:
-    - role: linux-system-roles.rhc
+    - role: fedora.linux_system_roles.rhc

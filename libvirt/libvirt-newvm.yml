@@ -16,7 +16,6 @@
 
   vars:
     # Define a default version unless overridden when calling the playbook
-    rhel_version: "rhel92"
     name: "{{ vm_hostname | default(rhel_version) }}"
     #name: "{{ vm_hostname | default(vm_image [rhel_version]) }}"
 
@@ -30,14 +29,15 @@
       libvirt_vms:
         - state: "{{ vm_state | default('present') }}"
           name: "{{ name }}"
-          memory_mb: 4096
-          vcpus: 1
+          memory_mb: "{{ memory_mb }}"
+          vcpus: "{{ vcpus }}"
           volumes:
             - name: "{{ name }}"
               device: 'disk'
               #type: 'file'
               format: 'qcow2'
-              capacity: '20GB'
+              # capacity: '20GB'
+              capacity: "{{ vm_disk_size }}"
               pool: 'vm-pool'
               image: "{{ vm_image_path + vm_image [ rhel_version ] }}"
             - name: 'generic-seed.qcow2'

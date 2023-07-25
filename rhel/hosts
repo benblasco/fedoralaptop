@@ -3,7 +3,9 @@
 [rhelrhc]
 #rhel85.blasco.id.au ansible_host=192.168.6.115
 #rhel86.blasco.id.au ansible_host=192.168.6.181
-rhel91.opti.blasco.id.au ansible_host=192.168.7.109
+rhel86.opti.blasco.id.au ansible_host=192.168.7.113
+
+[aap]
 aap.opti.blasco.id.au ansible_host=192.168.7.134
 
 [azure]

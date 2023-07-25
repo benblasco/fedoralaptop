@@ -1,5 +1,5 @@
-aap.opti.blasco.id.au ansible_host=192.168.7.134
-aap2.opti.blasco.id.au ansible_host=192.168.7.102
+aap.opti.blasco.id.au ansible_host=192.168.7.179
+#aap2.opti.blasco.id.au ansible_host=192.168.7.102
 
 [all:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'

@@ -26,6 +26,12 @@
        debug:
          msg: RHEL version is "{{ rhel_version }}" and hostname is "{{ name }}"
 
+     # Temporary action due to a bug between libvirtd and some other Linux service (dbus?)
+     - name: Restart libvirtd
+       service:
+         name: libvirtd
+         state: restarted
+
   roles:
     - role: stackhpc.libvirt-vm
       libvirt_vms:

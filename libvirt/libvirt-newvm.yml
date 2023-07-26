@@ -32,6 +32,10 @@
        service:
          name: libvirtd
          state: restarted
+     
+     - name: Pause while libvirtd restarts
+       ansible.builtin.pause:
+         seconds: 20
 
   roles:
     - role: stackhpc.libvirt-vm

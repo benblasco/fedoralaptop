@@ -28,6 +28,7 @@
 
      # Temporary action due to a bug between libvirtd and some other Linux service (dbus?)
      - name: Restart libvirtd
+       become: yes
        service:
          name: libvirtd
          state: restarted

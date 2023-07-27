@@ -50,7 +50,7 @@
               #type: 'file'
               format: 'qcow2'
               # capacity: '20GB'
-              capacity: "{{ vm_disk_size }}"
+              capacity: "{{ disk_size }}"
               pool: 'vm-pool'
               image: "{{ vm_image_path + vm_image [ rhel_version ] }}"
             - name: 'generic-seed.qcow2'

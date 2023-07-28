@@ -629,6 +629,7 @@
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command", value: "'/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=spotify --file-forwarding com.spotify.Client @@u %U @@'", state: "present" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding", value: "'Launch7'", state: "present" }
 
+    - { key: "org/gtk/gtk4/settings/file-chooser/sort-directories-first", value: "true", state: "present" }
 
 
 

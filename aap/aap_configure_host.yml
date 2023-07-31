@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+
+  tasks:
+    - name: Update all packages via DNF
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Configure AAP user
+      user:
+        name: aap
+        #group: aap
+        comment: "Containerised AAP user"
+        groups: wheel
+        # https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+        # ansible all -i localhost, -m debug -a "msg={{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+        password: "$6$mysecretsalt$MoClAmIwBKDeaqZBrZvLxedwb7nNCBNJ7VvEkaLLSMpAVo0.LGh7sdkVtbnAnGOezjPvP5ixUi1NhvZVkb1pP1"

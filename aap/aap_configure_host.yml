@@ -1,5 +1,8 @@
 ---
-- hosts: all
+- name: Prepare RHEL server for installation of containerised AAP
+  # https://gitlab.cee.redhat.com/ansible/aap-containerized-installer
+
+  hosts: all
   become: yes
 
   vars:

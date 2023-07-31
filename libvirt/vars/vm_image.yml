@@ -23,3 +23,4 @@ vm_image:
   "fedora37": "Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
   "fedora38": "Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
   "stream9": "CentOS-Stream-GenericCloud-9-20221219.0.x86_64.qcow2"
+  "rocky9": "Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"

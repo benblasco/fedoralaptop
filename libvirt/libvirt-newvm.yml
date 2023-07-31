@@ -18,13 +18,13 @@
 
   vars:
     # Define a default version unless overridden when calling the playbook
-    name: "{{ vm_hostname | default(rhel_version) }}"
-    #name: "{{ vm_hostname | default(vm_image [rhel_version]) }}"
+    vm_name: "{{ vm_hostname | default(rhel_version) }}"
+    #vm_name: "{{ vm_hostname | default(vm_image [rhel_version]) }}"
 
   pre_tasks:
      - name: Print the variables
        debug:
-         msg: RHEL version is "{{ rhel_version }}" and hostname is "{{ name }}"
+         msg: RHEL version is "{{ rhel_version }}" and hostname is "{{ vm_name }}"
 
      # Temporary action due to a bug between libvirtd and some other Linux service (dbus?)
      - name: Restart libvirtd
@@ -41,11 +41,11 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
         - state: "{{ vm_state | default('present') }}"
-          name: "{{ name }}"
+          name: "{{ vm_name }}"
           memory_mb: "{{ memory_mb }}"
           vcpus: "{{ vcpus }}"
           volumes:
-            - name: "{{ name }}"
+            - name: "{{ vm_name }}"
               device: 'disk'
               #type: 'file'
               format: 'qcow2'

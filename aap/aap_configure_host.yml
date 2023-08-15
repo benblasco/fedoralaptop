@@ -13,6 +13,17 @@
         name: "*"
         state: latest
 
+    - name: Enable the AAP repo
+      community.general.rhsm_repository:
+        name: ansible-automation-platform-2.2-for-rhel-9-x86_64-rpms
+
+    - name: Install ansible-builder (from AAP repo)
+      dnf:
+        name:
+          - ansible-builder
+          - skopeo
+        state: latest
+
     - name: Configure AAP user
       user:
         name: aap

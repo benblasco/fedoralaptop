@@ -10,3 +10,5 @@ ansible-navigator.log
 
 # VScode junk
 .vscode/
+
+aap/inventory_vars/variables.yml

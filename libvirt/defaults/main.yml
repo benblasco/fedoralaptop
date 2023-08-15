@@ -1,5 +1,0 @@
----
-rhel_version: 'rhel92'
-disk_size: '20GB'
-memory_mb: 4096
-vcpus: 1

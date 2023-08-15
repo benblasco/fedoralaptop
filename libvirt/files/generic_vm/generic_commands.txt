@@ -1,2 +1,0 @@
-# To generate a seed file to be used in a VM:
-cloud-localds -v generic-seed.qcow2 cloud_init.cfg 

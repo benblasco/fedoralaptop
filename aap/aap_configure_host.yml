@@ -15,7 +15,7 @@
 
     - name: Enable the AAP repo
       community.general.rhsm_repository:
-        name: ansible-automation-platform-2.2-for-rhel-9-x86_64-rpms
+        name: ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms
 
     - name: Install ansible-builder (from AAP repo)
       dnf:
@@ -31,5 +31,5 @@
         comment: "Containerised AAP user"
         groups: wheel
         # https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
-        # ansible all -i localhost, -m debug -a "msg={{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+        # ansible all -i localhost, -m debug -a "msg={{ 'aap' | password_hash('sha512', 'mysecretsalt') }}"
         password: "$6$mysecretsalt$MoClAmIwBKDeaqZBrZvLxedwb7nNCBNJ7VvEkaLLSMpAVo0.LGh7sdkVtbnAnGOezjPvP5ixUi1NhvZVkb1pP1"

@@ -10,30 +10,34 @@
       acme_directory: https://acme-v02.api.letsencrypt.org/directory
       acme_version: 2
       acme_email: certificate-reminders@blasco.id.au
+
       letsencrypt_dir: /etc/letsencrypt
-      letsencrypt_keys_dir: /etc/letsencrypt/keys
-      letsencrypt_csrs_dir: /etc/letsencrypt/csrs
-      letsencrypt_certs_dir: /etc/letsencrypt/certs
-      letsencrypt_account_key: /etc/letsencrypt/account/account.key
+
+      letsencrypt_keys_dir: "{{ letsencrypt_dir }}/keys"
+      letsencrypt_csrs_dir: "{{ letsencrypt_dir }}/csrs"
+      letsencrypt_certs_dir: "{{ letsencrypt_dir }}/certs"
+      letsencrypt_account_dir: "{{ letsencrypt_dir }}/account"
+      letsencrypt_account_key: "{{ letsencrypt_account_dir }}/account.key"
+      project_path: "{{ letsencrypt_dir }}/html"
+
       domain_name: "micro.blasco.id.au"
-      project_path: /etc/letsencrypt/html
 
     tasks:
       # Create the directories required by letsencrypt to store keys and certificates.
-      - name: "Create required directories in /etc/letsencrypt"
+      - name: "Create required directories in {{ letsencrypt_dir }}"
         #become: yes
         ansible.builtin.file:
-          path: "/etc/letsencrypt/{{ item }}"
+          path: "{{ item }}"
           state: directory
           owner: root
           group: root
           mode: u=rwx,g=x,o=x
         with_items:
-          - account
-          - certs
-          - csrs
-          - keys
-          - html
+          - "{{ letsencrypt_account_dir }}"
+          - "{{ letsencrypt_certs_dir }}"
+          - "{{ letsencrypt_csrs_dir }}"
+          - "{{ letsencrypt_keys_dir }}"
+          - "{{ project_path }}"
 
       # https://docs.ansible.com/ansible/2.9/modules/acme_certificate_module.html#acme-certificate-module
       - name: Generate let's encrypt account key
@@ -89,27 +93,14 @@
           - "{{ domain_name }}"
         when: acme_challenge is changed and domain_name|string in acme_challenge['challenge_data']
 
-      ############################################################
-      # Write tasks to
-      # - create a web server with podman and mount the above directory
-      # - create firewall rules if needed
-      # - test that web server to ensure it is reachable locally registry.redhat.io/rhel9/httpd-24
-      # https://docs.ansible.com/ansible/latest/collections/containers/podman/podman_container_module.html
-      # or
-      # https://williamlieurance.com/podman-certbot/
-      # https://github.com/geerlingguy/ansible-role-certbot
-      # https://catalog.redhat.com/software/containers/rhel9/httpd-24/61a60c2ec17162a20c1c6a5b
-      # 
       # The ACME challenge files must be served on a web server listening on port 80,
       # at the /.well-known/acme-challenge/ path for the domain or subdomain that you’re requesting
       # a certificate for. For example, in order to validate the certificate request for
       # www.your-domain, the ACME challenge file will need to be accessible over the internet
       # at the following path:
       # http://www.your-domain/.well-known/acme-challenge.
-      # 
-      # podman run -p 49156:80 -v /etc/letsencrypt:/var/www/html/.well-known/acme-challenge registry.redhat.io/rhel9/httpd-24
-      # podman run --rm -d --name httpd -p 49156:80 -v /etc/letsencrypt/html:/usr/local/apache2/htdocs:Z docker.io/httpd:2.4
 
+      # podman run --rm -d --name httpd -p 49156:80 -v /etc/letsencrypt/html:/usr/local/apache2/htdocs:Z docker.io/httpd:2.4
       - name: Create and start container for letsencrypt challenge
         containers.podman.podman_container:
           name: httpd-certificates

@@ -1,0 +1,156 @@
+---
+  # Instructions from:
+  # https://devops.stackexchange.com/questions/15891/how-can-i-set-lets-encrypt-certificates-with-ansible
+  - name: Generate a letsencrypt certificate for the host
+    hosts: micro.lan
+    become: yes
+
+    vars:
+      acme_challenge_type: http-01
+      acme_directory: https://acme-v02.api.letsencrypt.org/directory
+      acme_version: 2
+      acme_email: certificate-reminders@blasco.id.au
+      letsencrypt_dir: /etc/letsencrypt
+      letsencrypt_keys_dir: /etc/letsencrypt/keys
+      letsencrypt_csrs_dir: /etc/letsencrypt/csrs
+      letsencrypt_certs_dir: /etc/letsencrypt/certs
+      letsencrypt_account_key: /etc/letsencrypt/account/account.key
+      domain_name: "micro.blasco.id.au"
+      project_path: /etc/letsencrypt/html
+
+    tasks:
+      # Create the directories required by letsencrypt to store keys and certificates.
+      - name: "Create required directories in /etc/letsencrypt"
+        #become: yes
+        ansible.builtin.file:
+          path: "/etc/letsencrypt/{{ item }}"
+          state: directory
+          owner: root
+          group: root
+          mode: u=rwx,g=x,o=x
+        with_items:
+          - account
+          - certs
+          - csrs
+          - keys
+          - html
+
+      # https://docs.ansible.com/ansible/2.9/modules/acme_certificate_module.html#acme-certificate-module
+      - name: Generate let's encrypt account key
+        #become: yes
+        community.crypto.openssl_privatekey:
+          path: "{{ letsencrypt_account_key }}"
+
+      # https://docs.ansible.com/ansible/latest/collections/community/crypto/openssl_privatekey_module.html#openssl-privatekey-module
+      - name: Generate let's encrypt private key with the default values (4096 bits, RSA)
+        #become: yes
+        community.crypto.openssl_privatekey:
+          path: "{{ letsencrypt_keys_dir }}/{{ domain_name }}.key"
+
+      # https://docs.ansible.com/ansible/latest/collections/community/crypto/openssl_csr_module.html#openssl-csr-module
+      - name: Generate an OpenSSL Certificate Signing Request
+        #become: yes
+        community.crypto.openssl_csr:
+          path: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
+          privatekey_path: "{{ letsencrypt_keys_dir }}/{{ domain_name }}.key"
+          common_name: "{{ domain_name }}"
+
+      # Create letsencrypt challenge.
+      - name: Create a challenge for {{ domain_name }} using a account key file.
+        #become: yes
+        community.crypto.acme_certificate:
+          acme_directory: "{{ acme_directory }}"
+          acme_version: "{{ acme_version }}"
+          account_email: "{{ acme_email }}"
+          terms_agreed: yes
+          account_key_src: "{{ letsencrypt_account_key }}"
+          csr: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
+          dest: "{{ letsencrypt_certs_dir }}/{{ domain_name }}.crt"
+            #remaining_days: "{{ remaining_days }}"
+        register: acme_challenge
+
+      # Create the directory to hold the validation token.
+      - name: "Create .well-known/acme-challenge directory"
+        #become: yes
+        ansible.builtin.file:
+          path: "{{ project_path }}/.well-known/acme-challenge"
+          state: directory
+          owner: root
+          group: root
+          mode: u=rwx,g=rx,o=rx
+
+      # Copy the necessary files for the http-01 challenge.
+      - name: "Implement http-01 challenge files"
+        #become: yes
+        ansible.builtin.copy:
+          dest: "{{ project_path }}/{{ acme_challenge['challenge_data'][item]['http-01']['resource'] }}"
+          content: "{{ acme_challenge['challenge_data'][item]['http-01']['resource_value'] }}"
+        with_items:
+          - "{{ domain_name }}"
+        when: acme_challenge is changed and domain_name|string in acme_challenge['challenge_data']
+
+      ############################################################
+      # Write tasks to
+      # - create a web server with podman and mount the above directory
+      # - create firewall rules if needed
+      # - test that web server to ensure it is reachable locally registry.redhat.io/rhel9/httpd-24
+      # https://docs.ansible.com/ansible/latest/collections/containers/podman/podman_container_module.html
+      # or
+      # https://williamlieurance.com/podman-certbot/
+      # https://github.com/geerlingguy/ansible-role-certbot
+      # https://catalog.redhat.com/software/containers/rhel9/httpd-24/61a60c2ec17162a20c1c6a5b
+      # 
+      # The ACME challenge files must be served on a web server listening on port 80,
+      # at the /.well-known/acme-challenge/ path for the domain or subdomain that you’re requesting
+      # a certificate for. For example, in order to validate the certificate request for
+      # www.your-domain, the ACME challenge file will need to be accessible over the internet
+      # at the following path:
+      # http://www.your-domain/.well-known/acme-challenge.
+      # 
+      # podman run -p 49156:80 -v /etc/letsencrypt:/var/www/html/.well-known/acme-challenge registry.redhat.io/rhel9/httpd-24
+      # podman run --rm -d --name httpd -p 49156:80 -v /etc/letsencrypt/html:/usr/local/apache2/htdocs:Z docker.io/httpd:2.4
+
+      - name: Create and start container for letsencrypt challenge
+        containers.podman.podman_container:
+          name: httpd-certificates
+          image: docker.io/httpd:2.4
+          state: started
+          volume: /etc/letsencrypt/html:/usr/local/apache2/htdocs:Z
+          publish: 49156:80
+          remove: true
+          detach: true
+
+      - name: Enable firewall rule to permit traffic on high numbered port for container
+        ansible.posix.firewalld:
+          port: 49156/tcp
+          permanent: false
+          state: enabled
+
+      # Execute letsencrypt challenge.
+      - name: Let the challenge be validated and retrieve the cert and intermediate certificate 
+        #become: yes
+        community.crypto.acme_certificate:
+          account_key_src: "{{ letsencrypt_account_key }}"
+          csr: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
+          cert: "{{ letsencrypt_certs_dir }}/{{ domain_name }}.crt"
+          acme_directory: "{{ acme_directory }}"
+          acme_version: "{{ acme_version }}"
+          account_email: "{{ acme_email }}"
+          challenge: "{{ acme_challenge_type }}"
+          fullchain: "{{ letsencrypt_certs_dir }}/{{ domain_name }}-fullchain.crt"
+          chain: "{{ letsencrypt_certs_dir }}/{{ domain_name }}-intermediate.crt"
+            #remaining_days: "{{ remaining_days }}"
+          data: "{{ acme_challenge }}"
+        when: acme_challenge is changed
+        tags:
+          - execute_challenge
+
+      - name: Disable firewall rule to stop traffic on high numbered port for container
+        ansible.posix.firewalld:
+          port: 49156/tcp
+          state: disabled
+
+      - name: Delete container for letsencrypt challenge
+        containers.podman.podman_container:
+          name: httpd-certificates
+          state: absent

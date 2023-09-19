@@ -7,8 +7,8 @@
     #tags:
     #- cubox
 
-- hosts: localhost
-  connection: local
+- hosts: micro.lan
+  #connection: local
 
   name: PERFORM POST BUILD INSTALL/CONFIG OF HPE MICROSERVER
   gather_facts: yes

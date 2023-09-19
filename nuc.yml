@@ -1,6 +1,6 @@
 ---
-- hosts: localhost
-  connection: local
+- hosts: nuc.lan
+  #connection: local
 
   name: PERFORM POST BUILD INSTALL/CONFIG OF INTEL NUC SERVER
   gather_facts: yes

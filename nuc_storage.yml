@@ -1,7 +1,7 @@
-# ansible-galaxy install linux-system-roles.storage
+# ansible-galaxy collection install linux_system_roles.storage
 # then
-# cd ~/.ansible/roles/linux-system-roles.storage
-# ansible-galaxy collection install -vv -r meta/collection-requirements.yml
+# cd ~/.ansible/collections/ansible_collections/fedora/linux_system_roles/requirements.yml
+# ansible-galaxy collection install -vv -r requirements.yml
 ---
 - hosts: nuc.lan
   #connection: local

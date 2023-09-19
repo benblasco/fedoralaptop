@@ -3,8 +3,8 @@
 # cd ~/.ansible/roles/linux-system-roles.storage
 # ansible-galaxy collection install -vv -r meta/collection-requirements.yml
 ---
-- hosts: localhost
-  connection: local
+- hosts: nuc.lan
+  #connection: local
   become: yes
   vars:
     #ansible_python_interpreter: /usr/bin/python3
@@ -19,7 +19,7 @@
           - nvme0n1p3
         volumes:
           - name: root
-            size: "20 GiB"
+            size: "40 GiB"
             fs_type: xfs
             mount_point: /
             state: present
@@ -54,7 +54,7 @@
             state: present
 
   roles:
-    - linux-system-roles.storage
+    - fedora.linux_system_roles.storage
 
   tasks:
     - name: What's the user containers directory?

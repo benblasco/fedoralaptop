@@ -5,23 +5,6 @@
     hosts: micro.lan
     become: yes
 
-    vars:
-      acme_challenge_type: http-01
-      acme_directory: https://acme-v02.api.letsencrypt.org/directory
-      acme_version: 2
-      acme_email: certificate-reminders@blasco.id.au
-
-      letsencrypt_dir: /etc/letsencrypt
-
-      letsencrypt_keys_dir: "{{ letsencrypt_dir }}/keys"
-      letsencrypt_csrs_dir: "{{ letsencrypt_dir }}/csrs"
-      letsencrypt_certs_dir: "{{ letsencrypt_dir }}/certs"
-      letsencrypt_account_dir: "{{ letsencrypt_dir }}/account"
-      letsencrypt_account_key: "{{ letsencrypt_account_dir }}/account.key"
-      project_path: "{{ letsencrypt_dir }}/html"
-
-      domain_name: "micro.blasco.id.au"
-
     tasks:
       # Create the directories required by letsencrypt to store keys and certificates.
       - name: "Create required directories in {{ letsencrypt_dir }}"

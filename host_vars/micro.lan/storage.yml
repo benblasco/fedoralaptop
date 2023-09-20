@@ -1,0 +1,23 @@
+---
+# Variables for local storage configuration
+storage_pools:
+  - name: fedora_micro
+    disks:
+      - sdb3
+    volumes:
+      - name: vm_pool
+        size: "100 GiB"
+        fs_type: xfs
+        mount_point: /var/lib/libvirt/vm-pool
+        state: present
+      - name: user_containers
+        size: "20 GiB"
+        fs_type: xfs
+        mount_point: /mnt/containers
+        state: present
+      - name: root_containers
+        size: "20 GiB"
+        fs_type: xfs
+        mount_point: /var/lib/containers
+        state: present
+...

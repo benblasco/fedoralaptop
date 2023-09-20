@@ -2,7 +2,6 @@
 # Variables for local storage configuration
 mount_point_user_containers: /mnt/containers
 mount_point_root_containers: /var/lib/containers
-mount_point_crc: /home/bblasco/.crc
 
 storage_pools:
   - name: fedora_opti

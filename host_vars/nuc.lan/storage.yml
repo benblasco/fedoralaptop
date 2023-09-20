@@ -1,0 +1,46 @@
+---
+# Variables for local storage configuration
+mount_point_user_containers: /mnt/containers
+mount_point_root_containers: /var/lib/containers
+mount_point_crc: /home/bblasco/.crc
+
+storage_pools:
+  - name: fedora_nuc
+    disks:
+      - nvme-1n1p3
+    volumes:
+      - name: root
+        size: "39 GiB"
+        fs_type: xfs
+        mount_point: /
+        state: present
+      - name: vm_pool
+        size: "99 GiB"
+        fs_type: xfs
+        mount_point: /var/lib/libvirt/vm-pool
+        state: present
+      - name: user_containers
+        size: "19 GiB"
+        fs_type: xfs
+        mount_point: "{{ mount_point_user_containers }}"
+        state: present
+      - name: root_containers
+        size: "19 GiB"
+        fs_type: xfs
+        mount_point: "{{ mount_point_root_containers }}"
+        state: present
+      - name: crc
+        size: "99 GiB"
+        fs_type: xfs
+        mount_point: "{{ mount_point_crc }}"
+        state: present
+  - name: vg_samsung0tb
+    disks:
+      - sda
+    volumes:
+      - name: lv_general
+        size: "299 GiB"
+        fs_type: xfs
+        mount_point: /mnt/general
+        state: present
+...

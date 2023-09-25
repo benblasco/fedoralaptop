@@ -14,5 +14,10 @@ letsencrypt_account_dir: "{{ letsencrypt_dir }}/account"
 letsencrypt_account_key: "{{ letsencrypt_account_dir }}/account.key"
 project_path: "{{ letsencrypt_dir }}/html"
 
-domain_name: "micro.blasco.id.au"
+#domain_name: "micro.blasco.id.au"
+
+certificate_domains:
+  - "micro.blasco.id.au"
+  - "nuc.blasco.id.au"
+  - "opti.blasco.id.au"
 ...

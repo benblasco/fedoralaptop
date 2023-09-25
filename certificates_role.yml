@@ -1,0 +1,15 @@
+---
+  - name: Generate a letsencrypt certificate for the host
+    hosts: micro.lan
+    become: yes
+
+    tasks:
+      # Generate a certificate for each domain supplied
+      - name: "Generate a certificate for each domain supplied"
+        ansible.builtin.include_role:
+          name: generate_certificates
+        when: certificate_domains is defined
+        loop: "{{ certificate_domains }}"
+        loop_control:
+          loop_var: domain_name
+...

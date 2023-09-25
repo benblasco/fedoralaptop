@@ -1,0 +1,67 @@
+---
+aap_setup_down_offline_token: "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhZDUyMjdhMy1iY2ZkLTRjZjAtYTdiNi0zOTk4MzVhMDg1NjYifQ.eyJpYXQiOjE2ODk1NzY4NTksImp0aSI6ImM2MjZiNWJkLTY5OTAtNDM5Ny1hMTQ1LTc3MTA2ZjU3MTJmZiIsImlzcyI6Imh0dHBzOi8vc3NvLnJlZGhhdC5jb20vYXV0aC9yZWFsbXMvcmVkaGF0LWV4dGVybmFsIiwiYXVkIjoiaHR0cHM6Ly9zc28ucmVkaGF0LmNvbS9hdXRoL3JlYWxtcy9yZWRoYXQtZXh0ZXJuYWwiLCJzdWIiOiJmOjUyOGQ3NmZmLWY3MDgtNDNlZC04Y2Q1LWZlMTZmNGZlMGNlNjpyaG4tc2EtYmJsYXNjbyIsInR5cCI6Ik9mZmxpbmUiLCJhenAiOiJyaHNtLWFwaSIsInNlc3Npb25fc3RhdGUiOiJlNzEwNGQyYS0yMTU5LTQyY2ItYjliZS03MTMwMmMxMWM2NGEiLCJzY29wZSI6Im9mZmxpbmVfYWNjZXNzIiwic2lkIjoiZTcxMDRkMmEtMjE1OS00MmNiLWI5YmUtNzEzMDJjMTFjNjRhIn0.AIlaDpxqxJ67Cjb5Z2fqSnSD3yS6S8OU--pFBqfru6w"
+
+aap_setup_down_version: "2.4"
+aap_setup_down_type: "setup-bundle"
+aap_setup_rhel_version: "9"
+
+# TASK [redhat_cop.aap_utilities.aap_setup_install : Run the Ansible Automation Platform setup program] *********************************
+                                                                                                                  
+aap_setup_prep_inv_nodes:
+  automationcontroller:
+    - aap.opti.blasco.id.au
+  #automationhub:
+    #- aap.opti.blasco.id.au
+  #database:
+    #- aap.opti.blasco.id.au # if using an already existing DB, remove this and ensure that the following variables are filled with the valid details for your Controller and PAH
+                       # databases: pg_host, pg_port, pg_database, ph_username, pg_password, automationhub_pg_host, automationhub_pg_port, automationhub_pg_database,
+                       # automationhub_pg_username, automationhub_pg_password, automationhub_pg_sslmode
+  #execution_nodes:
+    #- aap.opti.blasco.id.au
+
+  #servicescatalog_workers:
+  #sso:
+
+aap_setup_prep_inv_vars:
+  automationcontroller: # denotes the automation controller nodes as hybrid nodes (controller and execution)
+    peers: execution_nodes
+    node_type: hybrid
+
+  execution_nodes:
+    node_type: execution
+
+  all:
+    ansible_user: ansible
+    ansible_become: true
+    admin_password: changeme # admin password for Automation Controller UI
+    pg_host: ''
+    pg_port: '5432'
+
+    pg_database: 'awx'
+    pg_username: 'awx'
+    pg_password: changeme
+    pg_sslmode: 'prefer'  # set to 'verify-full' for client-side enforced SSL
+
+    registry_url: 'registry.redhat.io'
+    receptor_listener_port: 27199
+
+    #automationhub_admin_password: changeme # admin password for PAH UI
+    #automationhub_pg_host: 'database.example'
+    #automationhub_pg_port: '5432'
+
+    #automationhub_pg_database: 'automationhub'
+    #automationhub_pg_username: 'automationhub'
+    #automationhub_pg_password: changeme
+    #automationhub_pg_sslmode: 'prefer'
+    #automationhub_main_url: hub.example
+    #automationhub_require_content_approval: False
+    #automationhub_enable_unauthenticated_collection_access: True
+
+    #automationhub_ssl_validate_certs: False
+
+    sso_console_admin_password: ''
+
+aap_setup_prep_inv_secrets:
+  all:
+    registry_username: rhn-sa-bblasco # Your access.redhat.com username
+    registry_password: Vkpyw215! # Your access.redhat.com password

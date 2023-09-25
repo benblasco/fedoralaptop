@@ -22,6 +22,16 @@
           - "{{ letsencrypt_keys_dir }}"
           - "{{ project_path }}"
 
+      # Create the directory to hold the validation token.
+      - name: "Create .well-known/acme-challenge directory"
+        #become: yes
+        ansible.builtin.file:
+          path: "{{ project_path }}/.well-known/acme-challenge"
+          state: directory
+          owner: root
+          group: root
+          mode: u=rwx,g=rx,o=rx
+
       # https://docs.ansible.com/ansible/2.9/modules/acme_certificate_module.html#acme-certificate-module
       - name: Generate let's encrypt account key
         #become: yes
@@ -56,15 +66,9 @@
             #remaining_days: "{{ remaining_days }}"
         register: acme_challenge
 
-      # Create the directory to hold the validation token.
-      - name: "Create .well-known/acme-challenge directory"
-        #become: yes
-        ansible.builtin.file:
-          path: "{{ project_path }}/.well-known/acme-challenge"
-          state: directory
-          owner: root
-          group: root
-          mode: u=rwx,g=rx,o=rx
+      - name: Print the acme challenge output
+        debug:
+          var: acme_challenge
 
       # Copy the necessary files for the http-01 challenge.
       - name: "Implement http-01 challenge files"

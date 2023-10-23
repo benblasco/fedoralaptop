@@ -1,1 +1,1 @@
-/mnt/sg1 -rw,hard,soft,retries=3,rsize=8192,wsize=8192 cubox.lan:/srv/nfs4/sg1
+/mnt/sg1 -rw,soft,timeo=100,retries=3,rsize=8192,wsize=8192 cubox.lan:/srv/nfs4/sg1

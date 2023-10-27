@@ -2,7 +2,7 @@
 - hosts: nuc.lan
   #connection: local
 
-  name: PERFORM POST BUILD INSTALL/CONFIG OF INTEL NUC SERVER
+  name: Perform post build install/config of Intel NUC server
   gather_facts: yes
   become: yes
 
@@ -15,4 +15,4 @@
   - container_host
   - tmux
     #- linux-system-roles.kdump
-    #- librespot
+  - librespot

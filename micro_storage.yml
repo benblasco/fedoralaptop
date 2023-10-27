@@ -11,23 +11,51 @@
     - geerlingguy.nfs
 
   tasks:
-    - name: Create mount point for sg1 filesystem
+
+    - name: Create mount points for media/backups
       file:
-        path: /mnt/sg1
+        path: "{{ item }}"
         state: directory
         mode: '0755'
         owner: root
         group: root
+      loop:
+        - /mnt/sg1
+        - /mnt/sg2
+        - /mnt/sg3
       tags:
         - nfs
 
-    - name: Mount sg1 filesystem from Cubox
+    - name: Mount the filesystem for media/backups
       mount:
-        src: cubox.lan:/srv/nfs4/sg1
         path: /mnt/sg1
+        src: LABEL=SEAGATE1
+        fstype: ext4
+        state: mounted
+        backup: yes
+
+    - name: Mount media/backups filesystem from NUC
+      mount:
+        src: nuc.lan:/mnt/sg2
+        path: /mnt/sg2
         opts: x-systemd.after=network-online.target
         state: mounted
         fstype: nfs
+      tags:
+        - nfs
+
+    - name: Open the appropriate firewall ports for NFS
+      firewalld:
+        zone: FedoraServer
+        service: '{{ item }}'
+        permanent: yes
+        immediate: yes
+        state: enabled
+      loop:
+        - nfs
+        - nfs3 
+        - mountd
+        - rpc-bind
       tags:
         - nfs
 

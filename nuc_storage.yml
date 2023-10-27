@@ -9,6 +9,7 @@
 
   roles:
     - fedora.linux_system_roles.storage
+    - geerlingguy.nfs
 
   tasks:
 

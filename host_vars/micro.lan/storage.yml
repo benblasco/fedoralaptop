@@ -20,4 +20,9 @@ storage_pools:
         fs_type: xfs
         mount_point: /var/lib/containers
         state: present
+      - name: vm_images
+        size: "100 GiB"
+        fs_type: xfs
+        mount_point: /mnt/vm_images
+        state: present
 ...

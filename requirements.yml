@@ -33,3 +33,7 @@ roles:
 # cd ~/.ansible/roles/linux-system-roles.storage
 # ansible-galaxy collection install -vv -r meta/requirements.yml
 #
+#
+
+# Easily configure an NFS server
+- src: geerlingguy.nfs

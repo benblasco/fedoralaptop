@@ -8,6 +8,7 @@
 
   roles:
     - fedora.linux_system_roles.storage
+    - geerlingguy.nfs
 
   tasks:
     - name: Create mount point for sg1 filesystem

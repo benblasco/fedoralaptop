@@ -1,0 +1,13 @@
+- name: Deploy and start healthchecks.io systemd unit/timer
+  hosts: all
+  become: true
+  vars:
+    systemd_unit_file_templates:
+      - healthchecks.io.heartbeat.service.j2
+      - healthchecks.io.heartbeat.timer.j2
+    systemd_started_units:
+      - healthchecks.io.heartbeat.timer
+    systemd_enabled_units:
+      - healthchecks.io.heartbeat.timer
+  roles:
+    - linux-system-roles.systemd

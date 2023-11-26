@@ -1,0 +1,16 @@
+# ANSIBLE MANAGED
+# Derived from https://gist.github.com/elyscape/7e8c1ea7ae186fd780c59e8cbf87181d
+# More knowledge at https://opensource.com/article/20/7/systemd-timers
+[Unit]
+Description=Send heartbeat every 5 minutes
+Requires=healthchecks.io.heartbeat.service
+
+[Timer]
+Unit=healthchecks.io.heartbeat.service
+#OnCalendar=*-*-* *:00/5:00
+#Persistent=true
+# Time between running each consecutive time
+OnUnitActiveSec=5m
+
+[Install]
+WantedBy=timers.target

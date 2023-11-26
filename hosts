@@ -7,3 +7,6 @@ pi4.lan
 nuc.lan
 micro.lan
 opti.lan
+
+#[all:vars]
+#ansible_ssh_common_args: '-o ProxyCommand="ssh -p 49152 -W %h:%p -q eblaben@eraser215.ddns.net"'

@@ -1,0 +1,15 @@
+# ANSIBLE MANAGED
+# Derived from https://gist.github.com/elyscape/7e8c1ea7ae186fd780c59e8cbf87181d
+# More knowledge at https://opensource.com/article/20/7/systemd-timers
+[Unit]
+Description=Healthchecks.io heartbeat
+After=network.target network-online.target
+Requisite=network.target network-online.target
+Wants=healthchecks.io.heartbeat.timer.j2
+
+[Service]
+Type=oneshot
+#EnvironmentFile=/etc/default/heartbeat
+ExecStart=/usr/bin/curl -fsS -m 10 --retry 3 "{{ healthchecks_io_url }}"
+#ExecStart=/usr/bin/curl -fsS -m 10 --retry 3 https://hc-ping.com/538ce824-0395-4f4b-91fa-7820efffa713
+StandardOutput=null

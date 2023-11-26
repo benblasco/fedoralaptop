@@ -17,7 +17,8 @@ project_path: "{{ letsencrypt_dir }}/html"
 #domain_name: "micro.blasco.id.au"
 
 certificate_domains:
-  - "micro.blasco.id.au"
-  - "nuc.blasco.id.au"
-  - "opti.blasco.id.au"
+  #- "micro.blasco.id.au"
+  #- "nuc.blasco.id.au"
+  #- "opti.blasco.id.au"
+  - "aapnew.opti.blasco.id.au"
 ...

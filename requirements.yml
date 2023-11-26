@@ -29,6 +29,7 @@ roles:
 - src: linux-system-roles.timesync
 - src: linux-system-roles.kdump
 - src: linux-system-roles.storage
+- src: linux-system-roles.systemd
 # then
 # cd ~/.ansible/roles/linux-system-roles.storage
 # ansible-galaxy collection install -vv -r meta/requirements.yml

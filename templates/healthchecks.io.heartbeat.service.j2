@@ -4,8 +4,8 @@
 [Unit]
 Description=Healthchecks.io heartbeat
 After=network.target network-online.target
-Requisite=network.target network-online.target
-Wants=healthchecks.io.heartbeat.timer.j2
+#Requisite=network.target network-online.target
+Wants=healthchecks.io.heartbeat.timer
 
 [Service]
 Type=oneshot

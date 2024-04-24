@@ -140,7 +140,9 @@
     flatpak_apps:
     - com.spotify.Client
     - org.signal.Signal
-    - com.github.Eloston.UngoogledChromium
+    #- com.github.Eloston.UngoogledChromium
+    - io.github.ungoogled_software.ungoogled_chromium
+    - io.podman_desktop.PodmanDesktop
     #- com.obsproject.Studio
 
     remove_packages:

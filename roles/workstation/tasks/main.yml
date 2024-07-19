@@ -159,6 +159,27 @@
   tags:
   - bluetooth
 
+
+- name: CREATE LOGIND.CONF.D DIRECTORY
+  file:
+    path: /etc/systemd/logind.conf.d
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+  tags:
+    - lidswitch
+
+- name: SET LID SWITCH BEHAVIOUR
+  copy:
+    src: files/logind.conf.d/lidswitch.conf
+    dest: /etc/systemd/logind.conf.d/lidswitch.conf
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+    - lidswitch
+
 # Consider removing this, refer to section on Gnome Shell extensions below in To Do list
 #- name: INSTALL GNOME SHELL EXTENSIONS
 #dnf:
@@ -250,6 +271,34 @@
     state: latest
   tags:
   - vscode
+
+# https://tailscale.com/download/linux/fedora
+- name: ADD TAILSCALE REPO
+  yum_repository:
+    name: tailscale
+    description: Tailscale stable
+    #baseurl: https://pkgs.tailscale.com/stable/fedora/{{ fedora_version }}/tailscale.repo
+    baseurl: https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+    #baseurl: https://pkgs.tailscale.com/stable/fedora/$(rpm -E %fedora)/tailscale.repo
+    #gpgkey: https://pkgs.tailscale.com/stable/fedora/{{ fedora_version }}/repo.gpg
+    gpgkey: https://pkgs.tailscale.com/stable/fedora/repo.gpg
+  tags:
+  - tailscale
+
+- name: INSTALL TAILSCALE
+  dnf:
+    name: tailscale
+    state: latest
+  tags:
+  - tailscale
+
+- name: ENABLE AND START TAILSCALE
+  service:
+    name: "tailscaled"
+    enabled: yes
+    state: started
+  tags:
+  - tailscale
 
 - name: INSTALL FLATPAK REMOTE REPOS
   become: no
@@ -634,9 +683,6 @@
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding", value: "'Launch7'", state: "present" }
 
     - { key: "/org/gtk/gtk4/settings/file-chooser/sort-directories-first", value: "true", state: "present" }
-
-
-
 
   tags:
   - dconf

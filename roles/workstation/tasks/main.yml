@@ -214,6 +214,13 @@
   tags:
   - obs
 
+- name: INSTALL KDENLIVE AND RELATED PACKAGES
+  dnf:
+    name: "{{ kdenlive_packages }}"
+    state: present
+  tags:
+  - kdenlive
+
 #- name: ADD BLUEJEANS GPG KEY
 #  rpm_key:
 #    state: present

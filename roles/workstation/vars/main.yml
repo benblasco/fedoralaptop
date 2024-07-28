@@ -134,6 +134,9 @@
     - obs-studio
     - v4l2loopback
 
+    kdenlive_packages:
+    - kdenlive
+
     flatpak_remotes:
     - { name: 'flathub', remote: 'https://flathub.org/repo/flathub.flatpakrepo' }
 

@@ -12,6 +12,143 @@
 
   tasks:
 
+    - name: Create the physical volume (PV)
+      lvg:
+        vg: fedora_micro
+        pvs: /dev/sda3
+      tags:
+      - lvm
+  
+    - name: Create the logical volume on disk for root
+      lvol:
+        vg: fedora_micro
+        lv: root
+        size: 20g
+      tags:
+      - lvm
+  
+    - name: Create the filesystem for root
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_micro/root
+        resizefs: yes
+      tags:
+      - lvm
+  
+    - name: Mount the filesystem
+      mount:
+        path: /
+        src: /dev/mapper/fedora_micro-root
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+  
+    - name: Create the logical volume on disk for vm_pool
+      lvol:
+        vg: fedora_micro
+        lv: vm_pool
+        size: 100g
+      tags:
+      - lvm
+  
+    - name: Create the filesystem for vm_pool
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_micro/vm_pool
+        resizefs: yes
+      tags:
+      - lvm
+  
+    - name: Mount the filesystem for vm_pool
+      mount:
+        path: /var/lib/libvirt/vm-pool
+        src: /dev/mapper/fedora_micro-vm_pool
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+  
+    - name: Create the logical volume on disk for user_containers
+      lvol:
+        vg: fedora_micro
+        lv: user_containers
+        size: 20g
+      tags:
+      - lvm
+  
+    - name: Create the filesystem for user_containers
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_micro/user_containers
+        resizefs: yes
+      tags:
+      - lvm
+  
+    - name: Mount the filesystem for user_containers
+      mount:
+        path: /mnt/containers
+        src: /dev/mapper/fedora_micro-user_containers
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+  
+    - name: Create the logical volume on disk for root_containers
+      lvol:
+        vg: fedora_micro
+        lv: root_containers
+        size: 20g
+      tags:
+      - lvm
+  
+    - name: Create the filesystem for root_containers
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_micro/root_containers
+        resizefs: yes
+      tags:
+      - lvm
+  
+    - name: Mount the filesystem for root_containers
+      mount:
+        path: /var/lib/containers
+        src: /dev/mapper/fedora_micro-root_containers
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+
+    - name: Create the logical volume on disk for vm_images
+      lvol:
+        vg: fedora_micro
+        lv: vm_images
+        size: 100g
+      tags:
+      - lvm
+  
+    - name: Create the filesystem for vm_images
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_micro/vm_images
+        resizefs: yes
+      tags:
+      - lvm
+
+    - name: Mount the filesystem for vm_images
+      mount:
+        path: /mnt/vm_images
+        src: /dev/mapper/fedora_micro-vm_images
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+
     - name: Create mount points for media/backups
       file:
         path: "{{ item }}"

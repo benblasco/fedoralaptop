@@ -13,7 +13,9 @@
   - common
   - server
   - container_host
-  - tmux
-    #- linux-system-roles.kdump
-  - librespot
+  - fedora.linux_system_roles.timesync
   - fedora.linux_system_roles.cockpit
+  #- fedora.linux_system_roles.kdump
+  - tmux
+  - librespot
+

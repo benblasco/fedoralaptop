@@ -17,6 +17,7 @@
   roles:
   - common
   - server
-  - tmux
+  - fedora.linux_system_roles.timesync
   - fedora.linux_system_roles.cockpit
+  - tmux
 

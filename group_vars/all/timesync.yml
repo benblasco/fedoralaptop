@@ -1,0 +1,6 @@
+timesync_ntp_servers:
+  - hostname: au.pool.ntp.org
+    pool: yes
+    iburst: yes
+
+timezone: "Australia/Melbourne"

@@ -19,5 +19,6 @@
   - server
   - fedora.linux_system_roles.timesync
   - fedora.linux_system_roles.cockpit
+  - fedora.linux_system_roles.podman
   - tmux
 

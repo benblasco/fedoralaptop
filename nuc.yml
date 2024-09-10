@@ -12,9 +12,9 @@
   roles:
   - common
   - server
-  - container_host
   - fedora.linux_system_roles.timesync
   - fedora.linux_system_roles.cockpit
+  - fedora.linux_system_roles.podman
   #- fedora.linux_system_roles.kdump
   - tmux
   - librespot

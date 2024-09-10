@@ -1,7 +1,0 @@
----
-# vars file for container_host
-
-    container_packages:
-    - podman
-    - buildah
-    - skopeo

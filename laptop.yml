@@ -18,3 +18,4 @@
   - common
   - workstation
   - tmux
+  - fedora.linux_system_roles.cockpit

@@ -10,17 +10,5 @@ tuning_packages:
   - linux-system-roles
   - tuned
 
-cockpit_packages:
-  - cockpit
-    #- cockpit-dashboard
-  - cockpit-podman
-  - cockpit-machines
-  - cockpit-networkmanager
-  - cockpit-storaged
-  - cockpit-pcp
-  - cockpit-composer
-  - cockpit-kdump
-  - cockpit-selinux
-
 jenkins_node_packages:
   - java-11-openjdk

@@ -40,13 +40,6 @@
   tags:
   - jenkins
 
-- name: INSTALL COCKPIT AND PLUGIN PACKAGES
-  dnf:
-    name: "{{ cockpit_packages }}"
-    state: present
-  tags:
-  - cockpit
-
 - name: ENABLE THE TUNED SERVICE
   systemd:
     name: tuned
@@ -54,11 +47,3 @@
     state: started
   tags:
   - tuning
-
-- name: ENABLE THE COCKPIT SERVICE
-  systemd:
-    name: cockpit.socket
-    enabled: yes
-    state: started
-  tags:
-  - cockpit

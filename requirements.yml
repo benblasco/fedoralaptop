@@ -11,6 +11,8 @@
 collections:
 # For automating podman containers
 - containers.podman
+- fedora.linux_system_roles
+
 
 roles:
 # Ansible Galaxy role for configuring host as a hypervisor

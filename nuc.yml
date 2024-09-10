@@ -16,3 +16,4 @@
   - tmux
     #- linux-system-roles.kdump
   - librespot
+  - fedora.linux_system_roles.cockpit

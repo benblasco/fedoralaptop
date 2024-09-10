@@ -1,0 +1,11 @@
+cockpit_enabled: true
+
+cockpit_started: true
+
+cockpit_manage_firewall: true
+
+cockpit_packages: full
+
+cockpit_config:
+  Session:
+    IdleTimeout: 15

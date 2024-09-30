@@ -4,16 +4,16 @@
 - name: SYNCHRONIZE LOCAL PACKAGES TO BE INSTALLED FROM MY SFTP SERVER
   synchronize:
     mode: pull
-    src: /home/eblaben/fedora_build/
+    src: /mnt/sg1/eblaben_backup/fedora_build/
     dest: /tmp/fedora_build/
     compress: no
   register: synchronize_output
   tags:
-    - cubox
+    - micro
     - remotefiles
 
 - name: SHOW SYNCHRONIZATION OUTPUT
   debug: var=synchronize_output
   tags:
-    - cubox
+    - micro
     - remotefiles

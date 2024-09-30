@@ -1,11 +1,11 @@
-- hosts: cubox
+- hosts: micro.lan
   name: PULL THE FILES REQUIRED FOR POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP
   gather_facts: no
 
   roles:
   - prereqs
   tags:
-  - cubox
+  - micro
 
 - hosts: localhost
   connection: local

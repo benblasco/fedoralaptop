@@ -1,0 +1,14 @@
+[Unit]
+Description=Librespot (an open source Spotify client)
+Documentation=https://github.com/librespot-org/librespot
+Documentation=https://github.com/librespot-org/librespot/wiki/Options
+Wants=network.target sound.target
+After=network.target sound.target
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStart=/root/.cargo/bin/librespot --name=LibreSpot@{{ ansible_hostname }} --bitrate=320 --zeroconf-port=49999 --backend=alsa --device=hw:CARD=Device,DEV=0 --initial-volume=100 -v
+
+[Install]
+WantedBy=default.target

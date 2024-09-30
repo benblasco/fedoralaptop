@@ -1,0 +1,21 @@
+---
+- hosts: rafibox.lan
+  name: Copy and enable librespot systemd unit
+  gather_facts: yes
+  become: yes
+
+  tasks:
+
+  - name: Copy the templated systemd service unit file
+    template:
+      src: librespot_rafibox.service.j2
+      dest: /etc/systemd/system/librespot.service
+      owner: root
+      group: root
+      mode: '0755'
+
+  - name: Enable the service
+    systemd:
+      name: librespot
+      enabled: yes
+      state: started

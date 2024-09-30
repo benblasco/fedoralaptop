@@ -12,6 +12,117 @@
 
   tasks:
 
+    - name: Create the physical volume (PV)
+      lvg:
+        vg: fedora_opti
+        pvs: /dev/sda3
+      tags:
+      - lvm
+
+    - name: Create the logical volume on disk for root
+      lvol:
+        vg: fedora_opti
+        lv: root
+        size: 30g
+      tags:
+      - lvm
+
+    - name: Create the filesystem for root
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_opti/root
+        resizefs: yes
+      tags:
+      - lvm
+
+    - name: Mount the filesystem
+      mount:
+        path: /
+        src: /dev/mapper/fedora_opti-root
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+
+    - name: Create the logical volume on disk for user_containers
+      lvol:
+        vg: fedora_opti
+        lv: user_containers
+        size: 20g
+      tags:
+      - lvm
+
+    - name: Create the filesystem for user_containers
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_opti/user_containers
+        resizefs: yes
+      tags:
+      - lvm
+
+    - name: Mount the filesystem for user_containers
+      mount:
+        path: /mnt/containers
+        src: /dev/mapper/fedora_opti-user_containers
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm 
+
+    - name: Create the logical volume on disk for root_containers
+      lvol:
+        vg: fedora_opti
+        lv: root_containers
+        size: 20g
+      tags:
+      - lvm
+
+    - name: Create the filesystem for root_containers
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_opti/root_containers
+        resizefs: yes
+      tags:
+      - lvm
+
+    - name: Mount the filesystem for root_containers
+      mount:
+        path: /var/lib/containers
+        src: /dev/mapper/fedora_opti-root_containers
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+
+    - name: Create the logical volume on disk for vm_pool
+      lvol:
+        vg: fedora_opti
+        lv: vm_pool
+        size: 140g
+      tags:
+        - lvm
+
+    - name: Create the filesystem for vm_pool
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_opti/vm_pool
+        resizefs: yes
+      tags:
+        - lvm
+
+    - name: Mount the filesystem for vm_pool
+      mount:
+        path: /var/lib/libvirt/vm-pool
+        src: /dev/mapper/fedora_opti-vm_pool
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+        - lvm
+
     - name: Create mount point for vm_images filesystem
       file:
         path: /mnt/vm_images
@@ -24,7 +135,7 @@
 
     - name: Mount vm_images filesystem from MicroServer
       mount:
-        src: micro.lan:/mnt/vm_images
+        src: opti.lan:/mnt/vm_images
         path: /mnt/vm_images
         opts: x-systemd.after=network-online.target
         state: mounted

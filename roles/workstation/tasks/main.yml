@@ -570,6 +570,7 @@
 #    mode: '0644'
 #  tags:
 #  - autofs
+#  - never
 
 #- name: COPY AUTOFS MAPPING FILE
 #  copy:
@@ -580,6 +581,7 @@
 #    mode: '0644'
 #  tags:
 #  - autofs
+#  - never
 
 #- name: COPY AUTOFS NetworkManager-dispatcher PRE-UP SCRIPT
 #  copy:
@@ -590,6 +592,7 @@
 #    mode: '0744'
 #  tags:
 #  - autofs
+#  - never
 
 #- name: COPY AUTOFS NetworkManager-dispatcher PRE-DOWN SCRIPT
 #  copy:
@@ -600,6 +603,7 @@
 #    mode: '0744'
 #  tags:
 #  - autofs
+#  - never
 
 - name: CREATE AUTOFS MOUNT POINT
   file:
@@ -619,6 +623,7 @@
 #    state: reloaded
 #  tags:
 #  - autofs
+#  - never
 
 - name: REMOVE PACKAGES I DON'T WANT ON THE SYSTEM
   dnf:

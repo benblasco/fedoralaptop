@@ -56,7 +56,7 @@ Time
 - [x] Enable automatic time zone
 
 Displays
-- Orient the screens correctly
+- [ ] Orient the screens correctly
 - [x] Enable night light
 
 Nautilus File Manager
@@ -80,7 +80,7 @@ Install Firefox extensions
 - Click on the extensions icon to show the list of extensions, and then right click on an extension to select "pin to toolbar"
     - https://www.reddit.com/r/firefox/comments/10f8ohq/how_to_bring_back_addon_icons_to_toolbar_after/
 
-Configure Firefox Hardware Acceleration:
+Configure Firefox Hardware Acceleration (which should already be done out of the box nowadays):
 - https://fedoraproject.org/wiki/Firefox_Hardware_acceleration
 
 Disable ctrl-q shortcut in Firefox as per https://superuser.com/questions/1318336/how-to-disable-ctrlq-shortcut-in-firefox-on-linux
@@ -104,12 +104,6 @@ Configure Joplin Notes
 - Change the default date format (Tools -> Options)
 - Switch default editor to vi mode (Tools -> Options -> General -> Show Advanced Settings -> Keyboard Mode: Vim)
 
-Install Todoist AppImage
-- https://todoist.com/help/articles/how-to-install-todoist-on-linux
-
-Configure Evernote (NixNote2)
-- Tools -> Sync, then log in to your account
-
 Configure Dropbox
 - Run Dropbox and follow the prompts
 - Disable annoying notifications via the following commands as regular user:
@@ -122,13 +116,9 @@ Configure Dropbox
     - Also note that accessing the dropbox GUI depends on legacy tray icon support in Gnome:
     https://extensions.gnome.org/extension/615/appindicator-support/
 
+Grab your VSCode extensions and settings
+- https://code.visualstudio.com/docs/editor/settings-sync
 
 Install and restore Calibre E-Book library
 - https://calibre-ebook.com/download_linux
 - https://manual.calibre-ebook.com/faq.html#how-do-i-move-my-calibre-data-from-one-computer-to-another
-
-# QUESTIONS/UPDATES REQUIRED
-
-Try IDM integration as per:
-https://mojo.redhat.com/docs/DOC-1199178
-(See Engineering Server - non-fresh RHEL 7, non-fresh RHEL 8 or RHEL 5 or 6)

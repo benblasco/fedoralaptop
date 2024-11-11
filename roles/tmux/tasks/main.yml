@@ -8,6 +8,7 @@
     state: latest
   tags:
   - tmux
+  - install-tmux
 
 - name: Clone the tmux profile Git repo
   become: no
@@ -18,3 +19,4 @@
   - update_tmux_profiles
   tags:
   - tmux
+  - tmux-profile

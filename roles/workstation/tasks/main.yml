@@ -495,14 +495,6 @@
   tags:
   - ssh
 
-- name: COPY TERMINATOR CONFIG FILE
-  copy:
-    src: files/terminator/config
-    dest: /home/bblasco/.terminator
-    owner: bblasco
-    group: bblasco
-    mode: '0644'
-
 - name: COPY RSYNC FILES
   copy:
     src: files/rsync

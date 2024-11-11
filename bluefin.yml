@@ -1,0 +1,14 @@
+- hosts: bluefin
+
+  name: PERFORM POST BUILD INSTALL/CONFIG OF FEDORA LAPTOP RUNNING BLUEFIN
+  gather_facts: yes
+  become: yes
+
+  roles:
+  - common
+  - workstation
+  - tmux
+  - fedora.linux_system_roles.timesync
+  #- fedora.linux_system_roles.cockpit
+  #- fedora.linux_system_roles.podman
+

@@ -122,3 +122,8 @@ Grab your VSCode extensions and settings
 Install and restore Calibre E-Book library
 - https://calibre-ebook.com/download_linux
 - https://manual.calibre-ebook.com/faq.html#how-do-i-move-my-calibre-data-from-one-computer-to-another
+
+Configure the APAC SecurePrint printer (while on the VPN)
+```
+lpadmin -p APAC_SecurePrint -E -v ipp://aws-rps01.win.redhat.com:631/ipp/print/APAC_SecurePrint_IPP -m everywhere
+```

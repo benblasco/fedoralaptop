@@ -1,4 +1,6 @@
 localhost ansible_connection=local
+bluefin ansible_connection=local
+#bluefin ansible_host=10.76.193.15
 #localhost
 cubox ansible_host=eraser215.ddns.net ansible_user=eblaben ansible_port=49152
 #cubox ansible_host=192.168.1.2 ansible_user=eblaben ansible_port=22
@@ -9,6 +11,7 @@ micro.lan
 opti.lan
 ospi.lan ansible_user=pi
 rafibox.lan ansible_user=debian
+aapnew.opti.blasco.id.au
 
 #[all:vars]
 #ansible_ssh_common_args='-o ProxyCommand="ssh -p 49152 -W %h:%p -q eblaben@eraser215.ddns.net"'

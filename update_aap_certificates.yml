@@ -1,96 +1,99 @@
 ---
 
-  - name: Collect certificates to push to AAP
-    hosts: micro.lan
-    gather_facts: no
-    become: yes
+- name: Collect certificates to push to AAP
+  hosts: micro.lan
+  gather_facts: no
+  become: yes
 
-    vars:
-      
-      remote_base_dir: "/etc/letsencrypt"
-      remote_certs: "certs"
-      remote_keys: "keys"
+  vars:
 
-      certificate_file: "aapnew.opti.blasco.id.au-fullchain.crt"
-      key_file: "aapnew.opti.blasco.id.au.key"
-      local_tmp_dir: "/var/tmp/aap_certificates"
+    remote_base_dir: "/etc/letsencrypt"
+    remote_certs: "certs"
+    remote_keys: "keys"
 
-    tasks:
+    certificate_file: "aapnew.opti.blasco.id.au-fullchain.crt"
+    key_file: "aapnew.opti.blasco.id.au.key"
+    local_tmp_dir: "/var/tmp/aap_certificates"
 
-      - name: Pull the certificates down
-        ansible.builtin.fetch:
-          src: "{{ item }}"
-          dest: "{{ local_tmp_dir }}/"
-          flat: true
-        loop:
-          - "{{ remote_base_dir }}/{{ remote_certs }}/{{ certificate_file }}"
-          - "{{ remote_base_dir }}/{{ remote_keys }}/{{ key_file }}"
-        register: synchronize_output
-        tags:
-          - remotefiles
+  tasks:
 
-      - name: Show synchronization output
-        ansible.builtin.debug: var=synchronize_output
-        tags:
-          - remotefiles
+    - name: Pull the certificates down
+      ansible.builtin.fetch:
+        src: "{{ item }}"
+        dest: "{{ local_tmp_dir }}/"
+        flat: true
+      loop:
+        - "{{ remote_base_dir }}/{{ remote_certs }}/{{ certificate_file }}"
+        - "{{ remote_base_dir }}/{{ remote_keys }}/{{ key_file }}"
+      register: synchronize_output
+      tags:
+        - remotefiles
 
-      - name: Set facts for the next play
-        ansible.builtin.set_fact:
-          certificate_file: "{{ certificate_file }}"
-          key_file: "{{ key_file }}"
-          local_tmp_dir: "{{ local_tmp_dir }}"
+    - name: Show synchronization output
+      ansible.builtin.debug:
+        var: synchronize_output
+      tags:
+        - remotefiles
 
-      - name: Show the host vars
-        ansible.builtin.debug:
-          var: hostvars['micro.lan']['certificate_file']
+    - name: Set facts for the next play
+      ansible.builtin.set_fact:
+        certificate_file: "{{ certificate_file }}"
+        key_file: "{{ key_file }}"
+        local_tmp_dir: "{{ local_tmp_dir }}"
 
-  - name: Copy updated certificates to AAP
-    hosts: aapnew.opti.blasco.id.au
-    gather_facts: no
-    become: yes
-    become_user: aap
+    - name: Show the host vars
+      ansible.builtin.debug:
+        var: hostvars['micro.lan']['certificate_file']
 
-    vars:
-      # Grab the facts set in the previous play so they are easier to use here
-      certificate_file: "{{ hostvars['micro.lan']['certificate_file'] }}"
-      key_file: "{{ hostvars['micro.lan']['key_file'] }}"
-      local_tmp_dir: "{{ hostvars['micro.lan']['local_tmp_dir'] }}"
+- name: Copy updated certificates to AAP
+  hosts: aapnew.opti.blasco.id.au
+  gather_facts: no
+  become: yes
+  become_user: aap
 
-    tasks:
+  vars:
+    # Grab the facts set in the previous play so they are easier to use here
+    certificate_file: "{{ hostvars['micro.lan']['certificate_file'] }}"
+    key_file: "{{ hostvars['micro.lan']['key_file'] }}"
+    local_tmp_dir: "{{ hostvars['micro.lan']['local_tmp_dir'] }}"
 
-      - name: Show the host vars
-        ansible.builtin.debug:
-          var: hostvars['micro.lan']['certificate_file']
+  tasks:
 
-      - name: Push the certificates out
-        ansible.builtin.copy:
-          src: "{{ local_tmp_dir }}/{{ certificate_file }}"
-          dest: "{{ item }}"
-        loop:
-          - "~/aap/controller/etc/tower.cert"
-          - "~/aap/hub/etc/pulp.cert"
-          - "~/aap/eda/etc/eda.cert"
-        notify:
-          - Restart AAP front-end
+    - name: Show the host vars
+      ansible.builtin.debug:
+        var: hostvars['micro.lan']['certificate_file']
 
-      - name: Push the keys out
-        ansible.builtin.copy:
-          src: "{{ local_tmp_dir }}/{{ key_file }}"
-          dest: "{{ item }}"
-        loop:
-          - "~/aap/controller/etc/tower.key"
-          - "~/aap/hub/etc/pulp.key"
-          - "~/aap/eda/etc/eda.key"
-        notify:
-          - Restart AAP front-end
+    - name: Push the certificates out
+      ansible.builtin.copy:
+        src: "{{ local_tmp_dir }}/{{ certificate_file }}"
+        dest: "{{ item }}"
+        mode: '0644'
+      loop:
+        - "~/aap/controller/etc/tower.cert"
+        - "~/aap/hub/etc/pulp.cert"
+        - "~/aap/eda/etc/eda.cert"
+      notify:
+        - Restart AAP front-end
 
-    handlers:
-      - name: Restart AAP front-end
-        ansible.builtin.service:
-          name: "{{ item }}"
-          state: restarted
-          scope: user
-        loop:
-          - automation-controller-web.service
-          - automation-hub-web.service
-          - automation-eda-web.service
+    - name: Push the keys out
+      ansible.builtin.copy:
+        src: "{{ local_tmp_dir }}/{{ key_file }}"
+        dest: "{{ item }}"
+        mode: '0400'
+      loop:
+        - "~/aap/controller/etc/tower.key"
+        - "~/aap/hub/etc/pulp.key"
+        - "~/aap/eda/etc/eda.key"
+      notify:
+        - Restart AAP front-end
+
+  handlers:
+    - name: Restart AAP front-end
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: restarted
+        scope: user
+      loop:
+        - automation-controller-web.service
+        - automation-hub-web.service
+        - automation-eda-web.service

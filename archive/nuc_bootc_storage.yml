@@ -1,0 +1,44 @@
+# ansible-galaxy collection install linux_system_roles.storage
+# then
+# cd ~/.ansible/collections/ansible_collections/fedora/linux_system_roles/requirements.yml
+# ansible-galaxy collection install -vv -r requirements.yml
+---
+- hosts: nuc.lan
+  #connection: local
+  become: yes
+
+  vars:
+    firewall:
+      - service: [nfs,nfs3,mountd,rpc-bind]
+        state: enabled
+
+  roles:
+    - fedora.linux_system_roles.storage
+    - fedora.linux_system_roles.firewall
+    - geerlingguy.nfs
+
+  tasks:
+
+    - name: Create mount points for media/backups
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+      loop:
+        - /mnt/sg1
+        - /mnt/sg2
+        - /mnt/sg3
+      tags:
+        - nfs
+
+    - name: Mount the filesystem for media/backups
+      mount:
+        path: /mnt/sg2
+        src: LABEL=SEAGATE2
+        fstype: ext4
+        state: mounted
+        backup: yes
+      tags:
+        - nfs

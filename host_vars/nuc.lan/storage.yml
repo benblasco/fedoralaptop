@@ -2,38 +2,38 @@
 # Variables for local storage configuration
 mount_point_user_containers: /mnt/containers
 mount_point_root_containers: /var/lib/containers
-mount_point_crc: /home/bblasco/.crc
+#mount_point_crc: /home/bblasco/.crc
 
 storage_pools:
-  - name: fedora_nuc
-    disks:
-      - nvme0n1p3
-    volumes:
-      - name: root
-        size: "40 GiB"
-        fs_type: xfs
-        mount_point: /
-        state: present
-      - name: vm_pool
-        size: "100 GiB"
-        fs_type: xfs
-        mount_point: /var/lib/libvirt/vm-pool
-        state: present
-      - name: user_containers
-        size: "20 GiB"
-        fs_type: xfs
-        mount_point: "{{ mount_point_user_containers }}"
-        state: present
-      - name: root_containers
-        size: "20 GiB"
-        fs_type: xfs
-        mount_point: "{{ mount_point_root_containers }}"
-        state: present
-      - name: crc
-        size: "100 GiB"
-        fs_type: xfs
-        mount_point: "{{ mount_point_crc }}"
-        state: present
+#  - name: fedora_nuc
+#    disks:
+#      - nvme0n1p3
+#    volumes:
+#      - name: root
+#        size: "40 GiB"
+#        fs_type: xfs
+#        mount_point: /
+#        state: present
+#      - name: vm_pool
+#        size: "100 GiB"
+#        fs_type: xfs
+#        mount_point: /var/lib/libvirt/vm-pool
+#        state: present
+#      - name: user_containers
+#        size: "20 GiB"
+#        fs_type: xfs
+#        mount_point: "{{ mount_point_user_containers }}"
+#        state: present
+#      - name: root_containers
+#        size: "20 GiB"
+#        fs_type: xfs
+#        mount_point: "{{ mount_point_root_containers }}"
+#        state: present
+#      - name: crc
+#        size: "100 GiB"
+#        fs_type: xfs
+#        mount_point: "{{ mount_point_crc }}"
+#        state: present
   - name: vg_samsung1tb
     disks:
       - sda
@@ -41,6 +41,6 @@ storage_pools:
       - name: lv_general
         size: "300 GiB"
         fs_type: xfs
-        mount_point: /mnt/general
+        mount_point: /var/mnt/general
         state: present
 ...

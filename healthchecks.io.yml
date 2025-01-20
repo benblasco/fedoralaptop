@@ -10,5 +10,5 @@
     systemd_enabled_units:
       - healthchecks.io.heartbeat.timer
   roles:
-    - role: linux-system-roles.systemd
+    - role: fedora.linux_system_roles.systemd
       when: healthchecks_io_url is defined

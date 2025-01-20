@@ -135,7 +135,7 @@
 
     - name: Mount vm_images filesystem from MicroServer
       mount:
-        src: opti.lan:/mnt/vm_images
+        src: micro.lan:/mnt/vm_images
         path: /mnt/vm_images
         opts: x-systemd.after=network-online.target
         state: mounted

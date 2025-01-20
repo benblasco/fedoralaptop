@@ -54,6 +54,26 @@
     tags:
     - podman
 
+  - name: Create mount point for vm_images filesystem
+    file:
+      path: /mnt/vm_images
+      state: directory
+      mode: '0755'
+      owner: root
+      group: root
+    tags:
+    - nfs
+
+  - name: Mount vm_images filesystem from MicroServer
+    mount:
+      src: micro.lan:/mnt/vm_images
+      path: /mnt/vm_images
+      opts: x-systemd.after=network-online.target
+      state: mounted
+      fstype: nfs
+    tags:
+    - nfs
+
   roles:
   #- common
   #- server

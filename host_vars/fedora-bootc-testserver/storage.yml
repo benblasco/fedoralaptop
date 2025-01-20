@@ -3,14 +3,14 @@
 mount_point_user_containers: /mnt/containers
 mount_point_root_containers: /var/lib/containers
 
-storage_pools:
-  - name: fedoravg
-    disks:
-      - vda4
-    volumes:
-      - name: testlv
-        size: "1 GiB"
-        fs_type: xfs
-        mount_point: /mnt/test
-        state: present
+#storage_pools:
+#  - name: fedoravg
+#    disks:
+#      - vda4
+#    volumes:
+#      - name: testlv
+#        size: "1 GiB"
+#        fs_type: xfs
+#        mount_point: /mnt/test
+#        state: present
 ...

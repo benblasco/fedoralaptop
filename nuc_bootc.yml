@@ -59,7 +59,7 @@
 
     - name: Create mount point for vm_images filesystem
       ansible.builtin.file:
-        path: /mnt/vm_images
+        path: /var/mnt/vm_images
         state: directory
         mode: '0755'
         owner: root
@@ -70,7 +70,7 @@
     - name: Mount vm_images filesystem from MicroServer
       ansible.posix.mount:
         src: micro.lan:/mnt/vm_images
-        path: /mnt/vm_images
+        path: /var/mnt/vm_images
         opts: x-systemd.after=network-online.target
         state: mounted
         fstype: nfs
@@ -85,15 +85,15 @@
         owner: root
         group: root
       loop:
-        - /mnt/sg1
-        - /mnt/sg2
-        - /mnt/sg3
+        - /var/mnt/sg1
+        - /var/mnt/sg2
+        - /var/mnt/sg3
       tags:
         - nfs
 
     - name: Mount the filesystem for media/backups
       ansible.posix.mount:
-        path: /mnt/sg2
+        path: /var/mnt/sg2
         src: LABEL=SEAGATE2
         fstype: ext4
         state: mounted

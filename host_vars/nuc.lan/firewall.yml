@@ -1,0 +1,6 @@
+---
+# Enable NFS-related services for export of /var/mnt/sg2
+firewall:
+  - service: [nfs, nfs3, mountd, rpc-bind]
+    state: enabled
+

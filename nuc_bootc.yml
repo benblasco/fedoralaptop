@@ -4,11 +4,6 @@
   gather_facts: yes
   become: yes
 
-  vars:
-    firewall:
-      - service: [nfs, nfs3, mountd, rpc-bind]
-        state: enabled
-
   pre_tasks:
     - name: Set the system hostname correctly
       ansible.builtin.hostname:

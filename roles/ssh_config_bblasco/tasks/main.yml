@@ -1,0 +1,26 @@
+---
+# tasks file for roles/ssh_config_bblasco
+
+- name: Create .ssh directory
+  file:
+    path: /home/bblasco/.ssh
+    owner: bblasco
+    group: bblasco
+    mode: '0700'
+    state: directory
+  tags:
+  - ssh
+
+- name: Copy ssh config and private key files
+  copy:
+    src: files/ssh/{{ item }}
+    dest: /home/bblasco/.ssh
+    owner: bblasco
+    group: bblasco
+    mode: '0600'
+  loop:
+    - config
+    - id_rsa
+    - id_rsa.pub
+  tags:
+  - ssh

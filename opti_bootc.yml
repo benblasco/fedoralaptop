@@ -87,8 +87,7 @@
         - nfs
 
   roles:
-    #- common
-    #- server
+    - ssh_config_bblasco
     #- fedora.linux_system_roles.storage
     - fedora.linux_system_roles.firewall
     - fedora.linux_system_roles.timesync

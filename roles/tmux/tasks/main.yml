@@ -1,11 +1,41 @@
 ---
 # tasks file for roles/tmux
 
+# This block is directly lifted from:
+# https://github.com/linux-system-roles/storage/blob/main/tasks/set_vars.yml
+- name: Determine if system is ostree and set flag
+  when: not __storage_is_ostree is defined
+  block:
+    - name: Check if system is ostree
+      stat:
+        path: /run/ostree-booted
+      register: __ostree_booted_stat
+
+    - name: Set flag to indicate system is ostree
+      set_fact:
+        __storage_is_ostree: "{{ __ostree_booted_stat.stat.exists }}"
+  tags:
+  - tmux
+
+- name: Tell the user what the "__storage_is_ostree" value is
+  ansible.builtin.debug:
+    msg: "Variable value is {{ __storage_is_ostree }}"
+  tags:
+  - tmux
+
+- name: Tell the user when this is an ostree/bootc system
+  ansible.builtin.debug:
+    msg: "System is ostree/bootc based, so package installation will be skipped."
+  when: __storage_is_ostree
+  tags:
+  - tmux
+
 - name: Install tmux package
   become: yes
   dnf:
     name: tmux
     state: latest
+  when: not __storage_is_ostree
   tags:
   - tmux
   - install-tmux

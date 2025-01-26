@@ -1,28 +1,69 @@
 ---
 # Variables for local storage configuration
-storage_pools:
-  - name: fedora_micro
-    disks:
-      - sdb3
-    volumes:
-      - name: vm_pool
-        size: "100 GiB"
-        fs_type: xfs
-        mount_point: /var/lib/libvirt/vm-pool
-        state: present
-      - name: user_containers
-        size: "20 GiB"
-        fs_type: xfs
-        mount_point: /mnt/containers
-        state: present
-      - name: root_containers
-        size: "20 GiB"
-        fs_type: xfs
-        mount_point: /var/lib/containers
-        state: present
-      - name: vm_images
-        size: "100 GiB"
-        fs_type: xfs
-        mount_point: /mnt/vm_images
-        state: present
+#storage_pools:
+#  - name: fedora_micro
+#    disks:
+#      - sdb3
+#    volumes:
+#      - name: vm_pool
+#        size: "100 GiB"
+#        fs_type: xfs
+#        mount_point: /var/lib/libvirt/vm-pool
+#        state: present
+#      - name: user_containers
+#        size: "20 GiB"
+#        fs_type: xfs
+#        mount_point: /mnt/containers
+#        state: present
+#      - name: root_containers
+#        size: "20 GiB"
+#        fs_type: xfs
+#        mount_point: /var/lib/containers
+#        state: present
+#      - name: vm_images
+#        size: "100 GiB"
+#        fs_type: xfs
+#        mount_point: /mnt/vm_images
+#        state: present
+#storage_volumes:
+#  - name: wd_xfs1
+#    type: partition
+#    disks: ["sdb1"]
+#      #- sdb1
+#    fs_type: xfs
+#    fs_label: WD_XFS1
+#    mount_point: /mnt/wd_xfs1
+#    mount_user: root
+#    mount_group: root
+#    mount_mode: 0755
+#  - name: sg3
+#    type: disk
+#    disks:
+#      - sdb2
+#    fs_type: ext4
+#    fs_label: WD_SG3
+#    mount_point: /mnt/sg3
+#    mount_user: root
+#    mount_group: root
+#    mount_mode: 0755
+#  - name: martinbackup
+#    type: disk
+#    disks:
+#      - sdb3
+#    fs_type: ext4
+#    fs_label: WD_MARTIN
+#    mount_point: /mnt/martinbackup
+#    mount_user: root
+#    mount_group: root
+#    mount_mode: 0755
+#  - name: spare
+#    type: disk
+#    disks:
+#      - sdb4
+#    fs_type: ext4
+#    fs_label: spare
+#    mount_point: /mnt/spare
+#    mount_user: root
+#    mount_group: root
+#    mount_mode: 0755
 ...

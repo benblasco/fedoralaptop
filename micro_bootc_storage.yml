@@ -1,0 +1,110 @@
+# ansible-galaxy collection install linux_system_roles.storage
+# then
+# cd ~/.ansible/collections/ansible_collections/fedora/linux_system_roles/requirements.yml
+# ansible-galaxy collection install -vv -r requirements.yml
+- hosts: micro.lan
+  #connection: local
+  become: yes
+
+  roles:
+    - fedora.linux_system_roles.storage
+    - geerlingguy.nfs
+
+  pre_tasks:
+
+    - name: Create the logical volume on disk for vm_images
+      lvol:
+        vg: fedora_micro
+        lv: vm_images
+        size: 100g
+      tags:
+      - lvm
+  
+    - name: Create the filesystem for vm_images
+      filesystem:
+        fstype: xfs
+        dev: /dev/fedora_micro/vm_images
+        resizefs: yes
+      tags:
+      - lvm
+
+    - name: Mount the filesystem for vm_images
+      mount:
+        path: /mnt/vm_images
+        src: /dev/mapper/fedora_micro-vm_images
+        fstype: xfs
+        state: mounted
+        backup: yes
+      tags:
+      - lvm
+
+    - name: Mount media/backups filesystem from NUC
+      mount:
+        src: nuc.lan:/var/mnt/sg2
+        path: /var/mnt/sg2
+        opts: x-systemd.after=network-online.target
+        state: mounted
+        fstype: nfs
+      tags:
+        - nfs- hosts: localhost
+  connection: local
+
+  - name: Create the mount point for both volumes
+    file:
+      path: '{{ item }}'
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+    loop:
+      - /var/mnt/sg3/
+      - /var/mnt/wd_xfs1/
+      - /var/mnt/martinbackup/
+      - /var/mnt/sg1/
+    tags:
+    - nfs
+    - martin
+
+  - name: Mount the filesystem for media/backups
+    mount:
+      path: /var/mnt/sg3
+      src: LABEL=WD_SG3
+      fstype: ext4
+      state: mounted
+      backup: yes
+    tags:
+    - nfs
+
+  - name: Mount the filesystem for laptop image backups
+    mount:
+      path: /var/mnt/wd_xfs1
+      src: LABEL=WD_XFS1
+      fstype: xfs
+      state: mounted
+      backup: yes
+    tags:
+    - nfs
+
+  - name: Mount the filesystem for Martin's drive backups
+    mount:
+      path: /var/mnt/martinbackup
+      src: LABEL=WD_MARTIN
+      fstype: ext4
+      state: mounted
+      backup: yes
+    tags:
+    - nfs
+    - martin
+
+#  - name: Open the appropriate firewall services for local VMs to access mounts
+#    firewalld:
+#      zone: libvirt
+#      service: '{{ item }}'
+#      permanent: yes
+#      immediate: yes
+#      state: enabled
+#    loop:
+#      - nfs
+#    tags:
+#    - nfs
+...

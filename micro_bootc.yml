@@ -1,6 +1,6 @@
 ---
 - name: Perform post build install/config of HPE MicroServer running Fedora via bootc
-  hosts: nuc.lan
+  hosts: micro.lan
   gather_facts: yes
   become: yes
 

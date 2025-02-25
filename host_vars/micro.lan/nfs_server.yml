@@ -1,6 +1,7 @@
 ---
 # Variables for NFS server configuration
-nfs_exports: [ "/var/mnt/vm_images 192.168.1.0/24(rw,sync,no_root_squash)", "/var/mnt/sg1 192.168.1.0/24(rw,sync,no_root_squash)" ]
+#nfs_exports: [ "/var/mnt/vm_images 192.168.1.0/24(rw,sync,no_root_squash)", "/var/mnt/sg1 192.168.1.0/24(rw,sync,no_root_squash)" ]
+nfs_exports: [ "/var/mnt/sg1 192.168.1.0/24(rw,sync,no_root_squash)" ]
 
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true

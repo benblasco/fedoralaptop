@@ -1,5 +1,5 @@
 ---
-# Enable NFS-related services for export of /var/mnt/sg1 and /var/mnt/vm_images
+# Enable NFS-related services for export of /var/mnt/sg1 etc.
 firewall:
   - service: [nfs, nfs3, mountd, rpc-bind]
     state: enabled

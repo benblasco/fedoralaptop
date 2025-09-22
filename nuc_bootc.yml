@@ -76,26 +76,6 @@
       tags:
         - nfs
 
-    - name: Create mount point for vm_images filesystem
-      ansible.builtin.file:
-        path: /var/mnt/vm_images
-        state: directory
-        mode: '0755'
-        owner: root
-        group: root
-      tags:
-        - nfs
-
-    - name: Mount vm_images filesystem from MicroServer
-      ansible.posix.mount:
-        src: micro.lan:/var/mnt/vm_images
-        path: /var/mnt/vm_images
-        opts: x-systemd.after=network-online.target
-        state: mounted
-        fstype: nfs
-      tags:
-        - nfs
-
   roles:
     - ssh_config_bblasco
     - fedora.linux_system_roles.storage

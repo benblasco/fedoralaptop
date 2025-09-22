@@ -62,9 +62,9 @@
       tags:
         - nfs
 
-    - name: Mount vm_images filesystem from MicroServer
+    - name: Mount vm_images filesystem from NUC
       ansible.posix.mount:
-        src: micro.lan:/var/mnt/vm_images
+        src: nuc.lan:/var/mnt/vm_images
         path: /var/mnt/vm_images
         opts: x-systemd.after=network-online.target
         state: mounted
